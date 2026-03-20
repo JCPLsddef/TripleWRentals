@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RVSlider } from './components/RVSlider';
+import UnicornScene from 'unicornstudio-react/next';
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -935,6 +936,16 @@ export default function Home() {
             </a>
           </div>
         </div>
+      </section>
+
+      {/* ── SECTION 5B: Unicorn Studio Scene ───────────────── */}
+      <section style={{ background: '#071610', overflow: 'hidden' }}>
+        <UnicornScene
+          projectId="Er0s1lg6jrtlnelZmgAW"
+          sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.4/dist/unicornStudio.umd.js"
+          width="100%"
+          height="500px"
+        />
       </section>
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
