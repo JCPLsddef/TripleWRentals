@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { RVSlider } from './components/RVSlider';
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -733,6 +734,35 @@ export default function Home() {
             fontFamily: "'DM Sans', sans-serif",
           }}>← Swipe to browse all units</p>
         </div>
+      </section>
+
+      {/* ── SECTION 4B: Interior Showcase Slider ─────────────── */}
+      <section id="showcase" aria-label="RV Interior Showcase">
+        <div style={{
+          background: '#0B2012',
+          padding: '64px 24px 40px',
+          textAlign: 'center',
+        }}>
+          <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, margin: '0 auto 20px' }} />
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(28px, 4vw, 50px)',
+            fontWeight: 700, color: '#F2EDE3',
+            marginBottom: 14,
+          }}>
+            Step Inside.{' '}
+            <em style={{ color: '#C9963A', fontWeight: 400 }}>See Every Detail.</em>
+          </h2>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 16, lineHeight: 1.75,
+            color: 'rgba(242,237,227,0.55)',
+            maxWidth: 540, margin: '0 auto',
+          }}>
+            Browse each RV model and explore every room. Use the arrows to switch units — tap any image to zoom through the interior.
+          </p>
+        </div>
+        <RVSlider />
       </section>
 
       {/* ── SECTION 5: How It Works ──────────────────────────── */}
