@@ -51,40 +51,74 @@ const fleet = [
 
 const reviews = [
   {
-    name: 'Verified Guest',
-    loc: 'Tyler State Park Visit',
+    name: 'Wyman Jones',
+    image: 'https://static.wixstatic.com/media/62f926_db0f2145b9b54be6947b1cd42f12e361~mv2.png',
+    loc: 'Tyler, Texas',
     stars: 5,
-    text: "Everything was clean and inviting! We came in to visit Tyler State Park and it was perfect. Westin is an excellent host and so very polite and kind. Will absolutely be back.",
+    text: "Thank you, Triple W Rentals, for the great service I received last weekend. When my reservation with another company was canceled at the last minute, I called Triple W Rentals, and they came through. They were very patient and answered all of my questions. In addition, I want to thank your team member Corbin for outstanding customer service. He delivered the RV on time, set it up, and ensured that everything was working properly. And when there was an issue, Corbin went above and beyond to correct it. His attention to detail and his professionalism were greatly appreciated. We had a great time in the RV, and I will definitely rent from Triple W again.",
   },
   {
-    name: 'Horse Show Attendee',
+    name: 'JT Seargeant',
+    image: 'https://static.wixstatic.com/media/62f926_110004e747b34d239d959afbd1f2b88e~mv2.png',
     loc: 'Texas Rose Horse Park',
     stars: 5,
-    text: "Loved our experience! It's a great place to stay for a horse show. Close to town and the renter is awesome. The RV had everything we needed and more.",
+    text: "I have rented from Triple W multiple times. The communication is always outstanding and the response time on site to any needs is quick. Corbin arrived on site in minutes to assist with one minor issue. He checked in daily to make sure all was well which exceeded my expectations. I will continue to use them on all my trips to Texas Rose Horse Park.",
   },
   {
-    name: 'VRBO Verified Guest',
-    loc: 'Weekend Trip',
+    name: 'Jaden Richardson',
+    image: 'https://static.wixstatic.com/media/62f926_1ec8069798744e269b3cd56333ec0268~mv2.png',
+    loc: 'Texas',
     stars: 5,
-    text: "Owner met us at our convenience and gave us a thorough walkthrough of the unit. Unit met expectations and was what we needed for our weekend plans. Would rent again.",
+    text: "Great experience with Triple W RV Rentals! The booking process was smooth, the staff was friendly and helpful, and the Momentum RV was in excellent condition. Everything went exactly as planned. Highly recommend!",
   },
   {
-    name: 'Repeat Customer',
-    loc: 'Tyler, TX',
+    name: 'Luci Wade-Cantu',
+    image: 'https://static.wixstatic.com/media/62f926_7141074f78bc415e8c9d845a4433a831~mv2.png',
+    loc: 'Tyler, Texas',
     stars: 5,
-    text: "Very clean. Cozy and comfortable. The closest and most convenient horse show lodging we've found in all of Texas. Property manager was very attentive and accommodating.",
+    text: "Best RV rental ever! Excellent service, experience and quality! They rented to us at a moments notice on the 4th of July. They delivered that same day, setup and provided an overview on how to use everything. They followed up with several phone calls to check in on how we were! Amazing! Top notch! Above and beyond! I will always use their service moving forward! Westin and team were the best! And the RV — pure luxury!",
   },
   {
-    name: 'Family Group',
-    loc: 'East Texas',
+    name: 'Sandy McKinney',
+    image: 'https://static.wixstatic.com/media/62f926_575e3599e5f64a11ac9775b952ae14c2~mv2.png',
+    loc: 'Texas Rose Horse Park',
     stars: 5,
-    text: "Used for a family reunion in East Texas. Could not have been easier — they handle everything from start to finish. The RV was nicer than most hotels we've stayed in.",
+    text: "Triple W was great to work with. As a RV novice Wayne was very polite, patient and accommodating. The RV was in great condition and fully loaded! Given the temperature outside it was great to have an RV that had strong A/C. If I had to make a complaint, because nothing is ever 100% perfect, the water pressure was very low. I was told that was the city regulated hook up and not an RV issue. I will definitely use them again when we return to the Rose Horse Park. Thanks for a great time!",
   },
   {
-    name: 'Event Renter',
-    loc: 'Dallas, TX',
+    name: 'Tim S.',
+    image: 'https://static.wixstatic.com/media/62f926_e823cada6ec745d5b64f7431a63badd5~mv2.png',
+    loc: 'Texas Rose Horse Park',
     stars: 5,
-    text: "24/7 support is real — Westin picked up late at night when I had a question. That alone sets them apart from any rental company I've ever used. The Momentum was stunning.",
+    text: "The RVs are nice and convenient especially for horse shows. However what makes this beyond 5 stars is the incredible hospitality by the host. He goes beyond Ritz Carlton standards. He was booked one time and got another RV to accommodate us. The wifi is incredible and fast and reliable. This is our new first choice when coming to Texas Rose Horse Park for schooling or for shows.",
+  },
+  {
+    name: 'Grant Walker',
+    image: 'https://static.wixstatic.com/media/62f926_641bcca631884ba09644963d5e5f9104~mv2.png',
+    loc: 'Tyler, Texas',
+    stars: 5,
+    text: "Me and my wife stayed in the North Trail RV near a pond on our Ranch that we have. The RV was setup and delivered for us. The RV was Clean and roomy. Westin and his Company were a pleasure to do business with. Couldn't ask for a better experience!",
+  },
+  {
+    name: 'Amy Walker',
+    image: 'https://static.wixstatic.com/media/62f926_e96de57f16044ca88717c7aa6ac0a0c5~mv2.png',
+    loc: 'Muddy Bottoms',
+    stars: 5,
+    text: "WOW!!! The customer service that I received from Triple W Rental was outstanding. This was the first time that I entertained renting a RV for a short Family vacation. I wanted something that would accommodate my family, my brother, sister and my mom. After several attempts through a RV rental company, Triple W RV Rental reached out to me. The rental company completely accommodated my needs and my family. Not only did Shane go above and beyond to help me schedule the perfect rental, I was super impressed with the quality of the camper I received. The camper was delivered to my destination at Muddy Bottoms and set up before I even arrived. The camper came completely stocked with towels, sheets, blankets, tissue, coffee maker, soap, etc — a home away from home. All I had to do was bring my family and food. Thank you Triple W Rentals and Shane for making my trip a wonderful experience. I will see you next year at Muddy Bottoms. ❤️",
+  },
+  {
+    name: 'Marsha Swann',
+    image: 'https://static.wixstatic.com/media/62f926_f644e58d08f94afd9a5f6698c775765c~mv2.png',
+    loc: 'Texas',
+    stars: 5,
+    text: "Triple W rentals has amazing RVs and great employees. The delivery driver is the best I've seen and should always be recommended when you're getting a rental! Great job guys.",
+  },
+  {
+    name: 'Giovanna Iriel',
+    image: 'https://static.wixstatic.com/media/62f926_980c1d6c8b8d493d9b6b0d945debcd90~mv2.png',
+    loc: 'Texas Rose Horse Park',
+    stars: 5,
+    text: "Highly recommend Triple W Rentals! If you're looking for hassle-free, top-notch golf cart rentals, Triple W Rentals is the way to go! Their customer service was outstanding — so personable, responsive, and accommodating. They made the entire process seamless by delivering our luxury golf cart right to our stalls at the horse show. The night before, they even texted me a picture to confirm delivery, so we didn't have to worry about a thing. No need to go off-site for pickup or drop-off — they handled everything! The golf cart was in excellent condition, super clean, and incredibly comfortable — perfect for getting around all week at the show. I can't recommend Triple W Rentals enough for their convenience and service. Will definitely rent from them again!",
   },
 ];
 
@@ -135,6 +169,76 @@ const moreServices = [
   { label: 'Get your quote', href: 'https://triplewrentals.com/get-your-quote' },
   { label: 'Newest Additions', href: 'https://triplewrentals.com/newest-additions' },
 ];
+
+/* ─── ReviewCard ───────────────────────────────────────────── */
+const REVIEW_MAX = 220;
+
+type Review = typeof reviews[0];
+
+function ReviewCard({ review }: { review: Review }) {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = review.text.length > REVIEW_MAX;
+  const displayed = !expanded && isLong
+    ? review.text.slice(0, REVIEW_MAX).trimEnd() + '\u2026'
+    : review.text;
+
+  return (
+    <div style={{
+      background: '#fff',
+      borderRadius: 16,
+      padding: 24,
+      border: '1px solid rgba(0,0,0,0.06)',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+      <div style={{ color: '#C9963A', fontSize: 15, marginBottom: 14, letterSpacing: 2 }}>
+        {'★'.repeat(review.stars)}
+      </div>
+      <p style={{
+        fontSize: 14, color: '#3D4E46',
+        fontStyle: 'italic', lineHeight: 1.8,
+        marginBottom: 8,
+        fontFamily: "'DM Sans', sans-serif",
+        flex: 1,
+      }}>
+        &ldquo;{displayed}&rdquo;
+      </p>
+      {isLong && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: '#C9963A', fontSize: 13, fontWeight: 600,
+            fontFamily: "'DM Sans', sans-serif",
+            padding: '6px 0',
+            textAlign: 'left',
+            marginBottom: 8,
+          }}
+        >
+          {expanded ? 'Show less ↑' : 'Read more ↓'}
+        </button>
+      )}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 12,
+        marginTop: 'auto', paddingTop: 16,
+        borderTop: '1px solid rgba(0,0,0,0.06)',
+      }}>
+        <Image
+          src={review.image}
+          alt={review.name}
+          width={44}
+          height={44}
+          style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+        />
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#0B2012', fontFamily: "'DM Sans', sans-serif" }}>{review.name}</div>
+          <div style={{ fontSize: 12, color: '#5A6B62', fontFamily: "'DM Sans', sans-serif" }}>{review.loc}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ─── Component ─────────────────────────────────────────────── */
 export default function Home() {
@@ -192,8 +296,6 @@ export default function Home() {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
-
-  const doubled = [...reviews, ...reviews];
 
   return (
     <>
@@ -836,9 +938,9 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
-      <section id="reviews" style={{ background: '#F2EDE3', padding: '96px 0', overflow: 'hidden' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', marginBottom: 48 }}>
-          <div className="reveal" style={{ marginBottom: 8 }}>
+      <section id="reviews" style={{ background: '#F2EDE3', padding: '96px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div className="reveal" style={{ marginBottom: 48 }}>
             <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, marginBottom: 20 }} />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
@@ -851,49 +953,24 @@ export default function Home() {
             </h2>
             <p style={{ fontSize: 14, color: '#5A6B62', fontFamily: "'DM Sans', sans-serif" }}>★★★★★ Rated on Google · Tyler, Texas</p>
           </div>
-        </div>
 
-        <div style={{ overflow: 'hidden', padding: '8px 0' }}>
-          <div className="marquee-track">
-            {doubled.map((r, i) => (
-              <div key={i} style={{
-                minWidth: 310, maxWidth: 310,
-                background: '#fff',
-                borderRadius: 14,
-                padding: 24,
-                margin: '0 8px',
-                border: '1px solid rgba(0,0,0,0.05)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.05)',
-                flexShrink: 0,
-              }}>
-                <div style={{ color: '#C9963A', fontSize: 15, marginBottom: 12 }}>
-                  {'★'.repeat(r.stars)}
-                </div>
-                <p style={{
-                  fontSize: 14, color: '#3D4E46',
-                  fontStyle: 'italic', lineHeight: 1.75,
-                  marginBottom: 18,
-                  fontFamily: "'DM Sans', sans-serif",
-                }}>
-                  &ldquo;{r.text}&rdquo;
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <div style={{
-                    width: 38, height: 38, borderRadius: '50%',
-                    background: '#0B2012',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: 15, fontWeight: 700, color: '#C9963A',
-                    flexShrink: 0,
-                  }}>
-                    {r.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: '#0B2012', fontFamily: "'DM Sans', sans-serif" }}>{r.name}</div>
-                    <div style={{ fontSize: 12, color: '#5A6B62', fontFamily: "'DM Sans', sans-serif" }}>{r.loc}</div>
-                  </div>
-                </div>
-              </div>
+          <style>{`
+            .reviews-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 20px;
+            }
+            @media (max-width: 1024px) {
+              .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            @media (max-width: 640px) {
+              .reviews-grid { grid-template-columns: 1fr; }
+            }
+          `}</style>
+
+          <div className="reviews-grid">
+            {reviews.map((r, i) => (
+              <ReviewCard key={i} review={r} />
             ))}
           </div>
         </div>
