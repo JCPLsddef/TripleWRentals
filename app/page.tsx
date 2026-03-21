@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RVSlider } from './components/RVSlider';
 import UnicornSection from './components/UnicornSection';
+import ReviewsSlider from './components/ReviewsSlider';
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -47,79 +48,6 @@ const fleet = [
     features: ['Fireplace', 'Marble Counters', 'Walk-in Baths', 'Smart TVs'],
     tag: 'Best Value',
     bg: '#142E1C',
-  },
-];
-
-const reviews = [
-  {
-    name: 'Wyman Jones',
-    image: 'https://static.wixstatic.com/media/62f926_db0f2145b9b54be6947b1cd42f12e361~mv2.png',
-    loc: 'Tyler, Texas',
-    stars: 5,
-    text: "Thank you, Triple W Rentals, for the great service I received last weekend. When my reservation with another company was canceled at the last minute, I called Triple W Rentals, and they came through. They were very patient and answered all of my questions. In addition, I want to thank your team member Corbin for outstanding customer service. He delivered the RV on time, set it up, and ensured that everything was working properly. And when there was an issue, Corbin went above and beyond to correct it. His attention to detail and his professionalism were greatly appreciated. We had a great time in the RV, and I will definitely rent from Triple W again.",
-  },
-  {
-    name: 'JT Seargeant',
-    image: 'https://static.wixstatic.com/media/62f926_110004e747b34d239d959afbd1f2b88e~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "I have rented from Triple W multiple times. The communication is always outstanding and the response time on site to any needs is quick. Corbin arrived on site in minutes to assist with one minor issue. He checked in daily to make sure all was well which exceeded my expectations. I will continue to use them on all my trips to Texas Rose Horse Park.",
-  },
-  {
-    name: 'Jaden Richardson',
-    image: 'https://static.wixstatic.com/media/62f926_1ec8069798744e269b3cd56333ec0268~mv2.png',
-    loc: 'Texas',
-    stars: 5,
-    text: "Great experience with Triple W RV Rentals! The booking process was smooth, the staff was friendly and helpful, and the Momentum RV was in excellent condition. Everything went exactly as planned. Highly recommend!",
-  },
-  {
-    name: 'Luci Wade-Cantu',
-    image: 'https://static.wixstatic.com/media/62f926_7141074f78bc415e8c9d845a4433a831~mv2.png',
-    loc: 'Tyler, Texas',
-    stars: 5,
-    text: "Best RV rental ever! Excellent service, experience and quality! They rented to us at a moments notice on the 4th of July. They delivered that same day, setup and provided an overview on how to use everything. They followed up with several phone calls to check in on how we were! Amazing! Top notch! Above and beyond! I will always use their service moving forward! Westin and team were the best! And the RV — pure luxury!",
-  },
-  {
-    name: 'Sandy McKinney',
-    image: 'https://static.wixstatic.com/media/62f926_575e3599e5f64a11ac9775b952ae14c2~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "Triple W was great to work with. As a RV novice Wayne was very polite, patient and accommodating. The RV was in great condition and fully loaded! Given the temperature outside it was great to have an RV that had strong A/C. If I had to make a complaint, because nothing is ever 100% perfect, the water pressure was very low. I was told that was the city regulated hook up and not an RV issue. I will definitely use them again when we return to the Rose Horse Park. Thanks for a great time!",
-  },
-  {
-    name: 'Tim S.',
-    image: 'https://static.wixstatic.com/media/62f926_e823cada6ec745d5b64f7431a63badd5~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "The RVs are nice and convenient especially for horse shows. However what makes this beyond 5 stars is the incredible hospitality by the host. He goes beyond Ritz Carlton standards. He was booked one time and got another RV to accommodate us. The wifi is incredible and fast and reliable. This is our new first choice when coming to Texas Rose Horse Park for schooling or for shows.",
-  },
-  {
-    name: 'Grant Walker',
-    image: 'https://static.wixstatic.com/media/62f926_641bcca631884ba09644963d5e5f9104~mv2.png',
-    loc: 'Tyler, Texas',
-    stars: 5,
-    text: "Me and my wife stayed in the North Trail RV near a pond on our Ranch that we have. The RV was setup and delivered for us. The RV was Clean and roomy. Westin and his Company were a pleasure to do business with. Couldn't ask for a better experience!",
-  },
-  {
-    name: 'Amy Walker',
-    image: 'https://static.wixstatic.com/media/62f926_e96de57f16044ca88717c7aa6ac0a0c5~mv2.png',
-    loc: 'Muddy Bottoms',
-    stars: 5,
-    text: "WOW!!! The customer service that I received from Triple W Rental was outstanding. This was the first time that I entertained renting a RV for a short Family vacation. I wanted something that would accommodate my family, my brother, sister and my mom. After several attempts through a RV rental company, Triple W RV Rental reached out to me. The rental company completely accommodated my needs and my family. Not only did Shane go above and beyond to help me schedule the perfect rental, I was super impressed with the quality of the camper I received. The camper was delivered to my destination at Muddy Bottoms and set up before I even arrived. The camper came completely stocked with towels, sheets, blankets, tissue, coffee maker, soap, etc — a home away from home. All I had to do was bring my family and food. Thank you Triple W Rentals and Shane for making my trip a wonderful experience. I will see you next year at Muddy Bottoms. ❤️",
-  },
-  {
-    name: 'Marsha Swann',
-    image: 'https://static.wixstatic.com/media/62f926_f644e58d08f94afd9a5f6698c775765c~mv2.png',
-    loc: 'Texas',
-    stars: 5,
-    text: "Triple W rentals has amazing RVs and great employees. The delivery driver is the best I've seen and should always be recommended when you're getting a rental! Great job guys.",
-  },
-  {
-    name: 'Giovanna Iriel',
-    image: 'https://static.wixstatic.com/media/62f926_980c1d6c8b8d493d9b6b0d945debcd90~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "Highly recommend Triple W Rentals! If you're looking for hassle-free, top-notch golf cart rentals, Triple W Rentals is the way to go! Their customer service was outstanding — so personable, responsive, and accommodating. They made the entire process seamless by delivering our luxury golf cart right to our stalls at the horse show. The night before, they even texted me a picture to confirm delivery, so we didn't have to worry about a thing. No need to go off-site for pickup or drop-off — they handled everything! The golf cart was in excellent condition, super clean, and incredibly comfortable — perfect for getting around all week at the show. I can't recommend Triple W Rentals enough for their convenience and service. Will definitely rent from them again!",
   },
 ];
 
@@ -170,76 +98,6 @@ const moreServices = [
   { label: 'Get your quote', href: 'https://triplewrentals.com/get-your-quote' },
   { label: 'Newest Additions', href: 'https://triplewrentals.com/newest-additions' },
 ];
-
-/* ─── ReviewCard ───────────────────────────────────────────── */
-const REVIEW_MAX = 220;
-
-type Review = typeof reviews[0];
-
-function ReviewCard({ review }: { review: Review }) {
-  const [expanded, setExpanded] = useState(false);
-  const isLong = review.text.length > REVIEW_MAX;
-  const displayed = !expanded && isLong
-    ? review.text.slice(0, REVIEW_MAX).trimEnd() + '\u2026'
-    : review.text;
-
-  return (
-    <div style={{
-      background: '#fff',
-      borderRadius: 16,
-      padding: 24,
-      border: '1px solid rgba(0,0,0,0.06)',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-      display: 'flex',
-      flexDirection: 'column',
-    }}>
-      <div style={{ color: '#C9963A', fontSize: 15, marginBottom: 14, letterSpacing: 2 }}>
-        {'★'.repeat(review.stars)}
-      </div>
-      <p style={{
-        fontSize: 14, color: '#3D4E46',
-        fontStyle: 'italic', lineHeight: 1.8,
-        marginBottom: 8,
-        fontFamily: "'DM Sans', sans-serif",
-        flex: 1,
-      }}>
-        &ldquo;{displayed}&rdquo;
-      </p>
-      {isLong && (
-        <button
-          onClick={() => setExpanded(!expanded)}
-          style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            color: '#C9963A', fontSize: 13, fontWeight: 600,
-            fontFamily: "'DM Sans', sans-serif",
-            padding: '6px 0',
-            textAlign: 'left',
-            marginBottom: 8,
-          }}
-        >
-          {expanded ? 'Show less ↑' : 'Read more ↓'}
-        </button>
-      )}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: 12,
-        marginTop: 'auto', paddingTop: 16,
-        borderTop: '1px solid rgba(0,0,0,0.06)',
-      }}>
-        <Image
-          src={review.image}
-          alt={review.name}
-          width={44}
-          height={44}
-          style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
-        />
-        <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#0B2012', fontFamily: "'DM Sans', sans-serif" }}>{review.name}</div>
-          <div style={{ fontSize: 12, color: '#5A6B62', fontFamily: "'DM Sans', sans-serif" }}>{review.loc}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ─── Component ─────────────────────────────────────────────── */
 export default function Home() {
@@ -715,25 +573,7 @@ export default function Home() {
       {/* ── SECTION 4: Fleet ─────────────────────────────────── */}
       <section id="fleet" style={{ background: '#FAFAF7', padding: '96px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <div className="reveal" style={{ marginBottom: 48 }}>
-            <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, marginBottom: 20 }} />
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 50px)',
-              fontWeight: 700, color: '#0B2012',
-              marginBottom: 14,
-            }}>
-              Pick Your Rig.{' '}
-              <em style={{ fontWeight: 400 }}>We Handle the Rest.</em>
-            </h2>
-            <p className="reveal d1" style={{ fontSize: 16, lineHeight: 1.75, maxWidth: 580 }}>
-              Every unit is cleaned, fully stocked, and delivered directly to your location — set up and ready to walk into.
-            </p>
-          </div>
-
-          <div
-            className="fleet-carousel"
-            style={{
+          <div className="fleet-carousel" style={{
               display: 'flex', gap: 16,
               overflowX: 'auto',
               scrollSnapType: 'x mandatory',
@@ -869,72 +709,173 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 5: How It Works ──────────────────────────── */}
-      <section id="how" style={{ background: '#0B2012', padding: '96px 24px' }}>
-        <div style={{ maxWidth: 980, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div className="reveal" style={{ display: 'flex', justifyContent: 'center' }}>
-              <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, marginBottom: 20 }} />
+      <section id="how" style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,168,76,0.1)', padding: '96px 0' }}>
+        <style>{`
+          @media (max-width: 767px) {
+            .hiw-steps-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+            .hiw-connector { display: none !important; }
+            .hiw-step { padding-right: 0 !important; }
+            .hiw-section { padding: 64px 0 !important; }
+          }
+          .hiw-cta-btn {
+            display: inline-block;
+            background: #C9A84C;
+            color: #0D0B09;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            padding: 14px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.15s;
+          }
+          .hiw-cta-btn:hover { background: #E8C97A; }
+        `}</style>
+        <div className="hiw-section" style={{ maxWidth: 1080, margin: '0 auto', padding: '0 24px' }}>
+
+          {/* Header */}
+          <div style={{ maxWidth: 560, marginBottom: 52 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+              <div style={{ width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
+              <span style={{ fontSize: 11, letterSpacing: '0.15em', color: '#C9A84C', textTransform: 'uppercase' }}>HOW IT WORKS</span>
             </div>
-            <h2 className="reveal" style={{
+            <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 50px)',
-              fontWeight: 700, color: '#F2EDE3',
-              marginBottom: 14,
+              fontSize: 'clamp(28px, 4vw, 40px)',
+              fontWeight: 300,
+              color: '#F0E8D8',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.15,
             }}>
-              Simple as{' '}
-              <em style={{ color: '#C9963A', fontWeight: 400 }}>Three Steps</em>
+              From First Call to Check-In —<br />
+              <em style={{ color: '#C9A84C' }}>Three Steps.</em>
             </h2>
-            <p className="reveal d1" style={{
-              fontSize: 16, lineHeight: 1.75,
-              color: 'rgba(242,237,227,0.5)',
-              maxWidth: 500, margin: '0 auto',
+            <p style={{
+              fontSize: 15,
+              color: '#A89880',
+              lineHeight: 1.65,
+              marginTop: 12,
               fontFamily: "'DM Sans', sans-serif",
             }}>
-              No truck. No hitch. No experience required. We handle every part of the process — start to finish.
+              No experience required. No truck needed. We handle every part of the process, start to finish.
             </p>
           </div>
 
-          <div className="steps-row" style={{ display: 'flex', gap: 16 }}>
-            {[
-              { emoji: '📞', num: '01', title: 'Call or Text Us', body: 'Tell us your dates, location, and group size. Most bookings are confirmed same-day. Takes about 2 minutes.' },
-              { emoji: '🚚', num: '02', title: 'We Deliver & Set Up', body: 'Your RV arrives fully cleaned, stocked, and set up at your location. We do the walkthrough, connect utilities, and make sure everything is perfect.' },
-              { emoji: '✨', num: '03', title: 'Enjoy Your Stay', body: "We're on call 24/7 for anything you need. When you're done, we handle pickup too. You just lock the door." },
-            ].map((step, i) => (
-              <div key={step.num} className={`reveal d${i}`} style={{
-                flex: 1,
-                padding: '32px 24px',
-                background: 'rgba(255,255,255,0.04)',
-                borderRadius: 16,
-                border: '1px solid rgba(201,150,58,0.18)',
-                textAlign: 'center',
-                minWidth: 200,
-              }}>
-                <div style={{ fontSize: 36, marginBottom: 16 }}>{step.emoji}</div>
+          {/* Steps */}
+          <div style={{ position: 'relative' }}>
+            {/* Dashed connector — desktop only */}
+            <div className="hiw-connector" style={{
+              position: 'absolute',
+              height: 1,
+              background: 'repeating-linear-gradient(90deg, rgba(201,168,76,0.4) 0, rgba(201,168,76,0.4) 6px, transparent 6px, transparent 14px)',
+              top: 28,
+              left: 'calc(16.66% + 28px)',
+              right: 'calc(16.66% + 28px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+            <div className="hiw-steps-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0 }}>
+
+              {/* Step 1 */}
+              <div className="hiw-step" style={{ paddingRight: 40 }}>
                 <div style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 12, color: '#C9963A',
-                  letterSpacing: '0.14em',
-                  marginBottom: 10,
-                }}>{step.num}</div>
-                <h3 style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 21, fontWeight: 600, color: '#F2EDE3',
-                  marginBottom: 12,
-                }}>{step.title}</h3>
-                <p style={{
-                  fontSize: 14, color: 'rgba(242,237,227,0.5)',
-                  lineHeight: 1.8,
-                  fontFamily: "'DM Sans', sans-serif",
-                }}>{step.body}</p>
+                  width: 56, height: 56, borderRadius: '50%',
+                  border: '1px solid rgba(201,168,76,0.35)',
+                  background: 'rgba(201,168,76,0.06)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: 24, position: 'relative', zIndex: 1,
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 10.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012.01 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 500, color: '#F0E8D8', marginBottom: 10, letterSpacing: '-0.01em' }}>
+                  Call or Text Us
+                </h3>
+                <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.7 }}>
+                  Tell us your dates, location, and group size. Takes about <span style={{ color: '#A89880' }}>two minutes</span>. No forms, no waiting.
+                </p>
+                <span style={{
+                  display: 'inline-block', marginTop: 12,
+                  fontSize: 11, color: '#C9A84C', letterSpacing: '0.04em',
+                  borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: 1,
+                }}>
+                  Most bookings confirmed same-day
+                </span>
               </div>
-            ))}
+
+              {/* Step 2 */}
+              <div className="hiw-step" style={{ paddingRight: 40 }}>
+                <div style={{
+                  width: 56, height: 56, borderRadius: '50%',
+                  border: '1px solid rgba(201,168,76,0.35)',
+                  background: 'rgba(201,168,76,0.06)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: 24, position: 'relative', zIndex: 1,
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="1" y="3" width="15" height="13" rx="1" />
+                    <path d="M16 8h4l3 5v4h-7V8z" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 500, color: '#F0E8D8', marginBottom: 10, letterSpacing: '-0.01em' }}>
+                  We Deliver &amp; Set Up
+                </h3>
+                <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.7 }}>
+                  Your RV arrives fully cleaned, stocked, and set up at your location. We <span style={{ color: '#A89880' }}>connect utilities</span> and walk you through every feature.
+                </p>
+                <span style={{
+                  display: 'inline-block', marginTop: 12,
+                  fontSize: 11, color: '#C9A84C', letterSpacing: '0.04em',
+                  borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: 1,
+                }}>
+                  Arrive to a fully set-up RV
+                </span>
+              </div>
+
+              {/* Step 3 */}
+              <div>
+                <div style={{
+                  width: 56, height: 56, borderRadius: '50%',
+                  border: '1px solid rgba(201,168,76,0.35)',
+                  background: 'rgba(201,168,76,0.06)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: 24, position: 'relative', zIndex: 1,
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 500, color: '#F0E8D8', marginBottom: 10, letterSpacing: '-0.01em' }}>
+                  Enjoy Your Stay
+                </h3>
+                <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.7 }}>
+                  We&apos;re on call day and night for anything you need. When you&apos;re done, we handle pickup too. You just <span style={{ color: '#A89880' }}>lock the door</span>.
+                </p>
+                <span style={{
+                  display: 'inline-block', marginTop: 12,
+                  fontSize: 11, color: '#C9A84C', letterSpacing: '0.04em',
+                  borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: 1,
+                }}>
+                  Support available 24/7 throughout your stay
+                </span>
+              </div>
+
+            </div>
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: 48 }}>
-            <a href="tel:9729656901" className="btn-primary">
+          {/* CTA Row */}
+          <div style={{ marginTop: 48, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+            <a href="tel:9729656901" className="hiw-cta-btn">
               Book Your Rental — (972) 965-6901
             </a>
+            <span style={{ fontSize: 13, color: '#6B5F52' }}>
+              or text us — we&apos;ll respond <span style={{ color: '#A89880' }}>within the hour</span>
+            </span>
           </div>
+
         </div>
       </section>
 
@@ -958,83 +899,199 @@ export default function Home() {
             <p style={{ fontSize: 14, color: '#5A6B62', fontFamily: "'DM Sans', sans-serif" }}>★★★★★ Rated on Google · Tyler, Texas</p>
           </div>
 
-          <style>{`
-            .reviews-grid {
-              display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              gap: 20px;
-            }
-            @media (max-width: 1024px) {
-              .reviews-grid { grid-template-columns: repeat(2, 1fr); }
-            }
-            @media (max-width: 640px) {
-              .reviews-grid { grid-template-columns: 1fr; }
-            }
-          `}</style>
-
-          <div className="reviews-grid">
-            {reviews.map((r, i) => (
-              <ReviewCard key={i} review={r} />
-            ))}
-          </div>
+          <ReviewsSlider />
         </div>
       </section>
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
-      <section style={{ background: '#FAFAF7', padding: '96px 24px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div className="reveal" style={{ marginBottom: 48, textAlign: 'center' }}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, marginBottom: 20 }} />
+      <section style={{ background: '#0D0B09', padding: '96px 0' }}>
+        <style>{`
+          @media (max-width: 767px) {
+            .wtw-section { padding: 64px 0 !important; }
+            .wtw-grid { grid-template-columns: 1fr !important; }
+            .wtw-strip { display: grid !important; grid-template-columns: 1fr 1fr !important; }
+            .wtw-strip-item:nth-child(2) { border-right: none !important; }
+            .wtw-strip-item:nth-child(3) { border-right: 1px solid rgba(201,168,76,0.1) !important; }
+          }
+          .wtw-card {
+            background: #0F0D0A;
+            padding: 28px 26px;
+            position: relative;
+            transition: background 0.2s;
+            cursor: default;
+          }
+          .wtw-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: linear-gradient(180deg, #C9A84C 0%, rgba(201,168,76,0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.2s;
+          }
+          .wtw-card:hover { background: #161209; }
+          .wtw-card:hover::before { opacity: 1; }
+        `}</style>
+        <div className="wtw-section" style={{ maxWidth: 1080, margin: '0 auto', padding: '0 24px' }}>
+
+          {/* Header */}
+          <div style={{ maxWidth: 640 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+              <div style={{ width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
+              <span style={{ fontSize: 11, letterSpacing: '0.15em', color: '#C9A84C', textTransform: 'uppercase' }}>WHY TRIPLE W</span>
             </div>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 50px)',
-              fontWeight: 700, color: '#0B2012',
+              fontSize: 'clamp(28px, 4vw, 40px)',
+              fontWeight: 300,
+              color: '#F0E8D8',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.15,
             }}>
-              Why{' '}
-              <em style={{ color: '#C9963A', fontWeight: 400 }}>Triple W?</em>
+              The Standard Other RV Companies Can&apos;t Match.
             </h2>
+            <p style={{
+              fontSize: 15,
+              color: '#A89880',
+              lineHeight: 1.65,
+              marginTop: 12,
+              marginBottom: 48,
+              fontFamily: "'DM Sans', sans-serif",
+            }}>
+              White-glove delivery, the finest fleet in East Texas, and a team that&apos;s always reachable — day or night.
+            </p>
           </div>
 
-          <div className="why-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
+          {/* 2×2 Card Grid */}
+          <div className="wtw-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 2,
+            background: 'rgba(201,168,76,0.08)',
+            border: '1px solid rgba(201,168,76,0.15)',
+            borderRadius: 10,
+            overflow: 'hidden',
+          }}>
+
+            {/* Card 1 — White-Glove Delivery */}
+            <div className="wtw-card">
+              <div style={{
+                width: 36, height: 36,
+                border: '1px solid rgba(201,168,76,0.3)',
+                borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 16,
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1" y="3" width="15" height="13" rx="1" />
+                  <path d="M16 8h4l3 5v4h-7V8z" />
+                  <circle cx="5.5" cy="18.5" r="2.5" />
+                  <circle cx="18.5" cy="18.5" r="2.5" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
+                White-Glove Delivery
+              </h3>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
+                No truck, no hitch, no experience needed. We bring the RV to your door, plug everything in, and <span style={{ color: '#A89880' }}>walk you through every feature</span> before we leave.
+              </p>
+            </div>
+
+            {/* Card 2 — The Finest Fleet in East Texas */}
+            <div className="wtw-card">
+              <div style={{
+                width: 36, height: 36,
+                border: '1px solid rgba(201,168,76,0.3)',
+                borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 16,
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
+                The Finest Fleet in East Texas
+              </h3>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
+                Marble countertops. King beds. Massage chairs. <span style={{ color: '#A89880' }}>Smart TVs in every room</span>. Nicer than most hotels — and we deliver it to you.
+              </p>
+            </div>
+
+            {/* Card 3 — Reserved Within the Hour */}
+            <div className="wtw-card">
+              <div style={{
+                width: 36, height: 36,
+                border: '1px solid rgba(201,168,76,0.3)',
+                borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 16,
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
+                Reserved Within the Hour
+              </h3>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
+                Call or text. Tell us your dates and location. <span style={{ color: '#A89880' }}>Most bookings confirmed same-day</span> — no lengthy forms, no waiting around.
+              </p>
+            </div>
+
+            {/* Card 4 — Always Reachable */}
+            <div className="wtw-card">
+              <div style={{
+                width: 36, height: 36,
+                border: '1px solid rgba(201,168,76,0.3)',
+                borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 16,
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 10.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012.01 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
+                Always Reachable
+              </h3>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
+                Reach the team directly on the main line, or get an instant answer from our <span style={{ color: '#A89880' }}>AI agent</span> — any time of day or night.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Differentiator Strip */}
+          <div className="wtw-strip" style={{
+            display: 'flex',
+            background: 'rgba(201,168,76,0.04)',
+            border: '1px solid rgba(201,168,76,0.15)',
+            borderRadius: 8,
+            marginTop: 20,
+          }}>
             {[
-              { emoji: '🚚', title: 'We Deliver & Set Up', body: "You don't need a truck, a hitch, or any experience. We bring the RV to your location, plug everything in, and walk you through every feature before we leave." },
-              { emoji: '👑', title: 'Luxury Fleet, Not Old Campers', body: 'Marble countertops, king beds, smart TVs, heated massage chairs. These are genuinely the nicest RVs available for rent in East Texas.' },
-              { emoji: '⚡', title: 'Book in Minutes, Not Days', body: 'Call or text us. Tell us your dates and where you need delivery. Most bookings are locked in within the hour — no lengthy forms, no waiting around.' },
-              { emoji: '📱', title: 'Open 24 / 7 — Always Local', body: 'Westin picks up the phone. No call centers, no hold music, no bots. Real, local support from someone who genuinely cares about your experience.' },
-            ].map((card, i) => (
+              'Daily, weekly, or monthly — flexible for any trip',
+              'Cleaned & sanitized before every rental',
+              'Fully delivered & set up anywhere in Texas',
+              'Friendly local team + AI line always on',
+            ].map((text, i, arr) => (
               <div
-                key={card.title}
-                className={`reveal d${i % 3}`}
+                key={i}
+                className="wtw-strip-item"
                 style={{
-                  padding: 28,
-                  background: '#fff',
-                  borderRadius: 16,
-                  border: '1px solid rgba(0,0,0,0.06)',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  cursor: 'default',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.1)';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)';
+                  padding: 20,
+                  textAlign: 'center',
+                  flex: 1,
+                  borderRight: i < arr.length - 1 ? '1px solid rgba(201,168,76,0.1)' : 'none',
                 }}
               >
-                <div style={{ fontSize: 32, marginBottom: 14 }}>{card.emoji}</div>
-                <h3 style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 20, fontWeight: 700, color: '#0B2012',
-                  marginBottom: 10,
-                }}>{card.title}</h3>
-                <p style={{ fontSize: 15, color: '#5A6B62', lineHeight: 1.75, fontFamily: "'DM Sans', sans-serif" }}>{card.body}</p>
+                <p style={{ fontSize: 13, color: '#A89880', lineHeight: 1.5 }}>{text}</p>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 

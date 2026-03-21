@@ -11,23 +11,21 @@ export default function UnicornSection() {
         height="600px"
       />
       <div className="unicorn-overlay">
-        <h2 className="unicorn-heading">
-          <span className="gold">It&apos;s Time to</span>
-          <span className="white">Explore</span>
-        </h2>
         <div className="unicorn-cta">
-          <a href="#fleet">
-            <button className="animated-button">
-              <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
-              </svg>
-              <span className="text">Book Your Adventure</span>
-              <span className="circle" />
-              <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
-              </svg>
-            </button>
-          </a>
+          <button
+            className="animated-button"
+            style={{ color: '#ffffff', boxShadow: '0 0 0 2px #ffffff' }}
+            onClick={() => document.querySelector('#fleet')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg" style={{ fill: 'white' }}>
+              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+            </svg>
+            <span className="text">Book Your Adventure</span>
+            <span className="circle" />
+            <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg" style={{ fill: 'white' }}>
+              <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>
