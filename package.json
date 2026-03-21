@@ -13,6 +13,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-slick": "^0.31.0",
+    "resend": "^6.9.4",
     "slick-carousel": "^1.8.1",
     "unicornstudio-react": "^2.1.4"
   },

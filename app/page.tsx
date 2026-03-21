@@ -65,7 +65,8 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [counts, setCounts] = useState({ rentals: 300 });
+  const [counts, setCounts] = useState({ rentals: 50 });
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [form, setForm] = useState({ name: '', phone: '', dates: '', message: '' });
   const statsRef = useRef(null);
   const statsRan = useRef(false);
@@ -97,7 +98,7 @@ export default function Home() {
             const p = Math.min((Date.now() - start) / dur, 1);
             const e = 1 - Math.pow(1 - p, 3);
             setCounts({
-              rentals: Math.round(e * 300),
+              rentals: Math.round(e * 50),
             });
             if (p < 1) requestAnimationFrame(tick);
           };
@@ -110,6 +111,65 @@ export default function Home() {
     return () => obs.disconnect();
   }, []);
 
+  /* Steps connector animation */
+  useEffect(() => {
+    const connector = document.querySelector('.steps-connector') as HTMLElement | null;
+    if (!connector) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          connector.classList.add('animated');
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(connector);
+    return () => obs.disconnect();
+  }, []);
+
+  /* Cursor dot */
+  useEffect(() => {
+    const dot = document.getElementById('cursor-dot') as HTMLElement | null;
+    if (!dot) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    let mouseX = 0, mouseY = 0;
+    let currentX = 0, currentY = 0;
+    let rafId = 0;
+
+    const lerp = (a: number, b: number, n: number) => a + (b - a) * n;
+
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.opacity = '0.9';
+    };
+
+    const animate = () => {
+      currentX = lerp(currentX, mouseX, 0.18);
+      currentY = lerp(currentY, mouseY, 0.18);
+      dot.style.left = currentX + 'px';
+      dot.style.top = currentY + 'px';
+      rafId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    const onEnter = () => { dot.style.transform = 'translate(-50%,-50%) scale(2.2)'; };
+    const onLeave = () => { dot.style.transform = 'translate(-50%,-50%) scale(1)'; };
+
+    window.addEventListener('mousemove', onMove);
+    document.querySelectorAll('a, button, .why-card').forEach(el => {
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
+    });
+
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   /* Lock scroll when menu open */
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -118,6 +178,8 @@ export default function Home() {
 
   return (
     <>
+      {/* Gold cursor dot — desktop only */}
+      <div id="cursor-dot" className="cursor-dot" />
       {/* ── SECTION 0: Mobile Sticky CTA ─────────────────────── */}
       <div
         className="mobile-sticky"
@@ -198,13 +260,15 @@ export default function Home() {
         <div className="desktop-nav-items" style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
           {[['Gallery', '#gallery'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
             <a key={label} href={href} style={{
-              color: '#A89880',
-              fontSize: 13, fontWeight: 400,
+              color: 'rgba(240,232,216,0.55)',
+              fontSize: 12, fontWeight: 400,
               fontFamily: "'Inter', sans-serif",
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
               transition: 'color 0.15s',
             }}
               onMouseEnter={e => (e.target as HTMLElement).style.color = '#F0E8D8'}
-              onMouseLeave={e => (e.target as HTMLElement).style.color = '#A89880'}
+              onMouseLeave={e => (e.target as HTMLElement).style.color = 'rgba(240,232,216,0.55)'}
             >{label}</a>
           ))}
           <a href="tel:9729656901" style={{
@@ -399,7 +463,7 @@ export default function Home() {
             marginBottom: 20,
           }}>
             <span style={{ display: 'block', animation: 'heroWord 0.75s ease 0.4s both', opacity: 0 }}>
-              Texas&apos;s Finest RV Experience.
+              Texas&apos;s Finest<br />RV Experience.
             </span>
             <em style={{
               display: 'block',
@@ -421,8 +485,7 @@ export default function Home() {
             margin: '0 auto',
             animation: 'fadeUp 0.7s ease 0.9s both', opacity: 0,
           }}>
-            Luxury RVs for events, camping, and extended stays across Tyler,
-            Dallas, Houston, and Austin. We deliver, set up, and handle everything.
+            White-glove delivery across Texas. You choose the dates and the location — we handle everything from arrival to pickup.
           </p>
 
           {/* Use-case identity pills */}
@@ -533,10 +596,10 @@ export default function Home() {
           textAlign: 'center',
         }}>
           {[
-            { val: `${counts.rentals}+`, label: 'RVs Delivered' },
+            { val: `${counts.rentals}+`, label: 'Rentals Delivered' },
             { val: '4.7★', label: '193 Verified Reviews' },
             { val: '24/7', label: 'Support Available' },
-            { val: 'Nationwide', label: 'Delivery Across the US' },
+            { val: 'TX', label: 'Statewide Delivery' },
           ].map(({ val, label }) => (
             <div key={label}>
               <div style={{
@@ -709,21 +772,35 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
-      <section id="reviews" style={{ background: '#F2EDE3', padding: '96px 24px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+      <section id="reviews" style={{
+        background: '#0D0B09',
+        borderTop: '1px solid rgba(201,168,76,0.10)',
+        padding: '96px 24px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Noise texture */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
+        <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div className="reveal" style={{ marginBottom: 48 }}>
-            <div style={{ width: 40, height: 3, background: '#C9A84C', borderRadius: 2, marginBottom: 20 }} />
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 44px)',
-              fontWeight: 400, color: '#0D0B09',
-              marginBottom: 10,
-              letterSpacing: '-0.02em', lineHeight: 1.15,
-            }}>
-              Don&rsquo;t Take Our{' '}
-              <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Word for It</em>
-            </h2>
-            <p style={{ fontSize: 14, color: '#7A6E60', fontFamily: "'Inter', sans-serif" }}>
+            {/* Eyebrow */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
+              <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>GUEST REVIEWS</span>
+            </div>
+            <div style={{ maxWidth: '560px' }}>
+              <h2 style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(28px, 4vw, 44px)',
+                fontWeight: 400, color: '#F0E8D8',
+                marginBottom: 10,
+                letterSpacing: '-0.02em', lineHeight: 1.15,
+              }}>
+                What Our Guests{' '}
+                <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Experience.</em>
+              </h2>
+            </div>
+            <p style={{ fontSize: 14, color: '#A89880', fontFamily: "'Inter', sans-serif" }}>
               4.7★ on Google · 193 verified reviews · Tyler, Texas
             </p>
           </div>
@@ -740,7 +817,7 @@ export default function Home() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
-          <div style={{ maxWidth: 640, marginBottom: 48 }}>
+          <div style={{ maxWidth: 560, marginBottom: 48 }}>
             <div style={{ marginBottom: 20 }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
               <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>WHY TRIPLE W</span>
@@ -754,7 +831,8 @@ export default function Home() {
               lineHeight: 1.15,
               marginBottom: 12,
             }}>
-              The Standard Other RV Companies Can&apos;t Match.
+              The Standard Other RV Companies{' '}
+              <em style={{ fontStyle: 'italic', color: '#C9A84C' }}>Can&apos;t Match.</em>
             </h2>
             <p style={{
               fontSize: 15,
@@ -943,14 +1021,18 @@ export default function Home() {
                     fontSize: 15, fontWeight: 500, color: '#F0E8D8',
                     lineHeight: 1.4, textAlign: 'left',
                   }}>{faq.q}</span>
-                  <span style={{
-                    color: '#C9A84C', fontSize: 20, fontWeight: 300,
-                    flexShrink: 0,
-                    transform: openFaq === i ? 'rotate(45deg)' : 'rotate(0)',
-                    transition: 'transform 0.2s ease',
-                    display: 'inline-block',
-                    lineHeight: 1,
-                  }}>+</span>
+                  <svg
+                    width="16" height="16" viewBox="0 0 16 16"
+                    fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"
+                    style={{
+                      flexShrink: 0,
+                      transform: openFaq === i ? 'rotate(45deg)' : 'rotate(0)',
+                      transition: 'transform 0.2s ease',
+                    }}
+                  >
+                    <line x1="8" y1="3" x2="8" y2="13" />
+                    <line x1="3" y1="8" x2="13" y2="8" />
+                  </svg>
                 </button>
                 <div style={{
                   maxHeight: openFaq === i ? 400 : 0,
@@ -1140,24 +1222,70 @@ export default function Home() {
             </p>
 
             <button
-              type="submit"
-              onClick={() => alert("Thanks! We'll call you within the hour.")}
+              type="button"
+              disabled={formStatus === 'sending'}
+              onClick={async () => {
+                if (!form.name || !form.phone) return;
+                setFormStatus('sending');
+                try {
+                  const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(form),
+                  });
+                  if (res.ok) {
+                    setFormStatus('success');
+                    setForm({ name: '', phone: '', dates: '', message: '' });
+                  } else {
+                    setFormStatus('error');
+                  }
+                } catch {
+                  setFormStatus('error');
+                }
+              }}
               style={{
                 width: '100%',
-                background: '#C9A84C', color: '#0D0B09',
+                background: formStatus === 'sending' ? 'rgba(201,168,76,0.5)' : '#C9A84C',
+                color: '#0D0B09',
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '15px', fontWeight: 500,
                 letterSpacing: '0.01em',
                 padding: '15px',
                 borderRadius: '6px',
-                border: 'none', cursor: 'pointer',
+                border: 'none', cursor: formStatus === 'sending' ? 'default' : 'pointer',
                 transition: 'background 0.15s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#E8C97A')}
-              onMouseLeave={e => (e.currentTarget.style.background = '#C9A84C')}
+              onMouseEnter={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#E8C97A'; }}
+              onMouseLeave={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#C9A84C'; }}
             >
-              Send Request · We&rsquo;ll Call Within the Hour
+              {formStatus === 'sending' ? 'Sending...' : 'Send Request · We\u2019ll Call Within the Hour'}
             </button>
+
+            {formStatus === 'success' && (
+              <div style={{
+                padding: '20px 24px',
+                background: 'rgba(201,168,76,0.08)',
+                border: '1px solid rgba(201,168,76,0.3)',
+                borderRadius: '8px',
+                textAlign: 'center',
+                marginTop: '16px',
+              }}>
+                <div style={{ fontSize: '20px', color: '#C9A84C', marginBottom: '8px' }}>✓</div>
+                <p style={{ color: '#F0E8D8', fontSize: '15px', fontWeight: 400, fontFamily: "'Playfair Display', serif", marginBottom: '4px' }}>
+                  Request received.
+                </p>
+                <p style={{ color: '#A89880', fontSize: '13px', fontFamily: "'Inter', sans-serif" }}>
+                  We&rsquo;ll call you back within the hour.
+                </p>
+              </div>
+            )}
+
+            {formStatus === 'error' && (
+              <p style={{ color: '#E87878', fontSize: '13px', textAlign: 'center', marginTop: '12px', fontFamily: "'Inter', sans-serif" }}>
+                Something went wrong. Please call us at{' '}
+                <a href="tel:9729656901" style={{ color: '#C9A84C', borderBottom: '1px solid rgba(201,168,76,0.4)', paddingBottom: '1px' }}>(972) 965-6901</a>
+              </p>
+            )}
 
             <p style={{
               fontSize: '12px', color: '#6B5F52',
@@ -1343,7 +1471,7 @@ export default function Home() {
           flexWrap: 'wrap', gap: 10,
         }}>
           <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.2)', fontFamily: "'Inter', sans-serif" }}>
-            © 2025 Triple W RV Rentals · All Rights Reserved
+            © 2026 Triple W Rentals · All Rights Reserved
           </p>
           <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.2)', fontFamily: "'Inter', sans-serif" }}>
             Tyler, Texas 75704

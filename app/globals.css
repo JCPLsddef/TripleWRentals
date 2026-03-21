@@ -130,7 +130,7 @@ button { font-family: inherit; }
   background: #0F0D0A;
   padding: 28px 26px;
   position: relative;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   cursor: default;
 }
 .why-card::before {
@@ -142,8 +142,42 @@ button { font-family: inherit; }
   opacity: 0;
   transition: opacity 0.2s ease;
 }
-.why-card:hover { background: #161209; }
+.why-card:hover { background: #161209; transform: translateY(-2px); }
 .why-card:hover::before { opacity: 1; }
+
+/* ─── Steps connector animation ──────────────────────────── */
+.steps-connector {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.steps-connector.animated {
+  transform: scaleX(1);
+}
+
+/* ─── Gold cursor dot ──────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  left: 0; top: 0;
+  width: 10px; height: 10px;
+  background: #C9A84C;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: left, top, transform;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot { display: none !important; }
+}
+
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button { cursor: none; }
+}
 
 /* ─── Steps connector & mobile overrides ───────────────────── */
 @media (max-width: 767px) {
