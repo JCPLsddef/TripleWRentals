@@ -4,52 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RVSlider } from './components/RVSlider';
 import UnicornSection from './components/UnicornSection';
-import ReviewsSlider from './components/ReviewsSlider';
+
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
-const fleet = [
-  {
-    name: 'Momentum 2',
-    type: 'Luxury Toy Hauler',
-    specs: 'Sleeps 8–10 · 3 King Beds · 2 Baths',
-    features: ['Fireplace', 'Marble Counters', '4 Smart TVs', 'Outdoor Kitchen'],
-    tag: 'Most Popular',
-    bg: '#0F2A18',
-  },
-  {
-    name: 'Momentum 3',
-    type: 'Deluxe Toy Hauler',
-    specs: 'Sleeps 10 · 3 King + 1 Queen · 2 Baths',
-    features: ['Marble Counters', 'Heated Seats', 'Patio Deck', 'Smart TVs'],
-    tag: 'Best for Groups',
-    bg: '#1A3820',
-  },
-  {
-    name: 'Heartland Gateway',
-    type: '5th Wheel',
-    specs: 'Sleeps 12 · 2 Beds · 2 Baths',
-    features: ['Custom Hardwood', 'Outdoor Kitchen', '4 Smart TVs', '2 Fridges'],
-    tag: 'Largest Fleet',
-    bg: '#0D2416',
-  },
-  {
-    name: 'Solitude',
-    type: 'Luxury 5th Wheel',
-    specs: 'King Bed · Full Bath · Walk-in Closet',
-    features: ['Marble Bar', 'Massage Chairs', 'Double Fridge', 'Security'],
-    tag: 'Most Private',
-    bg: '#1C3A1E',
-  },
-  {
-    name: 'Grand Design',
-    type: 'Super Toy Hauler',
-    specs: 'Sleeps 10 · 1 King + 3 Queen · 2 Baths',
-    features: ['Fireplace', 'Marble Counters', 'Walk-in Baths', 'Smart TVs'],
-    tag: 'Best Value',
-    bg: '#142E1C',
-  },
-];
 
 const faqs = [
   {
@@ -63,6 +21,10 @@ const faqs = [
   {
     q: 'Do I need a truck or special license?',
     a: "No. We deliver and set up the RV at your location. You don't need a truck, a hitch, or any experience. We handle all the logistics — you just walk in.",
+  },
+  {
+    q: "What if something breaks or doesn't work during my stay?",
+    a: "Call or text us immediately — we're available 24/7 and will either walk you through it over the phone or come out to fix it in person. In the rare event something can't be resolved, we'll make it right. Your experience is our reputation.",
   },
   {
     q: 'How does booking work?',
@@ -104,7 +66,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [counts, setCounts] = useState({ rentals: 0, states: 0 });
+  const [counts, setCounts] = useState({ rentals: 50, states: 4 });
   const [form, setForm] = useState({ name: '', phone: '', dates: '', message: '' });
   const statsRef = useRef(null);
   const statsRan = useRef(false);
@@ -136,7 +98,7 @@ export default function Home() {
             const p = Math.min((Date.now() - start) / dur, 1);
             const e = 1 - Math.pow(1 - p, 3);
             setCounts({
-              rentals: Math.round(e * 200),
+              rentals: Math.round(e * 50),
               states: Math.round(e * 4),
             });
             if (p < 1) requestAnimationFrame(tick);
@@ -236,7 +198,7 @@ export default function Home() {
 
         {/* Desktop Links */}
         <div className="desktop-nav-items" style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-          {[['Fleet', '#fleet'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
+          {[['Gallery', '#gallery'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
             <a key={label} href={href} style={{
               color: 'rgba(242,237,227,0.65)',
               fontSize: 14, fontWeight: 500,
@@ -305,7 +267,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
             {[
-              ['Our Fleet', '#fleet'],
+              ['Gallery', '#gallery'],
               ['How It Works', '#how'],
               ['Reviews', '#reviews'],
               ['FAQ', '#faq'],
@@ -504,25 +466,71 @@ export default function Home() {
             display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center',
             animation: 'fadeUp 0.7s ease 1.3s both', opacity: 0,
           }}>
-            <a href="tel:9729656901" className="btn-primary">
+            <a
+              href="tel:9729656901"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                background: '#C9A84C', color: '#0D0B09',
+                fontSize: '15px', fontWeight: 500,
+                padding: '14px 28px', borderRadius: '6px',
+                textDecoration: 'none', border: 'none',
+                transition: 'background 0.15s',
+                fontFamily: "'DM Sans', sans-serif",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = '#E8C97A')}
+              onMouseLeave={e => (e.currentTarget.style.background = '#C9A84C')}
+            >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.17 6.17l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z" /></svg>
               Call (972) 965-6901
             </a>
-            <a href="#fleet" className="btn-ghost">Browse Fleet ↓</a>
+            <a
+              href="#gallery"
+              style={{
+                display: 'inline-flex', alignItems: 'center',
+                background: 'transparent', color: '#A89880',
+                fontSize: '15px', fontWeight: 400,
+                padding: '14px 28px', borderRadius: '6px',
+                textDecoration: 'none',
+                border: '1px solid rgba(201,168,76,0.35)',
+                transition: 'border-color 0.15s, color 0.15s',
+                fontFamily: "'DM Sans', sans-serif",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.65)'; e.currentTarget.style.color = '#F0E8D8'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.35)'; e.currentTarget.style.color = '#A89880'; }}
+            >
+              Browse Gallery ↓
+            </a>
           </div>
 
-          {/* Trust micro-row */}
+          {/* Trust badges */}
           <div style={{
-            display: 'flex', gap: 20, flexWrap: 'wrap', justifyContent: 'center',
-            fontSize: 13, color: 'rgba(242,237,227,0.4)',
-            fontFamily: "'DM Sans', sans-serif",
+            display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center',
+            marginTop: '20px',
             animation: 'fadeUp 0.7s ease 1.5s both', opacity: 0,
           }}>
-            {['✓ Full Setup Included', '✓ Same-Day Booking', '✓ 24 / 7 Support', '✓ Luxury Fleet Only'].map(t => (
-              <span key={t}>{t}</span>
+            {['Full Setup Included', 'Same-Day Booking', '24/7 Support', 'Luxury Fleet Only'].map(t => (
+              <span key={t} style={{
+                display: 'inline-flex', alignItems: 'center', gap: '6px',
+                fontSize: '12px', color: '#C9A84C',
+                border: '1px solid rgba(201,168,76,0.35)',
+                borderRadius: '999px', padding: '4px 12px',
+                background: 'rgba(201,168,76,0.06)',
+                whiteSpace: 'nowrap',
+                fontFamily: "'DM Sans', sans-serif",
+              }}>
+                <span style={{ fontSize: '10px' }}>✓</span>
+                {t}
+              </span>
             ))}
           </div>
         </div>
+
+        {/* Bottom gradient for legibility */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
+          background: 'linear-gradient(to top, rgba(13,11,9,0.85) 0%, transparent 100%)',
+          pointerEvents: 'none', zIndex: 1,
+        }} />
 
         {/* Scroll cue */}
         <div style={{
@@ -531,6 +539,7 @@ export default function Home() {
           width: 1, height: 44,
           background: 'linear-gradient(to bottom, transparent, rgba(201,150,58,0.7))',
           animation: 'breathe 2.4s ease-in-out infinite',
+          zIndex: 2,
         }} />
       </section>
 
@@ -570,117 +579,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SECTION 4: Fleet ─────────────────────────────────── */}
-      <section id="fleet" style={{ background: '#FAFAF7', padding: '96px 0' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <div className="fleet-carousel" style={{
-              display: 'flex', gap: 16,
-              overflowX: 'auto',
-              scrollSnapType: 'x mandatory',
-              paddingBottom: 8,
-            }}
-          >
-            {fleet.map((rv) => (
-              <div
-                key={rv.name}
-                style={{
-                  minWidth: 300, maxWidth: 300,
-                  scrollSnapAlign: 'start',
-                  borderRadius: 16,
-                  overflow: 'hidden',
-                  flexShrink: 0,
-                  background: '#fff',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.transform = 'translateY(-6px)';
-                  e.currentTarget.style.boxShadow = '0 20px 56px rgba(0,0,0,0.18)';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)';
-                }}
-              >
-                <div style={{
-                  height: 190, background: rv.bg,
-                  position: 'relative', overflow: 'hidden',
-                  backgroundImage: `repeating-linear-gradient(
-                    135deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(255,255,255,0.02) 20px,
-                    rgba(255,255,255,0.02) 21px
-                  )`,
-                }}>
-                  <div style={{
-                    position: 'absolute', top: 14, right: 14,
-                    background: 'rgba(201,150,58,0.2)',
-                    border: '1px solid rgba(201,150,58,0.45)',
-                    borderRadius: 99, padding: '4px 12px',
-                    color: '#C9963A', fontSize: 10,
-                    fontWeight: 600, letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    fontFamily: "'DM Sans', sans-serif",
-                  }}>{rv.tag}</div>
-                  <div style={{ position: 'absolute', bottom: 14, left: 16 }}>
-                    <div style={{
-                      fontSize: 10, color: 'rgba(242,237,227,0.5)',
-                      textTransform: 'uppercase', letterSpacing: '0.1em',
-                      fontFamily: "'DM Sans', sans-serif",
-                      marginBottom: 4,
-                    }}>{rv.type}</div>
-                    <div style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: 24, fontWeight: 700, color: '#F2EDE3',
-                    }}>{rv.name}</div>
-                  </div>
-                </div>
-
-                <div style={{ padding: 20 }}>
-                  <p style={{
-                    fontSize: 13, color: '#5A6B62',
-                    marginBottom: 14, fontFamily: "'DM Sans', sans-serif",
-                  }}>{rv.specs}</p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
-                    {rv.features.map(f => (
-                      <span key={f} style={{
-                        background: '#EEF7F1', color: '#1A4A2E',
-                        borderRadius: 99, padding: '4px 10px',
-                        fontSize: 11, fontWeight: 500,
-                        fontFamily: "'DM Sans', sans-serif",
-                      }}>{f}</span>
-                    ))}
-                  </div>
-                  <a href="tel:9729656901" style={{
-                    display: 'block',
-                    width: '100%', textAlign: 'center',
-                    background: '#C9963A', color: '#0B2012',
-                    fontWeight: 600, fontSize: 14,
-                    padding: '12px 0', borderRadius: 8,
-                    fontFamily: "'DM Sans', sans-serif",
-                    transition: 'background 0.2s',
-                    minHeight: 44,
-                    lineHeight: '20px',
-                  }}
-                    onMouseEnter={e => (e.target as HTMLElement).style.background = '#E0B254'}
-                    onMouseLeave={e => (e.target as HTMLElement).style.background = '#C9963A'}
-                  >Check Availability</a>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p style={{
-            fontSize: 12, color: '#5A6B62',
-            textAlign: 'center', marginTop: 12,
-            fontFamily: "'DM Sans', sans-serif",
-          }}>← Swipe to browse all units</p>
-        </div>
-      </section>
-
       {/* ── SECTION 4B: Interior Showcase Slider ─────────────── */}
-      <section id="showcase" aria-label="RV Interior Showcase">
+      <section id="gallery" aria-label="RV Interior Showcase">
         <div style={{
           background: '#0B2012',
           padding: '64px 24px 40px',
@@ -825,23 +725,88 @@ export default function Home() {
       <UnicornSection />
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
-      <section id="reviews" style={{ background: '#F2EDE3', padding: '96px 24px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div className="reveal" style={{ marginBottom: 48 }}>
-            <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, marginBottom: 20 }} />
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 50px)',
-              fontWeight: 700, color: '#0B2012',
-              marginBottom: 10,
-            }}>
-              Don&rsquo;t Take Our{' '}
-              <em style={{ color: '#C9963A', fontWeight: 400 }}>Word for It</em>
+      <section id="reviews" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+
+        {/* Noise texture */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
+
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+
+          {/* Header */}
+          <div style={{ marginBottom: 48 }}>
+            <div style={{ marginBottom: 16 }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>GUEST REVIEWS</span>
+            </div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 10 }}>
+              What Guests Say After Their Stay
             </h2>
-            <p style={{ fontSize: 14, color: '#5A6B62', fontFamily: "'DM Sans', sans-serif" }}>★★★★★ Rated on Google · Tyler, Texas</p>
+            <p style={{ fontSize: '14px', color: '#A89880', fontFamily: "'DM Sans', sans-serif" }}>★★★★★ Rated on Google · Tyler, Texas</p>
           </div>
 
-          <ReviewsSlider />
+          {/* Static 3-column review grid */}
+          <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+            {[
+              {
+                name: 'Luci Wade-Cantu', initials: 'LW', source: 'Google Review',
+                quote: 'Best RV rental ever! They rented to us at a moments notice on the 4th of July — delivered same day, fully set up. The RV was pure luxury. Westin and team were outstanding. I will always use their service moving forward.',
+              },
+              {
+                name: 'JT Seargeant', initials: 'JS', source: 'Google Review',
+                quote: 'I have rented from Triple W multiple times. The communication is always outstanding. Corbin arrived on site in minutes to assist with a minor issue and checked in daily to make sure all was well — exceeded my expectations.',
+              },
+              {
+                name: 'Tim S.', initials: 'TS', source: 'Google Review',
+                quote: 'What makes this beyond 5 stars is the incredible hospitality. He goes beyond Ritz Carlton standards — was booked once and found another RV to accommodate us. The WiFi is incredible. Our new first choice every time.',
+              },
+              {
+                name: 'Wyman Jones', initials: 'WJ', source: 'Google Review',
+                quote: 'Triple W came through when another company canceled at the last minute. Corbin delivered on time, set everything up, and ensured all was working. His attention to detail and professionalism were greatly appreciated.',
+              },
+              {
+                name: 'Amy Walker', initials: 'AW', source: 'Google Review',
+                quote: 'The camper was delivered and fully set up before I even arrived — stocked with towels, sheets, blankets, and a coffee maker. A home away from home. Shane went absolutely above and beyond.',
+              },
+              {
+                name: 'Sandy McKinney', initials: 'SM', source: 'Google Review',
+                quote: 'Wayne was very polite, patient, and accommodating. The RV was in great condition and fully loaded. Given the temperature outside it was great to have such strong A/C. I will definitely use them again.',
+              },
+            ].map(({ name, initials, source, quote }) => (
+              <div key={name} className="review-card" style={{
+                background: '#0F0D0A',
+                border: '1px solid rgba(201,168,76,0.15)',
+                borderRadius: '10px',
+                padding: '24px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '14px',
+              }}>
+                <div style={{ color: '#C9A84C', fontSize: '13px', letterSpacing: '2px' }}>★★★★★</div>
+                <p style={{ fontSize: '14px', color: '#A89880', lineHeight: 1.7, fontStyle: 'italic', flex: 1, fontFamily: "'DM Sans', sans-serif" }}>
+                  &ldquo;{quote}&rdquo;
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: 'auto' }}>
+                  <div style={{
+                    width: '36px', height: '36px',
+                    borderRadius: '50%',
+                    background: 'rgba(201,168,76,0.12)',
+                    border: '1px solid rgba(201,168,76,0.3)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '12px', fontWeight: 500, color: '#C9A84C',
+                    flexShrink: 0,
+                    fontFamily: "'DM Sans', sans-serif",
+                  }}>
+                    {initials}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '13px', fontWeight: 500, color: '#F0E8D8', fontFamily: "'DM Sans', sans-serif" }}>{name}</div>
+                    <div style={{ fontSize: '11px', color: '#6B5F52', fontFamily: "'DM Sans', sans-serif" }}>{source} · Tyler, Texas</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -1020,28 +985,32 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 8: FAQ ───────────────────────────────────── */}
-      <section id="faq" style={{ background: '#0B2012', padding: '96px 24px' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <div className="reveal" style={{ marginBottom: 48 }}>
-            <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, marginBottom: 20 }} />
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 50px)',
-              fontWeight: 700, color: '#F2EDE3',
-            }}>
-              Common{' '}
-              <em style={{ color: '#C9963A', fontWeight: 400 }}>Questions</em>
+      <section id="faq" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+
+        {/* Noise texture */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n4'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n4)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
+
+        <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+
+          {/* Header */}
+          <div style={{ marginBottom: 48 }}>
+            <div style={{ marginBottom: 16 }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>COMMON QUESTIONS</span>
+            </div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+              Everything You Need to Know
             </h2>
           </div>
 
           <div>
             {faqs.map((faq, i) => (
-              <div key={i} style={{ borderBottom: '1px solid rgba(201,150,58,0.15)' }}>
+              <div key={i} className="faq-item" style={{ borderBottom: '1px solid rgba(201,168,76,0.12)', padding: '18px 0' }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{
                     width: '100%', background: 'none', border: 'none',
-                    cursor: 'pointer', padding: '20px 0',
+                    cursor: 'pointer', padding: 0,
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     gap: 16, minHeight: 44,
                     textAlign: 'left',
@@ -1050,98 +1019,108 @@ export default function Home() {
                 >
                   <span style={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 16, fontWeight: 500, color: '#F2EDE3',
-                    lineHeight: 1.5,
+                    fontSize: 15, fontWeight: 500, color: '#F0E8D8',
+                    lineHeight: 1.4, textAlign: 'left',
                   }}>{faq.q}</span>
                   <span style={{
-                    color: '#C9963A', fontSize: 20, fontWeight: 300,
+                    color: '#C9A84C', fontSize: 20, fontWeight: 300,
                     flexShrink: 0,
                     transform: openFaq === i ? 'rotate(45deg)' : 'rotate(0)',
-                    transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1)',
+                    transition: 'transform 0.2s ease',
                     display: 'inline-block',
                     lineHeight: 1,
                   }}>+</span>
                 </button>
                 <div style={{
-                  maxHeight: openFaq === i ? 300 : 0,
+                  maxHeight: openFaq === i ? 400 : 0,
                   overflow: 'hidden',
-                  transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1)',
+                  transition: 'max-height 0.3s ease',
                 }}>
                   <p style={{
-                    fontSize: 15, color: 'rgba(242,237,227,0.55)',
-                    lineHeight: 1.8, paddingBottom: 20,
+                    fontSize: 14, color: '#7A6E60',
+                    lineHeight: 1.75, paddingTop: '12px', paddingBottom: '6px',
                     fontFamily: "'DM Sans', sans-serif",
                   }}>{faq.a}</p>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Bottom CTA */}
+          <div style={{
+            marginTop: '32px',
+            padding: '20px 24px',
+            background: 'rgba(201,168,76,0.05)',
+            border: '1px solid rgba(201,168,76,0.15)',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}>
+            <span style={{ fontSize: '14px', color: '#A89880', fontFamily: "'DM Sans', sans-serif" }}>
+              Still have questions?
+            </span>
+            <a
+              href="tel:9729656901"
+              style={{
+                fontSize: '14px',
+                fontWeight: 500,
+                color: '#C9A84C',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(201,168,76,0.4)',
+                paddingBottom: '2px',
+                fontFamily: "'DM Sans', sans-serif",
+              }}
+            >
+              Call (972) 965-6901 →
+            </a>
+          </div>
+
         </div>
       </section>
 
       {/* ── SECTION 9: Closing CTA ───────────────────────────── */}
-      <section id="quote" style={{ background: '#F2EDE3', padding: '96px 24px' }}>
-        <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
-          <div className="reveal">
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 50px)',
-              fontWeight: 700, color: '#0B2012',
-              marginBottom: 18,
-            }}>
+      <section id="quote" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+
+        {/* Noise texture */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n5'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n5)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
+
+        <div style={{ maxWidth: '580px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+
+          {/* Section heading */}
+          <div style={{ marginBottom: 40 }}>
+            <div style={{ marginBottom: 16 }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>BOOK YOUR RENTAL</span>
+            </div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>
               Ready to Book?{' '}
-              <em style={{ color: '#C9963A', fontWeight: 400 }}>Let&rsquo;s Talk.</em>
+              <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Let&rsquo;s Talk.</em>
             </h2>
-            <p style={{
-              fontSize: 16, lineHeight: 1.75, color: '#5A6B62',
-              marginBottom: 36,
-              fontFamily: "'DM Sans', sans-serif",
-            }}>
-              Weekend availability goes fast — especially in spring and fall. Call Westin directly or send a request and we&rsquo;ll call you back within the hour.
+            <p style={{ fontSize: '14px', color: '#A89880', lineHeight: 1.65, fontFamily: "'DM Sans', sans-serif" }}>
+              Weekend availability goes fast — especially in spring and fall. Fill out the form and we&rsquo;ll call you back within the hour.
             </p>
           </div>
 
-          <div className="reveal d1">
-            <a
-              href="tel:9729656901"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 10,
-                background: '#C9963A', color: '#0B2012',
-                fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 600, fontSize: 17,
-                padding: '18px 40px', borderRadius: 8,
-                textDecoration: 'none',
-                animation: 'pulse 2.5s ease-out infinite',
-                marginBottom: 16,
-                minHeight: 44,
-              }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.17 6.17l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z" /></svg>
-              Call (972) 965-6901
-            </a>
-            <p style={{ fontSize: 13, color: '#5A6B62', marginBottom: 40, fontFamily: "'DM Sans', sans-serif" }}>
-              or fill out the form — we&rsquo;ll call you within the hour
-            </p>
-          </div>
-
-          {/* Quote Form */}
-          <div className="reveal d2" style={{
-            background: '#fff', borderRadius: 18, padding: 32,
-            boxShadow: '0 8px 48px rgba(0,0,0,0.09)',
-            border: '1px solid rgba(0,0,0,0.06)',
-            textAlign: 'left',
+          {/* Quote Form card */}
+          <div className="quote-card" style={{
+            background: '#0F0D0A',
+            border: '1px solid rgba(201,168,76,0.18)',
+            borderRadius: '12px',
+            padding: '40px',
           }}>
             <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
               {[
-                { label: 'YOUR NAME', key: 'name', placeholder: 'John Smith', type: 'text' },
-                { label: 'PHONE NUMBER', key: 'phone', placeholder: '(972) 555-0123', type: 'tel' },
+                { label: 'Your Name', key: 'name', placeholder: 'John Smith', type: 'text' },
+                { label: 'Phone Number', key: 'phone', placeholder: '(972) 555-0123', type: 'tel' },
               ].map(({ label, key, placeholder, type }) => (
-                <div key={key}>
+                <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <label style={{
-                    display: 'block', fontSize: 11, fontWeight: 600,
-                    letterSpacing: '0.1em', color: '#5A6B62',
-                    textTransform: 'uppercase', marginBottom: 6,
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '11px', fontWeight: 500,
+                    letterSpacing: '0.08em', textTransform: 'uppercase',
+                    color: '#6B5F52', fontFamily: "'DM Sans', sans-serif",
                   }}>{label}</label>
                   <input
                     type={type}
@@ -1149,87 +1128,118 @@ export default function Home() {
                     value={form[key as keyof typeof form]}
                     onChange={e => setForm({ ...form, [key]: e.target.value })}
                     style={{
-                      width: '100%', padding: '12px 14px',
-                      borderRadius: 8, border: '1px solid rgba(0,0,0,0.12)',
-                      fontFamily: "'DM Sans', sans-serif", fontSize: 14,
-                      background: '#FAFAF7', color: '#0B2012',
-                      outline: 'none', transition: 'border-color 0.2s',
+                      background: '#161209',
+                      border: '1px solid rgba(201,168,76,0.2)',
+                      borderRadius: '6px',
+                      padding: '12px 14px',
+                      fontSize: '14px',
+                      color: '#F0E8D8',
+                      outline: 'none',
+                      transition: 'border-color 0.15s',
+                      fontFamily: "'DM Sans', sans-serif",
                     }}
-                    onFocus={e => e.target.style.borderColor = '#C9963A'}
-                    onBlur={e => e.target.style.borderColor = 'rgba(0,0,0,0.12)'}
+                    onFocus={e => e.target.style.borderColor = 'rgba(201,168,76,0.55)'}
+                    onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.2)'}
                   />
                 </div>
               ))}
             </div>
 
-            <div style={{ marginBottom: 16 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 16 }}>
               <label style={{
-                display: 'block', fontSize: 11, fontWeight: 600,
-                letterSpacing: '0.1em', color: '#5A6B62',
-                textTransform: 'uppercase', marginBottom: 6,
-                fontFamily: "'DM Sans', sans-serif",
-              }}>RENTAL DATES</label>
+                fontSize: '11px', fontWeight: 500,
+                letterSpacing: '0.08em', textTransform: 'uppercase',
+                color: '#6B5F52', fontFamily: "'DM Sans', sans-serif",
+              }}>Rental Dates</label>
               <input
                 type="text"
                 placeholder="e.g. May 16 – 19, 2025"
                 value={form.dates}
                 onChange={e => setForm({ ...form, dates: e.target.value })}
                 style={{
-                  width: '100%', padding: '12px 14px',
-                  borderRadius: 8, border: '1px solid rgba(0,0,0,0.12)',
-                  fontFamily: "'DM Sans', sans-serif", fontSize: 14,
-                  background: '#FAFAF7', color: '#0B2012',
-                  outline: 'none', transition: 'border-color 0.2s',
+                  background: '#161209',
+                  border: '1px solid rgba(201,168,76,0.2)',
+                  borderRadius: '6px',
+                  padding: '12px 14px',
+                  fontSize: '14px',
+                  color: '#F0E8D8',
+                  outline: 'none',
+                  transition: 'border-color 0.15s',
+                  fontFamily: "'DM Sans', sans-serif",
                 }}
-                onFocus={e => e.target.style.borderColor = '#C9963A'}
-                onBlur={e => e.target.style.borderColor = 'rgba(0,0,0,0.12)'}
+                onFocus={e => e.target.style.borderColor = 'rgba(201,168,76,0.55)'}
+                onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.2)'}
               />
             </div>
 
-            <div style={{ marginBottom: 24 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 24 }}>
               <label style={{
-                display: 'block', fontSize: 11, fontWeight: 600,
-                letterSpacing: '0.1em', color: '#5A6B62',
-                textTransform: 'uppercase', marginBottom: 6,
-                fontFamily: "'DM Sans', sans-serif",
-              }}>ANYTHING ELSE?</label>
+                fontSize: '11px', fontWeight: 500,
+                letterSpacing: '0.08em', textTransform: 'uppercase',
+                color: '#6B5F52', fontFamily: "'DM Sans', sans-serif",
+              }}>Message</label>
               <textarea
-                rows={3}
+                rows={4}
                 placeholder="Tell us about your event, location, or group size..."
                 value={form.message}
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 style={{
-                  width: '100%', padding: '12px 14px',
-                  borderRadius: 8, border: '1px solid rgba(0,0,0,0.12)',
-                  fontFamily: "'DM Sans', sans-serif", fontSize: 14,
-                  background: '#FAFAF7', color: '#0B2012',
-                  outline: 'none', resize: 'vertical',
-                  transition: 'border-color 0.2s',
+                  background: '#161209',
+                  border: '1px solid rgba(201,168,76,0.2)',
+                  borderRadius: '6px',
+                  padding: '12px 14px',
+                  fontSize: '14px',
+                  color: '#F0E8D8',
+                  outline: 'none',
+                  resize: 'vertical',
+                  transition: 'border-color 0.15s',
+                  fontFamily: "'DM Sans', sans-serif",
                 }}
-                onFocus={e => e.target.style.borderColor = '#C9963A'}
-                onBlur={e => e.target.style.borderColor = 'rgba(0,0,0,0.12)'}
+                onFocus={e => e.target.style.borderColor = 'rgba(201,168,76,0.55)'}
+                onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.2)'}
               />
             </div>
 
+            <p style={{
+              fontSize: '12px', color: '#6B5F52',
+              textAlign: 'center', marginBottom: '10px', lineHeight: 1.5,
+              fontFamily: "'DM Sans', sans-serif",
+            }}>
+              Every request is personally reviewed. No spam, ever.
+            </p>
+
             <button
-              type="button"
+              type="submit"
               onClick={() => alert("Thanks! We'll call you within the hour.")}
               style={{
                 width: '100%',
-                background: '#C9963A', color: '#0B2012',
+                background: '#C9A84C', color: '#0D0B09',
                 fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 600, fontSize: 15,
-                padding: '14px 0', borderRadius: 8,
+                fontSize: '15px', fontWeight: 500,
+                letterSpacing: '0.01em',
+                padding: '15px',
+                borderRadius: '6px',
                 border: 'none', cursor: 'pointer',
-                transition: 'background 0.2s',
-                minHeight: 44,
+                transition: 'background 0.15s',
               }}
-              onMouseEnter={e => (e.target as HTMLElement).style.background = '#E0B254'}
-              onMouseLeave={e => (e.target as HTMLElement).style.background = '#C9963A'}
+              onMouseEnter={e => (e.currentTarget.style.background = '#E8C97A')}
+              onMouseLeave={e => (e.currentTarget.style.background = '#C9A84C')}
             >
               Send Request — We&rsquo;ll Call Within the Hour
             </button>
+
+            <p style={{
+              fontSize: '12px', color: '#6B5F52',
+              textAlign: 'center', marginTop: '12px',
+              fontFamily: "'DM Sans', sans-serif",
+            }}>
+              Prefer to call?{' '}
+              <a href="tel:9729656901" style={{ color: '#A89880', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.3)' }}>
+                (972) 965-6901
+              </a>
+            </p>
           </div>
+
         </div>
       </section>
 
@@ -1289,8 +1299,8 @@ export default function Home() {
 
       {/* ── SECTION 11: Footer ───────────────────────────────── */}
       <footer style={{
-        background: '#071610',
-        borderTop: '1px solid rgba(201,150,58,0.1)',
+        background: '#0D0B09',
+        borderTop: '1px solid rgba(201,168,76,0.12)',
         padding: '56px 24px 100px',
       }}>
         <div className="footer-grid" style={{
@@ -1306,7 +1316,7 @@ export default function Home() {
               fontSize: 22, fontWeight: 700, color: '#F2EDE3',
               marginBottom: 16,
             }}>
-              Triple W <span style={{ color: '#C9963A' }}>Rentals</span>
+              Triple W <span style={{ color: '#C9A84C' }}>Rentals</span>
             </div>
             <p style={{ fontSize: 13, color: 'rgba(242,237,227,0.35)', lineHeight: 1.8, fontFamily: "'DM Sans', sans-serif" }}>
               14078 State HWY 110 N<br />
@@ -1317,22 +1327,22 @@ export default function Home() {
 
           <div>
             <div style={{
-              fontSize: 10, color: '#C9963A',
+              fontSize: 10, color: '#C9A84C',
               fontWeight: 600, letterSpacing: '0.1em',
               textTransform: 'uppercase',
               fontFamily: "'DM Sans', sans-serif",
               marginBottom: 16,
             }}>QUICK LINKS</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {[['Our Fleet', '#fleet'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Book Now', '#quote']].map(([label, href]) => (
+              {[['Gallery', '#gallery'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Book Now', '#quote']].map(([label, href]) => (
                 <a key={label} href={href} style={{
-                  fontSize: 14, color: 'rgba(242,237,227,0.45)',
+                  fontSize: 13, color: '#7A6E60',
                   fontFamily: "'DM Sans', sans-serif",
-                  transition: 'color 0.2s',
-                  minHeight: 24,
+                  transition: 'color 0.15s',
+                  minHeight: 24, textDecoration: 'none',
                 }}
-                  onMouseEnter={e => (e.target as HTMLElement).style.color = '#C9963A'}
-                  onMouseLeave={e => (e.target as HTMLElement).style.color = 'rgba(242,237,227,0.45)'}
+                  onMouseEnter={e => (e.target as HTMLElement).style.color = '#C9A84C'}
+                  onMouseLeave={e => (e.target as HTMLElement).style.color = '#7A6E60'}
                 >{label}</a>
               ))}
             </div>
@@ -1340,7 +1350,7 @@ export default function Home() {
 
           <div>
             <div style={{
-              fontSize: 10, color: '#C9963A',
+              fontSize: 10, color: '#C9A84C',
               fontWeight: 600, letterSpacing: '0.1em',
               textTransform: 'uppercase',
               fontFamily: "'DM Sans', sans-serif",
@@ -1352,10 +1362,14 @@ export default function Home() {
               display: 'block', marginBottom: 10,
             }}>(972) 965-6901</a>
             <a href="mailto:triplewrentals@gmail.com" style={{
-              fontSize: 13, color: 'rgba(242,237,227,0.45)',
+              fontSize: 13, color: '#7A6E60',
               fontFamily: "'DM Sans', sans-serif",
-              display: 'block', marginBottom: 8,
-            }}>triplewrentals@gmail.com</a>
+              display: 'block', marginBottom: 8, textDecoration: 'none',
+              transition: 'color 0.15s',
+            }}
+              onMouseEnter={e => (e.target as HTMLElement).style.color = '#C9A84C'}
+              onMouseLeave={e => (e.target as HTMLElement).style.color = '#7A6E60'}
+            >triplewrentals@gmail.com</a>
             <p style={{ fontSize: 13, color: 'rgba(242,237,227,0.25)', fontFamily: "'DM Sans', sans-serif" }}>
               Owner: Westin Wayne Walker
             </p>
@@ -1363,19 +1377,26 @@ export default function Home() {
 
           <div>
             <div style={{
-              fontSize: 10, color: '#C9963A',
+              fontSize: 10, color: '#C9A84C',
               fontWeight: 600, letterSpacing: '0.1em',
               textTransform: 'uppercase',
               fontFamily: "'DM Sans', sans-serif",
               marginBottom: 16,
             }}>SERVICE AREAS</div>
-            {['Tyler, TX (Home Base)', 'Dallas / Fort Worth', 'Houston', 'Austin', 'San Antonio', 'Call to confirm your area'].map(area => (
-              <p key={area} style={{
-                fontSize: 13, color: 'rgba(242,237,227,0.35)',
-                fontFamily: "'DM Sans', sans-serif",
-                marginBottom: 8, lineHeight: 1.4,
-              }}>{area}</p>
-            ))}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {['Tyler, TX (Home Base)', 'Dallas / Fort Worth', 'Houston', 'Austin', 'San Antonio', 'Call to confirm your area'].map(area => (
+                <span key={area} style={{
+                  fontSize: '11px',
+                  color: '#7A6E60',
+                  border: '1px solid rgba(201,168,76,0.18)',
+                  borderRadius: '999px',
+                  padding: '3px 10px',
+                  fontFamily: "'DM Sans', sans-serif",
+                }}>
+                  {area}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 

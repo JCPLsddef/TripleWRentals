@@ -126,19 +126,13 @@ button { font-family: inherit; }
   100% { transform: translateX(-50%); }
 }
 
-/* ─── Carousel scrollbar hide ───────────────────────────────── */
-.fleet-carousel {
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+/* ─── Reviews grid responsive ───────────────────────────────── */
+@media (max-width: 1023px) {
+  .reviews-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
-.fleet-carousel::-webkit-scrollbar { display: none; }
-
-/* ─── Reviews marquee ───────────────────────────────────────── */
-.marquee-track {
-  display: flex;
-  animation: marquee 30s linear infinite;
+@media (max-width: 575px) {
+  .reviews-grid { grid-template-columns: 1fr !important; }
 }
-.marquee-track:hover { animation-play-state: paused; }
 
 /* ─── Unicorn Studio Section ───────────────────────────────── */
 .unicorn-section {
