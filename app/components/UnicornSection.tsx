@@ -11,10 +11,10 @@ export default function UnicornSection() {
         height="600px"
       />
       <div className="unicorn-overlay">
-        <div className="unicorn-heading">
+        <h2 className="unicorn-heading">
           <span className="gold">It&apos;s Time to</span>
           <span className="white">Explore</span>
-        </div>
+        </h2>
         <div className="unicorn-cta">
           <a href="#fleet">
             <button className="animated-button">

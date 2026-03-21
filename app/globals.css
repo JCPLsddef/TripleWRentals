@@ -147,12 +147,11 @@ button { font-family: inherit; }
 }
 .unicorn-overlay {
   position: absolute;
-  top: 23%;
-  left: 10%;
-  right: 10%;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 2rem;
   pointer-events: none;
 }
@@ -160,14 +159,17 @@ button { font-family: inherit; }
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  gap: 0.25em;
+  gap: 0.35em;
   font-family: 'Holtwood One SC', serif;
   font-size: 67px;
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-align: center;
+  white-space: nowrap;
 }
 .unicorn-heading .gold { color: #EA9B01; }
-.unicorn-heading .white { color: #FFFFFF; }
+.unicorn-heading .white { color: #FFFFFF; margin-left: 0.08em; }
 .unicorn-cta { pointer-events: all; }
 
 /* ── Animated Button ─────────────────────────────────────────── */
@@ -182,8 +184,8 @@ button { font-family: inherit; }
   background-color: transparent;
   border-radius: 100px;
   font-weight: 600;
-  color: greenyellow;
-  box-shadow: 0 0 0 2px greenyellow;
+  color: #C9963A;
+  box-shadow: 0 0 0 2px #C9963A;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -191,7 +193,7 @@ button { font-family: inherit; }
 .animated-button svg {
   position: absolute;
   width: 24px;
-  fill: greenyellow;
+  fill: #C9963A;
   z-index: 9;
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -204,7 +206,7 @@ button { font-family: inherit; }
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  background-color: greenyellow;
+  background-color: #C9963A;
   border-radius: 50%;
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -217,16 +219,16 @@ button { font-family: inherit; }
 }
 .animated-button:hover {
   box-shadow: 0 0 0 12px transparent;
-  color: #212121;
+  color: #0B2012;
   border-radius: 12px;
 }
 .animated-button:hover .arr-1 { right: -25%; }
 .animated-button:hover .arr-2 { left: 16px; }
 .animated-button:hover .text { transform: translateX(12px); }
-.animated-button:hover svg { fill: #212121; }
+.animated-button:hover svg { fill: #0B2012; }
 .animated-button:active {
   scale: 0.95;
-  box-shadow: 0 0 0 4px greenyellow;
+  box-shadow: 0 0 0 4px #C9963A;
 }
 .animated-button:hover .circle {
   width: 220px;
@@ -234,17 +236,26 @@ button { font-family: inherit; }
   opacity: 1;
 }
 
+/* Tablet: scale down but keep sentence on one line */
 @media (max-width: 991px) {
   .unicorn-heading {
-    flex-direction: column;
-    font-size: 56px;
-    gap: 0.05em;
+    font-size: 52px;
   }
-  .unicorn-overlay { top: 18%; }
 }
+/* Mobile: stack into two lines, EXPLORE slightly larger */
 @media (max-width: 575px) {
-  .unicorn-heading { font-size: 40px; }
-  .unicorn-overlay { top: 20%; left: 5%; right: 5%; }
+  .unicorn-heading {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.05em;
+    font-size: 36px;
+    white-space: normal;
+    letter-spacing: 0.04em;
+  }
+  .unicorn-heading .white {
+    font-size: 1.15em;
+    margin-left: 0;
+  }
   .animated-button { padding: 12px 28px; font-size: 14px; }
 }
 
