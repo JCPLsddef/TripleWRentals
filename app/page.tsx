@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RVSlider } from './components/RVSlider';
 import UnicornSection from './components/UnicornSection';
+import ReviewsSlider from './components/ReviewsSlider';
 
 import './globals.css';
 
@@ -639,8 +640,8 @@ export default function Home() {
               style={{
                 position: 'absolute',
                 top: '27px',
-                left: '20%',
-                right: '20%',
+                left: '56px',
+                right: 'calc(100% / 3)',
                 height: '1px',
                 backgroundImage: 'repeating-linear-gradient(90deg, rgba(201,168,76,0.45) 0, rgba(201,168,76,0.45) 6px, transparent 6px, transparent 14px)',
                 pointerEvents: 'none',
@@ -725,88 +726,23 @@ export default function Home() {
       <UnicornSection />
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
-      <section id="reviews" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-
-        {/* Noise texture */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
-
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
-
-          {/* Header */}
-          <div style={{ marginBottom: 48 }}>
-            <div style={{ marginBottom: 16 }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>GUEST REVIEWS</span>
-            </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 10 }}>
-              What Guests Say After Their Stay
+      <section id="reviews" style={{ background: '#F2EDE3', padding: '96px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div className="reveal" style={{ marginBottom: 48 }}>
+            <div style={{ width: 40, height: 3, background: '#C9963A', borderRadius: 2, marginBottom: 20 }} />
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(28px, 4vw, 50px)',
+              fontWeight: 700, color: '#0B2012',
+              marginBottom: 10,
+            }}>
+              Don&rsquo;t Take Our{' '}
+              <em style={{ color: '#C9963A', fontWeight: 400 }}>Word for It</em>
             </h2>
-            <p style={{ fontSize: '14px', color: '#A89880', fontFamily: "'DM Sans', sans-serif" }}>★★★★★ Rated on Google · Tyler, Texas</p>
+            <p style={{ fontSize: 14, color: '#5A6B62', fontFamily: "'DM Sans', sans-serif" }}>★★★★★ Rated on Google · Tyler, Texas</p>
           </div>
 
-          {/* Static 3-column review grid */}
-          <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
-            {[
-              {
-                name: 'Luci Wade-Cantu', initials: 'LW', source: 'Google Review',
-                quote: 'Best RV rental ever! They rented to us at a moments notice on the 4th of July — delivered same day, fully set up. The RV was pure luxury. Westin and team were outstanding. I will always use their service moving forward.',
-              },
-              {
-                name: 'JT Seargeant', initials: 'JS', source: 'Google Review',
-                quote: 'I have rented from Triple W multiple times. The communication is always outstanding. Corbin arrived on site in minutes to assist with a minor issue and checked in daily to make sure all was well — exceeded my expectations.',
-              },
-              {
-                name: 'Tim S.', initials: 'TS', source: 'Google Review',
-                quote: 'What makes this beyond 5 stars is the incredible hospitality. He goes beyond Ritz Carlton standards — was booked once and found another RV to accommodate us. The WiFi is incredible. Our new first choice every time.',
-              },
-              {
-                name: 'Wyman Jones', initials: 'WJ', source: 'Google Review',
-                quote: 'Triple W came through when another company canceled at the last minute. Corbin delivered on time, set everything up, and ensured all was working. His attention to detail and professionalism were greatly appreciated.',
-              },
-              {
-                name: 'Amy Walker', initials: 'AW', source: 'Google Review',
-                quote: 'The camper was delivered and fully set up before I even arrived — stocked with towels, sheets, blankets, and a coffee maker. A home away from home. Shane went absolutely above and beyond.',
-              },
-              {
-                name: 'Sandy McKinney', initials: 'SM', source: 'Google Review',
-                quote: 'Wayne was very polite, patient, and accommodating. The RV was in great condition and fully loaded. Given the temperature outside it was great to have such strong A/C. I will definitely use them again.',
-              },
-            ].map(({ name, initials, source, quote }) => (
-              <div key={name} className="review-card" style={{
-                background: '#0F0D0A',
-                border: '1px solid rgba(201,168,76,0.15)',
-                borderRadius: '10px',
-                padding: '24px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '14px',
-              }}>
-                <div style={{ color: '#C9A84C', fontSize: '13px', letterSpacing: '2px' }}>★★★★★</div>
-                <p style={{ fontSize: '14px', color: '#A89880', lineHeight: 1.7, fontStyle: 'italic', flex: 1, fontFamily: "'DM Sans', sans-serif" }}>
-                  &ldquo;{quote}&rdquo;
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: 'auto' }}>
-                  <div style={{
-                    width: '36px', height: '36px',
-                    borderRadius: '50%',
-                    background: 'rgba(201,168,76,0.12)',
-                    border: '1px solid rgba(201,168,76,0.3)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '12px', fontWeight: 500, color: '#C9A84C',
-                    flexShrink: 0,
-                    fontFamily: "'DM Sans', sans-serif",
-                  }}>
-                    {initials}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 500, color: '#F0E8D8', fontFamily: "'DM Sans', sans-serif" }}>{name}</div>
-                    <div style={{ fontSize: '11px', color: '#6B5F52', fontFamily: "'DM Sans', sans-serif" }}>{source} · Tyler, Texas</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
+          <ReviewsSlider />
         </div>
       </section>
 
