@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RVSlider } from './components/RVSlider';
+import ReviewsSlider from './components/ReviewsSlider';
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -10,7 +11,7 @@ import './globals.css';
 const faqs = [
   {
     q: 'How far do you deliver?',
-    a: 'We deliver across Texas — Tyler, Dallas/Fort Worth, Houston, Austin, San Antonio, and surrounding areas. Call us to confirm your specific location and get a delivery quote.',
+    a: 'We deliver across Texas: Tyler, Dallas/Fort Worth, Houston, Austin, San Antonio, and surrounding areas. Call us to confirm your specific location and get a delivery quote.',
   },
   {
     q: "What's included in the rental?",
@@ -18,11 +19,11 @@ const faqs = [
   },
   {
     q: 'Do I need a truck or special license?',
-    a: "No. We deliver and set up the RV at your location. You don't need a truck, a hitch, or any experience. We handle all the logistics — you just walk in.",
+    a: "No. We deliver and set up the RV at your location. You don't need a truck, a hitch, or any experience. We handle all the logistics. You just walk in.",
   },
   {
     q: "What if something breaks or doesn't work during my stay?",
-    a: "Call or text us immediately — we're available 24/7 and will either walk you through it over the phone or come out to fix it in person. In the rare event something can't be resolved, we'll make it right. Your experience is our reputation.",
+    a: "Call or text us immediately. We're available 24/7 and will either walk you through it over the phone or come out to fix it in person. In the rare event something can't be resolved, we'll make it right. Your experience is our reputation.",
   },
   {
     q: 'How does booking work?',
@@ -30,11 +31,11 @@ const faqs = [
   },
   {
     q: "What's your cancellation policy?",
-    a: "Full refund for cancellations 30+ days out. 50% refund for 8–30 days. No refund within 7 days. Something came up? Just call us — we'll always try to work with you.",
+    a: "Full refund for cancellations 30+ days out. 50% refund for 8–30 days. No refund within 7 days. Something came up? Just call us. We'll always try to work with you.",
   },
   {
     q: 'Can I rent for just one night?',
-    a: "Yes. We offer daily, weekly, and monthly rentals. Weekend single-night slots go fast, especially in spring and fall — call early to lock in your dates.",
+    a: "Yes. We offer daily, weekly, and monthly rentals. Weekend single-night slots go fast, especially in spring and fall. Call early to lock in your dates.",
   },
 ];
 
@@ -64,7 +65,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [counts, setCounts] = useState({ rentals: 50, states: 4 });
+  const [counts, setCounts] = useState({ rentals: 300 });
   const [form, setForm] = useState({ name: '', phone: '', dates: '', message: '' });
   const statsRef = useRef(null);
   const statsRan = useRef(false);
@@ -96,8 +97,7 @@ export default function Home() {
             const p = Math.min((Date.now() - start) / dur, 1);
             const e = 1 - Math.pow(1 - p, 3);
             setCounts({
-              rentals: Math.round(e * 50),
-              states: Math.round(e * 4),
+              rentals: Math.round(e * 300),
             });
             if (p < 1) requestAnimationFrame(tick);
           };
@@ -533,10 +533,10 @@ export default function Home() {
           textAlign: 'center',
         }}>
           {[
-            { val: `${counts.rentals}+`, label: 'Rentals Delivered' },
-            { val: '★★★★★', label: 'Google Rating' },
+            { val: `${counts.rentals}+`, label: 'RVs Delivered' },
+            { val: '4.7★', label: '193 Verified Reviews' },
             { val: '24/7', label: 'Support Available' },
-            { val: `${counts.states}+`, label: 'States We Deliver Across' },
+            { val: 'Nationwide', label: 'Delivery Across the US' },
           ].map(({ val, label }) => (
             <div key={label}>
               <div style={{
@@ -587,7 +587,7 @@ export default function Home() {
             color: '#A89880',
             maxWidth: 540, margin: '0 auto',
           }}>
-            Browse each RV model and explore every room. Use the arrows to switch units — tap any image to zoom through the interior.
+            Browse each RV model and explore every room. Use the arrows to switch units. Tap any image to zoom through the interior.
           </p>
         </div>
         <div style={{ background: '#0D0B09', position: 'relative', zIndex: 1 }}>
@@ -608,7 +608,7 @@ export default function Home() {
               <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>HOW IT WORKS</span>
             </div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '12px', marginBottom: '12px' }}>
-              From First Call to Check-In —{' '}
+              From First Call to Check-In:{' '}
               <br />
               <em style={{ fontStyle: 'italic', color: '#C9A84C' }}>Three Steps.</em>
             </h2>
@@ -698,10 +698,10 @@ export default function Home() {
               onMouseEnter={e => (e.currentTarget.style.background = '#E8C97A')}
               onMouseLeave={e => (e.currentTarget.style.background = '#C9A84C')}
             >
-              Book Your Rental — (972) 965-6901
+              Book Your Rental · (972) 965-6901
             </a>
             <span style={{ fontSize: '13px', color: '#6B5F52' }}>
-              or text us — <strong style={{ color: '#A89880', fontWeight: 400 }}>we&apos;ll respond within the hour</strong>
+              or text us. <strong style={{ color: '#A89880', fontWeight: 400 }}>We&apos;ll respond within the hour.</strong>
             </span>
           </div>
 
@@ -709,96 +709,25 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
-      <section id="reviews" style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,168,76,0.10)', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-
-        {/* Noise texture */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
-
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
-
-          {/* Header */}
-          <div style={{ marginBottom: 48 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-              <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>GUEST REVIEWS</span>
-            </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 44px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 10 }}>
-              What Our Guests{' '}
-              <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Say.</em>
+      <section id="reviews" style={{ background: '#F2EDE3', padding: '96px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div className="reveal" style={{ marginBottom: 48 }}>
+            <div style={{ width: 40, height: 3, background: '#C9A84C', borderRadius: 2, marginBottom: 20 }} />
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(28px, 4vw, 44px)',
+              fontWeight: 400, color: '#0D0B09',
+              marginBottom: 10,
+              letterSpacing: '-0.02em', lineHeight: 1.15,
+            }}>
+              Don&rsquo;t Take Our{' '}
+              <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Word for It</em>
             </h2>
-            <p style={{ fontSize: 14, color: '#A89880', fontFamily: "'Inter', sans-serif" }}>★★★★★ Rated on Google · Tyler, Texas</p>
+            <p style={{ fontSize: 14, color: '#7A6E60', fontFamily: "'Inter', sans-serif" }}>
+              4.7★ on Google · 193 verified reviews · Tyler, Texas
+            </p>
           </div>
-
-          {/* 3-col grid */}
-          <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-            {[
-              {
-                initials: 'GW', name: 'Grant Walker', location: 'Tyler, Texas', source: 'Google Review',
-                quote: 'The RV was better than any hotel room I\'ve stayed in. Marble countertops, king bed, full kitchen. Westin delivered and set it all up — didn\'t have to lift a finger. Will book again for every family event.',
-              },
-              {
-                initials: 'AW', name: 'Amy Walker', location: 'Muddy Bottoms', source: 'Google Review',
-                quote: 'Used Triple W for a horse show weekend and it was a total game-changer. The setup was flawless, the unit was immaculate, and they answered every question same day. Worth every penny.',
-              },
-              {
-                initials: 'MS', name: 'Marsha Swann', location: 'Texas', source: 'Google Review',
-                quote: 'Rented for a week and honestly didn\'t want to leave. Everything was spotless and well-stocked. They handled delivery, setup, and pickup — I didn\'t have to do anything except enjoy it.',
-              },
-              {
-                initials: 'SM', name: 'Sarah M.', location: 'Tyler State Park', source: 'Google Review',
-                quote: 'Three nights at Tyler State Park in their luxury RV was incredible. Felt like a hotel on wheels. Called them at 10pm with a question and they picked up immediately. That kind of service is rare.',
-              },
-              {
-                initials: 'JH', name: 'James H.', location: 'Texas Rose Park', source: 'Google Review',
-                quote: 'Used Triple W at Texas Rose for a multi-day event. Professional from start to finish — on-time delivery, quality units, zero issues. Exactly what we needed and more.',
-              },
-              {
-                initials: 'ED', name: 'Eric D.', location: 'Dallas, TX', source: 'Google Review',
-                quote: 'Rented for a corporate event outside Dallas. The whole process was seamless — Westin handled everything and the RV was in perfect condition. Already planning to book for our next event.',
-              },
-            ].map(({ initials, name, location, source, quote }) => (
-              <div key={name} style={{
-                background: '#0F0D0A',
-                border: '1px solid rgba(201,168,76,0.15)',
-                borderRadius: 10,
-                padding: 24,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 16,
-              }}>
-                <div style={{ color: '#C9A84C', fontSize: 13, letterSpacing: '2px' }}>★★★★★</div>
-                <p style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontStyle: 'italic',
-                  fontSize: 14,
-                  color: '#A89880',
-                  lineHeight: 1.8,
-                  flex: 1,
-                }}>
-                  <span style={{ color: '#C9A84C', fontSize: 28, lineHeight: 1, display: 'inline-block', marginRight: 2, verticalAlign: 'top' }}>&ldquo;</span>
-                  {quote}
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <div style={{
-                    width: 36, height: 36, borderRadius: '50%',
-                    background: 'rgba(201,168,76,0.12)',
-                    border: '1px solid rgba(201,168,76,0.3)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 12, fontWeight: 500, color: '#C9A84C',
-                    fontFamily: "'Inter', sans-serif",
-                    flexShrink: 0,
-                  }}>
-                    {initials}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: '#F0E8D8', fontFamily: "'Inter', sans-serif" }}>{name}</div>
-                    <div style={{ fontSize: 11, color: '#6B5F52', fontFamily: "'Inter', sans-serif" }}>{location} · {source}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
+          <ReviewsSlider />
         </div>
       </section>
 
@@ -833,7 +762,7 @@ export default function Home() {
               lineHeight: 1.65,
               fontFamily: "'Inter', sans-serif",
             }}>
-              White-glove delivery, the finest fleet in East Texas, and a team that&apos;s always reachable — day or night.
+              White-glove delivery, the finest fleet in East Texas, and a team that&apos;s always reachable, day or night.
             </p>
           </div>
 
@@ -891,7 +820,7 @@ export default function Home() {
                 The Finest Fleet in East Texas
               </h3>
               <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: 'Marble countertops. King beds. Massage chairs. <span style="color:#A89880">Smart TVs in every room</span>. Nicer than most hotels — and we deliver it to you.' }}
+                dangerouslySetInnerHTML={{ __html: 'Marble countertops. King beds. Massage chairs. <span style="color:#A89880">Smart TVs in every room</span>. Nicer than most hotels. We deliver it to you.' }}
               />
             </div>
 
@@ -914,7 +843,7 @@ export default function Home() {
                 Reserved Within the Hour
               </h3>
               <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: 'Call or text. Tell us your dates and location. <span style="color:#A89880">Most bookings confirmed same-day</span> — no lengthy forms, no waiting around.' }}
+                dangerouslySetInnerHTML={{ __html: 'Call or text. Tell us your dates and location. <span style="color:#A89880">Most bookings confirmed same-day</span>. No lengthy forms, no waiting.' }}
               />
             </div>
 
@@ -936,7 +865,7 @@ export default function Home() {
                 Always Reachable
               </h3>
               <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: 'Reach the team directly on the main line, or get an instant answer from our <span style="color:#A89880">AI agent</span> — any time of day or night.' }}
+                dangerouslySetInnerHTML={{ __html: 'Reach the team directly on the main line, or get an instant answer from our <span style="color:#A89880">AI agent</span>, any time of day or night.' }}
               />
             </div>
 
@@ -952,7 +881,7 @@ export default function Home() {
             marginTop: 20,
           }}>
             {[
-              'Daily, weekly, or monthly — flexible for any trip',
+              'Daily, weekly, or monthly. Flexible for any trip.',
               'Cleaned & sanitized before every rental',
               'Fully delivered & set up anywhere in Texas',
               'Friendly local team + AI line always on',
@@ -1092,7 +1021,7 @@ export default function Home() {
               <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>We Handle Everything Else.</em>
             </h2>
             <p style={{ fontSize: '14px', color: '#A89880', lineHeight: 1.65, fontFamily: "'Inter', sans-serif" }}>
-              Weekend availability goes fast — especially in spring and fall.
+              Weekend availability goes fast, especially in spring and fall.
             </p>
           </div>
 
@@ -1227,7 +1156,7 @@ export default function Home() {
               onMouseEnter={e => (e.currentTarget.style.background = '#E8C97A')}
               onMouseLeave={e => (e.currentTarget.style.background = '#C9A84C')}
             >
-              Send Request — We&rsquo;ll Call Within the Hour
+              Send Request · We&rsquo;ll Call Within the Hour
             </button>
 
             <p style={{
