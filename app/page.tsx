@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RVSlider } from './components/RVSlider';
 import ReviewsSlider from './components/ReviewsSlider';
+import UnicornSection from './components/UnicornSection';
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -770,6 +771,9 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* ── SECTION 5B: It's Time to Explore ────────────────── */}
+      <UnicornSection />
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
       <section id="reviews" style={{
