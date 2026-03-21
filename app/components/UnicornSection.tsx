@@ -3,36 +3,32 @@ import UnicornScene from 'unicornstudio-react/next';
 
 export default function UnicornSection() {
   return (
-    <section style={{ background: '#071610', overflow: 'hidden', position: 'relative' }}>
+    <section className="unicorn-section">
       <UnicornScene
         jsonFilePath="/rv-scene-data.json"
         sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.4/dist/unicornStudio.umd.js"
         width="100%"
         height="600px"
       />
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        textAlign: 'center',
-        pointerEvents: 'none',
-        whiteSpace: 'nowrap',
-      }}>
-        <p style={{
-          color: '#EA9B01',
-          fontFamily: '"Holtwood One SC", serif',
-          fontSize: 'clamp(32px, 4.7vw, 67px)',
-          lineHeight: 1.36,
-          margin: 0,
-        }}>It&apos;s Time to</p>
-        <p style={{
-          color: '#FFFFFF',
-          fontFamily: '"Holtwood One SC", serif',
-          fontSize: 'clamp(32px, 4.7vw, 67px)',
-          lineHeight: 1,
-          margin: 0,
-        }}>Exploreeeeeeee</p>
+      <div className="unicorn-overlay">
+        <div className="unicorn-heading">
+          <span className="gold">It&apos;s Time to</span>
+          <span className="white">Explore</span>
+        </div>
+        <div className="unicorn-cta">
+          <a href="#fleet">
+            <button className="animated-button">
+              <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+              </svg>
+              <span className="text">Book Your Adventure</span>
+              <span className="circle" />
+              <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+              </svg>
+            </button>
+          </a>
+        </div>
       </div>
     </section>
   );
