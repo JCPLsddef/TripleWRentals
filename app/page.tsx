@@ -709,54 +709,23 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 5: How It Works ──────────────────────────── */}
-      <section id="how" style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,168,76,0.1)', padding: '96px 0' }}>
-        <style>{`
-          @media (max-width: 767px) {
-            .hiw-steps-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-            .hiw-connector { display: none !important; }
-            .hiw-step { padding-right: 0 !important; }
-            .hiw-section { padding: 64px 0 !important; }
-          }
-          .hiw-cta-btn {
-            display: inline-block;
-            background: #C9A84C;
-            color: #0D0B09;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.01em;
-            padding: 14px 28px;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: background 0.15s;
-          }
-          .hiw-cta-btn:hover { background: #E8C97A; }
-        `}</style>
-        <div className="hiw-section" style={{ maxWidth: 1080, margin: '0 auto', padding: '0 24px' }}>
+      <section id="how" style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,168,76,0.1)', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+        {/* Noise texture */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n1)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
-          <div style={{ maxWidth: 560, marginBottom: 52 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-              <div style={{ width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
-              <span style={{ fontSize: 11, letterSpacing: '0.15em', color: '#C9A84C', textTransform: 'uppercase' }}>HOW IT WORKS</span>
+          <div style={{ maxWidth: '560px', marginBottom: '36px' }}>
+            <div style={{ marginBottom: '16px' }}>
+              <span className="why-eyebrow-line" style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>HOW IT WORKS</span>
             </div>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 40px)',
-              fontWeight: 300,
-              color: '#F0E8D8',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
-            }}>
-              From First Call to Check-In —<br />
-              <em style={{ color: '#C9A84C' }}>Three Steps.</em>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '12px', marginBottom: '12px' }}>
+              From First Call to Check-In —{' '}
+              <br />
+              <em style={{ fontStyle: 'italic', color: '#C9A84C' }}>Three Steps.</em>
             </h2>
-            <p style={{
-              fontSize: 15,
-              color: '#A89880',
-              lineHeight: 1.65,
-              marginTop: 12,
-              fontFamily: "'DM Sans', sans-serif",
-            }}>
+            <p style={{ fontSize: '15px', color: '#A89880', lineHeight: 1.65, fontFamily: "'DM Sans', sans-serif" }}>
               No experience required. No truck needed. We handle every part of the process, start to finish.
             </p>
           </div>
@@ -764,101 +733,69 @@ export default function Home() {
           {/* Steps */}
           <div style={{ position: 'relative' }}>
             {/* Dashed connector — desktop only */}
-            <div className="hiw-connector" style={{
-              position: 'absolute',
-              height: 1,
-              background: 'repeating-linear-gradient(90deg, rgba(201,168,76,0.4) 0, rgba(201,168,76,0.4) 6px, transparent 6px, transparent 14px)',
-              top: 28,
-              left: 'calc(16.66% + 28px)',
-              right: 'calc(16.66% + 28px)',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }} />
-            <div className="hiw-steps-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0 }}>
+            <div
+              className="steps-connector"
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                top: '27px',
+                left: '20%',
+                right: '20%',
+                height: '1px',
+                backgroundImage: 'repeating-linear-gradient(90deg, rgba(201,168,76,0.45) 0, rgba(201,168,76,0.45) 6px, transparent 6px, transparent 14px)',
+                pointerEvents: 'none',
+                zIndex: 0,
+              }}
+            />
+            <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0, position: 'relative', zIndex: 1 }}>
 
               {/* Step 1 */}
-              <div className="hiw-step" style={{ paddingRight: 40 }}>
-                <div style={{
-                  width: 56, height: 56, borderRadius: '50%',
-                  border: '1px solid rgba(201,168,76,0.35)',
-                  background: 'rgba(201,168,76,0.06)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: 24, position: 'relative', zIndex: 1,
-                }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 10.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012.01 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+              <div className="step-item" style={{ paddingRight: '32px' }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.45)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="#C9A84C" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
                   </svg>
                 </div>
-                <h3 style={{ fontSize: 16, fontWeight: 500, color: '#F0E8D8', marginBottom: 10, letterSpacing: '-0.01em' }}>
-                  Call or Text Us
-                </h3>
-                <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.7 }}>
-                  Tell us your dates, location, and group size. Takes about <span style={{ color: '#A89880' }}>two minutes</span>. No forms, no waiting.
-                </p>
-                <span style={{
-                  display: 'inline-block', marginTop: 12,
-                  fontSize: 11, color: '#C9A84C', letterSpacing: '0.04em',
-                  borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: 1,
-                }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#F0E8D8', marginBottom: '10px', letterSpacing: '-0.01em' }}>Call or Text Us</h3>
+                <p style={{ fontSize: '13px', color: '#7A6E60', lineHeight: 1.7 }}
+                  dangerouslySetInnerHTML={{ __html: `Tell us your dates, location, and group size. Takes about two minutes. <strong style="color:#A89880;font-weight:400">No forms, no waiting.</strong>` }}
+                />
+                <span style={{ display: 'inline-block', marginTop: '14px', fontSize: '11px', color: '#C9A84C', letterSpacing: '0.04em', borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '2px', opacity: 0.9 }}>
                   Most bookings confirmed same-day
                 </span>
               </div>
 
               {/* Step 2 */}
-              <div className="hiw-step" style={{ paddingRight: 40 }}>
-                <div style={{
-                  width: 56, height: 56, borderRadius: '50%',
-                  border: '1px solid rgba(201,168,76,0.35)',
-                  background: 'rgba(201,168,76,0.06)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: 24, position: 'relative', zIndex: 1,
-                }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="1" y="3" width="15" height="13" rx="1" />
-                    <path d="M16 8h4l3 5v4h-7V8z" />
-                    <circle cx="5.5" cy="18.5" r="2.5" />
-                    <circle cx="18.5" cy="18.5" r="2.5" />
+              <div className="step-item" style={{ paddingRight: '32px' }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.45)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="#C9A84C" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="1" y="3" width="15" height="13" rx="2"/>
+                    <path d="M16 8h4l3 3v5h-7V8z"/>
+                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                    <circle cx="18.5" cy="18.5" r="2.5"/>
                   </svg>
                 </div>
-                <h3 style={{ fontSize: 16, fontWeight: 500, color: '#F0E8D8', marginBottom: 10, letterSpacing: '-0.01em' }}>
-                  We Deliver &amp; Set Up
-                </h3>
-                <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.7 }}>
-                  Your RV arrives fully cleaned, stocked, and set up at your location. We <span style={{ color: '#A89880' }}>connect utilities</span> and walk you through every feature.
-                </p>
-                <span style={{
-                  display: 'inline-block', marginTop: 12,
-                  fontSize: 11, color: '#C9A84C', letterSpacing: '0.04em',
-                  borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: 1,
-                }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#F0E8D8', marginBottom: '10px', letterSpacing: '-0.01em' }}>We Deliver &amp; Set Up</h3>
+                <p style={{ fontSize: '13px', color: '#7A6E60', lineHeight: 1.7 }}
+                  dangerouslySetInnerHTML={{ __html: `Your RV arrives fully cleaned, stocked, and set up at your location. We connect utilities and <strong style="color:#A89880;font-weight:400">walk you through every feature.</strong>` }}
+                />
+                <span style={{ display: 'inline-block', marginTop: '14px', fontSize: '11px', color: '#C9A84C', letterSpacing: '0.04em', borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '2px', opacity: 0.9 }}>
                   Arrive to a fully set-up RV
                 </span>
               </div>
 
               {/* Step 3 */}
-              <div>
-                <div style={{
-                  width: 56, height: 56, borderRadius: '50%',
-                  border: '1px solid rgba(201,168,76,0.35)',
-                  background: 'rgba(201,168,76,0.06)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: 24, position: 'relative', zIndex: 1,
-                }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              <div className="step-item">
+                <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.45)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="#C9A84C" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                   </svg>
                 </div>
-                <h3 style={{ fontSize: 16, fontWeight: 500, color: '#F0E8D8', marginBottom: 10, letterSpacing: '-0.01em' }}>
-                  Enjoy Your Stay
-                </h3>
-                <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.7 }}>
-                  We&apos;re on call day and night for anything you need. When you&apos;re done, we handle pickup too. You just <span style={{ color: '#A89880' }}>lock the door</span>.
-                </p>
-                <span style={{
-                  display: 'inline-block', marginTop: 12,
-                  fontSize: 11, color: '#C9A84C', letterSpacing: '0.04em',
-                  borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: 1,
-                }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#F0E8D8', marginBottom: '10px', letterSpacing: '-0.01em' }}>Enjoy Your Stay</h3>
+                <p style={{ fontSize: '13px', color: '#7A6E60', lineHeight: 1.7 }}
+                  dangerouslySetInnerHTML={{ __html: `We&#39;re on call day and night for anything you need. When you&#39;re done, we handle pickup too. <strong style="color:#A89880;font-weight:400">You just lock the door.</strong>` }}
+                />
+                <span style={{ display: 'inline-block', marginTop: '14px', fontSize: '11px', color: '#C9A84C', letterSpacing: '0.04em', borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '2px', opacity: 0.9 }}>
                   Support available 24/7 throughout your stay
                 </span>
               </div>
@@ -867,12 +804,17 @@ export default function Home() {
           </div>
 
           {/* CTA Row */}
-          <div style={{ marginTop: 48, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
-            <a href="tel:9729656901" className="hiw-cta-btn">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginTop: '52px', flexWrap: 'wrap' }}>
+            <a
+              href="tel:9729656901"
+              style={{ display: 'inline-flex', alignItems: 'center', background: '#C9A84C', color: '#0D0B09', fontSize: '14px', fontWeight: 500, letterSpacing: '0.01em', padding: '14px 28px', borderRadius: '6px', textDecoration: 'none', transition: 'background 0.15s ease', whiteSpace: 'nowrap' }}
+              onMouseEnter={e => (e.currentTarget.style.background = '#E8C97A')}
+              onMouseLeave={e => (e.currentTarget.style.background = '#C9A84C')}
+            >
               Book Your Rental — (972) 965-6901
             </a>
-            <span style={{ fontSize: 13, color: '#6B5F52' }}>
-              or text us — we&apos;ll respond <span style={{ color: '#A89880' }}>within the hour</span>
+            <span style={{ fontSize: '13px', color: '#6B5F52' }}>
+              or text us — <strong style={{ color: '#A89880', fontWeight: 400 }}>we&apos;ll respond within the hour</strong>
             </span>
           </div>
 
@@ -904,49 +846,27 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
-      <section style={{ background: '#0D0B09', padding: '96px 0' }}>
-        <style>{`
-          @media (max-width: 767px) {
-            .wtw-section { padding: 64px 0 !important; }
-            .wtw-grid { grid-template-columns: 1fr !important; }
-            .wtw-strip { display: grid !important; grid-template-columns: 1fr 1fr !important; }
-            .wtw-strip-item:nth-child(2) { border-right: none !important; }
-            .wtw-strip-item:nth-child(3) { border-right: 1px solid rgba(201,168,76,0.1) !important; }
-          }
-          .wtw-card {
-            background: #0F0D0A;
-            padding: 28px 26px;
-            position: relative;
-            transition: background 0.2s;
-            cursor: default;
-          }
-          .wtw-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 3px; height: 100%;
-            background: linear-gradient(180deg, #C9A84C 0%, rgba(201,168,76,0.2) 100%);
-            opacity: 0;
-            transition: opacity 0.2s;
-          }
-          .wtw-card:hover { background: #161209; }
-          .wtw-card:hover::before { opacity: 1; }
-        `}</style>
-        <div className="wtw-section" style={{ maxWidth: 1080, margin: '0 auto', padding: '0 24px' }}>
+      <section id="why" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+
+        {/* Noise texture overlay */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
+
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
-          <div style={{ maxWidth: 640 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-              <div style={{ width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
-              <span style={{ fontSize: 11, letterSpacing: '0.15em', color: '#C9A84C', textTransform: 'uppercase' }}>WHY TRIPLE W</span>
+          <div style={{ maxWidth: 640, marginBottom: 48 }}>
+            <div style={{ marginBottom: 20 }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>WHY TRIPLE W</span>
             </div>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 40px)',
+              fontSize: 'clamp(28px, 4vw, 42px)',
               fontWeight: 300,
               color: '#F0E8D8',
               letterSpacing: '-0.02em',
               lineHeight: 1.15,
+              marginBottom: 12,
             }}>
               The Standard Other RV Companies Can&apos;t Match.
             </h2>
@@ -954,8 +874,6 @@ export default function Home() {
               fontSize: 15,
               color: '#A89880',
               lineHeight: 1.65,
-              marginTop: 12,
-              marginBottom: 48,
               fontFamily: "'DM Sans', sans-serif",
             }}>
               White-glove delivery, the finest fleet in East Texas, and a team that&apos;s always reachable — day or night.
@@ -963,7 +881,7 @@ export default function Home() {
           </div>
 
           {/* 2×2 Card Grid */}
-          <div className="wtw-grid" style={{
+          <div className="why-card-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: 2,
@@ -974,9 +892,10 @@ export default function Home() {
           }}>
 
             {/* Card 1 — White-Glove Delivery */}
-            <div className="wtw-card">
+            <div className="why-card">
               <div style={{
-                width: 36, height: 36,
+                width: 38, height: 38,
+                background: 'rgba(201,168,76,0.05)',
                 border: '1px solid rgba(201,168,76,0.3)',
                 borderRadius: 8,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -992,15 +911,16 @@ export default function Home() {
               <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
                 White-Glove Delivery
               </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
-                No truck, no hitch, no experience needed. We bring the RV to your door, plug everything in, and <span style={{ color: '#A89880' }}>walk you through every feature</span> before we leave.
-              </p>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
+                dangerouslySetInnerHTML={{ __html: 'No truck, no hitch, no experience needed. We bring the RV to your door, plug everything in, and <span style="color:#A89880">walk you through every feature</span> before we leave.' }}
+              />
             </div>
 
             {/* Card 2 — The Finest Fleet in East Texas */}
-            <div className="wtw-card">
+            <div className="why-card">
               <div style={{
-                width: 36, height: 36,
+                width: 38, height: 38,
+                background: 'rgba(201,168,76,0.05)',
                 border: '1px solid rgba(201,168,76,0.3)',
                 borderRadius: 8,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -1013,15 +933,16 @@ export default function Home() {
               <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
                 The Finest Fleet in East Texas
               </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
-                Marble countertops. King beds. Massage chairs. <span style={{ color: '#A89880' }}>Smart TVs in every room</span>. Nicer than most hotels — and we deliver it to you.
-              </p>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
+                dangerouslySetInnerHTML={{ __html: 'Marble countertops. King beds. Massage chairs. <span style="color:#A89880">Smart TVs in every room</span>. Nicer than most hotels — and we deliver it to you.' }}
+              />
             </div>
 
             {/* Card 3 — Reserved Within the Hour */}
-            <div className="wtw-card">
+            <div className="why-card">
               <div style={{
-                width: 36, height: 36,
+                width: 38, height: 38,
+                background: 'rgba(201,168,76,0.05)',
                 border: '1px solid rgba(201,168,76,0.3)',
                 borderRadius: 8,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -1035,15 +956,16 @@ export default function Home() {
               <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
                 Reserved Within the Hour
               </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
-                Call or text. Tell us your dates and location. <span style={{ color: '#A89880' }}>Most bookings confirmed same-day</span> — no lengthy forms, no waiting around.
-              </p>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
+                dangerouslySetInnerHTML={{ __html: 'Call or text. Tell us your dates and location. <span style="color:#A89880">Most bookings confirmed same-day</span> — no lengthy forms, no waiting around.' }}
+              />
             </div>
 
             {/* Card 4 — Always Reachable */}
-            <div className="wtw-card">
+            <div className="why-card">
               <div style={{
-                width: 36, height: 36,
+                width: 38, height: 38,
+                background: 'rgba(201,168,76,0.05)',
                 border: '1px solid rgba(201,168,76,0.3)',
                 borderRadius: 8,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -1056,16 +978,17 @@ export default function Home() {
               <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
                 Always Reachable
               </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}>
-                Reach the team directly on the main line, or get an instant answer from our <span style={{ color: '#A89880' }}>AI agent</span> — any time of day or night.
-              </p>
+              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
+                dangerouslySetInnerHTML={{ __html: 'Reach the team directly on the main line, or get an instant answer from our <span style="color:#A89880">AI agent</span> — any time of day or night.' }}
+              />
             </div>
 
           </div>
 
           {/* Differentiator Strip */}
-          <div className="wtw-strip" style={{
-            display: 'flex',
+          <div className="diff-strip" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             background: 'rgba(201,168,76,0.04)',
             border: '1px solid rgba(201,168,76,0.15)',
             borderRadius: 8,
@@ -1079,14 +1002,15 @@ export default function Home() {
             ].map((text, i, arr) => (
               <div
                 key={i}
-                className="wtw-strip-item"
                 style={{
-                  padding: 20,
-                  textAlign: 'center',
-                  flex: 1,
+                  padding: '16px 18px',
                   borderRight: i < arr.length - 1 ? '1px solid rgba(201,168,76,0.1)' : 'none',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: 10,
                 }}
               >
+                <span style={{ color: '#C9A84C', fontSize: 14, lineHeight: 1.5, flexShrink: 0, marginTop: 1 }}>•</span>
                 <p style={{ fontSize: 13, color: '#A89880', lineHeight: 1.5 }}>{text}</p>
               </div>
             ))}

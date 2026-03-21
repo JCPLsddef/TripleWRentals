@@ -275,3 +275,36 @@ button { font-family: inherit; }
   .mobile-sticky { display: none !important; }
   .mobile-menu-btn { display: none !important; }
 }
+
+/* ─── Why Triple W Cards ───────────────────────────────────── */
+.why-card {
+  background: #0F0D0A;
+  padding: 28px 26px;
+  position: relative;
+  transition: background 0.2s ease;
+  cursor: default;
+}
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, #C9A84C 0%, rgba(201,168,76,0.15) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.why-card:hover { background: #161209; }
+.why-card:hover::before { opacity: 1; }
+
+/* ─── Steps connector & mobile overrides ───────────────────── */
+@media (max-width: 767px) {
+  .steps-connector { display: none !important; }
+  .steps-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .steps-grid > div { padding-right: 0 !important; }
+  .why-card-grid { grid-template-columns: 1fr !important; }
+  .diff-strip { grid-template-columns: repeat(2, 1fr) !important; }
+  .diff-strip > div:nth-child(2) { border-right: none !important; }
+  .diff-strip > div:nth-child(3),
+  .diff-strip > div:nth-child(4) { border-top: 1px solid rgba(201,168,76,0.1) !important; }
+  .diff-strip > div:nth-child(4) { border-right: none !important; }
+}
