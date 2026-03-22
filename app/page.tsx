@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { RVSlider } from './components/RVSlider';
 import ReviewsSlider from './components/ReviewsSlider';
 import HeroSection from './components/HeroSection';
+import HowItWorks from './components/HowItWorks';
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -491,117 +492,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 5: How It Works ──────────────────────────── */}
-      <section id="how" style={{ background: '#0A0806', borderTop: '1px solid rgba(201,168,76,0.1)', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-        {/* Noise texture */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n1)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
-
-          {/* Header */}
-          <div style={{ maxWidth: '560px', marginBottom: '36px' }}>
-            <div style={{ marginBottom: '16px' }}>
-              <span className="why-eyebrow-line" style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>HOW IT WORKS</span>
-            </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '12px', marginBottom: '12px' }}>
-              From First Call to Check-In —
-              <br />
-              <em style={{ fontStyle: 'italic', color: '#C9A84C' }}>Three Steps.</em>
-            </h2>
-            <p style={{ fontSize: '15px', color: '#A89880', lineHeight: 1.65, fontFamily: "'Inter', sans-serif" }}>
-              No experience required. No truck needed. We handle every part of the process, start to finish.
-            </p>
-          </div>
-
-          {/* Steps */}
-          <div style={{ position: 'relative' }}>
-            {/* Dashed connector — desktop only */}
-            <div
-              className="steps-connector"
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                top: '27px',
-                left: '56px',
-                right: 'calc(100% / 3)',
-                height: '1px',
-                backgroundImage: 'repeating-linear-gradient(90deg, rgba(201,168,76,0.45) 0, rgba(201,168,76,0.45) 6px, transparent 6px, transparent 14px)',
-                pointerEvents: 'none',
-                zIndex: 0,
-              }}
-            />
-            <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0, position: 'relative', zIndex: 1 }}>
-
-              {/* Step 1 */}
-              <div className="step-item" style={{ paddingRight: '32px' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.45)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
-                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="#C9A84C" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#F0E8D8', marginBottom: '10px', letterSpacing: '-0.01em' }}>Call or Text Us</h3>
-                <p style={{ fontSize: '13px', color: '#7A6E60', lineHeight: 1.7 }}
-                  dangerouslySetInnerHTML={{ __html: `Tell us your dates, location, and group size. Takes about two minutes. <strong style="color:#A89880;font-weight:400">No forms, no waiting.</strong>` }}
-                />
-                <span style={{ display: 'inline-block', marginTop: '14px', fontSize: '11px', color: '#C9A84C', letterSpacing: '0.04em', borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '2px', opacity: 0.9 }}>
-                  Most bookings confirmed same-day
-                </span>
-              </div>
-
-              {/* Step 2 */}
-              <div className="step-item" style={{ paddingRight: '32px' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.45)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
-                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="#C9A84C" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="1" y="3" width="15" height="13" rx="2"/>
-                    <path d="M16 8h4l3 3v5h-7V8z"/>
-                    <circle cx="5.5" cy="18.5" r="2.5"/>
-                    <circle cx="18.5" cy="18.5" r="2.5"/>
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#F0E8D8', marginBottom: '10px', letterSpacing: '-0.01em' }}>We Deliver &amp; Set Up</h3>
-                <p style={{ fontSize: '13px', color: '#7A6E60', lineHeight: 1.7 }}
-                  dangerouslySetInnerHTML={{ __html: `Your RV arrives fully cleaned, stocked, and set up at your location. We connect utilities and <strong style="color:#A89880;font-weight:400">walk you through every feature.</strong>` }}
-                />
-                <span style={{ display: 'inline-block', marginTop: '14px', fontSize: '11px', color: '#C9A84C', letterSpacing: '0.04em', borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '2px', opacity: 0.9 }}>
-                  Arrive to a fully set-up RV
-                </span>
-              </div>
-
-              {/* Step 3 */}
-              <div className="step-item">
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.45)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
-                  <svg viewBox="0 0 24 24" width="22" height="22" stroke="#C9A84C" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 500, color: '#F0E8D8', marginBottom: '10px', letterSpacing: '-0.01em' }}>Enjoy Your Stay</h3>
-                <p style={{ fontSize: '13px', color: '#7A6E60', lineHeight: 1.7 }}
-                  dangerouslySetInnerHTML={{ __html: `We&#39;re on call day and night for anything you need. When you&#39;re done, we handle pickup too. <strong style="color:#A89880;font-weight:400">You just lock the door.</strong>` }}
-                />
-                <span style={{ display: 'inline-block', marginTop: '14px', fontSize: '11px', color: '#C9A84C', letterSpacing: '0.04em', borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '2px', opacity: 0.9 }}>
-                  Support available 24/7 throughout your stay
-                </span>
-              </div>
-
-            </div>
-          </div>
-
-          {/* CTA Row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginTop: '52px', flexWrap: 'wrap' }}>
-            <a
-              href="tel:9729656901"
-              style={{ display: 'inline-flex', alignItems: 'center', background: '#C9A84C', color: '#0D0B09', fontSize: '14px', fontWeight: 500, letterSpacing: '0.01em', padding: '14px 28px', borderRadius: '6px', textDecoration: 'none', transition: 'background 0.15s ease', whiteSpace: 'nowrap' }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#E8C97A')}
-              onMouseLeave={e => (e.currentTarget.style.background = '#C9A84C')}
-            >
-              Book Your Rental · (972) 965-6901
-            </a>
-            <span style={{ fontSize: '13px', color: '#6B5F52' }}>
-              or text us. <strong style={{ color: '#A89880', fontWeight: 400 }}>We&apos;ll respond within the hour.</strong>
-            </span>
-          </div>
-
-        </div>
-      </section>
+      <HowItWorks />
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
       <section id="reviews" style={{
