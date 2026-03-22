@@ -21,7 +21,7 @@ export default function HeroSection() {
 
       {/* Parallax scene — 4 layers */}
       <div className="hero-parallax__scene">
-        <div ref={bgRef} className="hero-parallax__bg">
+        <div ref={bgRef} data-parallax="0.08" className="hero-parallax__bg">
           <img
             src={ASSETS.background}
             alt=""
@@ -31,7 +31,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <div ref={rvRef} className="hero-parallax__rv">
+        <div ref={rvRef} data-parallax="0.15" className="hero-parallax__rv">
           <img
             src={ASSETS.rv}
             alt="Grand Design Reflection luxury fifth wheel RV"
@@ -40,7 +40,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <div ref={chairsRef} className="hero-parallax__chairs">
+        <div ref={chairsRef} data-parallax="0.22" className="hero-parallax__chairs">
           <img
             src={ASSETS.chairs}
             alt="Two camp chairs by the fire"
@@ -49,7 +49,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <div ref={fireRef} className="hero-parallax__fire">
+        <div ref={fireRef} data-parallax="0.28" className="hero-parallax__fire">
           <img
             src={ASSETS.fire}
             alt="Campfire"
