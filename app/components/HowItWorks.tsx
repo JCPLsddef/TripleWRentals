@@ -88,7 +88,11 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how"
-      className="relative overflow-hidden pt-24 md:pt-32 lg:pt-40 pb-28 md:pb-36 lg:pb-44"
+      // Vertical padding scales across all breakpoints; no horizontal padding here —
+      // that lives on the inner container so mx-auto centres against the true viewport.
+      className="relative overflow-hidden
+                 pt-20 md:pt-28 lg:pt-36 xl:pt-40 2xl:pt-48
+                 pb-24 md:pb-32 lg:pb-40 xl:pb-44 2xl:pb-52"
       style={{
         background: 'radial-gradient(ellipse at 50% 20%, #161209 0%, #0D0B09 55%, #080604 100%)',
         borderTop: '1px solid rgba(201,168,76,0.14)',
@@ -114,7 +118,7 @@ export default function HowItWorks() {
         className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2"
         style={{
           width: '80vw',
-          maxWidth: '900px',
+          maxWidth: '1100px',
           height: '420px',
           background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.10) 0%, transparent 65%)',
           filter: 'blur(48px)',
@@ -126,17 +130,30 @@ export default function HowItWorks() {
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2"
         style={{
-          width: '60rem',
+          width: '70vw',
+          maxWidth: '1200px',
           height: '200px',
           background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%)',
           filter: 'blur(56px)',
         }}
       />
 
-      <div className="relative w-full max-w-5xl mx-auto px-6">
+      {/*
+        ── Inner container ────────────────────────────────────────────────────────
+        Responsive max-width:
+          lg  (1024px+): 960px  — tight & balanced on tablets / small laptops
+          xl  (1280px+): 1152px — comfortable on 1440px & standard desktops
+          2xl (1536px+): 1280px — right-sized for 1920px FHD monitors
+        Horizontal padding scales so columns stay readable at every size.
+        mx-auto centres against the TRUE viewport width (no section padding offset).
+      */}
+      <div className="relative w-full
+                      max-w-5xl xl:max-w-6xl 2xl:max-w-7xl
+                      mx-auto
+                      px-6 xl:px-10 2xl:px-14">
 
         {/* ── Title ─────────────────────────────────────────────── */}
-        <div className="text-center mb-20 md:mb-24 lg:mb-28">
+        <div className="text-center mb-16 md:mb-20 lg:mb-24 xl:mb-28 2xl:mb-32">
 
           {/* Eyebrow */}
           <motion.div
@@ -165,21 +182,22 @@ export default function HowItWorks() {
             <span style={{ display: 'inline-block', width: '40px', height: '1px', background: 'rgba(201,168,76,0.55)' }} />
           </motion.div>
 
-          {/* Headline — editorial, large, white */}
+          {/* Headline */}
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="px-4"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
+              // clamp handles the full size spectrum: 3rem floor, 5.5vw fluid, 4.4rem cap
               fontSize: 'clamp(3rem, 5.5vw, 4.4rem)',
               lineHeight: 1.06,
               letterSpacing: '-0.03em',
               color: '#FFFFFF',
               maxWidth: '680px',
               margin: '0 auto',
+              padding: '0 16px',
             }}
           >
             From First Call<br />
@@ -213,10 +231,10 @@ export default function HowItWorks() {
         </div>
 
         {/* ── Steps Container ────────────────────────────────────── */}
-        {/* pt-10 = 40px top padding so connector line (at 7rem = 112px) hits node centers */}
+        {/* pt-10 = 40px so connector line (top-[7rem] = 112px = 40+72) hits node centres */}
         <div className="relative pt-10">
 
-          {/* Connection Line — desktop */}
+          {/* Connection Line — desktop (lg+) */}
           <div className={`absolute ${LINE_TOP} left-0 right-0 h-[2px] hidden lg:block pointer-events-none`}>
             <svg className="w-full h-full" preserveAspectRatio="none">
               <line
@@ -236,8 +254,8 @@ export default function HowItWorks() {
                 y2="1"
                 stroke="url(#lineGradient)"
                 strokeWidth="1.5"
-                strokeDasharray="1200"
-                strokeDashoffset={useTransform(lineProgress, [0, 1], [1200, 0])}
+                strokeDasharray="1600"
+                strokeDashoffset={useTransform(lineProgress, [0, 1], [1600, 0])}
                 style={{ filter: 'drop-shadow(0 0 4px rgba(180, 140, 40, 0.5))' }}
               />
               <motion.circle
@@ -314,9 +332,10 @@ export default function HowItWorks() {
             </svg>
           </div>
 
-          {/* Steps Grid */}
-          {/* Ghost ring placeholders — visible on desktop at all times, purely decorative.
-              Anchors all 3 column positions visually before scroll reveals each step. */}
+          {/* Ghost ring placeholders — decorative, aria-hidden, pointer-events-none.
+              Visually anchors all 3 column positions from first render so the section
+              never looks left-heavy while steps 2 & 3 are still waiting to animate in.
+              Uses the same grid-cols-3 layout as the real grid — always aligned. */}
           <div
             aria-hidden="true"
             className="hidden lg:grid grid-cols-3 pointer-events-none absolute left-0 right-0"
@@ -334,6 +353,7 @@ export default function HowItWorks() {
             ))}
           </div>
 
+          {/* Steps Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-0">
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -427,9 +447,9 @@ export default function HowItWorks() {
                     </motion.div>
                   </motion.div>
 
-                  {/* Step text */}
+                  {/* Step text — padding scales with column width at each breakpoint */}
                   <motion.div
-                    className="mt-9 px-2 lg:px-6"
+                    className="mt-9 px-4 lg:px-6 xl:px-8 2xl:px-10"
                     initial={{ opacity: 0, y: 12 }}
                     animate={shouldShow ? {
                       opacity: 1,
@@ -442,7 +462,8 @@ export default function HowItWorks() {
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 500,
-                        fontSize: 'clamp(1.3rem, 2.2vw, 1.65rem)',
+                        // fluid: floor 1.3rem, 2.2vw fluid, 1.7rem cap
+                        fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)',
                         letterSpacing: '-0.01em',
                         lineHeight: 1.2,
                         marginBottom: '14px',
@@ -458,9 +479,9 @@ export default function HowItWorks() {
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300,
-                        fontSize: '13px',
+                        fontSize: 'clamp(12px, 1vw, 14px)',
                         lineHeight: 1.9,
-                        maxWidth: '220px',
+                        maxWidth: '230px',
                         margin: '0 auto',
                         color: stepState === 'active'    ? '#A89880' :
                                stepState === 'completed' ? '#7A6E60' :
@@ -484,7 +505,7 @@ export default function HowItWorks() {
             y: 0,
             transition: { delay: 0.55, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
           } : { opacity: 0, y: 24 }}
-          className="text-center mt-20 md:mt-24 lg:mt-28"
+          className="text-center mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32"
         >
           {/* Thin gold rule */}
           <div style={{
@@ -494,7 +515,7 @@ export default function HowItWorks() {
             margin: '0 auto 40px',
           }} />
 
-          {/* Gold metallic CTA button */}
+          {/* Gold metallic CTA */}
           <motion.button
             whileHover={{ scale: 1.018, y: -3 }}
             whileTap={{ scale: 0.982 }}
