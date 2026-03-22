@@ -83,38 +83,56 @@ export default function HowItWorks() {
   };
 
   return (
-    <section ref={sectionRef} id="how" className="relative px-6 py-24 md:py-32 lg:py-40" style={{ background: '#0F0D0B' }}>
+    <section ref={sectionRef} id="how" className="relative px-6 pt-24 md:pt-32 lg:pt-40 pb-40 md:pb-52 lg:pb-64" style={{ background: '#0F0D0B' }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
+        <div className="text-center mb-24 md:mb-32">
+
+          {/* Eyebrow — centered flex-row with decorative lines */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+              marginBottom: '28px'
+            }}
           >
-            <p className="text-[#B68B3C] text-xs tracking-[0.25em] uppercase mb-6 font-light">
+            <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'rgba(201,168,76,0.45)' }} />
+            <span style={{
+              fontSize: '11px',
+              fontWeight: 500,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: '#C9A84C',
+              fontFamily: "'Inter', sans-serif"
+            }}>
               The Process
-            </p>
+            </span>
+            <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'rgba(201,168,76,0.45)' }} />
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-[4rem] mb-7 leading-[1.2] px-4"
+            className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-[3.5rem] mb-8 leading-[1.15] px-4"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, letterSpacing: '-0.02em' }}
           >
-            From First Call to Check-In —
+            From First Call to Check-In
             <br />
-            <span className="block mt-1">Three Steps.</span>
+            <span className="block mt-2">Three Steps.</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#C8BCA8] text-base md:text-lg max-w-xl mx-auto leading-[1.75] px-4"
+            className="text-[#C8BCA8] text-base max-w-[460px] mx-auto leading-[1.85] px-4"
             style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
           >
             No experience needed, no logistics to manage.
@@ -222,7 +240,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Steps Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-20 lg:gap-12">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const stepState = getStepState(index);
@@ -270,7 +288,7 @@ export default function HowItWorks() {
                 >
                   {/* Node */}
                   <motion.div
-                    className="relative w-36 h-36 mb-8 flex items-center justify-content-center"
+                    className="relative w-36 h-36 mb-10 flex items-center justify-content-center"
                     animate={{
                       y: isHovered && stepState !== 'inactive' ? -6 : 0,
                     }}
@@ -292,7 +310,7 @@ export default function HowItWorks() {
 
                     {/* Step number */}
                     <div
-                      className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.2em] transition-all duration-500"
+                      className="absolute -top-9 left-1/2 -translate-x-1/2 text-xs tracking-[0.2em] transition-all duration-500"
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300,
@@ -339,7 +357,7 @@ export default function HowItWorks() {
 
                   {/* Content */}
                   <motion.div
-                    className="px-2"
+                    className="px-3 lg:px-4"
                     initial={{ opacity: 0, y: 15 }}
                     animate={shouldShow ? {
                       opacity: 1,
@@ -352,11 +370,12 @@ export default function HowItWorks() {
                     } : { opacity: 0, y: 15 }}
                   >
                     <h3
-                      className="text-2xl md:text-3xl mb-4 transition-all duration-500"
+                      className="text-xl md:text-2xl lg:text-[1.75rem] mb-5 transition-all duration-500"
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 400,
                         letterSpacing: '-0.01em',
+                        lineHeight: 1.2,
                         color: stepState === 'active' ? '#F3EDE3' :
                                stepState === 'completed' ? '#E5DDD0' : '#C4B8A8',
                         textShadow: stepState === 'active' ? '0 0 25px rgba(198, 156, 82, 0.15)' : 'none',
@@ -366,7 +385,7 @@ export default function HowItWorks() {
                     </h3>
 
                     <p
-                      className="text-sm leading-[1.8] max-w-[240px] mx-auto transition-all duration-500"
+                      className="text-sm leading-[1.9] max-w-[260px] mx-auto transition-all duration-500"
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300,
@@ -395,7 +414,7 @@ export default function HowItWorks() {
               ease: [0.22, 1, 0.36, 1]
             }
           } : { opacity: 0, y: 30 }}
-          className="text-center mt-16 md:mt-20"
+          className="text-center mt-20 md:mt-28"
         >
           <motion.button
             whileHover={{ scale: 1.02, y: -3 }}
@@ -413,7 +432,7 @@ export default function HowItWorks() {
           </motion.button>
 
           <p
-            className="mt-5 text-[#C8BCA8] text-xs tracking-[0.06em]"
+            className="mt-6 text-[#C8BCA8] text-xs tracking-[0.06em]"
             style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
           >
             Most inquiries confirmed within the hour &nbsp;·&nbsp; White-glove support throughout your rental

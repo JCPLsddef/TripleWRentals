@@ -498,7 +498,7 @@ export default function Home() {
       <section id="reviews" style={{
         background: '#0D0B09',
         borderTop: '1px solid rgba(201,168,76,0.10)',
-        padding: '96px 24px',
+        padding: '112px 24px 96px',
         position: 'relative',
         overflow: 'hidden',
       }}>
