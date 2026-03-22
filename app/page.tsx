@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { RVSlider } from './components/RVSlider';
 import ReviewsSlider from './components/ReviewsSlider';
-import UnicornSection from './components/UnicornSection';
 import HeroSection from './components/HeroSection';
 import './globals.css';
 
@@ -500,7 +499,7 @@ export default function Home() {
               <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>HOW IT WORKS</span>
             </div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', lineHeight: 1.15, letterSpacing: '-0.02em', marginTop: '12px', marginBottom: '12px' }}>
-              From First Call to Check-In:{' '}
+              From First Call to Check-In —
               <br />
               <em style={{ fontStyle: 'italic', color: '#C9A84C' }}>Three Steps.</em>
             </h2>
@@ -599,9 +598,6 @@ export default function Home() {
 
         </div>
       </section>
-
-      {/* ── SECTION 5B: It's Time to Explore ────────────────── */}
-      <UnicornSection />
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
       <section id="reviews" style={{
@@ -1194,9 +1190,9 @@ export default function Home() {
 
       {/* ── SECTION 11: Footer ───────────────────────────────── */}
       <footer style={{
-        background: '#0D0B09',
+        background: '#0A0806',
         borderTop: '1px solid rgba(201,168,76,0.12)',
-        padding: '56px 24px 100px',
+        padding: '56px 24px 80px',
       }}>
         <div className="footer-grid" style={{
           display: 'grid',

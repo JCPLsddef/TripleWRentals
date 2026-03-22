@@ -246,6 +246,18 @@ export default function HeroSection() {
         </div>
       </motion.div>
 
+      {/* ── Left gradient — darkens text zone for readability ── */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: 'linear-gradient(110deg, rgba(2,1,8,0.90) 0%, rgba(2,1,8,0.72) 35%, rgba(2,1,8,0.28) 58%, transparent 72%)',
+          pointerEvents: 'none',
+          zIndex: 15,
+        }}
+      />
+
       {/* ── Bottom fade-to-dark gradient ──────────────────────── */}
       <div
         aria-hidden="true"
