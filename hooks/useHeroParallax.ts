@@ -1,10 +1,13 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+// Register ONCE at module level — this is critical in Next.js
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 export function useHeroParallax() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -15,112 +18,66 @@ export function useHeroParallax() {
   const canvasRef  = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    // Guarantee parallax starts from correct position on every load
-    window.scrollTo(0, 0)
-
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-
+    // Guard: exit if refs not ready
     const section = sectionRef.current
-    if (!section) return
+    const bg      = bgRef.current
+    const rv      = rvRef.current
+    const chairs  = chairsRef.current
+    const fire    = fireRef.current
+    if (!section || !bg || !rv || !chairs || !fire) return
 
-    const ctx = gsap.context(() => {
+    // Guard: skip on reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-      // ── PARALLAX SCROLL SYSTEM ──
-      if (!prefersReducedMotion) {
+    // Small delay — ensures Next.js has finished hydration and layout
+    const timer = setTimeout(() => {
 
-        const scrollTriggerConfig = {
-          trigger: section,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.2,
-        }
+      // Kill any existing ScrollTrigger instances to prevent duplicates
+      ScrollTrigger.getAll().forEach(st => st.kill())
 
-        // fromTo with explicit y:0 start so layers are never pre-offset on load
-        if (bgRef.current) {
-          gsap.fromTo(bgRef.current,
-            { y: 0 },
-            { y: 55, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
-          )
-        }
-
-        if (rvRef.current) {
-          gsap.fromTo(rvRef.current,
-            { y: 0 },
-            { y: 105, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
-          )
-        }
-
-        if (chairsRef.current) {
-          gsap.fromTo(chairsRef.current,
-            { y: 0 },
-            { y: 145, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
-          )
-        }
-
-        // Fire: y scroll parallax ONLY — no scale, no opacity, no other transforms
-        if (fireRef.current) {
-          gsap.fromTo(fireRef.current,
-            { y: 0 },
-            { y: 175, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
-          )
-        }
-
-        // Cinematic entry scale
-        gsap.from(section, {
-          scale: 1.04,
-          duration: 2.0,
-          ease: 'power2.out',
-        })
-
-        // Force recalculate after mount to fix initial state
-        ScrollTrigger.refresh()
+      // Shared config
+      const config = {
+        trigger: section,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5,
+        invalidateOnRefresh: true,
       }
 
-      // ── TEXT REVEAL ──
-      if (!prefersReducedMotion) {
-        const textTl = gsap.timeline({ delay: 0.3 })
+      // Layer 1 — Background: slowest (most distant)
+      gsap.fromTo(bg,
+        { y: 0 },
+        { y: 60, ease: 'none', scrollTrigger: config }
+      )
 
-        textTl
-          .from('.hero-eyebrow', {
-            y: 18, opacity: 0, duration: 0.65, ease: 'power3.out',
-          })
-          .from('.hero-line-1', {
-            y: 60, opacity: 0, duration: 0.80, ease: 'power3.out',
-          }, '-=0.35')
-          .from('.hero-line-2', {
-            y: 60, opacity: 0, duration: 0.80, ease: 'power3.out',
-          }, '-=0.58')
-          .from('.hero-line-3', {
-            y: 60, opacity: 0, duration: 0.95, ease: 'power3.out',
-          }, '-=0.58')
-          .from('.hero-divider', {
-            scaleX: 0, opacity: 0, duration: 0.55, ease: 'power2.out',
-            transformOrigin: 'center',
-          }, '-=0.45')
-          .from('.hero-subhead', {
-            y: 18, opacity: 0, duration: 0.50, ease: 'power2.out',
-          }, '-=0.30')
-          .from('.hero-pills', {
-            y: 12, opacity: 0, duration: 0.40, ease: 'power2.out',
-          }, '-=0.20')
-          .from('.hero-ctas', {
-            y: 12, opacity: 0, duration: 0.40, ease: 'power2.out',
-          }, '-=0.15')
-          .from('.hero-trust', {
-            y: 8, opacity: 0, duration: 0.40, ease: 'power2.out',
-          }, '-=0.10')
+      // Layer 2 — RV: medium
+      gsap.fromTo(rv,
+        { y: 0 },
+        { y: 110, ease: 'none', scrollTrigger: config }
+      )
 
-      } else {
-        gsap.from('.hero-parallax__content', {
-          opacity: 0, duration: 0.8, ease: 'power2.out',
-        })
-      }
+      // Layer 3 — Chairs: faster
+      gsap.fromTo(chairs,
+        { y: 0 },
+        { y: 150, ease: 'none', scrollTrigger: config }
+      )
 
-    }, section)
+      // Layer 4 — Fire: fastest foreground
+      // ONLY y movement — no scale, no opacity, no other property
+      gsap.fromTo(fire,
+        { y: 0 },
+        { y: 180, ease: 'none', scrollTrigger: config }
+      )
 
-    return () => ctx.revert()
+      // Force recalculate layout
+      ScrollTrigger.refresh()
+
+    }, 200)
+
+    return () => {
+      clearTimeout(timer)
+      ScrollTrigger.getAll().forEach(st => st.kill())
+    }
 
   }, [])
 
