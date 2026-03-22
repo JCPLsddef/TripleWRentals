@@ -47,12 +47,10 @@ export default function HowItWorks() {
   useEffect(() => {
     const unsubscribe = lineProgress.on('change', (latest) => {
       if (isDesktop) {
-        // Desktop: tighter progression so Bubble 3 arrives without excess scrolling
         if (latest < 0.28) setCurrentStep(0);
         else if (latest < 0.52) setCurrentStep(1);
         else setCurrentStep(2);
       } else {
-        // Mobile: unchanged
         if (latest < 0.35) setCurrentStep(0);
         else if (latest < 0.65) setCurrentStep(1);
         else setCurrentStep(2);
@@ -61,7 +59,7 @@ export default function HowItWorks() {
     return () => unsubscribe();
   }, [lineProgress, isDesktop]);
 
-  // Premium "stomp" — weighted, confident, precise. Refined ease for luxury feel.
+  // Premium "stomp" animation — locked, do not modify
   const stompAnimation = {
     hidden: { opacity: 0, scale: 0.75, y: 18 },
     visible: {
@@ -90,14 +88,51 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how"
-      className="relative px-6 pt-24 md:pt-32 lg:pt-40 pb-24 md:pb-32 lg:pb-40"
+      className="relative overflow-hidden px-6 pt-24 md:pt-32 lg:pt-40 pb-28 md:pb-36 lg:pb-44"
       style={{
-        background: '#FAF8F4',
-        borderTop: '1px solid rgba(201,168,76,0.15)',
-        borderBottom: '1px solid rgba(201,168,76,0.15)',
+        background: '#0D0B09',
+        borderTop: '1px solid rgba(201,168,76,0.14)',
+        borderBottom: '1px solid rgba(201,168,76,0.14)',
       }}
     >
-      <div className="max-w-7xl mx-auto">
+
+      {/* ── Noise texture overlay ── */}
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 w-full h-full"
+        style={{ opacity: 0.035, mixBlendMode: 'overlay' }}
+      >
+        <filter id="howNoise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#howNoise)" />
+      </svg>
+
+      {/* ── Atmospheric top glow ── */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
+        style={{
+          width: '70vw',
+          height: '380px',
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+      />
+
+      {/* ── Atmospheric bottom glow ── */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2"
+        style={{
+          width: '56rem',
+          height: '180px',
+          background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)',
+          filter: 'blur(52px)',
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto">
 
         {/* ── Title ───────────────────────────────────────────── */}
         <div className="text-center mb-20 md:mb-24 lg:mb-28">
@@ -111,25 +146,35 @@ export default function HowItWorks() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '12px',
-              marginBottom: '26px'
+              gap: '14px',
+              marginBottom: '28px',
             }}
           >
-            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(184,146,42,0.4)' }} />
+            <span style={{
+              display: 'inline-block',
+              width: '36px',
+              height: '1px',
+              background: 'rgba(201,168,76,0.5)',
+            }} />
             <span style={{
               fontSize: '10px',
               fontWeight: 500,
-              letterSpacing: '0.2em',
+              letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#B8922A',
-              fontFamily: "'Inter', sans-serif"
+              color: '#C9A84C',
+              fontFamily: "'Inter', sans-serif",
             }}>
               The Process
             </span>
-            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(184,146,42,0.4)' }} />
+            <span style={{
+              display: 'inline-block',
+              width: '36px',
+              height: '1px',
+              background: 'rgba(201,168,76,0.5)',
+            }} />
           </motion.div>
 
-          {/* Headline — strong, editorial, balanced */}
+          {/* Headline */}
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -138,17 +183,37 @@ export default function HowItWorks() {
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
-              fontSize: 'clamp(2.4rem, 5vw, 3.25rem)',
-              lineHeight: 1.1,
-              letterSpacing: '-0.025em',
-              color: '#1A1714',
+              fontSize: 'clamp(2.5rem, 5vw, 3.4rem)',
+              lineHeight: 1.08,
+              letterSpacing: '-0.02em',
+              color: '#F0E8D8',
               maxWidth: '620px',
-              margin: '0 auto'
+              margin: '0 auto',
             }}
           >
             From First Call<br />
-            <span style={{ fontStyle: 'italic', color: '#2E2A26' }}>to Check-In.</span>
+            <span style={{ fontStyle: 'italic', color: '#C9A84C' }}>to Check-In.</span>
           </motion.h2>
+
+          {/* Supporting sub-line */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 300,
+              fontSize: '13px',
+              letterSpacing: '0.02em',
+              lineHeight: 1.75,
+              color: '#7A6E60',
+              marginTop: '20px',
+              maxWidth: '340px',
+              margin: '20px auto 0',
+            }}
+          >
+            Three steps. Every detail handled for you.
+          </motion.p>
         </div>
 
         {/* ── Steps Container ──────────────────────────────────── */}
@@ -195,8 +260,9 @@ export default function HowItWorks() {
                   <stop offset="50%" stopColor="#C9A84C" />
                   <stop offset="100%" stopColor="#B8922A" />
                 </linearGradient>
+                {/* Bead center matches dark bg so it reads as a glowing ring, not a white dot */}
                 <radialGradient id="beadGradient">
-                  <stop offset="0%" stopColor="#FAF8F4" />
+                  <stop offset="0%" stopColor="#0D0B09" />
                   <stop offset="45%" stopColor="#E8C97A" />
                   <stop offset="100%" stopColor="#B8922A" />
                 </radialGradient>
@@ -232,7 +298,7 @@ export default function HowItWorks() {
                 cx="1"
                 cy={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['8%', '50%', '92%', '92%'])}
                 r="3"
-                fill="url(#beadGradient)"
+                fill="url(#beadGradientV)"
                 style={{
                   filter: 'drop-shadow(0 0 6px rgba(180, 140, 40, 0.8))',
                   opacity: useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
@@ -244,6 +310,11 @@ export default function HowItWorks() {
                   <stop offset="50%" stopColor="#C9A84C" />
                   <stop offset="100%" stopColor="#B8922A" />
                 </linearGradient>
+                <radialGradient id="beadGradientV">
+                  <stop offset="0%" stopColor="#0D0B09" />
+                  <stop offset="45%" stopColor="#E8C97A" />
+                  <stop offset="100%" stopColor="#B8922A" />
+                </radialGradient>
               </defs>
             </svg>
           </div>
@@ -257,25 +328,25 @@ export default function HowItWorks() {
 
               const nodeStyles = {
                 inactive: {
-                  borderColor: 'rgba(201,168,76,0.28)',
+                  borderColor: 'rgba(201,168,76,0.20)',
                   glowOpacity: 0,
-                  iconColor: '#7A6040',
+                  iconColor: 'rgba(201,168,76,0.3)',
                   iconFilter: 'none',
-                  boxShadow: '0 2px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05)'
+                  boxShadow: '0 0 0 1px rgba(201,168,76,0.06), 0 4px 28px rgba(0,0,0,0.5)',
                 },
                 active: {
                   borderColor: '#C9A84C',
-                  glowOpacity: 0.3,
+                  glowOpacity: 0.35,
                   iconColor: '#C9A84C',
-                  iconFilter: 'drop-shadow(0 0 8px rgba(198,156,82,0.45))',
-                  boxShadow: '0 0 36px rgba(198,156,82,0.22), 0 8px 32px rgba(0,0,0,0.12), inset 0 0 28px rgba(198,156,82,0.10)'
+                  iconFilter: 'drop-shadow(0 0 8px rgba(198,156,82,0.55))',
+                  boxShadow: '0 0 48px rgba(198,156,82,0.22), 0 12px 40px rgba(0,0,0,0.55), inset 0 0 32px rgba(198,156,82,0.08)',
                 },
                 completed: {
                   borderColor: '#B8922A',
-                  glowOpacity: 0.12,
+                  glowOpacity: 0.15,
                   iconColor: '#B8922A',
-                  iconFilter: 'drop-shadow(0 0 4px rgba(180,140,40,0.28))',
-                  boxShadow: '0 0 18px rgba(180,140,40,0.14), 0 4px 20px rgba(0,0,0,0.09), inset 0 0 14px rgba(180,140,40,0.07)'
+                  iconFilter: 'drop-shadow(0 0 4px rgba(180,140,40,0.32))',
+                  boxShadow: '0 0 26px rgba(180,140,40,0.16), 0 6px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(180,140,40,0.06)',
                 }
               };
 
@@ -288,7 +359,6 @@ export default function HowItWorks() {
                   initial="hidden"
                   animate={shouldShow ? "visible" : "hidden"}
                   variants={stompAnimation}
-                  // Subtle premium card lift on hover — desktop hover events only
                   whileHover={stepState !== 'inactive' ? { scale: 1.015 } : undefined}
                   transition={{ scale: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
                   onMouseEnter={() => setHoveredStep(index)}
@@ -302,21 +372,21 @@ export default function HowItWorks() {
                     animate={{ y: isHovered && stepState !== 'inactive' ? -4 : 0 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    {/* Ambient glow — soft gold halo on white */}
+                    {/* Ambient glow */}
                     <motion.div
                       className="absolute inset-0 rounded-full"
                       animate={{
-                        opacity: (isHovered && stepState !== 'inactive') ? 0.45 : currentStyle.glowOpacity,
-                        scale: (isHovered && stepState !== 'inactive') ? 1.2 : 1.1,
+                        opacity: (isHovered && stepState !== 'inactive') ? 0.55 : currentStyle.glowOpacity,
+                        scale: (isHovered && stepState !== 'inactive') ? 1.25 : 1.1,
                       }}
                       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                       style={{
-                        background: 'radial-gradient(circle, rgba(198,156,82,0.32) 0%, rgba(198,156,82,0) 65%)',
-                        filter: 'blur(20px)'
+                        background: 'radial-gradient(circle, rgba(198,156,82,0.36) 0%, rgba(198,156,82,0) 65%)',
+                        filter: 'blur(22px)',
                       }}
                     />
 
-                    {/* Dark orb — dramatic contrast on white */}
+                    {/* Dark orb */}
                     <motion.div
                       className="relative w-full h-full rounded-full border-[1.5px] flex items-center justify-center"
                       style={{
@@ -325,7 +395,7 @@ export default function HowItWorks() {
                       animate={{
                         borderColor: isHovered && stepState !== 'inactive' ? '#C9A84C' : currentStyle.borderColor,
                         boxShadow: isHovered && stepState !== 'inactive'
-                          ? '0 0 44px rgba(198,156,82,0.28), 0 10px 40px rgba(0,0,0,0.18), inset 0 0 32px rgba(198,156,82,0.14)'
+                          ? '0 0 56px rgba(198,156,82,0.28), 0 14px 44px rgba(0,0,0,0.6), inset 0 0 36px rgba(198,156,82,0.12)'
                           : currentStyle.boxShadow,
                       }}
                       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -339,8 +409,8 @@ export default function HowItWorks() {
                           style={{
                             color: isHovered && stepState !== 'inactive' ? '#C9A84C' : currentStyle.iconColor,
                             filter: isHovered && stepState !== 'inactive'
-                              ? 'drop-shadow(0 0 10px rgba(198,156,82,0.65))'
-                              : currentStyle.iconFilter
+                              ? 'drop-shadow(0 0 12px rgba(198,156,82,0.7))'
+                              : currentStyle.iconFilter,
                           }}
                           strokeWidth={1.5}
                         />
@@ -350,7 +420,7 @@ export default function HowItWorks() {
 
                   {/* Step text */}
                   <motion.div
-                    className="mt-9 px-2 lg:px-5"
+                    className="mt-9 px-2 lg:px-6"
                     initial={{ opacity: 0, y: 12 }}
                     animate={shouldShow ? {
                       opacity: 1,
@@ -363,12 +433,13 @@ export default function HowItWorks() {
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 500,
-                        fontSize: 'clamp(1.2rem, 2vw, 1.55rem)',
+                        fontSize: 'clamp(1.25rem, 2vw, 1.6rem)',
                         letterSpacing: '-0.012em',
                         lineHeight: 1.18,
                         marginBottom: '14px',
-                        color: stepState === 'active' ? '#1A1714' :
-                               stepState === 'completed' ? '#2A2420' : '#6A5E52',
+                        color: stepState === 'active'     ? '#F0E8D8' :
+                               stepState === 'completed'  ? '#C8BAA4' :
+                                                            'rgba(240,232,216,0.22)',
                       }}
                     >
                       {step.title}
@@ -383,8 +454,9 @@ export default function HowItWorks() {
                         lineHeight: 1.9,
                         maxWidth: '224px',
                         margin: '0 auto',
-                        color: stepState === 'active' ? '#3E3630' :
-                               stepState === 'completed' ? '#4E4640' : '#9A8E84',
+                        color: stepState === 'active'     ? '#A89880' :
+                               stepState === 'completed'  ? '#7A6E60' :
+                                                            'rgba(168,152,128,0.28)',
                       }}
                     >
                       {step.description}
@@ -404,37 +476,40 @@ export default function HowItWorks() {
             y: 0,
             transition: { delay: 0.55, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
           } : { opacity: 0, y: 24 }}
-          className="text-center mt-16 md:mt-20 lg:mt-24"
+          className="text-center mt-20 md:mt-24 lg:mt-28"
         >
-          {/* Subtle divider */}
+          {/* Divider */}
           <div style={{
-            width: '40px',
+            width: '48px',
             height: '1px',
-            background: 'rgba(184,146,42,0.3)',
-            margin: '0 auto 28px'
+            background: 'rgba(201,168,76,0.28)',
+            margin: '0 auto 36px',
           }} />
 
           <motion.button
             whileHover={{ scale: 1.015, y: -2 }}
             whileTap={{ scale: 0.985 }}
-            className="group relative overflow-hidden transition-all duration-500"
+            className="group relative overflow-hidden"
             style={{
-              background: '#1A1714',
-              color: '#F5F0E8',
+              background: 'transparent',
+              color: '#F0E8D8',
               fontFamily: "'Inter', sans-serif",
               fontWeight: 400,
-              fontSize: '13px',
-              letterSpacing: '0.08em',
+              fontSize: '12px',
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
-              padding: '18px 52px',
-              border: 'none',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              padding: '18px 56px',
+              border: '1px solid rgba(201,168,76,0.45)',
+              cursor: 'pointer',
+              boxShadow: '0 0 0 1px rgba(201,168,76,0.06), 0 4px 24px rgba(0,0,0,0.3)',
+              transition: 'border-color 0.4s ease, color 0.4s ease',
             }}
           >
-            <span className="relative z-10">Start Your Booking</span>
+            <span className="relative z-10" style={{ letterSpacing: '0.12em' }}>Begin Your Reservation</span>
+            {/* Hover fill */}
             <motion.div
               className="absolute inset-0"
-              style={{ background: '#2A2420' }}
+              style={{ background: 'rgba(201,168,76,0.08)' }}
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
               transition={{ duration: 0.35 }}
@@ -447,8 +522,8 @@ export default function HowItWorks() {
               fontFamily: "'Inter', sans-serif",
               fontWeight: 300,
               fontSize: '11px',
-              letterSpacing: '0.04em',
-              color: '#A09080'
+              letterSpacing: '0.05em',
+              color: '#6B5F52',
             }}
           >
             Confirmed within the hour &nbsp;·&nbsp; White-glove service throughout
@@ -456,15 +531,6 @@ export default function HowItWorks() {
         </motion.div>
 
       </div>
-
-      {/* Warm ambient base */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[56rem] h-[10rem] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%)',
-          filter: 'blur(52px)'
-        }}
-      />
     </section>
   );
 }
