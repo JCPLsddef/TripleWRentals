@@ -133,7 +133,7 @@ export default function HowItWorks() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative max-w-5xl mx-auto">
 
         {/* ── Title ─────────────────────────────────────────────── */}
         <div className="text-center mb-20 md:mb-24 lg:mb-28">
@@ -214,7 +214,7 @@ export default function HowItWorks() {
 
         {/* ── Steps Container ────────────────────────────────────── */}
         {/* pt-10 = 40px top padding so connector line (at 7rem = 112px) hits node centers */}
-        <div className="relative px-4 lg:px-8 pt-10">
+        <div className="relative pt-10">
 
           {/* Connection Line — desktop */}
           <div className={`absolute ${LINE_TOP} left-0 right-0 h-[2px] hidden lg:block pointer-events-none`}>
