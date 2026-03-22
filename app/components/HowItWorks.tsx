@@ -1,12 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Phone, Calendar, Key } from 'lucide-react';
 
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
@@ -17,48 +16,21 @@ export default function HowItWorks() {
 
   const lineProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const steps = [
-    {
-      number: '01',
-      icon: Phone,
-      title: 'Call or Text Us',
-      description: "Tell us your dates, occasion, and group size. We'll find your perfect RV and confirm availability — most bookings sorted within the hour."
-    },
-    {
-      number: '02',
-      icon: Calendar,
-      title: 'We Handle Everything',
-      description: 'Delivery, full setup, walkthrough, and insurance are all arranged for you. Every detail is taken care of before you arrive.'
-    },
-    {
-      number: '03',
-      icon: Key,
-      title: 'Arrive & Enjoy',
-      description: 'Your RV is on-site, fully prepped, and ready to go. Step inside, make yourself at home, and let the experience begin.'
-    }
-  ];
+  const icons = [Phone, Calendar, Key];
 
   // Sequential step activation based on scroll
   useEffect(() => {
     const unsubscribe = lineProgress.on('change', (latest) => {
-      if (latest < 0.35) {
-        setCurrentStep(0);
-      } else if (latest < 0.65) {
-        setCurrentStep(1);
-      } else {
-        setCurrentStep(2);
-      }
+      if (latest < 0.35) setCurrentStep(0);
+      else if (latest < 0.65) setCurrentStep(1);
+      else setCurrentStep(2);
     });
     return () => unsubscribe();
   }, [lineProgress]);
 
   // Premium "stomp" animation — weighted, confident, precise
   const stompAnimation = {
-    hidden: {
-      opacity: 0,
-      scale: 0.7,
-      y: 20
-    },
+    hidden: { opacity: 0, scale: 0.7, y: 20 },
     visible: {
       opacity: 1,
       scale: 1,
@@ -66,12 +38,7 @@ export default function HowItWorks() {
       transition: {
         duration: 0.7,
         ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-        scale: {
-          type: "spring",
-          damping: 20,
-          stiffness: 300,
-          restDelta: 0.001
-        }
+        scale: { type: "spring", damping: 20, stiffness: 300, restDelta: 0.001 }
       }
     }
   };
@@ -83,72 +50,24 @@ export default function HowItWorks() {
   };
 
   return (
-    <section ref={sectionRef} id="how" className="relative px-6 pt-24 md:pt-32 lg:pt-40 pb-40 md:pb-52 lg:pb-64" style={{ background: '#0F0D0B' }}>
+    <section
+      ref={sectionRef}
+      id="how"
+      className="relative px-6 py-24 md:py-32 lg:py-40"
+      style={{ background: '#0F0D0B' }}
+    >
       <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
-        <div className="text-center mb-24 md:mb-32">
+        {/* Steps Container — full width on desktop, centered stack on mobile */}
+        <div className="relative px-4 lg:px-8">
 
-          {/* Eyebrow — centered flex-row with decorative lines */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '12px',
-              marginBottom: '28px'
-            }}
-          >
-            <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'rgba(201,168,76,0.45)' }} />
-            <span style={{
-              fontSize: '11px',
-              fontWeight: 500,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: '#C9A84C',
-              fontFamily: "'Inter', sans-serif"
-            }}>
-              The Process
-            </span>
-            <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'rgba(201,168,76,0.45)' }} />
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-[3.5rem] mb-8 leading-[1.15] px-4"
-            style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, letterSpacing: '-0.02em' }}
-          >
-            From First Call to Check-In
-            <br />
-            <span className="block mt-2">Three Steps.</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#C8BCA8] text-base max-w-[460px] mx-auto leading-[1.85] px-4"
-            style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
-          >
-            No experience needed, no logistics to manage.
-            We take care of everything so your only job is to enjoy.
-          </motion.p>
-        </div>
-
-        {/* Steps Container */}
-        <div className="relative max-w-6xl mx-auto px-4">
-          {/* Connection Line System — desktop */}
+          {/* Connection Line — desktop only */}
           <div className="absolute top-[4.5rem] left-0 right-0 h-[2px] hidden lg:block pointer-events-none">
             <svg className="w-full h-full" preserveAspectRatio="none">
               <line
-                x1="15%"
+                x1="16.7%"
                 y1="1"
-                x2="85%"
+                x2="83.3%"
                 y2="1"
                 stroke="#8F6A2E"
                 strokeWidth="1"
@@ -156,20 +75,18 @@ export default function HowItWorks() {
                 opacity="0.25"
               />
               <motion.line
-                x1="15%"
+                x1="16.7%"
                 y1="1"
-                x2="85%"
+                x2="83.3%"
                 y2="1"
                 stroke="url(#lineGradient)"
                 strokeWidth="2"
                 strokeDasharray="1200"
                 strokeDashoffset={useTransform(lineProgress, [0, 1], [1200, 0])}
-                style={{
-                  filter: 'drop-shadow(0 0 6px rgba(198, 156, 82, 0.5))'
-                }}
+                style={{ filter: 'drop-shadow(0 0 6px rgba(198, 156, 82, 0.5))' }}
               />
               <motion.circle
-                cx={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['15%', '50%', '85%', '85%'])}
+                cx={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['16.7%', '50%', '83.3%', '83.3%'])}
                 cy="1"
                 r="3"
                 fill="url(#beadGradient)"
@@ -215,9 +132,7 @@ export default function HowItWorks() {
                 strokeWidth="2"
                 strokeDasharray="2000"
                 strokeDashoffset={useTransform(lineProgress, [0, 1], [2000, 0])}
-                style={{
-                  filter: 'drop-shadow(0 0 6px rgba(198, 156, 82, 0.5))'
-                }}
+                style={{ filter: 'drop-shadow(0 0 6px rgba(198, 156, 82, 0.5))' }}
               />
               <motion.circle
                 cx="1"
@@ -239,10 +154,9 @@ export default function HowItWorks() {
             </svg>
           </div>
 
-          {/* Steps Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-20 lg:gap-12">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
+          {/* Icons Grid — equal thirds on desktop, stacked on mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-20 lg:gap-0">
+            {icons.map((Icon, index) => {
               const stepState = getStepState(index);
               const isHovered = hoveredStep === index;
 
@@ -252,7 +166,6 @@ export default function HowItWorks() {
                   glowOpacity: 0,
                   iconColor: '#8F6A2E',
                   iconFilter: 'none',
-                  scale: 1,
                   boxShadow: '0 0 0px rgba(198, 156, 82, 0)'
                 },
                 active: {
@@ -260,7 +173,6 @@ export default function HowItWorks() {
                   glowOpacity: 0.5,
                   iconColor: '#C69C52',
                   iconFilter: 'drop-shadow(0 0 10px rgba(198, 156, 82, 0.6))',
-                  scale: 1,
                   boxShadow: '0 0 40px rgba(198, 156, 82, 0.4), inset 0 0 30px rgba(198, 156, 82, 0.15)'
                 },
                 completed: {
@@ -268,7 +180,6 @@ export default function HowItWorks() {
                   glowOpacity: 0.2,
                   iconColor: '#B68B3C',
                   iconFilter: 'drop-shadow(0 0 4px rgba(182, 139, 60, 0.3))',
-                  scale: 1,
                   boxShadow: '0 0 20px rgba(182, 139, 60, 0.2), inset 0 0 15px rgba(182, 139, 60, 0.08)'
                 }
               };
@@ -284,14 +195,12 @@ export default function HowItWorks() {
                   variants={stompAnimation}
                   onMouseEnter={() => setHoveredStep(index)}
                   onMouseLeave={() => setHoveredStep(null)}
-                  className="relative flex flex-col items-center text-center group cursor-pointer"
+                  className="flex items-center justify-center cursor-pointer"
                 >
                   {/* Node */}
                   <motion.div
-                    className="relative w-36 h-36 mb-10 flex items-center justify-content-center"
-                    animate={{
-                      y: isHovered && stepState !== 'inactive' ? -6 : 0,
-                    }}
+                    className="relative w-36 h-36 flex items-center justify-center"
+                    animate={{ y: isHovered && stepState !== 'inactive' ? -6 : 0 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {/* Outer ambient glow */}
@@ -308,19 +217,6 @@ export default function HowItWorks() {
                       }}
                     />
 
-                    {/* Step number */}
-                    <div
-                      className="absolute -top-9 left-1/2 -translate-x-1/2 text-xs tracking-[0.2em] transition-all duration-500"
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontWeight: 300,
-                        color: stepState === 'active' ? '#C69C52' : '#8F6A2E',
-                        opacity: stepState === 'inactive' ? 0.4 : 0.7
-                      }}
-                    >
-                      {step.number}
-                    </div>
-
                     {/* Inner circle */}
                     <motion.div
                       className="relative w-full h-full rounded-full border-[2px] flex items-center justify-center"
@@ -336,9 +232,7 @@ export default function HowItWorks() {
                       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <motion.div
-                        animate={{
-                          scale: (isHovered && stepState !== 'inactive') ? 1.08 : 1,
-                        }}
+                        animate={{ scale: (isHovered && stepState !== 'inactive') ? 1.08 : 1 }}
                         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                       >
                         <Icon
@@ -354,90 +248,12 @@ export default function HowItWorks() {
                       </motion.div>
                     </motion.div>
                   </motion.div>
-
-                  {/* Content */}
-                  <motion.div
-                    className="px-3 lg:px-4"
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={shouldShow ? {
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        delay: 0.3,
-                        duration: 0.6,
-                        ease: [0.22, 1, 0.36, 1]
-                      }
-                    } : { opacity: 0, y: 15 }}
-                  >
-                    <h3
-                      className="text-xl md:text-2xl lg:text-[1.75rem] mb-5 transition-all duration-500"
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontWeight: 400,
-                        letterSpacing: '-0.01em',
-                        lineHeight: 1.2,
-                        color: stepState === 'active' ? '#F3EDE3' :
-                               stepState === 'completed' ? '#E5DDD0' : '#C4B8A8',
-                        textShadow: stepState === 'active' ? '0 0 25px rgba(198, 156, 82, 0.15)' : 'none',
-                      }}
-                    >
-                      {step.title}
-                    </h3>
-
-                    <p
-                      className="text-sm leading-[1.9] max-w-[260px] mx-auto transition-all duration-500"
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontWeight: 300,
-                        color: stepState === 'active' ? '#C8BCA8' :
-                               stepState === 'completed' ? '#B8AC98' : '#A09488',
-                      }}
-                    >
-                      {step.description}
-                    </p>
-                  </motion.div>
                 </motion.div>
               );
             })}
           </div>
+
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={currentStep >= 2 ? {
-            opacity: 1,
-            y: 0,
-            transition: {
-              delay: 0.6,
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1]
-            }
-          } : { opacity: 0, y: 30 }}
-          className="text-center mt-20 md:mt-28"
-        >
-          <motion.button
-            whileHover={{ scale: 1.02, y: -3 }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative px-14 py-6 border-[2px] border-[#B68B3C] text-[#F3EDE3] text-base tracking-[0.05em] transition-all duration-500 hover:border-[#C69C52] hover:shadow-[0_0_40px_rgba(198,156,82,0.35)] overflow-hidden"
-            style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400 }}
-          >
-            <span className="relative z-10">Start Your Booking</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-[#8F6A2E] to-[#B68B3C]"
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 0.12 }}
-              transition={{ duration: 0.5 }}
-            />
-          </motion.button>
-
-          <p
-            className="mt-6 text-[#C8BCA8] text-xs tracking-[0.06em]"
-            style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
-          >
-            Most inquiries confirmed within the hour &nbsp;·&nbsp; White-glove support throughout your rental
-          </p>
-        </motion.div>
       </div>
 
       {/* Ambient background effects */}
