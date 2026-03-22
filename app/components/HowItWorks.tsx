@@ -21,17 +21,17 @@ export default function HowItWorks() {
     {
       icon: Phone,
       title: 'Call or Text Us',
-      description: "Tell us your dates, occasion, and group size. We'll find your perfect RV and confirm availability — most bookings sorted within the hour."
+      description: "Tell us your dates, occasion, and group size. We'll find the right RV and confirm availability — most bookings sorted within the hour."
     },
     {
       icon: Calendar,
       title: 'We Handle Everything',
-      description: 'Delivery, full setup, walkthrough, and insurance are all arranged for you. Every detail is taken care of before you arrive.'
+      description: 'Delivery, setup, walkthrough, and insurance arranged for you. Every detail taken care of before you arrive.'
     },
     {
       icon: Key,
       title: 'Arrive & Enjoy',
-      description: 'Your RV is on-site, fully prepped, and ready to go. Step inside, make yourself at home, and let the experience begin.'
+      description: 'Your RV is on-site, fully prepped, and ready. Step inside, make yourself at home, and let the experience begin.'
     }
   ];
 
@@ -66,89 +66,81 @@ export default function HowItWorks() {
     return 'completed';
   };
 
+  // Node size: w-36 h-36 = 144px. Center = 72px.
+  // Grid container has pt-10 (40px). Line must align to node center = 40 + 72 = 112px = 7rem.
+  const LINE_TOP = 'top-[7rem]';
+
   return (
     <section
       ref={sectionRef}
       id="how"
-      className="relative px-6 pt-24 md:pt-32 lg:pt-40 pb-28 md:pb-36 lg:pb-44"
+      className="relative px-6 pt-20 md:pt-28 lg:pt-36 pb-24 md:pb-32 lg:pb-40"
       style={{
         background: '#FAF8F4',
-        borderTop: '1px solid rgba(201,168,76,0.18)',
-        borderBottom: '1px solid rgba(201,168,76,0.18)',
+        borderTop: '1px solid rgba(201,168,76,0.15)',
+        borderBottom: '1px solid rgba(201,168,76,0.15)',
       }}
     >
       <div className="max-w-7xl mx-auto">
 
-        {/* ── Header ──────────────────────────────────────────── */}
-        <div className="text-center mb-20 md:mb-28">
+        {/* ── Title ───────────────────────────────────────────── */}
+        <div className="text-center mb-16 md:mb-20 lg:mb-24">
 
           {/* Eyebrow */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '12px',
-              marginBottom: '28px'
+              marginBottom: '22px'
             }}
           >
-            <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'rgba(201,168,76,0.55)' }} />
+            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(184,146,42,0.4)' }} />
             <span style={{
-              fontSize: '11px',
+              fontSize: '10px',
               fontWeight: 500,
-              letterSpacing: '0.18em',
+              letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: '#B8922A',
               fontFamily: "'Inter', sans-serif"
             }}>
               The Process
             </span>
-            <span style={{ display: 'inline-block', width: '32px', height: '1px', background: 'rgba(201,168,76,0.55)' }} />
+            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(184,146,42,0.4)' }} />
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline — strong, editorial, balanced */}
           <motion.h2
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-5xl lg:text-[3.5rem] mb-8 leading-[1.12] px-4"
+            transition={{ duration: 0.85, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="px-4"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
+              fontSize: 'clamp(2.4rem, 5vw, 3.25rem)',
+              lineHeight: 1.1,
               letterSpacing: '-0.025em',
-              color: '#1A1714'
+              color: '#1A1714',
+              maxWidth: '620px',
+              margin: '0 auto'
             }}
           >
-            From First Call to Check-In
-            <br />
-            <span className="block mt-2" style={{ color: '#1A1714' }}>Three Steps.</span>
+            From First Call<br />
+            <span style={{ fontStyle: 'italic', color: '#2E2A26' }}>to Check-In.</span>
           </motion.h2>
-
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="text-base max-w-[460px] mx-auto leading-[1.85] px-4"
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 300,
-              color: '#6B6158'
-            }}
-          >
-            No experience needed, no logistics to manage.
-            We take care of everything so your only job is to enjoy.
-          </motion.p>
         </div>
 
         {/* ── Steps Container ──────────────────────────────────── */}
-        <div className="relative px-4 lg:px-8">
+        {/* pt-10 = 40px top padding so connector line (at 7rem = 112px) hits node centers */}
+        <div className="relative px-4 lg:px-8 pt-10">
 
           {/* Connection Line — desktop */}
-          <div className="absolute top-[4.5rem] left-0 right-0 h-[2px] hidden lg:block pointer-events-none">
+          <div className={`absolute ${LINE_TOP} left-0 right-0 h-[2px] hidden lg:block pointer-events-none`}>
             <svg className="w-full h-full" preserveAspectRatio="none">
               <line
                 x1="16.7%"
@@ -157,8 +149,8 @@ export default function HowItWorks() {
                 y2="1"
                 stroke="#C9A84C"
                 strokeWidth="1"
-                strokeDasharray="3 7"
-                opacity="0.18"
+                strokeDasharray="3 8"
+                opacity="0.15"
               />
               <motion.line
                 x1="16.7%"
@@ -169,7 +161,7 @@ export default function HowItWorks() {
                 strokeWidth="1.5"
                 strokeDasharray="1200"
                 strokeDashoffset={useTransform(lineProgress, [0, 1], [1200, 0])}
-                style={{ filter: 'drop-shadow(0 0 4px rgba(180, 140, 40, 0.4))' }}
+                style={{ filter: 'drop-shadow(0 0 4px rgba(180, 140, 40, 0.5))' }}
               />
               <motion.circle
                 cx={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['16.7%', '50%', '83.3%', '83.3%'])}
@@ -177,7 +169,7 @@ export default function HowItWorks() {
                 r="3"
                 fill="url(#beadGradient)"
                 style={{
-                  filter: 'drop-shadow(0 0 6px rgba(180, 140, 40, 0.7))',
+                  filter: 'drop-shadow(0 0 6px rgba(180, 140, 40, 0.8))',
                   opacity: useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
                 }}
               />
@@ -189,7 +181,7 @@ export default function HowItWorks() {
                 </linearGradient>
                 <radialGradient id="beadGradient">
                   <stop offset="0%" stopColor="#FAF8F4" />
-                  <stop offset="40%" stopColor="#E8C97A" />
+                  <stop offset="45%" stopColor="#E8C97A" />
                   <stop offset="100%" stopColor="#B8922A" />
                 </radialGradient>
               </defs>
@@ -201,19 +193,19 @@ export default function HowItWorks() {
             <svg className="w-full h-full" preserveAspectRatio="none">
               <line
                 x1="1"
-                y1="10%"
+                y1="8%"
                 x2="1"
-                y2="90%"
+                y2="92%"
                 stroke="#C9A84C"
                 strokeWidth="1"
-                strokeDasharray="3 7"
-                opacity="0.2"
+                strokeDasharray="3 8"
+                opacity="0.15"
               />
               <motion.line
                 x1="1"
-                y1="10%"
+                y1="8%"
                 x2="1"
-                y2="90%"
+                y2="92%"
                 stroke="url(#lineGradientVertical)"
                 strokeWidth="1.5"
                 strokeDasharray="2000"
@@ -222,11 +214,11 @@ export default function HowItWorks() {
               />
               <motion.circle
                 cx="1"
-                cy={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['10%', '50%', '90%', '90%'])}
+                cy={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['8%', '50%', '92%', '92%'])}
                 r="3"
                 fill="url(#beadGradient)"
                 style={{
-                  filter: 'drop-shadow(0 0 6px rgba(180, 140, 40, 0.7))',
+                  filter: 'drop-shadow(0 0 6px rgba(180, 140, 40, 0.8))',
                   opacity: useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
                 }}
               />
@@ -241,7 +233,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Steps Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-20 lg:gap-0">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-0">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const stepState = getStepState(index);
@@ -249,25 +241,25 @@ export default function HowItWorks() {
 
               const nodeStyles = {
                 inactive: {
-                  borderColor: 'rgba(201,168,76,0.3)',
+                  borderColor: 'rgba(201,168,76,0.28)',
                   glowOpacity: 0,
-                  iconColor: '#8F7040',
+                  iconColor: '#7A6040',
                   iconFilter: 'none',
-                  boxShadow: '0 2px 20px rgba(0,0,0,0.08)'
+                  boxShadow: '0 2px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05)'
                 },
                 active: {
                   borderColor: '#C9A84C',
-                  glowOpacity: 0.35,
+                  glowOpacity: 0.3,
                   iconColor: '#C9A84C',
-                  iconFilter: 'drop-shadow(0 0 8px rgba(198,156,82,0.5))',
-                  boxShadow: '0 0 40px rgba(198,156,82,0.25), 0 6px 32px rgba(0,0,0,0.12), inset 0 0 30px rgba(198,156,82,0.12)'
+                  iconFilter: 'drop-shadow(0 0 8px rgba(198,156,82,0.45))',
+                  boxShadow: '0 0 36px rgba(198,156,82,0.22), 0 8px 32px rgba(0,0,0,0.12), inset 0 0 28px rgba(198,156,82,0.10)'
                 },
                 completed: {
                   borderColor: '#B8922A',
-                  glowOpacity: 0.15,
+                  glowOpacity: 0.12,
                   iconColor: '#B8922A',
-                  iconFilter: 'drop-shadow(0 0 4px rgba(180,140,40,0.3))',
-                  boxShadow: '0 0 20px rgba(180,140,40,0.15), 0 4px 24px rgba(0,0,0,0.1), inset 0 0 15px rgba(180,140,40,0.08)'
+                  iconFilter: 'drop-shadow(0 0 4px rgba(180,140,40,0.28))',
+                  boxShadow: '0 0 18px rgba(180,140,40,0.14), 0 4px 20px rgba(0,0,0,0.09), inset 0 0 14px rgba(180,140,40,0.07)'
                 }
               };
 
@@ -286,20 +278,20 @@ export default function HowItWorks() {
                 >
                   {/* Node */}
                   <motion.div
-                    className="relative w-36 h-36 mt-10 flex items-center justify-center"
-                    animate={{ y: isHovered && stepState !== 'inactive' ? -6 : 0 }}
+                    className="relative w-36 h-36 flex items-center justify-center"
+                    animate={{ y: isHovered && stepState !== 'inactive' ? -5 : 0 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {/* Ambient glow — soft gold halo on white */}
                     <motion.div
                       className="absolute inset-0 rounded-full"
                       animate={{
-                        opacity: (isHovered && stepState !== 'inactive') ? 0.5 : currentStyle.glowOpacity,
-                        scale: (isHovered && stepState !== 'inactive') ? 1.18 : 1.12,
+                        opacity: (isHovered && stepState !== 'inactive') ? 0.45 : currentStyle.glowOpacity,
+                        scale: (isHovered && stepState !== 'inactive') ? 1.2 : 1.1,
                       }}
                       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                       style={{
-                        background: 'radial-gradient(circle, rgba(198,156,82,0.35) 0%, rgba(198,156,82,0) 65%)',
+                        background: 'radial-gradient(circle, rgba(198,156,82,0.32) 0%, rgba(198,156,82,0) 65%)',
                         filter: 'blur(20px)'
                       }}
                     />
@@ -313,7 +305,7 @@ export default function HowItWorks() {
                       animate={{
                         borderColor: isHovered && stepState !== 'inactive' ? '#C9A84C' : currentStyle.borderColor,
                         boxShadow: isHovered && stepState !== 'inactive'
-                          ? '0 0 50px rgba(198,156,82,0.3), 0 8px 40px rgba(0,0,0,0.2), inset 0 0 35px rgba(198,156,82,0.18)'
+                          ? '0 0 44px rgba(198,156,82,0.28), 0 10px 40px rgba(0,0,0,0.18), inset 0 0 32px rgba(198,156,82,0.14)'
                           : currentStyle.boxShadow,
                       }}
                       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -327,7 +319,7 @@ export default function HowItWorks() {
                           style={{
                             color: isHovered && stepState !== 'inactive' ? '#C9A84C' : currentStyle.iconColor,
                             filter: isHovered && stepState !== 'inactive'
-                              ? 'drop-shadow(0 0 10px rgba(198,156,82,0.7))'
+                              ? 'drop-shadow(0 0 10px rgba(198,156,82,0.65))'
                               : currentStyle.iconFilter
                           }}
                           strokeWidth={1.5}
@@ -338,35 +330,40 @@ export default function HowItWorks() {
 
                   {/* Step text */}
                   <motion.div
-                    className="px-4 lg:px-6 mt-8"
-                    initial={{ opacity: 0, y: 14 }}
+                    className="mt-8 px-2 lg:px-5"
+                    initial={{ opacity: 0, y: 12 }}
                     animate={shouldShow ? {
                       opacity: 1,
                       y: 0,
-                      transition: { delay: 0.3, duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-                    } : { opacity: 0, y: 14 }}
+                      transition: { delay: 0.32, duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+                    } : { opacity: 0, y: 12 }}
                   >
                     <h3
-                      className="text-xl md:text-2xl lg:text-[1.65rem] mb-4 transition-all duration-500"
+                      className="mb-3 transition-all duration-500"
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 500,
-                        letterSpacing: '-0.015em',
-                        lineHeight: 1.2,
+                        fontSize: 'clamp(1.2rem, 2vw, 1.55rem)',
+                        letterSpacing: '-0.012em',
+                        lineHeight: 1.18,
                         color: stepState === 'active' ? '#1A1714' :
-                               stepState === 'completed' ? '#2E2A26' : '#5A524A',
+                               stepState === 'completed' ? '#2A2420' : '#6A5E52',
                       }}
                     >
                       {step.title}
                     </h3>
 
                     <p
-                      className="text-sm leading-[1.9] max-w-[260px] mx-auto transition-all duration-500"
+                      className="transition-all duration-500"
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300,
-                        color: stepState === 'active' ? '#4A4238' :
-                               stepState === 'completed' ? '#5A524A' : '#8A7E74',
+                        fontSize: '13px',
+                        lineHeight: 1.85,
+                        maxWidth: '220px',
+                        margin: '0 auto',
+                        color: stepState === 'active' ? '#3E3630' :
+                               stepState === 'completed' ? '#4E4640' : '#9A8E84',
                       }}
                     >
                       {step.description}
@@ -380,58 +377,71 @@ export default function HowItWorks() {
 
         {/* ── CTA ─────────────────────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={currentStep >= 2 ? {
             opacity: 1,
             y: 0,
-            transition: { delay: 0.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-          } : { opacity: 0, y: 28 }}
-          className="text-center mt-20 md:mt-28"
+            transition: { delay: 0.55, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
+          } : { opacity: 0, y: 24 }}
+          className="text-center mt-16 md:mt-20 lg:mt-24"
         >
+          {/* Subtle divider */}
+          <div style={{
+            width: '40px',
+            height: '1px',
+            background: 'rgba(184,146,42,0.3)',
+            margin: '0 auto 28px'
+          }} />
+
           <motion.button
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative px-14 py-5 overflow-hidden transition-all duration-500"
+            whileHover={{ scale: 1.015, y: -2 }}
+            whileTap={{ scale: 0.985 }}
+            className="group relative overflow-hidden transition-all duration-500"
             style={{
               background: '#1A1714',
-              color: '#FAF8F4',
+              color: '#F5F0E8',
               fontFamily: "'Inter', sans-serif",
               fontWeight: 400,
-              fontSize: '14px',
-              letterSpacing: '0.06em',
-              border: '1px solid #1A1714',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.14)',
+              fontSize: '13px',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              padding: '18px 52px',
+              border: 'none',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
             }}
           >
             <span className="relative z-10">Start Your Booking</span>
             <motion.div
               className="absolute inset-0"
-              style={{ background: 'linear-gradient(135deg, #2A2420 0%, #1A1714 100%)' }}
+              style={{ background: '#2A2420' }}
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.35 }}
             />
           </motion.button>
 
           <p
-            className="mt-5 text-xs tracking-[0.06em]"
+            className="mt-5"
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 300,
-              color: '#8A7E74'
+              fontSize: '11px',
+              letterSpacing: '0.04em',
+              color: '#A09080'
             }}
           >
-            Most inquiries confirmed within the hour&nbsp;·&nbsp;White-glove support throughout your rental
+            Confirmed within the hour &nbsp;·&nbsp; White-glove service throughout
           </p>
         </motion.div>
 
       </div>
 
-      {/* Subtle warm ambient glow at bottom */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[48rem] h-[12rem] pointer-events-none"
+      {/* Warm ambient base */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[56rem] h-[10rem] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)',
-          filter: 'blur(40px)'
+          background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%)',
+          filter: 'blur(52px)'
         }}
       />
     </section>
