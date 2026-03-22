@@ -7,12 +7,12 @@ import { Phone, Calendar, Key } from 'lucide-react';
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
-  const [currentStep, setCurrentStep] = useState<number>(0); // Start with first step visible
+  const [currentStep, setCurrentStep] = useState<number>(0);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 0.6", "end 0.3"] // Better scroll range for smooth progression
+    offset: ["start 0.6", "end 0.3"]
   });
 
   const lineProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -21,39 +21,38 @@ export default function HowItWorks() {
     {
       number: '01',
       icon: Phone,
-      title: 'Reach Out',
-      description: 'Call or text us with your dates and vision. We\'ll guide you through our fleet and find your perfect match.'
+      title: 'Call or Text Us',
+      description: "Tell us your dates, occasion, and group size. We'll find your perfect RV and confirm availability — most bookings sorted within the hour."
     },
     {
       number: '02',
       icon: Calendar,
-      title: 'Confirm Details',
-      description: 'We\'ll handle all the logistics, from insurance to itinerary planning. Your journey is customized to perfection.'
+      title: 'We Handle Everything',
+      description: 'Delivery, full setup, walkthrough, and insurance are all arranged for you. Every detail is taken care of before you arrive.'
     },
     {
       number: '03',
       icon: Key,
-      title: 'Begin Your Journey',
-      description: 'Arrive to a pristine RV, fully prepped and stocked. Your luxury adventure starts the moment you turn the key.'
+      title: 'Arrive & Enjoy',
+      description: 'Your RV is on-site, fully prepped, and ready to go. Step inside, make yourself at home, and let the experience begin.'
     }
   ];
 
-  // Sequential step activation based on scroll - refined for smooth progression
+  // Sequential step activation based on scroll
   useEffect(() => {
     const unsubscribe = lineProgress.on('change', (latest) => {
-      // Step 1 visible immediately, Step 2 at 40%, Step 3 at 70%
       if (latest < 0.35) {
-        setCurrentStep(0); // Step 1 active
+        setCurrentStep(0);
       } else if (latest < 0.65) {
-        setCurrentStep(1); // Step 2 active
+        setCurrentStep(1);
       } else {
-        setCurrentStep(2); // Step 3 active
+        setCurrentStep(2);
       }
     });
     return () => unsubscribe();
   }, [lineProgress]);
 
-  // Premium "stomp" animation - weighted, confident, precise
+  // Premium "stomp" animation — weighted, confident, precise
   const stompAnimation = {
     hidden: {
       opacity: 0,
@@ -84,16 +83,17 @@ export default function HowItWorks() {
   };
 
   return (
-    <section ref={sectionRef} id="how" className="relative px-6 py-40 md:py-48 lg:py-56" style={{ background: '#0F0D0B' }}>
+    <section ref={sectionRef} id="how" className="relative px-6 py-24 md:py-32 lg:py-40" style={{ background: '#0F0D0B' }}>
       <div className="max-w-7xl mx-auto">
-        {/* Header - More breathing room */}
-        <div className="text-center mb-32 md:mb-40">
+
+        {/* Header */}
+        <div className="text-center mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-[#B68B3C] text-xs tracking-[0.25em] uppercase mb-8 font-light">
+            <p className="text-[#B68B3C] text-xs tracking-[0.25em] uppercase mb-6 font-light">
               The Process
             </p>
           </motion.div>
@@ -102,33 +102,31 @@ export default function HowItWorks() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#F3EDE3] text-5xl md:text-6xl lg:text-[5rem] mb-10 leading-[1.15] px-4"
+            className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-[4rem] mb-7 leading-[1.2] px-4"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, letterSpacing: '-0.02em' }}
           >
-            From First Call to Check-In—
+            From First Call to Check-In —
             <br />
-            <span className="block mt-2">Three Steps.</span>
+            <span className="block mt-1">Three Steps.</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#D8CCBC] text-lg md:text-xl max-w-2xl mx-auto leading-[1.7] px-4"
+            className="text-[#C8BCA8] text-base md:text-lg max-w-xl mx-auto leading-[1.75] px-4"
             style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
           >
-            We&apos;ve refined every detail to make your luxury RV experience effortless.
-            <br className="hidden md:block" />
-            From your first inquiry to the open road, we&apos;re with you every mile.
+            No experience needed, no logistics to manage.
+            We take care of everything so your only job is to enjoy.
           </motion.p>
         </div>
 
-        {/* Steps Container - Improved spacing */}
+        {/* Steps Container */}
         <div className="relative max-w-6xl mx-auto px-4">
-          {/* Connection Line System */}
+          {/* Connection Line System — desktop */}
           <div className="absolute top-[4.5rem] left-0 right-0 h-[2px] hidden lg:block pointer-events-none">
             <svg className="w-full h-full" preserveAspectRatio="none">
-              {/* Base inactive line - subtle and refined */}
               <line
                 x1="15%"
                 y1="1"
@@ -139,8 +137,6 @@ export default function HowItWorks() {
                 strokeDasharray="3 6"
                 opacity="0.25"
               />
-
-              {/* Active animated line */}
               <motion.line
                 x1="15%"
                 y1="1"
@@ -154,8 +150,6 @@ export default function HowItWorks() {
                   filter: 'drop-shadow(0 0 6px rgba(198, 156, 82, 0.5))'
                 }}
               />
-
-              {/* Traveling energy bead/sweep */}
               <motion.circle
                 cx={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['15%', '50%', '85%', '85%'])}
                 cy="1"
@@ -166,7 +160,6 @@ export default function HowItWorks() {
                   opacity: useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
                 }}
               />
-
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#8F6A2E" />
@@ -185,7 +178,6 @@ export default function HowItWorks() {
           {/* Mobile vertical connector line */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-full lg:hidden pointer-events-none">
             <svg className="w-full h-full" preserveAspectRatio="none">
-              {/* Base inactive line */}
               <line
                 x1="1"
                 y1="10%"
@@ -196,8 +188,6 @@ export default function HowItWorks() {
                 strokeDasharray="3 6"
                 opacity="0.25"
               />
-
-              {/* Active animated vertical line */}
               <motion.line
                 x1="1"
                 y1="10%"
@@ -211,8 +201,6 @@ export default function HowItWorks() {
                   filter: 'drop-shadow(0 0 6px rgba(198, 156, 82, 0.5))'
                 }}
               />
-
-              {/* Traveling energy bead - vertical */}
               <motion.circle
                 cx="1"
                 cy={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['10%', '50%', '90%', '90%'])}
@@ -223,7 +211,6 @@ export default function HowItWorks() {
                   opacity: useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
                 }}
               />
-
               <defs>
                 <linearGradient id="lineGradientVertical" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stopColor="#8F6A2E" />
@@ -234,14 +221,13 @@ export default function HowItWorks() {
             </svg>
           </div>
 
-          {/* Steps Grid - Better rhythm */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-20 lg:gap-12">
+          {/* Steps Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-10">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const stepState = getStepState(index);
               const isHovered = hoveredStep === index;
 
-              // State-based styling
               const nodeStyles = {
                 inactive: {
                   borderColor: '#8F6A2E',
@@ -282,9 +268,9 @@ export default function HowItWorks() {
                   onMouseLeave={() => setHoveredStep(null)}
                   className="relative flex flex-col items-center text-center group cursor-pointer"
                 >
-                  {/* Node - Refined and smaller */}
+                  {/* Node */}
                   <motion.div
-                    className="relative w-36 h-36 mb-10 flex items-center justify-content-center"
+                    className="relative w-36 h-36 mb-8 flex items-center justify-content-center"
                     animate={{
                       y: isHovered && stepState !== 'inactive' ? -6 : 0,
                     }}
@@ -304,7 +290,7 @@ export default function HowItWorks() {
                       }}
                     />
 
-                    {/* Step number - Above the circle */}
+                    {/* Step number */}
                     <div
                       className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.2em] transition-all duration-500"
                       style={{
@@ -317,7 +303,7 @@ export default function HowItWorks() {
                       {step.number}
                     </div>
 
-                    {/* Inner circle with premium border */}
+                    {/* Inner circle */}
                     <motion.div
                       className="relative w-full h-full rounded-full border-[2px] flex items-center justify-center"
                       style={{
@@ -331,7 +317,6 @@ export default function HowItWorks() {
                       }}
                       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      {/* Icon */}
                       <motion.div
                         animate={{
                           scale: (isHovered && stepState !== 'inactive') ? 1.08 : 1,
@@ -352,8 +337,9 @@ export default function HowItWorks() {
                     </motion.div>
                   </motion.div>
 
-                  {/* Content - Sequential reveal */}
+                  {/* Content */}
                   <motion.div
+                    className="px-2"
                     initial={{ opacity: 0, y: 15 }}
                     animate={shouldShow ? {
                       opacity: 1,
@@ -366,7 +352,7 @@ export default function HowItWorks() {
                     } : { opacity: 0, y: 15 }}
                   >
                     <h3
-                      className="text-3xl md:text-4xl mb-5 transition-all duration-500"
+                      className="text-2xl md:text-3xl mb-4 transition-all duration-500"
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 400,
@@ -380,12 +366,12 @@ export default function HowItWorks() {
                     </h3>
 
                     <p
-                      className="text-base leading-[1.75] max-w-xs mx-auto transition-all duration-500"
+                      className="text-sm leading-[1.8] max-w-[240px] mx-auto transition-all duration-500"
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300,
-                        color: stepState === 'active' ? '#D8CCBC' :
-                               stepState === 'completed' ? '#C8BCA8' : '#B0A495',
+                        color: stepState === 'active' ? '#C8BCA8' :
+                               stepState === 'completed' ? '#B8AC98' : '#A09488',
                       }}
                     >
                       {step.description}
@@ -397,7 +383,7 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* CTA Section - Appears after sequence completes */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={currentStep >= 2 ? {
@@ -409,7 +395,7 @@ export default function HowItWorks() {
               ease: [0.22, 1, 0.36, 1]
             }
           } : { opacity: 0, y: 30 }}
-          className="text-center mt-32 md:mt-40"
+          className="text-center mt-16 md:mt-20"
         >
           <motion.button
             whileHover={{ scale: 1.02, y: -3 }}
@@ -427,15 +413,15 @@ export default function HowItWorks() {
           </motion.button>
 
           <p
-            className="mt-7 text-[#D8CCBC] text-sm tracking-wide"
+            className="mt-5 text-[#C8BCA8] text-xs tracking-[0.06em]"
             style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
           >
-            Most bookings confirmed same day · Support available throughout your stay
+            Most inquiries confirmed within the hour &nbsp;·&nbsp; White-glove support throughout your rental
           </p>
         </motion.div>
       </div>
 
-      {/* Ambient background effects - More subtle */}
+      {/* Ambient background effects */}
       <div className="absolute top-20 left-1/4 w-[32rem] h-[32rem] bg-[#B68B3C] rounded-full opacity-[0.02] blur-[140px] pointer-events-none" />
       <div className="absolute bottom-20 right-1/4 w-[32rem] h-[32rem] bg-[#C69C52] rounded-full opacity-[0.025] blur-[140px] pointer-events-none" />
     </section>
