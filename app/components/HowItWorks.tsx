@@ -43,7 +43,7 @@ export default function HowItWorks() {
     }
   ];
 
-  // Sequential step activation — desktop thresholds compressed for tighter scroll feel
+  // Sequential step activation — locked, do not modify
   useEffect(() => {
     const unsubscribe = lineProgress.on('change', (latest) => {
       if (isDesktop) {
@@ -59,7 +59,7 @@ export default function HowItWorks() {
     return () => unsubscribe();
   }, [lineProgress, isDesktop]);
 
-  // Premium "stomp" animation — locked, do not modify
+  // Stomp animation — locked, do not modify
   const stompAnimation = {
     hidden: { opacity: 0, scale: 0.75, y: 18 },
     visible: {
@@ -90,17 +90,17 @@ export default function HowItWorks() {
       id="how"
       className="relative overflow-hidden px-6 pt-24 md:pt-32 lg:pt-40 pb-28 md:pb-36 lg:pb-44"
       style={{
-        background: '#0D0B09',
+        background: 'radial-gradient(ellipse at 50% 20%, #161209 0%, #0D0B09 55%, #080604 100%)',
         borderTop: '1px solid rgba(201,168,76,0.14)',
         borderBottom: '1px solid rgba(201,168,76,0.14)',
       }}
     >
 
-      {/* ── Noise texture overlay ── */}
+      {/* ── Noise texture ── */}
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 w-full h-full"
-        style={{ opacity: 0.035, mixBlendMode: 'overlay' }}
+        style={{ opacity: 0.04, mixBlendMode: 'overlay' }}
       >
         <filter id="howNoise">
           <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
@@ -108,33 +108,34 @@ export default function HowItWorks() {
         <rect width="100%" height="100%" filter="url(#howNoise)" />
       </svg>
 
-      {/* ── Atmospheric top glow ── */}
+      {/* ── Top atmospheric gold bloom ── */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
+        className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2"
         style={{
-          width: '70vw',
-          height: '380px',
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%)',
-          filter: 'blur(40px)',
+          width: '80vw',
+          maxWidth: '900px',
+          height: '420px',
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.10) 0%, transparent 65%)',
+          filter: 'blur(48px)',
         }}
       />
 
-      {/* ── Atmospheric bottom glow ── */}
+      {/* ── Bottom ambient ── */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2"
         style={{
-          width: '56rem',
-          height: '180px',
-          background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)',
-          filter: 'blur(52px)',
+          width: '60rem',
+          height: '200px',
+          background: 'radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%)',
+          filter: 'blur(56px)',
         }}
       />
 
       <div className="relative max-w-7xl mx-auto">
 
-        {/* ── Title ───────────────────────────────────────────── */}
+        {/* ── Title ─────────────────────────────────────────────── */}
         <div className="text-center mb-20 md:mb-24 lg:mb-28">
 
           {/* Eyebrow */}
@@ -147,76 +148,71 @@ export default function HowItWorks() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '14px',
-              marginBottom: '28px',
+              marginBottom: '30px',
             }}
           >
-            <span style={{
-              display: 'inline-block',
-              width: '36px',
-              height: '1px',
-              background: 'rgba(201,168,76,0.5)',
-            }} />
+            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: 'rgba(201,168,76,0.55)' }} />
             <span style={{
               fontSize: '10px',
               fontWeight: 500,
-              letterSpacing: '0.22em',
+              letterSpacing: '0.24em',
               textTransform: 'uppercase',
               color: '#C9A84C',
               fontFamily: "'Inter', sans-serif",
             }}>
               The Process
             </span>
-            <span style={{
-              display: 'inline-block',
-              width: '36px',
-              height: '1px',
-              background: 'rgba(201,168,76,0.5)',
-            }} />
+            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: 'rgba(201,168,76,0.55)' }} />
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline — editorial, large, white */}
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.85, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="px-4"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
-              fontSize: 'clamp(2.5rem, 5vw, 3.4rem)',
-              lineHeight: 1.08,
-              letterSpacing: '-0.02em',
-              color: '#F0E8D8',
-              maxWidth: '620px',
+              fontSize: 'clamp(3rem, 5.5vw, 4.4rem)',
+              lineHeight: 1.06,
+              letterSpacing: '-0.03em',
+              color: '#FFFFFF',
+              maxWidth: '680px',
               margin: '0 auto',
             }}
           >
             From First Call<br />
-            <span style={{ fontStyle: 'italic', color: '#C9A84C' }}>to Check-In.</span>
+            <em style={{
+              fontStyle: 'italic',
+              color: '#C9A84C',
+              textShadow: '0 0 40px rgba(201,168,76,0.25)',
+            }}>to Check-In.</em>
           </motion.h2>
 
-          {/* Supporting sub-line */}
+          {/* Sub-line */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 300,
-              fontSize: '13px',
-              letterSpacing: '0.02em',
-              lineHeight: 1.75,
+              fontSize: '13.5px',
+              letterSpacing: '0.03em',
+              lineHeight: 1.7,
               color: '#7A6E60',
-              marginTop: '20px',
-              maxWidth: '340px',
-              margin: '20px auto 0',
+              marginTop: '22px',
+              maxWidth: '320px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
             }}
           >
             Three steps. Every detail handled for you.
           </motion.p>
         </div>
 
-        {/* ── Steps Container ──────────────────────────────────── */}
+        {/* ── Steps Container ────────────────────────────────────── */}
         {/* pt-10 = 40px top padding so connector line (at 7rem = 112px) hits node centers */}
         <div className="relative px-4 lg:px-8 pt-10">
 
@@ -260,7 +256,6 @@ export default function HowItWorks() {
                   <stop offset="50%" stopColor="#C9A84C" />
                   <stop offset="100%" stopColor="#B8922A" />
                 </linearGradient>
-                {/* Bead center matches dark bg so it reads as a glowing ring, not a white dot */}
                 <radialGradient id="beadGradient">
                   <stop offset="0%" stopColor="#0D0B09" />
                   <stop offset="45%" stopColor="#E8C97A" />
@@ -330,7 +325,7 @@ export default function HowItWorks() {
                 inactive: {
                   borderColor: 'rgba(201,168,76,0.20)',
                   glowOpacity: 0,
-                  iconColor: 'rgba(201,168,76,0.3)',
+                  iconColor: 'rgba(201,168,76,0.28)',
                   iconFilter: 'none',
                   boxShadow: '0 0 0 1px rgba(201,168,76,0.06), 0 4px 28px rgba(0,0,0,0.5)',
                 },
@@ -339,14 +334,14 @@ export default function HowItWorks() {
                   glowOpacity: 0.35,
                   iconColor: '#C9A84C',
                   iconFilter: 'drop-shadow(0 0 8px rgba(198,156,82,0.55))',
-                  boxShadow: '0 0 48px rgba(198,156,82,0.22), 0 12px 40px rgba(0,0,0,0.55), inset 0 0 32px rgba(198,156,82,0.08)',
+                  boxShadow: '0 0 52px rgba(198,156,82,0.22), 0 12px 40px rgba(0,0,0,0.55), inset 0 0 32px rgba(198,156,82,0.08)',
                 },
                 completed: {
                   borderColor: '#B8922A',
                   glowOpacity: 0.15,
                   iconColor: '#B8922A',
                   iconFilter: 'drop-shadow(0 0 4px rgba(180,140,40,0.32))',
-                  boxShadow: '0 0 26px rgba(180,140,40,0.16), 0 6px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(180,140,40,0.06)',
+                  boxShadow: '0 0 28px rgba(180,140,40,0.16), 0 6px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(180,140,40,0.06)',
                 }
               };
 
@@ -366,13 +361,12 @@ export default function HowItWorks() {
                   className="flex flex-col items-center text-center cursor-pointer"
                   style={{ willChange: 'transform' }}
                 >
-                  {/* Node */}
+                  {/* Node — locked, do not modify */}
                   <motion.div
                     className="relative w-36 h-36 flex items-center justify-center"
                     animate={{ y: isHovered && stepState !== 'inactive' ? -4 : 0 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    {/* Ambient glow */}
                     <motion.div
                       className="absolute inset-0 rounded-full"
                       animate={{
@@ -385,13 +379,9 @@ export default function HowItWorks() {
                         filter: 'blur(22px)',
                       }}
                     />
-
-                    {/* Dark orb */}
                     <motion.div
                       className="relative w-full h-full rounded-full border-[1.5px] flex items-center justify-center"
-                      style={{
-                        background: 'radial-gradient(circle at 32% 28%, #1E1A16 0%, #0D0B09 100%)',
-                      }}
+                      style={{ background: 'radial-gradient(circle at 32% 28%, #1E1A16 0%, #0D0B09 100%)' }}
                       animate={{
                         borderColor: isHovered && stepState !== 'inactive' ? '#C9A84C' : currentStyle.borderColor,
                         boxShadow: isHovered && stepState !== 'inactive'
@@ -433,18 +423,17 @@ export default function HowItWorks() {
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 500,
-                        fontSize: 'clamp(1.25rem, 2vw, 1.6rem)',
-                        letterSpacing: '-0.012em',
-                        lineHeight: 1.18,
+                        fontSize: 'clamp(1.3rem, 2.2vw, 1.65rem)',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.2,
                         marginBottom: '14px',
-                        color: stepState === 'active'     ? '#F0E8D8' :
-                               stepState === 'completed'  ? '#C8BAA4' :
-                                                            'rgba(240,232,216,0.22)',
+                        color: stepState === 'active'    ? '#FFFFFF' :
+                               stepState === 'completed' ? '#D4C8B4' :
+                                                           'rgba(255,255,255,0.18)',
                       }}
                     >
                       {step.title}
                     </h3>
-
                     <p
                       className="transition-all duration-500"
                       style={{
@@ -452,11 +441,11 @@ export default function HowItWorks() {
                         fontWeight: 300,
                         fontSize: '13px',
                         lineHeight: 1.9,
-                        maxWidth: '224px',
+                        maxWidth: '220px',
                         margin: '0 auto',
-                        color: stepState === 'active'     ? '#A89880' :
-                               stepState === 'completed'  ? '#7A6E60' :
-                                                            'rgba(168,152,128,0.28)',
+                        color: stepState === 'active'    ? '#A89880' :
+                               stepState === 'completed' ? '#7A6E60' :
+                                                           'rgba(168,152,128,0.25)',
                       }}
                     >
                       {step.description}
@@ -468,7 +457,7 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* ── CTA ─────────────────────────────────────────────── */}
+        {/* ── CTA ─────────────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={currentStep >= 2 ? {
@@ -478,52 +467,49 @@ export default function HowItWorks() {
           } : { opacity: 0, y: 24 }}
           className="text-center mt-20 md:mt-24 lg:mt-28"
         >
-          {/* Divider */}
+          {/* Thin gold rule */}
           <div style={{
-            width: '48px',
-            height: '1px',
-            background: 'rgba(201,168,76,0.28)',
-            margin: '0 auto 36px',
+            width: '1px',
+            height: '52px',
+            background: 'linear-gradient(to bottom, transparent, rgba(201,168,76,0.4), transparent)',
+            margin: '0 auto 40px',
           }} />
 
+          {/* Gold metallic CTA button */}
           <motion.button
-            whileHover={{ scale: 1.015, y: -2 }}
-            whileTap={{ scale: 0.985 }}
-            className="group relative overflow-hidden"
+            whileHover={{ scale: 1.018, y: -3 }}
+            whileTap={{ scale: 0.982 }}
+            onClick={() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' })}
             style={{
-              background: 'transparent',
-              color: '#F0E8D8',
+              position: 'relative',
+              overflow: 'hidden',
+              background: 'linear-gradient(105deg, #A87820 0%, #C9A84C 28%, #E8C86A 52%, #C9A84C 72%, #A87820 100%)',
+              color: '#0D0B09',
               fontFamily: "'Inter', sans-serif",
-              fontWeight: 400,
-              fontSize: '12px',
-              letterSpacing: '0.12em',
+              fontWeight: 500,
+              fontSize: '11.5px',
+              letterSpacing: '0.18em',
               textTransform: 'uppercase',
-              padding: '18px 56px',
-              border: '1px solid rgba(201,168,76,0.45)',
+              padding: '20px 68px',
+              border: 'none',
               cursor: 'pointer',
-              boxShadow: '0 0 0 1px rgba(201,168,76,0.06), 0 4px 24px rgba(0,0,0,0.3)',
-              transition: 'border-color 0.4s ease, color 0.4s ease',
+              boxShadow: '0 4px 32px rgba(201,168,76,0.28), 0 2px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.15)',
+              transition: 'box-shadow 0.4s ease',
             }}
+            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 6px 48px rgba(201,168,76,0.5), 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(0,0,0,0.15)')}
+            onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 4px 32px rgba(201,168,76,0.28), 0 2px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.15)')}
           >
-            <span className="relative z-10" style={{ letterSpacing: '0.12em' }}>Begin Your Reservation</span>
-            {/* Hover fill */}
-            <motion.div
-              className="absolute inset-0"
-              style={{ background: 'rgba(201,168,76,0.08)' }}
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.35 }}
-            />
+            Begin Your Reservation
           </motion.button>
 
           <p
-            className="mt-5"
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 300,
               fontSize: '11px',
               letterSpacing: '0.05em',
-              color: '#6B5F52',
+              color: '#5C5248',
+              marginTop: '22px',
             }}
           >
             Confirmed within the hour &nbsp;·&nbsp; White-glove service throughout
