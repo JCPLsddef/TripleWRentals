@@ -9,6 +9,14 @@ export default function HowItWorks() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.12 });
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [isDesktop, setIsDesktop] = useState<boolean>(false);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -35,27 +43,35 @@ export default function HowItWorks() {
     }
   ];
 
-  // Sequential step activation based on scroll
+  // Sequential step activation — desktop thresholds compressed for tighter scroll feel
   useEffect(() => {
     const unsubscribe = lineProgress.on('change', (latest) => {
-      if (latest < 0.35) setCurrentStep(0);
-      else if (latest < 0.65) setCurrentStep(1);
-      else setCurrentStep(2);
+      if (isDesktop) {
+        // Desktop: tighter progression so Bubble 3 arrives without excess scrolling
+        if (latest < 0.28) setCurrentStep(0);
+        else if (latest < 0.52) setCurrentStep(1);
+        else setCurrentStep(2);
+      } else {
+        // Mobile: unchanged
+        if (latest < 0.35) setCurrentStep(0);
+        else if (latest < 0.65) setCurrentStep(1);
+        else setCurrentStep(2);
+      }
     });
     return () => unsubscribe();
-  }, [lineProgress]);
+  }, [lineProgress, isDesktop]);
 
-  // Premium "stomp" animation — weighted, confident, precise
+  // Premium "stomp" — weighted, confident, precise. Refined ease for luxury feel.
   const stompAnimation = {
-    hidden: { opacity: 0, scale: 0.7, y: 20 },
+    hidden: { opacity: 0, scale: 0.75, y: 18 },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
       transition: {
-        duration: 0.7,
-        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-        scale: { type: "spring", damping: 20, stiffness: 300, restDelta: 0.001 }
+        duration: 0.65,
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+        scale: { type: "spring", damping: 22, stiffness: 320, restDelta: 0.001 }
       }
     }
   };
@@ -74,7 +90,7 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how"
-      className="relative px-6 pt-20 md:pt-28 lg:pt-36 pb-24 md:pb-32 lg:pb-40"
+      className="relative px-6 pt-24 md:pt-32 lg:pt-40 pb-24 md:pb-32 lg:pb-40"
       style={{
         background: '#FAF8F4',
         borderTop: '1px solid rgba(201,168,76,0.15)',
@@ -84,7 +100,7 @@ export default function HowItWorks() {
       <div className="max-w-7xl mx-auto">
 
         {/* ── Title ───────────────────────────────────────────── */}
-        <div className="text-center mb-16 md:mb-20 lg:mb-24">
+        <div className="text-center mb-20 md:mb-24 lg:mb-28">
 
           {/* Eyebrow */}
           <motion.div
@@ -96,7 +112,7 @@ export default function HowItWorks() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '12px',
-              marginBottom: '22px'
+              marginBottom: '26px'
             }}
           >
             <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(184,146,42,0.4)' }} />
@@ -272,14 +288,18 @@ export default function HowItWorks() {
                   initial="hidden"
                   animate={shouldShow ? "visible" : "hidden"}
                   variants={stompAnimation}
+                  // Subtle premium card lift on hover — desktop hover events only
+                  whileHover={stepState !== 'inactive' ? { scale: 1.015 } : undefined}
+                  transition={{ scale: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
                   onMouseEnter={() => setHoveredStep(index)}
                   onMouseLeave={() => setHoveredStep(null)}
                   className="flex flex-col items-center text-center cursor-pointer"
+                  style={{ willChange: 'transform' }}
                 >
                   {/* Node */}
                   <motion.div
                     className="relative w-36 h-36 flex items-center justify-center"
-                    animate={{ y: isHovered && stepState !== 'inactive' ? -5 : 0 }}
+                    animate={{ y: isHovered && stepState !== 'inactive' ? -4 : 0 }}
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     {/* Ambient glow — soft gold halo on white */}
@@ -330,7 +350,7 @@ export default function HowItWorks() {
 
                   {/* Step text */}
                   <motion.div
-                    className="mt-8 px-2 lg:px-5"
+                    className="mt-9 px-2 lg:px-5"
                     initial={{ opacity: 0, y: 12 }}
                     animate={shouldShow ? {
                       opacity: 1,
@@ -339,13 +359,14 @@ export default function HowItWorks() {
                     } : { opacity: 0, y: 12 }}
                   >
                     <h3
-                      className="mb-3 transition-all duration-500"
+                      className="transition-all duration-500"
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 500,
                         fontSize: 'clamp(1.2rem, 2vw, 1.55rem)',
                         letterSpacing: '-0.012em',
                         lineHeight: 1.18,
+                        marginBottom: '14px',
                         color: stepState === 'active' ? '#1A1714' :
                                stepState === 'completed' ? '#2A2420' : '#6A5E52',
                       }}
@@ -359,8 +380,8 @@ export default function HowItWorks() {
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300,
                         fontSize: '13px',
-                        lineHeight: 1.85,
-                        maxWidth: '220px',
+                        lineHeight: 1.9,
+                        maxWidth: '224px',
                         margin: '0 auto',
                         color: stepState === 'active' ? '#3E3630' :
                                stepState === 'completed' ? '#4E4640' : '#9A8E84',
