@@ -15,6 +15,9 @@ export function useHeroParallax() {
   const canvasRef  = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    // Guarantee parallax starts from correct position on every load
+    window.scrollTo(0, 0)
+
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches
@@ -34,36 +37,34 @@ export function useHeroParallax() {
           scrub: 1.2,
         }
 
+        // fromTo with explicit y:0 start so layers are never pre-offset on load
         if (bgRef.current) {
-          gsap.to(bgRef.current, {
-            y: 55,
-            ease: 'none',
-            scrollTrigger: scrollTriggerConfig,
-          })
+          gsap.fromTo(bgRef.current,
+            { y: 0 },
+            { y: 55, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
+          )
         }
 
         if (rvRef.current) {
-          gsap.to(rvRef.current, {
-            y: 105,
-            ease: 'none',
-            scrollTrigger: scrollTriggerConfig,
-          })
+          gsap.fromTo(rvRef.current,
+            { y: 0 },
+            { y: 105, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
+          )
         }
 
         if (chairsRef.current) {
-          gsap.to(chairsRef.current, {
-            y: 145,
-            ease: 'none',
-            scrollTrigger: scrollTriggerConfig,
-          })
+          gsap.fromTo(chairsRef.current,
+            { y: 0 },
+            { y: 145, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
+          )
         }
 
+        // Fire: y scroll parallax ONLY — no scale, no opacity, no other transforms
         if (fireRef.current) {
-          gsap.to(fireRef.current, {
-            y: 175,
-            ease: 'none',
-            scrollTrigger: scrollTriggerConfig,
-          })
+          gsap.fromTo(fireRef.current,
+            { y: 0 },
+            { y: 175, ease: 'none', immediateRender: false, scrollTrigger: scrollTriggerConfig }
+          )
         }
 
         // Cinematic entry scale
@@ -72,49 +73,9 @@ export function useHeroParallax() {
           duration: 2.0,
           ease: 'power2.out',
         })
-      }
 
-      // ── FIRE FLICKER — independent loop ──
-      if (fireRef.current) {
-        const flickerTl = gsap.timeline({ repeat: -1, yoyo: true })
-
-        flickerTl
-          .to(fireRef.current, {
-            scaleX: 1.015,
-            scaleY: 0.988,
-            opacity: 0.93,
-            duration: 0.18,
-            ease: 'sine.inOut',
-            transformOrigin: 'bottom center',
-          })
-          .to(fireRef.current, {
-            scaleX: 0.988,
-            scaleY: 1.012,
-            opacity: 0.98,
-            duration: 0.22,
-            ease: 'sine.inOut',
-            transformOrigin: 'bottom center',
-          })
-          .to(fireRef.current, {
-            scaleX: 1.010,
-            scaleY: 0.995,
-            opacity: 0.95,
-            duration: 0.15,
-            ease: 'sine.inOut',
-            transformOrigin: 'bottom center',
-          })
-          .to(fireRef.current, {
-            scaleX: 0.995,
-            scaleY: 1.008,
-            opacity: 1.0,
-            duration: 0.25,
-            ease: 'sine.inOut',
-            transformOrigin: 'bottom center',
-          })
-
-        if (prefersReducedMotion) {
-          flickerTl.timeScale(0.3)
-        }
+        // Force recalculate after mount to fix initial state
+        ScrollTrigger.refresh()
       }
 
       // ── TEXT REVEAL ──

@@ -59,6 +59,9 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* Fire ambient glow — CSS only, does NOT affect fire image transforms */}
+      <div className="hero-fire-glow" aria-hidden="true" />
+
       {/* Ember particles canvas */}
       <canvas
         ref={canvasRef}

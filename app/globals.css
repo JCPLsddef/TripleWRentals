@@ -658,3 +658,36 @@ button { font-family: inherit; }
     opacity: 0.4;
   }
 }
+
+/* ── Fire ambient glow overlay ──
+   Pure CSS animation — does NOT touch fire image transforms */
+.hero-fire-glow {
+  position: absolute;
+  left: 28%;
+  bottom: 12%;
+  width: 22%;
+  height: 30%;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 80%,
+    rgba(200, 80, 15, 0.28) 0%,
+    rgba(160, 50, 8, 0.12) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: heroFireGlow 2.2s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes heroFireGlow {
+  0%,  100% { opacity: 0.70; transform: scale(1.00); }
+  33%       { opacity: 1.00; transform: scale(1.06); }
+  66%       { opacity: 0.82; transform: scale(0.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fire-glow {
+    animation-duration: 8s;
+  }
+}
