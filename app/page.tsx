@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'motion/react';
+import { Truck, Star, Clock, Phone } from 'lucide-react';
 import { RVSlider } from './components/RVSlider';
 import ReviewsSlider from './components/ReviewsSlider';
 import HeroSection from './components/HeroSection';
@@ -61,6 +63,42 @@ const moreServices = [
   { label: 'Newest Additions', href: 'https://triplewrentals.com/newest-additions' },
 ];
 
+/* ─── Why Triple W Data ──────────────────────────────────────── */
+
+const whyFeatures = [
+  {
+    icon: Truck,
+    title: 'White-Glove Delivery',
+    description: 'We bring the RV to you—fully set up, perfectly cleaned, and ready to enjoy. No hassle, no trips, just premium service.',
+    image: 'https://images.unsplash.com/photo-1677129666186-d29eba893fe3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jaWVyZ2UlMjBzZXJ2aWNlJTIwbHV4dXJ5fGVufDF8fHx8MTc3NDIxNDc3M3ww&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+  {
+    icon: Star,
+    title: 'The Finest Fleet in East Texas',
+    description: 'Meticulously maintained, modern RVs from top brands. Each one handpicked for comfort, reliability, and premium amenities.',
+    image: 'https://images.unsplash.com/photo-1625093887818-b89d990121a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwUlYlMjBmbGVldHxlbnwxfHx8fDE3NzQyMTQ3NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+  {
+    icon: Clock,
+    title: 'Reserved Within the Hour',
+    description: 'Fast, simple booking with instant confirmations. No waiting, no uncertainty—just quick, professional service.',
+    image: 'https://images.unsplash.com/photo-1667574307418-8a44b96d96be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBSViUyMG1vdG9yaG9tZSUyMHByZW1pdW18ZW58MXx8fHwxNzc0MjE0NzcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+  {
+    icon: Phone,
+    title: 'Always Reachable',
+    description: "Real people, real support. Call, text, or message anytime during your trip. We're here to make sure everything goes perfectly.",
+    image: 'https://images.unsplash.com/photo-1768678218064-72683d81bf2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdXN0b21lciUyMHNlcnZpY2UlMjBwaG9uZSUyMHN1cHBvcnR8ZW58MXx8fHwxNzc0MTI0NjY5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  },
+] as const;
+
+const whyTrustPoints = [
+  'Daily, weekly, or monthly. Flexible for any trip.',
+  'Cleaned & sanitized before every rental.',
+  'Fully delivered & set up anywhere in Texas.',
+  'Friendly local team + instant support.',
+];
+
 /* ─── Component ─────────────────────────────────────────────── */
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -71,6 +109,8 @@ export default function Home() {
   const [form, setForm] = useState({ name: '', phone: '', dates: '', message: '' });
   const statsRef = useRef(null);
   const statsRan = useRef(false);
+  const whyRef = useRef<HTMLElement>(null);
+  const whyInView = useInView(whyRef, { once: true, amount: 0.2 });
 
   /* Scroll reveal */
   useEffect(() => {
@@ -532,176 +572,196 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
-      <section id="why" style={{ background: '#0A0806', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section id="why" ref={whyRef} style={{ background: '#0F0D0B', padding: '120px 0 100px', position: 'relative', overflow: 'hidden' }}>
 
-        {/* Noise texture overlay */}
+        {/* Background gradient orbs */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+          <div style={{ position: 'absolute', top: 0, left: '25%', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+          <div style={{ position: 'absolute', bottom: 0, right: '25%', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(143,106,46,0.06) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+        </div>
+
+        {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
 
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
-          {/* Header */}
-          <div style={{ maxWidth: 560, marginBottom: 48 }}>
-            <div style={{ marginBottom: 20 }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>WHY TRIPLE W</span>
-            </div>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(28px, 4vw, 42px)',
-              fontWeight: 300,
-              color: '#F0E8D8',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
-              marginBottom: 12,
-            }}>
-              The Standard Other RV Companies{' '}
-              <em style={{ fontStyle: 'italic', color: '#C9A84C' }}>Can&apos;t Match.</em>
-            </h2>
-            <p style={{
-              fontSize: 15,
-              color: '#A89880',
-              lineHeight: 1.65,
-              fontFamily: "'Inter', sans-serif",
-            }}>
-              White-glove delivery, the finest fleet in East Texas, and a team that&apos;s always reachable, day or night.
-            </p>
+          {/* Header — centered */}
+          <div style={{ textAlign: 'center', marginBottom: 80 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 20 }}
+            >
+              <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
+              <span style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>WHY TRIPLE W</span>
+              <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(36px, 5vw, 64px)',
+                fontWeight: 600,
+                color: '#F0E8D8',
+                lineHeight: 1.1,
+                letterSpacing: '-0.01em',
+                maxWidth: 900,
+                margin: '0 auto 20px',
+              }}
+            >
+              The Standard Other RV Companies Can&apos;t Match
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 'clamp(15px, 1.5vw, 18px)',
+                color: '#A89880',
+                fontWeight: 300,
+                lineHeight: 1.7,
+                maxWidth: 680,
+                margin: '0 auto',
+              }}
+            >
+              White-glove delivery, a premium fleet, and service that stays with you from first call to check-out.
+            </motion.p>
           </div>
 
           {/* 2×2 Card Grid */}
-          <div className="why-card-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 2,
-            background: 'rgba(201,168,76,0.08)',
-            border: '1px solid rgba(201,168,76,0.15)',
-            borderRadius: 10,
-            overflow: 'hidden',
-          }}>
+          <div className="why-card-grid-v2">
+            {whyFeatures.map((feature, index) => {
+              const Icon = feature.icon;
+              const delays = [0.4, 0.5, 0.6, 0.7] as const;
+              return (
+                <motion.div
+                  key={index}
+                  className="why-card-v2"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                  transition={{ duration: 0.9, delay: delays[index], ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
+                    border: '1px solid rgba(201,168,76,0.12)',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.3), 0 0 1px rgba(201,168,76,0.1)',
+                  }}
+                >
+                  {/* Inner glow on hover */}
+                  <div className="why-card-v2-inner-glow" />
+                  {/* Top gradient tint on hover */}
+                  <div className="why-card-v2-top-glow" />
+                  {/* Photo background */}
+                  <div className="why-card-v2-img">
+                    <img src={feature.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
 
-            {/* Card 1 — White-Glove Delivery */}
-            <div className="why-card">
-              <div style={{
-                width: 38, height: 38,
-                background: 'rgba(201,168,76,0.05)',
-                border: '1px solid rgba(201,168,76,0.3)',
-                borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: 16,
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="1" y="3" width="15" height="13" rx="1" />
-                  <path d="M16 8h4l3 5v4h-7V8z" />
-                  <circle cx="5.5" cy="18.5" r="2.5" />
-                  <circle cx="18.5" cy="18.5" r="2.5" />
-                </svg>
-              </div>
-              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
-                White-Glove Delivery
-              </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: 'No truck, no hitch, no experience needed. We bring the RV to your door, plug everything in, and <span style="color:#A89880">walk you through every feature</span> before we leave.' }}
-              />
-            </div>
+                  <div style={{ position: 'relative', padding: '48px 52px' }}>
+                    {/* Icon badge */}
+                    <div
+                      className="why-card-v2-icon-badge"
+                      style={{
+                        width: 64,
+                        height: 64,
+                        borderRadius: 12,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: 32,
+                        background: 'linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.06) 100%)',
+                        border: '1px solid rgba(201,168,76,0.25)',
+                        boxShadow: '0 4px 16px rgba(201,168,76,0.08)',
+                      }}
+                    >
+                      <Icon
+                        className="why-card-v2-icon"
+                        size={28}
+                        style={{ color: '#C9A84C' }}
+                        strokeWidth={1.5}
+                      />
+                    </div>
 
-            {/* Card 2 — The Finest Fleet in East Texas */}
-            <div className="why-card">
-              <div style={{
-                width: 38, height: 38,
-                background: 'rgba(201,168,76,0.05)',
-                border: '1px solid rgba(201,168,76,0.3)',
-                borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: 16,
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              </div>
-              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
-                The Finest Fleet in East Texas
-              </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: 'Marble countertops. King beds. Massage chairs. <span style="color:#A89880">Smart TVs in every room</span>. Nicer than most hotels. We deliver it to you.' }}
-              />
-            </div>
+                    <h3 style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: 'clamp(20px, 2.2vw, 26px)',
+                      fontWeight: 600,
+                      color: '#F0E8D8',
+                      lineHeight: 1.25,
+                      letterSpacing: '-0.01em',
+                      marginBottom: 18,
+                    }}>
+                      {feature.title}
+                    </h3>
 
-            {/* Card 3 — Reserved Within the Hour */}
-            <div className="why-card">
-              <div style={{
-                width: 38, height: 38,
-                background: 'rgba(201,168,76,0.05)',
-                border: '1px solid rgba(201,168,76,0.3)',
-                borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: 16,
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <polyline points="12 6 12 12 16 14" />
-                </svg>
-              </div>
-              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
-                Reserved Within the Hour
-              </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: 'Call or text. Tell us your dates and location. <span style="color:#A89880">Most bookings confirmed same-day</span>. No lengthy forms, no waiting.' }}
-              />
-            </div>
+                    <p style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '1.0625rem',
+                      color: '#A89880',
+                      fontWeight: 300,
+                      lineHeight: 1.75,
+                      maxWidth: 480,
+                    }}>
+                      {feature.description}
+                    </p>
+                  </div>
 
-            {/* Card 4 — Always Reachable */}
-            <div className="why-card">
-              <div style={{
-                width: 38, height: 38,
-                background: 'rgba(201,168,76,0.05)',
-                border: '1px solid rgba(201,168,76,0.3)',
-                borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: 16,
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 10.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012.01 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-                </svg>
-              </div>
-              <h3 style={{ fontSize: 15, fontWeight: 500, color: '#F0E8D8', marginBottom: 8, letterSpacing: '-0.01em' }}>
-                Always Reachable
-              </h3>
-              <p style={{ fontSize: 13, color: '#7A6E60', lineHeight: 1.65 }}
-                dangerouslySetInnerHTML={{ __html: 'Reach the team directly on the main line, or get an instant answer from our <span style="color:#A89880">AI agent</span>, any time of day or night.' }}
-              />
-            </div>
-
+                  {/* Bottom gold accent bar — slides in on hover */}
+                  <div className="why-card-v2-bottom-bar" />
+                </motion.div>
+              );
+            })}
           </div>
 
-          {/* Differentiator Strip */}
-          <div className="diff-strip" style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            background: 'rgba(201,168,76,0.04)',
-            border: '1px solid rgba(201,168,76,0.15)',
-            borderRadius: 8,
-            marginTop: 20,
-          }}>
-            {[
-              'Daily, weekly, or monthly. Flexible for any trip.',
-              'Cleaned & sanitized before every rental',
-              'Fully delivered & set up anywhere in Texas',
-              'Friendly local team + AI line always on',
-            ].map((text, i, arr) => (
-              <div
-                key={i}
-                style={{
-                  padding: '16px 18px',
-                  borderRight: i < arr.length - 1 ? '1px solid rgba(201,168,76,0.1)' : 'none',
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: 10,
-                }}
-              >
-                <span style={{ color: '#C9A84C', fontSize: 14, lineHeight: 1.5, flexShrink: 0, marginTop: 1 }}>•</span>
-                <p style={{ fontSize: 13, color: '#A89880', lineHeight: 1.5 }}>{text}</p>
-              </div>
-            ))}
-          </div>
+          {/* Trust Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              borderRadius: 16,
+              padding: '36px 48px',
+              marginTop: 28,
+              background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
+              border: '1px solid rgba(201,168,76,0.15)',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.25)',
+            }}
+          >
+            <div className="why-trust-grid">
+              {whyTrustPoints.map((point, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={whyInView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.7, delay: 1.0 + index * 0.1 }}
+                  style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}
+                >
+                  <div style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    backgroundColor: '#C9A84C',
+                    boxShadow: '0 0 8px rgba(201,168,76,0.45)',
+                    flexShrink: 0,
+                    marginTop: 8,
+                  }} />
+                  <p style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '1rem',
+                    color: '#A89880',
+                    fontWeight: 400,
+                    lineHeight: 1.7,
+                  }}>
+                    {point}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
         </div>
       </section>

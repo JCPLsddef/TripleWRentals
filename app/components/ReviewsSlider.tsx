@@ -145,23 +145,18 @@ function ReviewCard({ review }: { review: typeof reviews[0] }) {
         marginTop: 'auto', paddingTop: 16,
         borderTop: '1px solid rgba(201,168,76,0.10)',
       }}>
-        <div style={{
-          width: 36,
-          height: 36,
-          borderRadius: '50%',
-          background: 'rgba(201,168,76,0.10)',
-          border: '1px solid rgba(201,168,76,0.30)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 12,
-          fontWeight: 500,
-          color: '#C9A84C',
-          fontFamily: "'Cormorant Garamond', serif",
-          flexShrink: 0,
-        }}>
-          {review.name.replace(/\./g, '').trim().split(/\s+/).map((w: string) => w[0]).slice(0, 2).join('').toUpperCase()}
-        </div>
+        <img
+          src={review.image}
+          alt={review.name}
+          style={{
+            width: 36,
+            height: 36,
+            borderRadius: '50%',
+            objectFit: 'cover',
+            border: '1px solid rgba(201,168,76,0.30)',
+            flexShrink: 0,
+          }}
+        />
         <div>
           <div style={{
             fontSize: 13, fontWeight: 500,
