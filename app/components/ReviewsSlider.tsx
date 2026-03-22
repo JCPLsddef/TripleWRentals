@@ -108,10 +108,10 @@ function ReviewCard({ review }: { review: typeof reviews[0] }) {
       <p
         className={`review-text${expanded ? ' review-text--expanded' : ''}`}
         style={{
-          fontSize: 14,
-          color: '#A89880',
+          fontSize: 13,
+          color: 'rgba(210,195,165,0.90)',
           fontStyle: 'italic',
-          lineHeight: 1.8,
+          lineHeight: 1.72,
           marginBottom: 8,
           fontFamily: "'Playfair Display', Georgia, serif",
           flex: 1,

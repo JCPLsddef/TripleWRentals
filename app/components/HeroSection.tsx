@@ -32,7 +32,7 @@ export default function HeroSection() {
 
       {/* ── Background Layer — Trees & Sky ───────────────────── */}
       <motion.div
-        style={{ y: backgroundY, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '120%' }}
+        style={{ y: backgroundY, position: 'absolute', top: '-15%', left: 0, right: 0, width: '100%', height: '130%' }}
       >
         <img
           src={ASSETS.background}
@@ -40,7 +40,7 @@ export default function HeroSection() {
           aria-hidden="true"
           loading="eager"
           decoding="async"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'brightness(0.85) contrast(1.06) saturate(0.90)' }}
         />
         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.2), transparent, transparent)' }} />
       </motion.div>
@@ -122,13 +122,14 @@ export default function HeroSection() {
                 display: 'inline-block',
                 padding: '10px 16px',
                 borderRadius: '9999px',
-                backdropFilter: 'blur(12px)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: '13px',
                 fontWeight: 400,
-                color: '#C9A84C',
-                backgroundColor: 'rgba(201,168,76,0.08)',
-                border: '1px solid rgba(201,168,76,0.22)',
+                color: '#D4AF55',
+                backgroundColor: 'rgba(201,168,76,0.14)',
+                border: '1px solid rgba(201,168,76,0.55)',
                 letterSpacing: '0.03em',
               }}>
                 ★★★★★ · Tyler, Texas · Open 24 / 7
@@ -145,17 +146,20 @@ export default function HeroSection() {
               <h1 style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(2.2rem, 5vw, 4.2rem)',
-                fontWeight: 300,
-                color: '#F0E8D8',
+                fontWeight: 400,
+                color: '#FFFFFF',
                 letterSpacing: '-0.02em',
                 lineHeight: '1.2',
+                textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 4px 80px rgba(0,0,0,0.85)',
               }}>
                 Texas&apos;s Finest<br />
                 RV Experience.<br />
                 <span style={{
                   fontStyle: 'italic',
-                  color: '#C9A84C',
+                  color: '#D4AF55',
                   fontSize: 'clamp(2.4rem, 5.5vw, 4.6rem)',
+                  fontWeight: 400,
+                  textShadow: '0 2px 30px rgba(0,0,0,0.95)',
                 }}>
                   Delivered to You.
                 </span>
@@ -171,10 +175,11 @@ export default function HeroSection() {
                 marginBottom: '24px',
                 maxWidth: '512px',
                 fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
+                fontSize: 'clamp(15px, 1.6vw, 18px)',
                 fontWeight: 300,
-                color: '#A89880',
+                color: 'rgba(240,232,210,0.92)',
                 lineHeight: '1.6',
+                textShadow: '0 1px 20px rgba(0,0,0,0.95)',
               }}
             >
               You show up. The fire&apos;s already going. We handled everything else.
@@ -194,9 +199,9 @@ export default function HeroSection() {
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: '13px',
                   fontWeight: 400,
-                  color: '#7A6E60',
+                  color: 'rgba(220,205,170,0.90)',
                   backgroundColor: 'rgba(201,168,76,0.06)',
-                  border: '1px solid rgba(201,168,76,0.15)',
+                  border: '1px solid rgba(201,168,76,0.30)',
                 }}>
                   {item}
                 </span>
@@ -235,7 +240,7 @@ export default function HeroSection() {
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: '14px',
                   fontWeight: 400,
-                  color: '#7A6E60',
+                  color: 'rgba(200,185,155,0.80)',
                 }}>
                   ✓ {badge}
                 </span>
@@ -252,7 +257,7 @@ export default function HeroSection() {
         style={{
           position: 'absolute',
           top: 0, left: 0, right: 0, bottom: 0,
-          background: 'linear-gradient(110deg, rgba(2,1,8,0.90) 0%, rgba(2,1,8,0.72) 35%, rgba(2,1,8,0.28) 58%, transparent 72%)',
+          background: 'linear-gradient(112deg, rgba(2,1,8,0.94) 0%, rgba(2,1,8,0.78) 28%, rgba(2,1,8,0.38) 52%, rgba(2,1,8,0.08) 68%, transparent 78%)',
           pointerEvents: 'none',
           zIndex: 15,
         }}
@@ -266,8 +271,8 @@ export default function HeroSection() {
           bottom: 0,
           left: 0,
           right: 0,
-          height: '30%',
-          background: 'linear-gradient(to top, rgba(13,11,9,0.97) 0%, transparent 100%)',
+          height: '55%',
+          background: 'linear-gradient(to top, rgba(2,1,8,0.97) 0%, rgba(2,1,8,0.82) 14%, rgba(2,1,8,0.40) 28%, rgba(2,1,8,0.10) 42%, transparent 55%)',
           pointerEvents: 'none',
           zIndex: 20,
         }}

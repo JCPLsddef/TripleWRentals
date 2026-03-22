@@ -260,15 +260,15 @@ export default function Home() {
         <div className="desktop-nav-items" style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
           {[['Gallery', '#gallery'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
             <a key={label} href={href} style={{
-              color: 'rgba(240,232,216,0.55)',
+              color: 'rgba(240,232,216,0.72)',
               fontSize: 12, fontWeight: 400,
               fontFamily: "'Inter', sans-serif",
-              letterSpacing: '0.06em',
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               transition: 'color 0.15s',
             }}
-              onMouseEnter={e => (e.target as HTMLElement).style.color = '#F0E8D8'}
-              onMouseLeave={e => (e.target as HTMLElement).style.color = 'rgba(240,232,216,0.55)'}
+              onMouseEnter={e => (e.target as HTMLElement).style.color = '#FFFFFF'}
+              onMouseLeave={e => (e.target as HTMLElement).style.color = 'rgba(240,232,216,0.72)'}
             >{label}</a>
           ))}
           <a href="tel:9729656901" style={{
@@ -413,8 +413,8 @@ export default function Home() {
       {/* ── SECTION 3: Stats Bar ─────────────────────────────── */}
       <section ref={statsRef} style={{
         background: '#0F0D0A',
-        borderTop: '1px solid rgba(201,168,76,0.12)',
-        borderBottom: '1px solid rgba(201,168,76,0.12)',
+        borderTop: '1px solid rgba(201,168,76,0.14)',
+        borderBottom: '1px solid rgba(201,168,76,0.14)',
         padding: '36px 24px',
       }}>
         <div className="stats-grid" style={{
@@ -438,8 +438,8 @@ export default function Home() {
               }}>{val}</div>
               <div style={{
                 fontFamily: "'Inter', sans-serif",
-                fontSize: 11, color: '#6B5F52',
-                letterSpacing: '0.08em',
+                fontSize: 11, color: 'rgba(168,152,128,0.75)',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}>{label}</div>
             </div>
@@ -487,7 +487,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 5: How It Works ──────────────────────────── */}
-      <section id="how" style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,168,76,0.1)', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section id="how" style={{ background: '#0A0806', borderTop: '1px solid rgba(201,168,76,0.1)', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n1)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
@@ -637,7 +637,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
-      <section id="why" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section id="why" style={{ background: '#0A0806', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
 
         {/* Noise texture overlay */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
@@ -913,7 +913,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 9: Closing CTA ───────────────────────────── */}
-      <section id="quote" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section id="quote" style={{ background: '#0A0806', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
 
         {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n5'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n5)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
@@ -1157,7 +1157,7 @@ export default function Home() {
 
           <div style={{
             borderRadius: 10, overflow: 'hidden',
-            border: '1px solid rgba(201,168,76,0.15)',
+            border: '1px solid rgba(201,168,76,0.18)',
             marginBottom: 28,
           }}>
             <iframe
@@ -1191,7 +1191,7 @@ export default function Home() {
       {/* ── SECTION 11: Footer ───────────────────────────────── */}
       <footer style={{
         background: '#0A0806',
-        borderTop: '1px solid rgba(201,168,76,0.12)',
+        borderTop: '1px solid rgba(201,168,76,0.14)',
         padding: '56px 24px 80px',
       }}>
         <div className="footer-grid" style={{
