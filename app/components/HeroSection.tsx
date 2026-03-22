@@ -1,7 +1,7 @@
 'use client'
 
-import { useHeroParallax } from '@/hooks/useHeroParallax'
-import { useHeroEmbers }   from '@/hooks/useHeroEmbers'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'motion/react'
 
 const ASSETS = {
   background: 'https://static.wixstatic.com/media/62f926_e0e04aa080b0429ea3f63cc0335a383b~mv2.png',
@@ -11,130 +11,256 @@ const ASSETS = {
 } as const
 
 export default function HeroSection() {
-  const { sectionRef, bgRef, rvRef, chairsRef, fireRef, canvasRef } =
-    useHeroParallax()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  })
 
-  useHeroEmbers(canvasRef)
+  // Parallax transforms — different speed per depth layer
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '8%'])
+  const rvY         = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
+  const chairsY     = useTransform(scrollYProgress, [0, 1], ['0%', '22%'])
+  const fireY       = useTransform(scrollYProgress, [0, 1], ['0%', '28%'])
+  const textY       = useTransform(scrollYProgress, [0, 1], ['0%', '12%'])
 
   return (
-    <section ref={sectionRef} className="hero-parallax">
+    <div
+      ref={containerRef}
+      style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden', backgroundColor: '#0D0B09' }}
+    >
 
-      {/* Parallax scene — 4 layers */}
-      <div className="hero-parallax__scene">
-        <div ref={bgRef} data-parallax="0.08" className="hero-parallax__bg">
-          <img
-            src={ASSETS.background}
-            alt=""
+      {/* ── Background Layer — Trees & Sky ───────────────────── */}
+      <motion.div
+        style={{ y: backgroundY, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '120%' }}
+      >
+        <img
+          src={ASSETS.background}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          decoding="async"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+        />
+        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.2), transparent, transparent)' }} />
+      </motion.div>
+
+      {/* ── RV Layer — Mid-ground ─────────────────────────────── */}
+      <motion.div
+        style={{ y: rvY, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '120%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', paddingRight: '8%', paddingBottom: '6%' }}
+      >
+        <img
+          src={ASSETS.rv}
+          alt="Grand Design Reflection luxury fifth wheel RV"
+          loading="eager"
+          decoding="async"
+          style={{ height: '60%', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(0,0,0,0.5))' }}
+        />
+      </motion.div>
+
+      {/* ── Chairs Layer — Foreground ─────────────────────────── */}
+      <motion.div
+        style={{ y: chairsY, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '120%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingLeft: '8%', paddingBottom: '7%' }}
+      >
+        <img
+          src={ASSETS.chairs}
+          alt="Two camp chairs by the fire"
+          loading="eager"
+          decoding="async"
+          style={{ height: '38%', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 15px 40px rgba(0,0,0,0.6))' }}
+        />
+      </motion.div>
+
+      {/* ── Fire Layer — Front foreground (glow moves with it) ── */}
+      <motion.div
+        style={{ y: fireY, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '120%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start', paddingLeft: '13%', paddingBottom: '4%' }}
+      >
+        <div style={{ position: 'relative' }}>
+          {/* Ambient glow */}
+          <div
             aria-hidden="true"
-            loading="eager"
-            decoding="async"
+            style={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0, bottom: 0,
+              filter: 'blur(48px)',
+              opacity: 0.7,
+              background: 'radial-gradient(circle, rgba(201,168,76,0.5) 0%, rgba(232,201,122,0.3) 30%, rgba(255,160,50,0.2) 50%, transparent 70%)',
+            }}
           />
-        </div>
-
-        <div ref={rvRef} data-parallax="0.15" className="hero-parallax__rv">
-          <img
-            src={ASSETS.rv}
-            alt="Grand Design Reflection luxury fifth wheel RV"
-            loading="eager"
-            decoding="async"
-          />
-        </div>
-
-        <div ref={chairsRef} data-parallax="0.22" className="hero-parallax__chairs">
-          <img
-            src={ASSETS.chairs}
-            alt="Two camp chairs by the fire"
-            loading="eager"
-            decoding="async"
-          />
-        </div>
-
-        <div ref={fireRef} data-parallax="0.28" className="hero-parallax__fire">
           <img
             src={ASSETS.fire}
             alt="Campfire"
             loading="eager"
             decoding="async"
+            style={{
+              height: '28vh',
+              width: 'auto',
+              objectFit: 'contain',
+              position: 'relative',
+              zIndex: 10,
+              filter: 'drop-shadow(0 10px 35px rgba(201,168,76,0.5))',
+            }}
           />
         </div>
-      </div>
+      </motion.div>
 
-      {/* Fire ambient glow — CSS only, does NOT affect fire image transforms */}
-      <div className="hero-fire-glow" aria-hidden="true" />
+      {/* ── Hero Text Content ─────────────────────────────────── */}
+      <motion.div
+        style={{ y: textY, position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', padding: '0 clamp(24px, 4vw, 64px)' }}
+      >
+        <div style={{ maxWidth: '1600px', margin: '0 auto', width: '100%', marginTop: '8vh' }}>
+          <div style={{ maxWidth: '672px', paddingLeft: '60px' }}>
 
-      {/* Ember particles canvas */}
-      <canvas
-        ref={canvasRef}
-        className="hero-parallax__embers"
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+              style={{ marginBottom: '32px' }}
+            >
+              <span style={{
+                display: 'inline-block',
+                padding: '10px 16px',
+                borderRadius: '9999px',
+                backdropFilter: 'blur(12px)',
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: '13px',
+                fontWeight: 400,
+                color: '#C9A84C',
+                backgroundColor: 'rgba(201,168,76,0.08)',
+                border: '1px solid rgba(201,168,76,0.22)',
+                letterSpacing: '0.03em',
+              }}>
+                ★★★★★ · Tyler, Texas · Open 24 / 7
+              </span>
+            </motion.div>
+
+            {/* Main Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+              style={{ marginBottom: '24px' }}
+            >
+              <h1 style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(2.2rem, 5vw, 4.2rem)',
+                fontWeight: 300,
+                color: '#F0E8D8',
+                letterSpacing: '-0.02em',
+                lineHeight: '1.2',
+              }}>
+                Texas&apos;s Finest<br />
+                RV Experience.<br />
+                <span style={{
+                  fontStyle: 'italic',
+                  color: '#C9A84C',
+                  fontSize: 'clamp(2.4rem, 5.5vw, 4.6rem)',
+                }}>
+                  Delivered to You.
+                </span>
+              </h1>
+            </motion.div>
+
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7, ease: 'easeOut' }}
+              style={{
+                marginBottom: '24px',
+                maxWidth: '512px',
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
+                fontWeight: 300,
+                color: '#A89880',
+                lineHeight: '1.6',
+              }}
+            >
+              You show up. The fire&apos;s already going. We handled everything else.
+            </motion.p>
+
+            {/* Identity Pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.85, ease: 'easeOut' }}
+              style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '32px' }}
+            >
+              {['Horse Shows', 'Family Reunions', 'Corporate Events'].map((item) => (
+                <span key={item} style={{
+                  padding: '6px 12px',
+                  borderRadius: '9999px',
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '13px',
+                  fontWeight: 400,
+                  color: '#7A6E60',
+                  backgroundColor: 'rgba(201,168,76,0.06)',
+                  border: '1px solid rgba(201,168,76,0.15)',
+                }}>
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1, ease: 'easeOut' }}
+              style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '24px' }}
+            >
+              <a href="tel:9729656901" className="hero-cta-primary">
+                Call (972) 965-6901
+              </a>
+              <a href="#gallery" className="hero-cta-secondary">
+                See the Fleet ↓
+              </a>
+            </motion.div>
+
+            {/* Trust Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.15, ease: 'easeOut' }}
+              style={{ display: 'flex', flexWrap: 'wrap', columnGap: '24px', rowGap: '8px' }}
+            >
+              {[
+                'Full Setup Included',
+                'Same-Day Booking',
+                '24/7 Support',
+                'Premium Fleet Only',
+              ].map((badge) => (
+                <span key={badge} style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '14px',
+                  fontWeight: 400,
+                  color: '#7A6E60',
+                }}>
+                  ✓ {badge}
+                </span>
+              ))}
+            </motion.div>
+
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ── Bottom fade-to-dark gradient ──────────────────────── */}
+      <div
         aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '30%',
+          background: 'linear-gradient(to top, rgba(13,11,9,0.97) 0%, transparent 100%)',
+          pointerEvents: 'none',
+          zIndex: 20,
+        }}
       />
 
-      {/* Gradient overlays */}
-      <div className="hero-parallax__overlays" aria-hidden="true">
-        <div className="hero-parallax__grad-left" />
-        <div className="hero-parallax__grad-btm"  />
-      </div>
-
-      {/* Hero content */}
-      <div className="hero-parallax__content">
-
-        <div className="hero-eyebrow">
-          <span className="hero-eyebrow__stars">★★★★★</span>
-          <span className="hero-eyebrow__sep">·</span>
-          <span>Tyler, Texas</span>
-          <span className="hero-eyebrow__sep">·</span>
-          <span>Open 24 / 7</span>
-        </div>
-
-        <h1 className="hero-headline">
-          <span className="hero-line-1">Texas&apos;s Finest</span>
-          <span className="hero-line-2">RV Experience.</span>
-          <span className="hero-line-3">Delivered to You.</span>
-        </h1>
-
-        <div className="hero-divider" aria-hidden="true" />
-
-        <p className="hero-subhead">
-          You show up. The fire&apos;s already going.<br />
-          We handled everything else.
-        </p>
-
-        <div className="hero-pills">
-          <span className="hero-pill">Horse Shows</span>
-          <span className="hero-pill">Family Reunions</span>
-          <span className="hero-pill">Corporate Events</span>
-        </div>
-
-        <div className="hero-ctas">
-          <a href="tel:9729656901" className="hero-cta-primary">
-            Call (972) 965-6901
-          </a>
-          <a href="#gallery" className="hero-cta-secondary">
-            See the Fleet ↓
-          </a>
-        </div>
-
-        <div className="hero-trust">
-          {[
-            'Full Setup Included',
-            'Same-Day Booking',
-            '24/7 Support',
-            'Premium Fleet Only',
-          ].map((label) => (
-            <div key={label} className="hero-trust__item">
-              <div className="hero-trust__check">✓</div>
-              {label}
-            </div>
-          ))}
-        </div>
-
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="hero-scroll-indicator" aria-hidden="true">
-        <div className="hero-scroll-line" />
-      </div>
-
-    </section>
+    </div>
   )
 }
