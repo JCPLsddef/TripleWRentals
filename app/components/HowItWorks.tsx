@@ -88,7 +88,7 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how"
-      className="relative overflow-hidden px-6 pt-24 md:pt-32 lg:pt-40 pb-28 md:pb-36 lg:pb-44"
+      className="relative overflow-hidden pt-24 md:pt-32 lg:pt-40 pb-28 md:pb-36 lg:pb-44"
       style={{
         background: 'radial-gradient(ellipse at 50% 20%, #161209 0%, #0D0B09 55%, #080604 100%)',
         borderTop: '1px solid rgba(201,168,76,0.14)',
@@ -133,7 +133,7 @@ export default function HowItWorks() {
         }}
       />
 
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative w-full max-w-5xl mx-auto px-6">
 
         {/* ── Title ─────────────────────────────────────────────── */}
         <div className="text-center mb-20 md:mb-24 lg:mb-28">
@@ -315,6 +315,25 @@ export default function HowItWorks() {
           </div>
 
           {/* Steps Grid */}
+          {/* Ghost ring placeholders — visible on desktop at all times, purely decorative.
+              Anchors all 3 column positions visually before scroll reveals each step. */}
+          <div
+            aria-hidden="true"
+            className="hidden lg:grid grid-cols-3 pointer-events-none absolute left-0 right-0"
+            style={{ top: '40px', height: '144px' }}
+          >
+            {[0, 1, 2].map(i => (
+              <div key={i} className="flex justify-center items-center">
+                <div style={{
+                  width: '144px',
+                  height: '144px',
+                  borderRadius: '50%',
+                  border: '1px solid rgba(201,168,76,0.07)',
+                }} />
+              </div>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-0">
             {steps.map((step, index) => {
               const Icon = step.icon;
