@@ -412,15 +412,15 @@ export default function Home() {
 
       {/* ── SECTION 3: Stats Bar ─────────────────────────────── */}
       <section ref={statsRef} style={{
-        background: '#0F0D0A',
-        borderTop: '1px solid rgba(201,168,76,0.14)',
-        borderBottom: '1px solid rgba(201,168,76,0.14)',
-        padding: '36px 24px',
+        background: '#060402',
+        borderTop: '1px solid rgba(201,168,76,0.12)',
+        borderBottom: '1px solid rgba(201,168,76,0.12)',
+        padding: '48px 24px',
       }}>
         <div className="stats-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 24, maxWidth: 900, margin: '0 auto',
+          maxWidth: 860, margin: '0 auto',
           textAlign: 'center',
         }}>
           {[
@@ -428,18 +428,22 @@ export default function Home() {
             { val: '4.7★', label: '193 Verified Reviews' },
             { val: '24/7', label: 'Support Available' },
             { val: 'TX', label: 'Statewide Delivery' },
-          ].map(({ val, label }) => (
-            <div key={label}>
+          ].map(({ val, label }, i, arr) => (
+            <div key={label} style={{
+              borderRight: i < arr.length - 1 ? '1px solid rgba(201,168,76,0.12)' : 'none',
+              padding: '0 24px',
+            }}>
               <div style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: 'clamp(22px, 4vw, 36px)',
+                fontSize: 'clamp(32px, 3.5vw, 48px)',
                 fontWeight: 400, color: '#C9A84C',
-                marginBottom: 6,
+                lineHeight: 1,
+                marginBottom: 10,
               }}>{val}</div>
               <div style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: 11, color: 'rgba(168,152,128,0.75)',
-                letterSpacing: '0.12em',
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: 11, color: 'rgba(168,148,118,0.70)',
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
               }}>{label}</div>
             </div>
@@ -1190,7 +1194,7 @@ export default function Home() {
 
       {/* ── SECTION 11: Footer ───────────────────────────────── */}
       <footer style={{
-        background: '#0A0806',
+        background: '#060402',
         borderTop: '1px solid rgba(201,168,76,0.14)',
         padding: '56px 24px 80px',
       }}>
