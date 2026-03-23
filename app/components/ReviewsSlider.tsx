@@ -108,7 +108,7 @@ export default function ReviewsSlider() {
   };
 
   return (
-    <section id="reviews" className="bg-[#0F0D0B] py-28 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section id="reviews" className="bg-[#0F0D0B] py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Eyebrow */}
         <motion.div
@@ -129,8 +129,8 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-6xl mb-7 text-center"
-          style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500, lineHeight: 1.1 }}
+          className="text-[#F3EDE3] text-3xl md:text-4xl lg:text-5xl mb-6 text-center"
+          style={{ fontFamily: 'Playfair Display, serif', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}
         >
           What Our Guests Experience
         </motion.h2>
@@ -141,14 +141,14 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#A89880] mb-20 flex items-center justify-center gap-2.5 flex-wrap"
-          style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px' }}
+          className="text-[#A89880] mb-16 flex items-center justify-center gap-2.5 flex-wrap"
+          style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', fontWeight: 300 }}
         >
           <span className="text-[#C9A84C]" style={{ fontWeight: 500 }}>4.7★</span>
           <span>on Google</span>
-          <span className="text-[#C9A84C]/40">·</span>
+          <span className="text-[#C9A84C]/30">·</span>
           <span>193 verified reviews</span>
-          <span className="text-[#C9A84C]/40">·</span>
+          <span className="text-[#C9A84C]/30">·</span>
           <span>Tyler, Texas</span>
         </motion.div>
 
@@ -268,11 +268,14 @@ export default function ReviewsSlider() {
         >
           <a
             href="#quote"
-            className="inline-block bg-[#C9A84C] hover:bg-[#E8C97A] text-[#0F0D0B] px-12 py-4 rounded-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(201,168,76,0.3)] hover:-translate-y-0.5"
-            style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '15px', letterSpacing: '0.01em' }}
+            className="inline-block bg-[#C9A84C] hover:bg-[#E8C97A] text-[#0F0D0B] px-10 py-3.5 rounded-sm transition-all duration-300 hover:shadow-[0_8px_30px_rgba(201,168,76,0.3)] hover:-translate-y-0.5"
+            style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500, fontSize: '13px', letterSpacing: '0.06em', textTransform: 'uppercase' }}
           >
             Start Your Booking
           </a>
+          <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '11px', color: '#6B5F52', marginTop: '16px', letterSpacing: '0.03em', fontWeight: 300 }}>
+            Most bookings confirmed within the hour
+          </p>
         </motion.div>
       </div>
     </section>

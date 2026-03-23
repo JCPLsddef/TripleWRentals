@@ -817,7 +817,7 @@ function RVModelSlider({ rv, rvIndex, currentRVIndex }: { rv: RVModel; rvIndex: 
             object-fit: contain;
           }
           .rv-slide-wrapper {
-            background: #081a0e;
+            background: #0D0B09;
           }
         }
       `}</style>
@@ -903,15 +903,15 @@ export function RVSlider() {
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
 
-        <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 px-8 py-4 shadow-2xl min-w-[280px]">
+        <div className="bg-white/8 backdrop-blur-xl rounded-2xl border border-white/15 px-8 py-3.5 shadow-2xl min-w-[280px]">
           <div className="text-center">
-            <div className="text-white/70 text-sm tracking-widest uppercase mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            <div className="text-white/60 text-xs tracking-widest uppercase mb-0.5" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400 }}>
               {currentRV.category}
             </div>
-            <div className="text-white text-2xl md:text-3xl lg:text-4xl tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <div className="text-white text-xl md:text-2xl lg:text-3xl tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
               {currentRV.modelName}
             </div>
-            <div className="text-white/80 text-sm mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            <div className="text-white/50 text-xs mt-0.5" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: '0.05em' }}>
               {currentRVIndex + 1} / {rvModels.length}
             </div>
           </div>

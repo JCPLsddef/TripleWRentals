@@ -11,7 +11,7 @@
   --gold-lt:     #E8C97A;
   --gold-dim:    rgba(201, 168, 76, 0.45);
   --gold-lo:     rgba(201, 168, 76, 0.10);
-  --text-white:  #FFFFFF;
+  --text-white:  #F0E8D8;
   --text-cream:  #F0E8D8;
   --text-mid:    #A89880;
   --text-dim:    #7A6E60;
@@ -54,18 +54,21 @@ button { font-family: inherit; }
   color: #0D0B09;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.01em;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: all 0.2s;
   padding: 14px 28px;
   min-height: 44px;
+  box-shadow: 0 2px 12px rgba(201,168,76,0.18);
 }
 .btn-primary:hover {
   background: #E8C97A;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.30);
 }
 
 .btn-ghost {
@@ -76,17 +79,19 @@ button { font-family: inherit; }
   color: #A89880;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  border: 1px solid rgba(201,168,76,0.35);
-  border-radius: 6px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(201,168,76,0.28);
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.15s;
+  transition: all 0.2s;
   padding: 14px 28px;
   min-height: 44px;
 }
 .btn-ghost:hover {
-  border-color: rgba(201,168,76,0.65);
+  border-color: rgba(201,168,76,0.55);
   color: #F0E8D8;
 }
 

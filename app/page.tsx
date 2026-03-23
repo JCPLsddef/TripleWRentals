@@ -281,47 +281,49 @@ export default function Home() {
       {/* ── SECTION 1: Navigation ────────────────────────────── */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30,
-        background: 'linear-gradient(to bottom, rgba(13,11,9,0.92) 0%, transparent 100%)',
-        padding: '0 24px',
+        background: 'linear-gradient(to bottom, rgba(13,11,9,0.95) 0%, rgba(13,11,9,0.60) 60%, transparent 100%)',
+        padding: '0 32px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 68,
+        height: 62,
       }}>
         {/* Logo */}
         <a href="#" style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: 18, fontWeight: 500,
+          fontSize: 17, fontWeight: 500,
           color: '#F0E8D8',
           letterSpacing: '-0.01em',
         }}>
-          Triple W <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 18, color: '#F0E8D8' }}>Rentals</span>
+          Triple W <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15, color: 'rgba(240,232,216,0.70)', marginLeft: 2 }}>Rentals</span>
         </a>
 
         {/* Desktop Links */}
-        <div className="desktop-nav-items" style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-          {[['Gallery', '#gallery'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
+        <div className="desktop-nav-items" style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+          {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
             <a key={label} href={href} style={{
-              color: 'rgba(240,232,216,0.72)',
-              fontSize: 12, fontWeight: 400,
+              color: 'rgba(240,232,216,0.60)',
+              fontSize: 11, fontWeight: 400,
               fontFamily: "'Inter', sans-serif",
-              letterSpacing: '0.08em',
+              letterSpacing: '0.10em',
               textTransform: 'uppercase',
-              transition: 'color 0.15s',
+              transition: 'color 0.2s',
             }}
-              onMouseEnter={e => (e.target as HTMLElement).style.color = '#FFFFFF'}
-              onMouseLeave={e => (e.target as HTMLElement).style.color = 'rgba(240,232,216,0.72)'}
+              onMouseEnter={e => (e.target as HTMLElement).style.color = '#F0E8D8'}
+              onMouseLeave={e => (e.target as HTMLElement).style.color = 'rgba(240,232,216,0.60)'}
             >{label}</a>
           ))}
           <a href="tel:9729656901" style={{
             background: '#C9A84C', color: '#0D0B09',
             fontFamily: "'Inter', sans-serif",
-            fontWeight: 500, fontSize: 13,
-            padding: '8px 18px', borderRadius: 999,
-            transition: 'background 0.15s',
+            fontWeight: 500, fontSize: 12,
+            letterSpacing: '0.02em',
+            padding: '8px 20px', borderRadius: 999,
+            transition: 'all 0.2s',
+            boxShadow: '0 2px 12px rgba(201,168,76,0.20)',
           }}
-            onMouseEnter={e => (e.target as HTMLElement).style.background = '#E8C97A'}
-            onMouseLeave={e => (e.target as HTMLElement).style.background = '#C9A84C'}
+            onMouseEnter={e => { (e.target as HTMLElement).style.background = '#E8C97A'; (e.target as HTMLElement).style.boxShadow = '0 4px 20px rgba(201,168,76,0.35)'; }}
+            onMouseLeave={e => { (e.target as HTMLElement).style.background = '#C9A84C'; (e.target as HTMLElement).style.boxShadow = '0 2px 12px rgba(201,168,76,0.20)'; }}
           >(972) 965-6901</a>
         </div>
 
@@ -455,14 +457,14 @@ export default function Home() {
       {/* ── SECTION 3: Stats Bar ─────────────────────────────── */}
       <section ref={statsRef} style={{
         background: '#060402',
-        borderTop: '1px solid rgba(201,168,76,0.12)',
-        borderBottom: '1px solid rgba(201,168,76,0.12)',
-        padding: '56px 24px',
+        borderTop: '1px solid rgba(201,168,76,0.10)',
+        borderBottom: '1px solid rgba(201,168,76,0.10)',
+        padding: '44px 24px',
       }}>
         <div className="stats-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          maxWidth: 980, margin: '0 auto',
+          maxWidth: 920, margin: '0 auto',
           textAlign: 'center',
         }}>
           {[
@@ -472,21 +474,23 @@ export default function Home() {
             { val: 'TX', label: 'Statewide Delivery' },
           ].map(({ val, label }, i, arr) => (
             <div key={label} style={{
-              borderRight: i < arr.length - 1 ? '1px solid rgba(201,168,76,0.12)' : 'none',
-              padding: '0 24px',
+              borderRight: i < arr.length - 1 ? '1px solid rgba(201,168,76,0.10)' : 'none',
+              padding: '0 20px',
             }}>
               <div style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: 'clamp(32px, 3.5vw, 48px)',
+                fontSize: 'clamp(28px, 3vw, 42px)',
                 fontWeight: 400, color: '#C9A84C',
                 lineHeight: 1,
-                marginBottom: 10,
+                marginBottom: 8,
+                textShadow: '0 0 20px rgba(201,168,76,0.12)',
               }}>{val}</div>
               <div style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 11, color: 'rgba(168,148,118,0.70)',
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 10, color: 'rgba(168,148,118,0.60)',
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
+                fontWeight: 400,
               }}>{label}</div>
             </div>
           ))}
@@ -499,19 +503,19 @@ export default function Home() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n0)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{
           background: '#0D0B09',
-          padding: '100px 40px 60px',
+          padding: '88px 40px 48px',
           textAlign: 'center',
           position: 'relative', zIndex: 1,
         }}>
           {/* Eyebrow */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
             <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
             <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>OUR FLEET</span>
             <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
           </div>
           <h2 style={{
             fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(30px, 4.5vw, 54px)',
+            fontSize: 'clamp(28px, 4vw, 48px)',
             fontWeight: 400, color: '#F0E8D8',
             marginBottom: 16,
             letterSpacing: '-0.02em', lineHeight: 1.12,
@@ -521,11 +525,12 @@ export default function Home() {
           </h2>
           <p style={{
             fontFamily: "'Inter', sans-serif",
-            fontSize: 15, lineHeight: 1.65,
+            fontSize: 14, lineHeight: 1.7,
             color: '#A89880',
-            maxWidth: 540, margin: '0 auto',
+            maxWidth: 480, margin: '0 auto',
+            fontWeight: 300,
           }}>
-            Browse each RV model and explore every room. Use the arrows to switch units. Tap any image to zoom through the interior.
+            Browse each RV model and explore every room. Use the arrows to switch units.
           </p>
         </div>
         <div style={{ background: '#0D0B09', position: 'relative', zIndex: 1 }}>
@@ -543,7 +548,7 @@ export default function Home() {
       <ReviewsSlider />
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
-      <section id="why" ref={whyRef} style={{ background: '#0F0D0B', padding: '120px 0 100px', position: 'relative', overflow: 'hidden' }}>
+      <section id="why" ref={whyRef} style={{ background: '#0F0D0B', padding: '100px 0 88px', position: 'relative', overflow: 'hidden' }}>
 
         {/* Background gradient orbs */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
@@ -557,7 +562,7 @@ export default function Home() {
         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header — centered */}
-          <div style={{ textAlign: 'center', marginBottom: 80 }}>
+          <div style={{ textAlign: 'center', marginBottom: 64 }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -575,13 +580,13 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: 'clamp(36px, 5vw, 64px)',
-                fontWeight: 600,
+                fontSize: 'clamp(32px, 4.5vw, 56px)',
+                fontWeight: 400,
                 color: '#F0E8D8',
                 lineHeight: 1.1,
-                letterSpacing: '-0.01em',
-                maxWidth: 900,
-                margin: '0 auto 20px',
+                letterSpacing: '-0.02em',
+                maxWidth: 800,
+                margin: '0 auto 18px',
               }}
             >
               The Standard Other RV<br />Companies Can&apos;t Match
@@ -632,26 +637,26 @@ export default function Home() {
                     <img src={feature.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
 
-                  <div style={{ position: 'relative', padding: '48px 52px' }}>
+                  <div style={{ position: 'relative', padding: '40px 44px' }}>
                     {/* Icon badge */}
                     <div
                       className="why-card-v2-icon-badge"
                       style={{
-                        width: 64,
-                        height: 64,
-                        borderRadius: 12,
+                        width: 56,
+                        height: 56,
+                        borderRadius: 10,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginBottom: 32,
-                        background: 'linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.06) 100%)',
-                        border: '1px solid rgba(201,168,76,0.25)',
-                        boxShadow: '0 4px 16px rgba(201,168,76,0.08)',
+                        marginBottom: 28,
+                        background: 'linear-gradient(135deg, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.04) 100%)',
+                        border: '1px solid rgba(201,168,76,0.22)',
+                        boxShadow: '0 4px 16px rgba(201,168,76,0.06)',
                       }}
                     >
                       <Icon
                         className="why-card-v2-icon"
-                        size={28}
+                        size={24}
                         style={{ color: '#C9A84C' }}
                         strokeWidth={1.5}
                       />
@@ -659,23 +664,23 @@ export default function Home() {
 
                     <h3 style={{
                       fontFamily: "'Playfair Display', serif",
-                      fontSize: 'clamp(20px, 2.2vw, 26px)',
-                      fontWeight: 600,
+                      fontSize: 'clamp(18px, 2vw, 24px)',
+                      fontWeight: 400,
                       color: '#F0E8D8',
                       lineHeight: 1.25,
                       letterSpacing: '-0.01em',
-                      marginBottom: 18,
+                      marginBottom: 14,
                     }}>
                       {feature.title}
                     </h3>
 
                     <p style={{
                       fontFamily: "'Inter', sans-serif",
-                      fontSize: '1.0625rem',
+                      fontSize: '15px',
                       color: '#A89880',
                       fontWeight: 300,
                       lineHeight: 1.75,
-                      maxWidth: 480,
+                      maxWidth: 440,
                     }}>
                       {feature.description}
                     </p>
@@ -694,12 +699,12 @@ export default function Home() {
             animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              borderRadius: 16,
-              padding: '36px 48px',
-              marginTop: 28,
+              borderRadius: 12,
+              padding: '28px 40px',
+              marginTop: 24,
               background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
-              border: '1px solid rgba(201,168,76,0.15)',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.25)',
+              border: '1px solid rgba(201,168,76,0.12)',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.20)',
             }}
           >
             <div className="why-trust-grid">
@@ -722,9 +727,9 @@ export default function Home() {
                   }} />
                   <p style={{
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: '1rem',
+                    fontSize: '14px',
                     color: '#A89880',
-                    fontWeight: 400,
+                    fontWeight: 300,
                     lineHeight: 1.7,
                   }}>
                     {point}
@@ -738,7 +743,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 8: FAQ ───────────────────────────────────── */}
-      <section id="faq" style={{ background: '#0D0B09', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section id="faq" style={{ background: '#0D0B09', padding: '88px 0', position: 'relative', overflow: 'hidden' }}>
 
         {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n4'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n4)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
@@ -746,20 +751,20 @@ export default function Home() {
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
-          <div style={{ marginBottom: 56, textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
+          <div style={{ marginBottom: 48, textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
               <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>COMMON QUESTIONS</span>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '560px', margin: '0 auto' }}>
-              Everything You Need to Know
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '520px', margin: '0 auto' }}>
+              Everything You Need<br />to Know
             </h2>
           </div>
 
           <div>
             {faqs.map((faq, i) => (
-              <div key={i} className="faq-item" style={{ borderBottom: '1px solid rgba(201,168,76,0.12)', padding: '24px 0' }}>
+              <div key={i} className="faq-item" style={{ borderBottom: '1px solid rgba(201,168,76,0.10)', padding: '20px 0' }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{
@@ -773,8 +778,9 @@ export default function Home() {
                 >
                   <span style={{
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: 15, fontWeight: 500, color: '#F0E8D8',
-                    lineHeight: 1.4, textAlign: 'left',
+                    fontSize: 14, fontWeight: 500, color: '#F0E8D8',
+                    lineHeight: 1.5, textAlign: 'left',
+                    letterSpacing: '0.01em',
                   }}>{faq.q}</span>
                   <svg
                     width="16" height="16" viewBox="0 0 16 16"
@@ -795,9 +801,10 @@ export default function Home() {
                   transition: 'max-height 0.3s ease',
                 }}>
                   <p style={{
-                    fontSize: 14, color: '#A89880',
-                    lineHeight: 1.75, paddingTop: '12px', paddingBottom: '14px',
+                    fontSize: 13, color: '#A89880',
+                    lineHeight: 1.8, paddingTop: '10px', paddingBottom: '12px',
                     fontFamily: "'Inter', sans-serif",
+                    fontWeight: 300,
                   }}>{faq.a}</p>
                 </div>
               </div>
@@ -806,31 +813,31 @@ export default function Home() {
 
           {/* Bottom CTA */}
           <div style={{
-            marginTop: '44px',
-            padding: '28px 32px',
-            background: 'rgba(201,168,76,0.06)',
-            border: '1px solid rgba(201,168,76,0.18)',
-            borderRadius: '10px',
+            marginTop: '36px',
+            padding: '24px 28px',
+            background: 'rgba(201,168,76,0.04)',
+            border: '1px solid rgba(201,168,76,0.14)',
+            borderRadius: '8px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             gap: '12px',
           }}>
-            <span style={{ fontSize: '15px', color: '#F0E8D8', fontFamily: "'Playfair Display', serif", fontWeight: 400 }}>
+            <span style={{ fontSize: '14px', color: '#E0D6C6', fontFamily: "'Playfair Display', serif", fontWeight: 400 }}>
               Still have questions?
             </span>
             <a
               href="tel:9729656901"
               style={{
-                fontSize: '14px',
+                fontSize: '13px',
                 fontWeight: 500,
                 color: '#C9A84C',
                 textDecoration: 'none',
-                borderBottom: '1px solid rgba(201,168,76,0.4)',
+                borderBottom: '1px solid rgba(201,168,76,0.35)',
                 paddingBottom: '2px',
                 fontFamily: "'Inter', sans-serif",
-                letterSpacing: '0.01em',
+                letterSpacing: '0.02em',
               }}
             >
               Call (972) 965-6901 →
@@ -841,7 +848,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 9: Closing CTA ───────────────────────────── */}
-      <section id="quote" style={{ background: '#0A0806', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section id="quote" style={{ background: '#0A0806', padding: '88px 0', position: 'relative', overflow: 'hidden' }}>
 
         {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n5'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n5)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
@@ -849,37 +856,28 @@ export default function Home() {
         <div style={{ maxWidth: '580px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Section heading */}
-          <div style={{ marginBottom: 40, textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
+          <div style={{ marginBottom: 32, textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
               <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>BOOK YOUR RENTAL</span>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, marginBottom: 14 }}>
               Reserve Your Dates.<br />
-              <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>We Handle Everything Else.</em>
+              <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>We Handle the Rest.</em>
             </h2>
-            <p style={{ fontSize: '15px', color: '#A89880', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", maxWidth: '380px', margin: '0 auto' }}>
-              Weekend availability goes fast, especially in spring and fall.
+            <p style={{ fontSize: '13px', color: '#A89880', lineHeight: 1.7, fontFamily: "'Inter', sans-serif", maxWidth: '360px', margin: '0 auto', fontWeight: 300 }}>
+              Weekend availability goes fast — spring and summer weekends book 2–3 weeks out.
             </p>
           </div>
 
-          {/* Scarcity signal */}
-          <p style={{
-            fontSize: '12px', color: '#6B5F52',
-            textAlign: 'center', marginBottom: '20px',
-            letterSpacing: '0.02em',
-            fontFamily: "'Inter', sans-serif",
-          }}>
-            Spring and summer weekends book 2–3 weeks out.
-          </p>
-
           {/* Quote Form card */}
           <div className="quote-card" style={{
-            background: '#0F0D0A',
-            border: '1px solid rgba(201,168,76,0.18)',
-            borderRadius: '12px',
-            padding: '40px',
+            background: 'linear-gradient(145deg, #12100C 0%, #0F0D0A 100%)',
+            border: '1px solid rgba(201,168,76,0.15)',
+            borderRadius: '10px',
+            padding: '36px 36px',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(201,168,76,0.04)',
           }}>
             <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
               {[
@@ -888,9 +886,9 @@ export default function Home() {
               ].map(({ label, key, placeholder, type }) => (
                 <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <label style={{
-                    fontSize: '11px', fontWeight: 500,
-                    letterSpacing: '0.08em', textTransform: 'uppercase',
-                    color: '#7A6E60', fontFamily: "'Inter', sans-serif",
+                    fontSize: '10px', fontWeight: 500,
+                    letterSpacing: '0.10em', textTransform: 'uppercase',
+                    color: '#6B5F52', fontFamily: "'Inter', sans-serif",
                   }}>{label}</label>
                   <input
                     type={type}
@@ -917,8 +915,8 @@ export default function Home() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 16 }}>
               <label style={{
-                fontSize: '11px', fontWeight: 500,
-                letterSpacing: '0.08em', textTransform: 'uppercase',
+                fontSize: '10px', fontWeight: 500,
+                letterSpacing: '0.10em', textTransform: 'uppercase',
                 color: '#6B5F52', fontFamily: "'Inter', sans-serif",
               }}>Rental Dates</label>
               <input
@@ -944,8 +942,8 @@ export default function Home() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 24 }}>
               <label style={{
-                fontSize: '11px', fontWeight: 500,
-                letterSpacing: '0.08em', textTransform: 'uppercase',
+                fontSize: '10px', fontWeight: 500,
+                letterSpacing: '0.10em', textTransform: 'uppercase',
                 color: '#6B5F52', fontFamily: "'Inter', sans-serif",
               }}>Message</label>
               <textarea
@@ -1005,12 +1003,14 @@ export default function Home() {
                 background: formStatus === 'sending' ? 'rgba(201,168,76,0.5)' : '#C9A84C',
                 color: '#0D0B09',
                 fontFamily: "'Inter', sans-serif",
-                fontSize: '15px', fontWeight: 500,
-                letterSpacing: '0.01em',
-                padding: '15px',
-                borderRadius: '6px',
+                fontSize: '12px', fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                padding: '16px',
+                borderRadius: '4px',
                 border: 'none', cursor: formStatus === 'sending' ? 'default' : 'pointer',
-                transition: 'background 0.15s',
+                transition: 'all 0.2s',
+                boxShadow: '0 2px 16px rgba(201,168,76,0.18)',
               }}
               onMouseEnter={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#E8C97A'; }}
               onMouseLeave={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#C9A84C'; }}
@@ -1060,35 +1060,34 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 10: Map ──────────────────────────────────── */}
-      <section style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,168,76,0.10)', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: '#0D0B09', borderTop: '1px solid rgba(201,168,76,0.08)', padding: '80px 0', position: 'relative', overflow: 'hidden' }}>
         {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n6'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n6)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '14px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 36 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '16px' }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
               <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>FIND US</span>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
             </div>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(30px, 4vw, 50px)',
+              fontSize: 'clamp(28px, 3.5vw, 44px)',
               fontWeight: 400, color: '#F0E8D8',
               letterSpacing: '-0.02em', lineHeight: 1.12,
-              marginBottom: 14,
+              marginBottom: 12,
             }}>
-              Find Us in<br />
-              <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Tyler, Texas.</em>
+              Tyler, Texas.
             </h2>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#A89880' }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#A89880', fontWeight: 300, letterSpacing: '0.02em' }}>
               14078 State HWY 110 N, Tyler, Texas 75704
             </p>
           </div>
 
           <div style={{
-            borderRadius: 10, overflow: 'hidden',
-            border: '1px solid rgba(201,168,76,0.18)',
-            marginBottom: 28,
+            borderRadius: 8, overflow: 'hidden',
+            border: '1px solid rgba(201,168,76,0.12)',
+            marginBottom: 24,
           }}>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.9504833451133!2d-95.50569542354714!3d32.4740161737919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa3d36bd00c543f%3A0x3d0eff9988656b8c!2sTriple%20W%20Rentals!5e0!3m2!1sfr!2sca!4v1774039713056!5m2!1sfr!2sca"
@@ -1121,25 +1120,25 @@ export default function Home() {
       {/* ── SECTION 11: Footer ───────────────────────────────── */}
       <footer style={{
         background: '#060402',
-        borderTop: '1px solid rgba(201,168,76,0.14)',
-        padding: '56px 24px 80px',
+        borderTop: '1px solid rgba(201,168,76,0.10)',
+        padding: '48px 24px 72px',
       }}>
         <div className="footer-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 40,
-          maxWidth: 1100, margin: '0 auto',
-          marginBottom: 40,
+          gap: 36,
+          maxWidth: 1060, margin: '0 auto',
+          marginBottom: 36,
         }}>
           <div>
             <div style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 22, fontWeight: 500, color: '#F0E8D8',
-              marginBottom: 16,
+              fontSize: 20, fontWeight: 500, color: '#F0E8D8',
+              marginBottom: 14,
             }}>
               Triple W <span style={{ color: '#C9A84C' }}>Rentals</span>
             </div>
-            <p style={{ fontSize: 13, color: 'rgba(240,232,216,0.55)', lineHeight: 1.8, fontFamily: "'Inter', sans-serif" }}>
+            <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.45)', lineHeight: 1.9, fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
               14078 State HWY 110 N<br />
               Tyler, Texas 75704<br />
               Open 24 / 7
@@ -1149,16 +1148,17 @@ export default function Home() {
           <div>
             <div style={{
               fontSize: 10, color: '#C9A84C',
-              fontWeight: 600, letterSpacing: '0.1em',
+              fontWeight: 500, letterSpacing: '0.12em',
               textTransform: 'uppercase',
               fontFamily: "'Inter', sans-serif",
-              marginBottom: 16,
+              marginBottom: 14,
             }}>QUICK LINKS</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {[['Gallery', '#gallery'], ['How It Works', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Book Now', '#quote']].map(([label, href]) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Book Now', '#quote']].map(([label, href]) => (
                 <a key={label} href={href} style={{
-                  fontSize: 13, color: '#7A6E60',
+                  fontSize: 12, color: '#7A6E60',
                   fontFamily: "'Inter', sans-serif",
+                  fontWeight: 300,
                   transition: 'color 0.15s',
                   minHeight: 24, textDecoration: 'none',
                 }}
@@ -1172,26 +1172,27 @@ export default function Home() {
           <div>
             <div style={{
               fontSize: 10, color: '#C9A84C',
-              fontWeight: 600, letterSpacing: '0.1em',
+              fontWeight: 500, letterSpacing: '0.12em',
               textTransform: 'uppercase',
               fontFamily: "'Inter', sans-serif",
-              marginBottom: 16,
+              marginBottom: 14,
             }}>CONTACT</div>
             <a href="tel:9729656901" style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 20, color: '#F0E8D8',
-              display: 'block', marginBottom: 10,
+              fontSize: 18, color: '#F0E8D8',
+              display: 'block', marginBottom: 8,
             }}>(972) 965-6901</a>
             <a href="mailto:triplewrentals@gmail.com" style={{
-              fontSize: 13, color: '#7A6E60',
+              fontSize: 12, color: '#7A6E60',
               fontFamily: "'Inter', sans-serif",
-              display: 'block', marginBottom: 8, textDecoration: 'none',
+              fontWeight: 300,
+              display: 'block', marginBottom: 6, textDecoration: 'none',
               transition: 'color 0.15s',
             }}
               onMouseEnter={e => (e.target as HTMLElement).style.color = '#C9A84C'}
               onMouseLeave={e => (e.target as HTMLElement).style.color = '#7A6E60'}
             >triplewrentals@gmail.com</a>
-            <p style={{ fontSize: 13, color: 'rgba(240,232,216,0.25)', fontFamily: "'Inter', sans-serif" }}>
+            <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.20)', fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
               Owner: Westin Wayne Walker
             </p>
           </div>
@@ -1199,20 +1200,21 @@ export default function Home() {
           <div>
             <div style={{
               fontSize: 10, color: '#C9A84C',
-              fontWeight: 600, letterSpacing: '0.1em',
+              fontWeight: 500, letterSpacing: '0.12em',
               textTransform: 'uppercase',
               fontFamily: "'Inter', sans-serif",
-              marginBottom: 16,
+              marginBottom: 14,
             }}>SERVICE AREAS</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
               {['Tyler, TX (Home Base)', 'Dallas / Fort Worth', 'Houston', 'Austin', 'San Antonio', 'Call to confirm your area'].map(area => (
                 <span key={area} style={{
-                  fontSize: '11px',
+                  fontSize: '10px',
                   color: '#7A6E60',
-                  border: '1px solid rgba(201,168,76,0.18)',
+                  border: '1px solid rgba(201,168,76,0.14)',
                   borderRadius: '999px',
                   padding: '3px 10px',
                   fontFamily: "'Inter', sans-serif",
+                  fontWeight: 300,
                 }}>
                   {area}
                 </span>
@@ -1222,16 +1224,16 @@ export default function Home() {
         </div>
 
         <div style={{
-          borderTop: '1px solid rgba(240,232,216,0.07)',
-          paddingTop: 24,
-          maxWidth: 1100, margin: '0 auto',
+          borderTop: '1px solid rgba(240,232,216,0.05)',
+          paddingTop: 20,
+          maxWidth: 1060, margin: '0 auto',
           display: 'flex', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: 10,
         }}>
-          <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.38)', fontFamily: "'Inter', sans-serif" }}>
+          <p style={{ fontSize: 11, color: 'rgba(240,232,216,0.30)', fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
             © 2026 Triple W Rentals · All Rights Reserved
           </p>
-          <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.38)', fontFamily: "'Inter', sans-serif" }}>
+          <p style={{ fontSize: 11, color: 'rgba(240,232,216,0.30)', fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
             Tyler, Texas 75704
           </p>
         </div>
