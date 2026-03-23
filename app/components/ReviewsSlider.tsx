@@ -116,10 +116,10 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-[#B68B3C] text-xs tracking-[0.25em] uppercase mb-5"
-          style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}
+          className="flex items-center gap-2.5 mb-5"
         >
-          GUEST REVIEWS
+          <span className="inline-block w-7 h-px bg-[#C9A84C]/60 flex-shrink-0" />
+          <span className="text-[#C9A84C] text-[11px] tracking-[0.15em] uppercase" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>GUEST REVIEWS</span>
         </motion.div>
 
         {/* Headline */}
@@ -140,14 +140,14 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#D8CCBC] mb-20 flex items-center gap-2.5 flex-wrap"
+          className="text-[#A89880] mb-20 flex items-center gap-2.5 flex-wrap"
           style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px' }}
         >
-          <span className="text-[#B68B3C]" style={{ fontWeight: 500 }}>4.7★</span>
+          <span className="text-[#C9A84C]" style={{ fontWeight: 500 }}>4.7★</span>
           <span>on Google</span>
-          <span className="text-[#8F6A2E]">·</span>
+          <span className="text-[#C9A84C]/40">·</span>
           <span>193 verified reviews</span>
-          <span className="text-[#8F6A2E]">·</span>
+          <span className="text-[#C9A84C]/40">·</span>
           <span>Tyler, Texas</span>
         </motion.div>
 
@@ -197,7 +197,7 @@ export default function ReviewsSlider() {
         >
           <button
             onClick={prevSlide}
-            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] hover:border-[#B68B3C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(182,139,60,0.1)]"
+            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] hover:border-[#C9A84C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(201,168,76,0.15)]"
             aria-label="Previous reviews"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -210,7 +210,7 @@ export default function ReviewsSlider() {
                 onClick={() => goToSlide(index)}
                 className={`h-1.5 rounded-full transition-all duration-400 ${
                   index === currentSlide
-                    ? 'bg-[#B68B3C] w-10 shadow-[0_0_8px_rgba(182,139,60,0.4)]'
+                    ? 'bg-[#C9A84C] w-10 shadow-[0_0_8px_rgba(201,168,76,0.4)]'
                     : 'bg-[#2A2520] w-1.5 hover:bg-[#3A3530]'
                 }`}
                 aria-label={`Go to page ${index + 1}`}
@@ -220,7 +220,7 @@ export default function ReviewsSlider() {
 
           <button
             onClick={nextSlide}
-            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] hover:border-[#B68B3C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(182,139,60,0.1)]"
+            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] hover:border-[#C9A84C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(201,168,76,0.15)]"
             aria-label="Next reviews"
           >
             <ChevronRight className="w-5 h-5" />
@@ -231,7 +231,7 @@ export default function ReviewsSlider() {
         <div className="md:hidden flex items-center justify-center gap-4 mb-16">
           <button
             onClick={prevSlide}
-            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] transition-colors"
+            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] transition-colors"
             aria-label="Previous review"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -242,7 +242,7 @@ export default function ReviewsSlider() {
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? 'bg-[#B68B3C] w-8' : 'bg-[#2A2520] w-1.5'
+                  index === currentSlide ? 'bg-[#C9A84C] w-8' : 'bg-[#2A2520] w-1.5'
                 }`}
                 aria-label={`Go to review ${index + 1}`}
               />
@@ -250,7 +250,7 @@ export default function ReviewsSlider() {
           </div>
           <button
             onClick={nextSlide}
-            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] transition-colors"
+            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] transition-colors"
             aria-label="Next review"
           >
             <ChevronRight className="w-5 h-5" />
@@ -267,7 +267,7 @@ export default function ReviewsSlider() {
         >
           <a
             href="#quote"
-            className="inline-block bg-[#B68B3C] hover:bg-[#C69C52] text-[#0F0D0B] px-12 py-4 rounded-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(182,139,60,0.3)] hover:-translate-y-0.5"
+            className="inline-block bg-[#C9A84C] hover:bg-[#E8C97A] text-[#0F0D0B] px-12 py-4 rounded-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(201,168,76,0.3)] hover:-translate-y-0.5"
             style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '15px', letterSpacing: '0.01em' }}
           >
             Start Your Booking

@@ -457,12 +457,12 @@ export default function Home() {
         background: '#060402',
         borderTop: '1px solid rgba(201,168,76,0.12)',
         borderBottom: '1px solid rgba(201,168,76,0.12)',
-        padding: '48px 24px',
+        padding: '56px 24px',
       }}>
         <div className="stats-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          maxWidth: 860, margin: '0 auto',
+          maxWidth: 980, margin: '0 auto',
           textAlign: 'center',
         }}>
           {[
@@ -499,7 +499,7 @@ export default function Home() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n0)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{
           background: '#0D0B09',
-          padding: '80px 40px 40px',
+          padding: '100px 40px 60px',
           textAlign: 'center',
           position: 'relative', zIndex: 1,
         }}>
@@ -507,6 +507,7 @@ export default function Home() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '14px' }}>
             <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
             <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>OUR FLEET</span>
+            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
           </div>
           <h2 style={{
             fontFamily: "'Playfair Display', serif",
@@ -746,18 +747,18 @@ export default function Home() {
 
           {/* Header */}
           <div style={{ marginBottom: 48 }}>
-            <div style={{ marginBottom: 16 }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>COMMON QUESTIONS</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>COMMON QUESTIONS</span>
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
               Everything You Need to Know
             </h2>
           </div>
 
           <div>
             {faqs.map((faq, i) => (
-              <div key={i} className="faq-item" style={{ borderBottom: '1px solid rgba(201,168,76,0.12)', padding: '18px 0' }}>
+              <div key={i} className="faq-item" style={{ borderBottom: '1px solid rgba(201,168,76,0.12)', padding: '24px 0' }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{
@@ -793,8 +794,8 @@ export default function Home() {
                   transition: 'max-height 0.3s ease',
                 }}>
                   <p style={{
-                    fontSize: 14, color: '#7A6E60',
-                    lineHeight: 1.75, paddingTop: '12px', paddingBottom: '6px',
+                    fontSize: 14, color: '#A89880',
+                    lineHeight: 1.75, paddingTop: '12px', paddingBottom: '14px',
                     fontFamily: "'Inter', sans-serif",
                   }}>{faq.a}</p>
                 </div>
@@ -804,18 +805,18 @@ export default function Home() {
 
           {/* Bottom CTA */}
           <div style={{
-            marginTop: '32px',
-            padding: '20px 24px',
-            background: 'rgba(201,168,76,0.05)',
-            border: '1px solid rgba(201,168,76,0.15)',
-            borderRadius: '8px',
+            marginTop: '44px',
+            padding: '28px 32px',
+            background: 'rgba(201,168,76,0.06)',
+            border: '1px solid rgba(201,168,76,0.18)',
+            borderRadius: '10px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             gap: '12px',
           }}>
-            <span style={{ fontSize: '14px', color: '#A89880', fontFamily: "'Inter', sans-serif" }}>
+            <span style={{ fontSize: '15px', color: '#F0E8D8', fontFamily: "'Playfair Display', serif", fontWeight: 400 }}>
               Still have questions?
             </span>
             <a
@@ -828,6 +829,7 @@ export default function Home() {
                 borderBottom: '1px solid rgba(201,168,76,0.4)',
                 paddingBottom: '2px',
                 fontFamily: "'Inter', sans-serif",
+                letterSpacing: '0.01em',
               }}
             >
               Call (972) 965-6901 →
@@ -847,11 +849,11 @@ export default function Home() {
 
           {/* Section heading */}
           <div style={{ marginBottom: 40 }}>
-            <div style={{ marginBottom: 16 }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', marginRight: '10px', verticalAlign: 'middle' }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', verticalAlign: 'middle', fontWeight: 500 }}>BOOK YOUR RENTAL</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>BOOK YOUR RENTAL</span>
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 300, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>
               Reserve Your Dates.{' '}
               <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>We Handle Everything Else.</em>
             </h2>
@@ -886,7 +888,7 @@ export default function Home() {
                   <label style={{
                     fontSize: '11px', fontWeight: 500,
                     letterSpacing: '0.08em', textTransform: 'uppercase',
-                    color: '#6B5F52', fontFamily: "'Inter', sans-serif",
+                    color: '#7A6E60', fontFamily: "'Inter', sans-serif",
                   }}>{label}</label>
                   <input
                     type={type}
@@ -1064,6 +1066,7 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '14px' }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
               <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>FIND US</span>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
             </div>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
@@ -1134,7 +1137,7 @@ export default function Home() {
             }}>
               Triple W <span style={{ color: '#C9A84C' }}>Rentals</span>
             </div>
-            <p style={{ fontSize: 13, color: 'rgba(240,232,216,0.35)', lineHeight: 1.8, fontFamily: "'Inter', sans-serif" }}>
+            <p style={{ fontSize: 13, color: 'rgba(240,232,216,0.55)', lineHeight: 1.8, fontFamily: "'Inter', sans-serif" }}>
               14078 State HWY 110 N<br />
               Tyler, Texas 75704<br />
               Open 24 / 7
@@ -1223,10 +1226,10 @@ export default function Home() {
           display: 'flex', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: 10,
         }}>
-          <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.2)', fontFamily: "'Inter', sans-serif" }}>
+          <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.38)', fontFamily: "'Inter', sans-serif" }}>
             © 2026 Triple W Rentals · All Rights Reserved
           </p>
-          <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.2)', fontFamily: "'Inter', sans-serif" }}>
+          <p style={{ fontSize: 12, color: 'rgba(240,232,216,0.38)', fontFamily: "'Inter', sans-serif" }}>
             Tyler, Texas 75704
           </p>
         </div>
