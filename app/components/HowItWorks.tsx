@@ -164,22 +164,22 @@ export default function HowItWorks() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '14px',
-              marginBottom: '30px',
+              gap: '10px',
+              marginBottom: '24px',
             }}
           >
-            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: 'rgba(201,168,76,0.55)' }} />
+            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
             <span style={{
-              fontSize: '10px',
+              fontSize: '11px',
               fontWeight: 500,
-              letterSpacing: '0.24em',
+              letterSpacing: '0.15em',
               textTransform: 'uppercase',
               color: '#C9A84C',
               fontFamily: "'Inter', sans-serif",
             }}>
               The Process
             </span>
-            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: 'rgba(201,168,76,0.55)' }} />
+            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
           </motion.div>
 
           {/* Headline */}
@@ -189,10 +189,9 @@ export default function HowItWorks() {
             transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              // clamp handles the full size spectrum: 3rem floor, 5.5vw fluid, 4.4rem cap
+              fontWeight: 400,
               fontSize: 'clamp(3rem, 5.5vw, 4.4rem)',
-              lineHeight: 1.06,
+              lineHeight: 1.1,
               letterSpacing: '-0.03em',
               color: '#FFFFFF',
               maxWidth: '680px',
@@ -216,12 +215,12 @@ export default function HowItWorks() {
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 300,
-              fontSize: '13.5px',
+              fontSize: '14px',
               letterSpacing: '0.03em',
               lineHeight: 1.7,
-              color: '#7A6E60',
-              marginTop: '22px',
-              maxWidth: '320px',
+              color: '#A89880',
+              marginTop: '24px',
+              maxWidth: '400px',
               marginLeft: 'auto',
               marginRight: 'auto',
             }}
@@ -457,6 +456,21 @@ export default function HowItWorks() {
                       transition: { delay: 0.32, duration: 0.55, ease: [0.22, 1, 0.36, 1] }
                     } : { opacity: 0, y: 12 }}
                   >
+                    <span style={{
+                      display: 'block',
+                      fontFamily: "'Inter', sans-serif",
+                      fontWeight: 400,
+                      fontSize: '10px',
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      color: stepState === 'active' ? 'rgba(201,168,76,0.7)' :
+                             stepState === 'completed' ? 'rgba(201,168,76,0.35)' :
+                                                         'rgba(201,168,76,0.12)',
+                      marginBottom: '10px',
+                      transition: 'color 0.5s ease',
+                    }}>
+                      0{index + 1}
+                    </span>
                     <h3
                       className="transition-all duration-500"
                       style={{
@@ -466,7 +480,7 @@ export default function HowItWorks() {
                         fontSize: 'clamp(1.3rem, 2.2vw, 1.7rem)',
                         letterSpacing: '-0.01em',
                         lineHeight: 1.2,
-                        marginBottom: '14px',
+                        marginBottom: '10px',
                         color: stepState === 'active'    ? '#FFFFFF' :
                                stepState === 'completed' ? '#D4C8B4' :
                                                            'rgba(255,255,255,0.18)',
@@ -480,7 +494,7 @@ export default function HowItWorks() {
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300,
                         fontSize: 'clamp(12px, 1vw, 14px)',
-                        lineHeight: 1.9,
+                        lineHeight: 1.75,
                         maxWidth: '230px',
                         margin: '0 auto',
                         color: stepState === 'active'    ? '#A89880' :
@@ -548,7 +562,7 @@ export default function HowItWorks() {
               fontWeight: 300,
               fontSize: '11px',
               letterSpacing: '0.05em',
-              color: '#5C5248',
+              color: '#6B5F52',
               marginTop: '22px',
             }}
           >
