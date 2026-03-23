@@ -559,10 +559,10 @@ export default function Home() {
         {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
 
-        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header — centered */}
-          <div style={{ textAlign: 'center', marginBottom: 64 }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -898,7 +898,7 @@ export default function Home() {
                     style={{
                       background: '#161209',
                       border: '1px solid rgba(201,168,76,0.2)',
-                      borderRadius: '6px',
+                      borderRadius: '4px',
                       padding: '12px 14px',
                       fontSize: '14px',
                       color: '#F0E8D8',
@@ -927,7 +927,7 @@ export default function Home() {
                 style={{
                   background: '#161209',
                   border: '1px solid rgba(201,168,76,0.2)',
-                  borderRadius: '6px',
+                  borderRadius: '4px',
                   padding: '12px 14px',
                   fontSize: '14px',
                   color: '#F0E8D8',
@@ -954,7 +954,7 @@ export default function Home() {
                 style={{
                   background: '#161209',
                   border: '1px solid rgba(201,168,76,0.2)',
-                  borderRadius: '6px',
+                  borderRadius: '4px',
                   padding: '12px 14px',
                   fontSize: '14px',
                   color: '#F0E8D8',

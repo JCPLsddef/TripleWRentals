@@ -193,8 +193,8 @@ export default function HowItWorks() {
               fontSize: 'clamp(3rem, 5.5vw, 4.4rem)',
               lineHeight: 1.1,
               letterSpacing: '-0.03em',
-              color: '#FFFFFF',
-              maxWidth: '680px',
+              color: '#F0E8D8',
+              maxWidth: '620px',
               margin: '0 auto',
               padding: '0 16px',
             }}
@@ -481,9 +481,9 @@ export default function HowItWorks() {
                         letterSpacing: '-0.01em',
                         lineHeight: 1.2,
                         marginBottom: '10px',
-                        color: stepState === 'active'    ? '#FFFFFF' :
+                        color: stepState === 'active'    ? '#F0E8D8' :
                                stepState === 'completed' ? '#D4C8B4' :
-                                                           'rgba(255,255,255,0.18)',
+                                                           'rgba(240,232,216,0.18)',
                       }}
                     >
                       {step.title}
@@ -495,7 +495,7 @@ export default function HowItWorks() {
                         fontWeight: 300,
                         fontSize: 'clamp(12px, 1vw, 14px)',
                         lineHeight: 1.75,
-                        maxWidth: '230px',
+                        maxWidth: '260px',
                         margin: '0 auto',
                         color: stepState === 'active'    ? '#A89880' :
                                stepState === 'completed' ? '#7A6E60' :
@@ -519,14 +519,14 @@ export default function HowItWorks() {
             y: 0,
             transition: { delay: 0.55, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
           } : { opacity: 0, y: 24 }}
-          className="text-center mt-16 md:mt-20 lg:mt-24 xl:mt-28 2xl:mt-32"
+          className="text-center mt-14 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-28"
         >
           {/* Thin gold rule */}
           <div style={{
             width: '1px',
-            height: '52px',
+            height: '40px',
             background: 'linear-gradient(to bottom, transparent, rgba(201,168,76,0.4), transparent)',
-            margin: '0 auto 40px',
+            margin: '0 auto 32px',
           }} />
 
           {/* Gold metallic CTA */}

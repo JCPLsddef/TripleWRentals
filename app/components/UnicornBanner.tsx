@@ -29,7 +29,15 @@ export default function UnicornBanner() {
 
   return (
     <div
-      style={{ width: '100%', height: '900px', display: 'block', lineHeight: 0 }}
+      style={{
+        width: '100%',
+        height: '600px',
+        display: 'block',
+        lineHeight: 0,
+        borderTop: '1px solid rgba(201,168,76,0.08)',
+        borderBottom: '1px solid rgba(201,168,76,0.08)',
+        background: '#0D0B09',
+      }}
       data-us-project="Er0s1lg6jrtlnelZmgAW"
     />
   );

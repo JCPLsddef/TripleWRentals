@@ -153,7 +153,7 @@ export default function ReviewsSlider() {
         </motion.div>
 
         {/* Desktop: 3 Cards */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8 mb-16">
+        <div className="hidden md:grid md:grid-cols-3 gap-6 mb-12">
           {getCurrentReviews().map((review, index) => (
             <ReviewCard
               key={`${review.name}-${currentSlide}`}
@@ -194,7 +194,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="hidden md:flex justify-center items-center gap-6 mb-16"
+          className="hidden md:flex justify-center items-center gap-5 mb-14"
         >
           <button
             onClick={prevSlide}
@@ -229,7 +229,7 @@ export default function ReviewsSlider() {
         </motion.div>
 
         {/* Mobile Navigation: Arrows + Dots */}
-        <div className="md:hidden flex items-center justify-center gap-4 mb-16">
+        <div className="md:hidden flex items-center justify-center gap-4 mb-12">
           <button
             onClick={prevSlide}
             className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] transition-colors"
