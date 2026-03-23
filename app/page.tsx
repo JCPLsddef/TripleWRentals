@@ -511,12 +511,12 @@ export default function Home() {
           </div>
           <h2 style={{
             fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(26px, 4vw, 44px)',
+            fontSize: 'clamp(30px, 4.5vw, 54px)',
             fontWeight: 400, color: '#F0E8D8',
-            marginBottom: 14,
-            letterSpacing: '-0.02em', lineHeight: 1.15,
+            marginBottom: 16,
+            letterSpacing: '-0.02em', lineHeight: 1.12,
           }}>
-            Step Inside.{' '}
+            Step Inside.<br />
             <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>See Every Detail.</em>
           </h2>
           <p style={{
@@ -584,7 +584,7 @@ export default function Home() {
                 margin: '0 auto 20px',
               }}
             >
-              The Standard Other RV Companies Can&apos;t Match
+              The Standard Other RV<br />Companies Can&apos;t Match
             </motion.h2>
 
             <motion.p
@@ -746,12 +746,13 @@ export default function Home() {
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
-          <div style={{ marginBottom: 48 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+          <div style={{ marginBottom: 56, textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
               <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>COMMON QUESTIONS</span>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '560px', margin: '0 auto' }}>
               Everything You Need to Know
             </h2>
           </div>
@@ -848,16 +849,17 @@ export default function Home() {
         <div style={{ maxWidth: '580px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Section heading */}
-          <div style={{ marginBottom: 40 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+          <div style={{ marginBottom: 40, textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
               <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>BOOK YOUR RENTAL</span>
+              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>
-              Reserve Your Dates.{' '}
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, marginBottom: 16 }}>
+              Reserve Your Dates.<br />
               <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>We Handle Everything Else.</em>
             </h2>
-            <p style={{ fontSize: '14px', color: '#A89880', lineHeight: 1.65, fontFamily: "'Inter', sans-serif" }}>
+            <p style={{ fontSize: '15px', color: '#A89880', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", maxWidth: '380px', margin: '0 auto' }}>
               Weekend availability goes fast, especially in spring and fall.
             </p>
           </div>
@@ -1070,12 +1072,12 @@ export default function Home() {
             </div>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 'clamp(26px, 4vw, 44px)',
+              fontSize: 'clamp(30px, 4vw, 50px)',
               fontWeight: 400, color: '#F0E8D8',
-              letterSpacing: '-0.02em', lineHeight: 1.15,
-              marginBottom: 12,
+              letterSpacing: '-0.02em', lineHeight: 1.12,
+              marginBottom: 14,
             }}>
-              Find Us in{' '}
+              Find Us in<br />
               <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Tyler, Texas.</em>
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#A89880' }}>

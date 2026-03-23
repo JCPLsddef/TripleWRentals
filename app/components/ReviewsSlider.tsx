@@ -116,10 +116,11 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex items-center gap-2.5 mb-5"
+          className="flex items-center justify-center gap-2.5 mb-5"
         >
           <span className="inline-block w-7 h-px bg-[#C9A84C]/60 flex-shrink-0" />
           <span className="text-[#C9A84C] text-[11px] tracking-[0.15em] uppercase" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>GUEST REVIEWS</span>
+          <span className="inline-block w-7 h-px bg-[#C9A84C]/60 flex-shrink-0" />
         </motion.div>
 
         {/* Headline */}
@@ -128,7 +129,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-6xl mb-7"
+          className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-6xl mb-7 text-center"
           style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500, lineHeight: 1.1 }}
         >
           What Our Guests Experience
@@ -140,7 +141,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#A89880] mb-20 flex items-center gap-2.5 flex-wrap"
+          className="text-[#A89880] mb-20 flex items-center justify-center gap-2.5 flex-wrap"
           style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px' }}
         >
           <span className="text-[#C9A84C]" style={{ fontWeight: 500 }}>4.7★</span>
