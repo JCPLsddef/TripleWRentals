@@ -1,340 +1,279 @@
 'use client';
 
-import React, { useState } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ReviewCard } from './ReviewCard';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const reviews = [
+interface Review {
+  name: string;
+  image: string;
+  excerpt: string;
+  fullReview: string;
+  stars: number;
+}
+
+const reviews: Review[] = [
+  {
+    name: 'Tim S.',
+    image: 'https://static.wixstatic.com/media/62f926_e823cada6ec745d5b64f7431a63badd5~mv2.png',
+    excerpt: 'What makes this beyond 5 stars is the incredible hospitality. He goes beyond Ritz Carlton standards. The wifi is fast and reliable. Our new first choice when coming to Texas Rose Horse Park.',
+    fullReview: 'The RVs are nice and convenient especially for horse shows. However what makes this beyond 5 stars is the incredible hospitality by the host. He goes beyond Ritz Carlton standards. The wifi is incredible and fast and reliable. This is our new first choice when coming to Texas Rose Horse Park.',
+    stars: 5
+  },
   {
     name: 'Wyman Jones',
     image: 'https://static.wixstatic.com/media/62f926_db0f2145b9b54be6947b1cd42f12e361~mv2.png',
-    loc: 'Tyler, Texas',
-    stars: 5,
-    text: "Thank you, Triple W Rentals, for the great service I received last weekend. When my reservation with another company was canceled at the last minute, I called Triple W Rentals, and they came through. They were very patient and answered all of my questions. In addition, I want to thank your team member Corbin for outstanding customer service. He delivered the RV on time, set it up, and ensured that everything was working properly. And when there was an issue, Corbin went above and beyond to correct it. His attention to detail and his professionalism were greatly appreciated. We had a great time in the RV, and I will definitely rent from Triple W again.",
+    excerpt: 'When my reservation with another company was canceled last minute, I called Triple W and they came through. Corbin went above and beyond. His attention to detail and professionalism were greatly appreciated.',
+    fullReview: 'Thank you, Triple W Rentals, for the great service I received last weekend. When my reservation with another company was canceled at the last minute, I called Triple W Rentals, and they came through. They were very patient and answered all of my questions. In addition, I want to thank your team member Corbin for outstanding customer service. He delivered the RV on time, set it up, and ensured that everything was working properly. And when there was an issue, Corbin went above and beyond to correct it. His attention to detail and his professionalism were greatly appreciated. We had a great time in the RV, and I will definitely rent from Triple W again.',
+    stars: 5
   },
   {
     name: 'JT Seargeant',
     image: 'https://static.wixstatic.com/media/62f926_110004e747b34d239d959afbd1f2b88e~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "I have rented from Triple W multiple times. The communication is always outstanding and the response time on site to any needs is quick. Corbin arrived on site in minutes to assist with one minor issue. He checked in daily to make sure all was well which exceeded my expectations. I will continue to use them on all my trips to Texas Rose Horse Park.",
-  },
-  {
-    name: 'Jaden Richardson',
-    image: 'https://static.wixstatic.com/media/62f926_1ec8069798744e269b3cd56333ec0268~mv2.png',
-    loc: 'Texas',
-    stars: 5,
-    text: "Great experience with Triple W RV Rentals! The booking process was smooth, the staff was friendly and helpful, and the Momentum RV was in excellent condition. Everything went exactly as planned. Highly recommend!",
+    excerpt: 'I have rented from Triple W multiple times. The communication is always outstanding. Corbin arrived on site in minutes and checked in daily. Exceeded my expectations.',
+    fullReview: 'I have rented from Triple W multiple times. The communication is always outstanding and the response time on site to any needs is quick. Corbin arrived on site in minutes to assist with one minor issue. He checked in daily to make sure all was well which exceeded my expectations. I will continue to use them on all my trips to Texas Rose Horse Park.',
+    stars: 5
   },
   {
     name: 'Luci Wade-Cantu',
     image: 'https://static.wixstatic.com/media/62f926_7141074f78bc415e8c9d845a4433a831~mv2.png',
-    loc: 'Tyler, Texas',
-    stars: 5,
-    text: "Best RV rental ever! Excellent service, experience and quality! They rented to us at a moments notice on the 4th of July. They delivered that same day, setup and provided an overview on how to use everything. They followed up with several phone calls to check in on how we were! Amazing! Top notch! Above and beyond! I will always use their service moving forward! Westin and team were the best!",
-  },
-  {
-    name: 'Sandy McKinney',
-    image: 'https://static.wixstatic.com/media/62f926_575e3599e5f64a11ac9775b952ae14c2~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "Triple W was great to work with. As a RV novice Wayne was very polite, patient and accommodating. The RV was in great condition and fully loaded! Given the temperature outside it was great to have an RV that had strong A/C. I will definitely use them again when we return to the Rose Horse Park.",
-  },
-  {
-    name: 'Tim S.',
-    image: 'https://static.wixstatic.com/media/62f926_e823cada6ec745d5b64f7431a63badd5~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "The RVs are nice and convenient especially for horse shows. However what makes this beyond 5 stars is the incredible hospitality by the host. He goes beyond Ritz Carlton standards. The wifi is incredible and fast and reliable. This is our new first choice when coming to Texas Rose Horse Park.",
-  },
-  {
-    name: 'Grant Walker',
-    image: 'https://static.wixstatic.com/media/62f926_641bcca631884ba09644963d5e5f9104~mv2.png',
-    loc: 'Tyler, Texas',
-    stars: 5,
-    text: "Me and my wife stayed in the North Trail RV near a pond on our Ranch. The RV was setup and delivered for us. The RV was Clean and roomy. Westin and his Company were a pleasure to do business with. Couldn't ask for a better experience!",
+    excerpt: "Best RV rental ever! They rented to us at a moment's notice on the 4th of July. Delivered same day, setup, and provided an overview. Amazing! Top notch! Above and beyond!",
+    fullReview: 'Best RV rental ever! Excellent service, experience and quality! They rented to us at a moments notice on the 4th of July. They delivered that same day, setup and provided an overview on how to use everything. They followed up with several phone calls to check in on how we were! Amazing! Top notch! Above and beyond! I will always use their service moving forward! Westin and team were the best!',
+    stars: 5
   },
   {
     name: 'Amy Walker',
     image: 'https://static.wixstatic.com/media/62f926_e96de57f16044ca88717c7aa6ac0a0c5~mv2.png',
-    loc: 'Muddy Bottoms',
-    stars: 5,
-    text: "WOW!!! The customer service that I received from Triple W Rental was outstanding. The rental company completely accommodated my needs and my family. Not only did Shane go above and beyond to help me schedule the perfect rental, I was super impressed with the quality of the camper. The camper was delivered to my destination at Muddy Bottoms and set up before I even arrived, completely stocked. All I had to do was bring my family and food.",
+    excerpt: 'The customer service was outstanding. Shane went above and beyond. The camper was delivered and set up before I even arrived, completely stocked. All I had to do was bring my family and food.',
+    fullReview: 'WOW!!! The customer service that I received from Triple W Rental was outstanding. The rental company completely accommodated my needs and my family. Not only did Shane go above and beyond to help me schedule the perfect rental, I was super impressed with the quality of the camper. The camper was delivered to my destination at Muddy Bottoms and set up before I even arrived, completely stocked. All I had to do was bring my family and food.',
+    stars: 5
+  },
+  {
+    name: 'Sandy McKinney',
+    image: 'https://static.wixstatic.com/media/62f926_575e3599e5f64a11ac9775b952ae14c2~mv2.png',
+    excerpt: 'Triple W was great to work with. As a RV novice Wayne was very polite, patient and accommodating. The RV was in great condition and fully loaded with strong A/C. Will definitely use them again.',
+    fullReview: 'Triple W was great to work with. As a RV novice Wayne was very polite, patient and accommodating. The RV was in great condition and fully loaded! Given the temperature outside it was great to have an RV that had strong A/C. I will definitely use them again when we return to the Rose Horse Park.',
+    stars: 5
+  },
+  {
+    name: 'Jaden Richardson',
+    image: 'https://static.wixstatic.com/media/62f926_1ec8069798744e269b3cd56333ec0268~mv2.png',
+    excerpt: 'Great experience! The booking process was smooth, the staff was friendly and helpful, and the Momentum RV was in excellent condition. Everything went exactly as planned.',
+    fullReview: 'Great experience with Triple W RV Rentals! The booking process was smooth, the staff was friendly and helpful, and the Momentum RV was in excellent condition. Everything went exactly as planned. Highly recommend!',
+    stars: 5
+  },
+  {
+    name: 'Grant Walker',
+    image: 'https://static.wixstatic.com/media/62f926_641bcca631884ba09644963d5e5f9104~mv2.png',
+    excerpt: "The RV was setup and delivered for us. Clean and roomy. Westin and his Company were a pleasure to do business with. Couldn't ask for a better experience!",
+    fullReview: 'Me and my wife stayed in the North Trail RV near a pond on our Ranch. The RV was setup and delivered for us. The RV was Clean and roomy. Westin and his Company were a pleasure to do business with. Couldn\'t ask for a better experience!',
+    stars: 5
   },
   {
     name: 'Marsha Swann',
     image: 'https://static.wixstatic.com/media/62f926_f644e58d08f94afd9a5f6698c775765c~mv2.png',
-    loc: 'Texas',
-    stars: 5,
-    text: "Triple W rentals has amazing RVs and great employees. The delivery driver is the best I've seen and should always be recommended when you're getting a rental! Great job guys.",
+    excerpt: "Triple W rentals has amazing RVs and great employees. The delivery driver is the best I've seen and should always be recommended. Great job guys.",
+    fullReview: "Triple W rentals has amazing RVs and great employees. The delivery driver is the best I've seen and should always be recommended when you're getting a rental! Great job guys.",
+    stars: 5
   },
   {
     name: 'Giovanna Iriel',
     image: 'https://static.wixstatic.com/media/62f926_980c1d6c8b8d493d9b6b0d945debcd90~mv2.png',
-    loc: 'Texas Rose Horse Park',
-    stars: 5,
-    text: "Highly recommend Triple W Rentals! Their customer service was outstanding — so personable, responsive, and accommodating. They made the entire process seamless by delivering our luxury golf cart right to our stalls at the horse show. The golf cart was in excellent condition, super clean, and incredibly comfortable. Will definitely rent from them again!",
-  },
+    excerpt: 'Highly recommend! Their customer service was outstanding — so personable, responsive, and accommodating. They delivered our luxury golf cart right to our stalls. Super clean and comfortable.',
+    fullReview: 'Highly recommend Triple W Rentals! Their customer service was outstanding — so personable, responsive, and accommodating. They made the entire process seamless by delivering our luxury golf cart right to our stalls at the horse show. The golf cart was in excellent condition, super clean, and incredibly comfortable. Will definitely rent from them again!',
+    stars: 5
+  }
 ];
 
-function ReviewCard({ review }: { review: typeof reviews[0] }) {
-  const [expanded, setExpanded] = useState(false);
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: '#0F0D0A',
-        borderRadius: 10,
-        padding: '24px 22px',
-        border: `1px solid ${hovered ? 'rgba(201,168,76,0.35)' : 'rgba(201,168,76,0.15)'}`,
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        transition: 'transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94), border-color 0.2s ease',
-        cursor: 'default',
-      }}
-    >
-      {/* Stars */}
-      <div style={{ color: '#C9A84C', fontSize: 13, marginBottom: 14, letterSpacing: '2px' }}>
-        {'★'.repeat(review.stars)}
-      </div>
-
-      {/* Quote */}
-      <p
-        className={`review-text${expanded ? ' review-text--expanded' : ''}`}
-        style={{
-          fontSize: 13,
-          color: 'rgba(210,195,165,0.90)',
-          fontStyle: 'italic',
-          lineHeight: 1.72,
-          marginBottom: 8,
-          fontFamily: "'Playfair Display', Georgia, serif",
-          flex: 1,
-        }}
-      >
-        &ldquo;{review.text}&rdquo;
-      </p>
-
-      {/* Read more */}
-      <button
-        className="review-read-more"
-        onClick={() => setExpanded(!expanded)}
-        style={{
-          background: 'none', border: 'none', cursor: 'pointer',
-          color: '#C9A84C', fontSize: 12, fontWeight: 400,
-          fontFamily: "'Inter', sans-serif",
-          padding: '4px 0',
-          textAlign: 'left',
-          marginBottom: 8,
-          borderBottom: '1px solid rgba(201,168,76,0.3)',
-          alignSelf: 'flex-start',
-          letterSpacing: '0.02em',
-        }}
-      >
-        {expanded ? 'Show less ↑' : 'Read more ↓'}
-      </button>
-
-      {/* Reviewer */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: 12,
-        marginTop: 'auto', paddingTop: 16,
-        borderTop: '1px solid rgba(201,168,76,0.10)',
-      }}>
-        <img
-          src={review.image}
-          alt={review.name}
-          style={{
-            width: 36,
-            height: 36,
-            borderRadius: '50%',
-            objectFit: 'cover',
-            border: '1px solid rgba(201,168,76,0.30)',
-            flexShrink: 0,
-          }}
-        />
-        <div>
-          <div style={{
-            fontSize: 13, fontWeight: 500,
-            color: '#F0E8D8',
-            fontFamily: "'Inter', sans-serif",
-          }}>{review.name}</div>
-          <div style={{
-            fontSize: 11,
-            color: '#6B5F52',
-            fontFamily: "'Inter', sans-serif",
-          }}>{review.loc}</div>
-        </div>
-        <div style={{
-          marginLeft: 'auto',
-          fontSize: 10, color: '#6B5F52',
-          letterSpacing: '0.04em',
-          textTransform: 'uppercase',
-          fontFamily: "'Inter', sans-serif",
-        }}>
-          Google
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function ReviewsSlider() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    autoplay: true,
-    autoplaySpeed: 3800,
-    pauseOnHover: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)',
-    dotsClass: 'slick-dots reviews-slider-dots',
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          centerMode: false,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          centerMode: true,
-          centerPadding: '24px',
-        },
-      },
-    ],
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalPages = Math.ceil(reviews.length / 3);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalPages);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  const getCurrentReviews = () => {
+    const start = currentSlide * 3;
+    return reviews.slice(start, start + 3);
   };
 
   return (
-    <div className="reviews-slider-outer">
-      <style>{`
-        .reviews-slider-outer {
-          position: relative;
-          margin: 0 -24px;
-          padding: 0 24px;
-        }
+    <section id="reviews" className="bg-[#0F0D0B] py-28 px-6 md:px-12 lg:px-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* Eyebrow */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-[#B68B3C] text-xs tracking-[0.25em] uppercase mb-5"
+          style={{ fontFamily: 'Inter, sans-serif', fontWeight: 500 }}
+        >
+          GUEST REVIEWS
+        </motion.div>
 
-        /* Edge fade — desktop only */
-        @media (min-width: 641px) {
-          .reviews-slider-outer::before,
-          .reviews-slider-outer::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 40px;
-            width: 80px;
-            z-index: 10;
-            pointer-events: none;
-          }
-          .reviews-slider-outer::before {
-            left: 0;
-            background: linear-gradient(to right, #0D0B09 20%, transparent);
-          }
-          .reviews-slider-outer::after {
-            right: 0;
-            background: linear-gradient(to left, #0D0B09 20%, transparent);
-          }
-        }
+        {/* Headline */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-[#F3EDE3] text-4xl md:text-5xl lg:text-6xl mb-7"
+          style={{ fontFamily: 'Playfair Display, serif', fontWeight: 500, lineHeight: 1.1 }}
+        >
+          What Our Guests Experience
+        </motion.h2>
 
-        /* Slide padding */
-        .reviews-slider-outer .slick-slide > div {
-          padding: 8px 10px 16px;
-        }
+        {/* Trust Line */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-[#D8CCBC] mb-20 flex items-center gap-2.5 flex-wrap"
+          style={{ fontFamily: 'Inter, sans-serif', fontSize: '15px' }}
+        >
+          <span className="text-[#B68B3C]" style={{ fontWeight: 500 }}>4.7★</span>
+          <span>on Google</span>
+          <span className="text-[#8F6A2E]">·</span>
+          <span>193 verified reviews</span>
+          <span className="text-[#8F6A2E]">·</span>
+          <span>Tyler, Texas</span>
+        </motion.div>
 
-        @media (max-width: 640px) {
-          .reviews-slider-outer .slick-slide > div {
-            padding: 8px 6px 16px;
-          }
-        }
+        {/* Desktop: 3 Cards */}
+        <div className="hidden md:grid md:grid-cols-3 gap-8 mb-16">
+          {getCurrentReviews().map((review, index) => (
+            <ReviewCard
+              key={`${review.name}-${currentSlide}`}
+              name={review.name}
+              image={review.image}
+              excerpt={review.excerpt}
+              stars={review.stars}
+              delay={0.3 + index * 0.1}
+            />
+          ))}
+        </div>
 
-        /* Dots */
-        .reviews-slider-dots {
-          bottom: -8px !important;
-          display: flex !important;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
+        {/* Mobile: Single Card Slider */}
+        <div className="md:hidden mb-12">
+          <div className="relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <ReviewCard
+                  name={reviews[currentSlide].name}
+                  image={reviews[currentSlide].image}
+                  excerpt={reviews[currentSlide].excerpt}
+                  stars={reviews[currentSlide].stars}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
 
-        .reviews-slider-dots li {
-          margin: 0;
-          width: 8px;
-          height: 8px;
-          transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+        {/* Desktop Navigation: Arrows + Dots */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="hidden md:flex justify-center items-center gap-6 mb-16"
+        >
+          <button
+            onClick={prevSlide}
+            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] hover:border-[#B68B3C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(182,139,60,0.1)]"
+            aria-label="Previous reviews"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
 
-        .reviews-slider-dots li button {
-          width: 7px;
-          height: 7px;
-          padding: 0;
-          border-radius: 50%;
-          background: rgba(201,168,76,0.25);
-          border: none;
-          cursor: pointer;
-          transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+          <div className="flex gap-2.5">
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`h-1.5 rounded-full transition-all duration-400 ${
+                  index === currentSlide
+                    ? 'bg-[#B68B3C] w-10 shadow-[0_0_8px_rgba(182,139,60,0.4)]'
+                    : 'bg-[#2A2520] w-1.5 hover:bg-[#3A3530]'
+                }`}
+                aria-label={`Go to page ${index + 1}`}
+              />
+            ))}
+          </div>
 
-        .reviews-slider-dots li button:hover {
-          background: rgba(201,168,76,0.5);
-        }
+          <button
+            onClick={nextSlide}
+            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] hover:border-[#B68B3C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(182,139,60,0.1)]"
+            aria-label="Next reviews"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </motion.div>
 
-        .reviews-slider-dots li.slick-active {
-          width: 22px;
-        }
+        {/* Mobile Navigation: Arrows + Dots */}
+        <div className="md:hidden flex items-center justify-center gap-4 mb-16">
+          <button
+            onClick={prevSlide}
+            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] transition-colors"
+            aria-label="Previous review"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <div className="flex gap-2">
+            {reviews.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  index === currentSlide ? 'bg-[#B68B3C] w-8' : 'bg-[#2A2520] w-1.5'
+                }`}
+                aria-label={`Go to review ${index + 1}`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={nextSlide}
+            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#B68B3C] hover:bg-[#1A1410] transition-colors"
+            aria-label="Next review"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
 
-        .reviews-slider-dots li.slick-active button {
-          background: #C9A84C;
-          width: 22px;
-          border-radius: 999px;
-        }
-
-        .reviews-slider-dots li button:before {
-          display: none;
-        }
-
-        /* Equal height cards */
-        .reviews-slider-outer .slick-track {
-          display: flex !important;
-        }
-
-        .reviews-slider-outer .slick-slide {
-          height: inherit !important;
-        }
-
-        .reviews-slider-outer .slick-slide > div {
-          height: 100%;
-        }
-
-        /* Read more — all screen sizes */
-        .review-text:not(.review-text--expanded) {
-          display: -webkit-box;
-          -webkit-line-clamp: 5;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .review-read-more {
-          display: inline-block;
-        }
-      `}</style>
-
-      <Slider {...settings}>
-        {reviews.map((r, i) => (
-          <ReviewCard key={i} review={r} />
-        ))}
-      </Slider>
-    </div>
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center"
+        >
+          <a
+            href="#quote"
+            className="inline-block bg-[#B68B3C] hover:bg-[#C69C52] text-[#0F0D0B] px-12 py-4 rounded-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(182,139,60,0.3)] hover:-translate-y-0.5"
+            style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '15px', letterSpacing: '0.01em' }}
+          >
+            Start Your Booking
+          </a>
+        </motion.div>
+      </div>
+    </section>
   );
 }

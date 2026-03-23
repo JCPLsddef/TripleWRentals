@@ -7,6 +7,7 @@ import { RVSlider } from './components/RVSlider';
 import ReviewsSlider from './components/ReviewsSlider';
 import HeroSection from './components/HeroSection';
 import HowItWorks from './components/HowItWorks';
+import UnicornBanner from './components/UnicornBanner';
 import './globals.css';
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -534,42 +535,11 @@ export default function Home() {
       {/* ── SECTION 5: How It Works ──────────────────────────── */}
       <HowItWorks />
 
+      {/* ── SECTION 5.5: Unicorn Banner ──────────────────────── */}
+      <UnicornBanner />
+
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
-      <section id="reviews" style={{
-        background: '#0D0B09',
-        borderTop: '1px solid rgba(201,168,76,0.10)',
-        padding: '112px 24px 96px',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        {/* Noise texture */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <div className="reveal" style={{ marginBottom: 48 }}>
-            {/* Eyebrow */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-              <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>GUEST REVIEWS</span>
-            </div>
-            <div style={{ maxWidth: '560px' }}>
-              <h2 style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: 'clamp(28px, 4vw, 44px)',
-                fontWeight: 400, color: '#F0E8D8',
-                marginBottom: 10,
-                letterSpacing: '-0.02em', lineHeight: 1.15,
-              }}>
-                What Our Guests{' '}
-                <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>Experience.</em>
-              </h2>
-            </div>
-            <p style={{ fontSize: 14, color: '#A89880', fontFamily: "'Inter', sans-serif" }}>
-              4.7★ on Google · 193 verified reviews · Tyler, Texas
-            </p>
-          </div>
-          <ReviewsSlider />
-        </div>
-      </section>
+      <ReviewsSlider />
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
       <section id="why" ref={whyRef} style={{ background: '#0F0D0B', padding: '120px 0 100px', position: 'relative', overflow: 'hidden' }}>
