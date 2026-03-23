@@ -548,7 +548,7 @@ export default function Home() {
       <ReviewsSlider />
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
-      <section id="why" ref={whyRef} style={{ background: '#0F0D0B', padding: '100px 0 88px', position: 'relative', overflow: 'hidden' }}>
+      <section id="why" ref={whyRef} style={{ background: '#0F0D0B', padding: '88px 0', position: 'relative', overflow: 'hidden' }}>
 
         {/* Background gradient orbs */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
@@ -562,7 +562,7 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header — centered */}
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div style={{ textAlign: 'center', marginBottom: 52 }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -700,8 +700,8 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
             style={{
               borderRadius: 12,
-              padding: '28px 40px',
-              marginTop: 24,
+              padding: '28px 36px',
+              marginTop: 36,
               background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
               border: '1px solid rgba(201,168,76,0.12)',
               boxShadow: '0 4px 24px rgba(0,0,0,0.20)',

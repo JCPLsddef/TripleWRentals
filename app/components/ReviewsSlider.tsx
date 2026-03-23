@@ -141,7 +141,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#A89880] mb-16 flex items-center justify-center gap-2.5 flex-wrap"
+          className="text-[#A89880] mb-10 flex items-center justify-center gap-2.5 flex-wrap"
           style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', fontWeight: 300 }}
         >
           <span className="text-[#C9A84C]" style={{ fontWeight: 500 }}>4.7★</span>
@@ -153,7 +153,7 @@ export default function ReviewsSlider() {
         </motion.div>
 
         {/* Desktop: 3 Cards */}
-        <div className="hidden md:grid md:grid-cols-3 gap-6 mb-12">
+        <div className="hidden md:grid md:grid-cols-3 gap-5 mb-8">
           {getCurrentReviews().map((review, index) => (
             <ReviewCard
               key={`${review.name}-${currentSlide}`}
@@ -194,7 +194,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="hidden md:flex justify-center items-center gap-5 mb-14"
+          className="hidden md:flex justify-center items-center gap-5 mb-10"
         >
           <button
             onClick={prevSlide}

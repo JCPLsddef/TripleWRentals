@@ -91,8 +91,8 @@ export default function HowItWorks() {
       // Vertical padding scales across all breakpoints; no horizontal padding here —
       // that lives on the inner container so mx-auto centres against the true viewport.
       className="relative overflow-hidden
-                 pt-20 md:pt-28 lg:pt-36 xl:pt-40 2xl:pt-48
-                 pb-24 md:pb-32 lg:pb-40 xl:pb-44 2xl:pb-52"
+                 pt-16 md:pt-24 lg:pt-28
+                 pb-20 md:pb-28 lg:pb-32"
       style={{
         background: 'radial-gradient(ellipse at 50% 20%, #161209 0%, #0D0B09 55%, #080604 100%)',
         borderTop: '1px solid rgba(201,168,76,0.14)',
@@ -153,7 +153,7 @@ export default function HowItWorks() {
                       px-6 xl:px-10 2xl:px-14">
 
         {/* ── Title ─────────────────────────────────────────────── */}
-        <div className="text-center mb-16 md:mb-20 lg:mb-24 xl:mb-28 2xl:mb-32">
+        <div className="text-center mb-10 md:mb-12 lg:mb-14">
 
           {/* Eyebrow */}
           <motion.div
@@ -338,16 +338,26 @@ export default function HowItWorks() {
           <div
             aria-hidden="true"
             className="hidden lg:grid grid-cols-3 pointer-events-none absolute left-0 right-0"
-            style={{ top: '40px', height: '144px' }}
+            style={{ top: '40px' }}
           >
             {[0, 1, 2].map(i => (
-              <div key={i} className="flex justify-center items-center">
+              <div key={i} className="flex flex-col items-center">
                 <div style={{
                   width: '144px',
                   height: '144px',
                   borderRadius: '50%',
-                  border: '1px solid rgba(201,168,76,0.07)',
+                  border: '1px solid rgba(201,168,76,0.18)',
+                  background: 'radial-gradient(circle at 32% 28%, rgba(201,168,76,0.04) 0%, transparent 70%)',
                 }} />
+                <div style={{
+                  marginTop: '32px',
+                  fontSize: '10px',
+                  fontWeight: 400,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(201,168,76,0.10)',
+                  fontFamily: "'Inter', sans-serif",
+                }}>0{i + 1}</div>
               </div>
             ))}
           </div>
@@ -448,7 +458,7 @@ export default function HowItWorks() {
 
                   {/* Step text — padding scales with column width at each breakpoint */}
                   <motion.div
-                    className="mt-9 px-4 lg:px-6 xl:px-8 2xl:px-10"
+                    className="mt-8 px-3 lg:px-4 xl:px-6"
                     initial={{ opacity: 0, y: 12 }}
                     animate={shouldShow ? {
                       opacity: 1,
@@ -519,7 +529,7 @@ export default function HowItWorks() {
             y: 0,
             transition: { delay: 0.55, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
           } : { opacity: 0, y: 24 }}
-          className="text-center mt-14 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-28"
+          className="text-center mt-10 md:mt-12 lg:mt-14"
         >
           {/* Thin gold rule */}
           <div style={{
