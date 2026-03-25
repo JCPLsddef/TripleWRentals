@@ -571,7 +571,7 @@ export default function Home() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 marginBottom: 28,
                 fontSize: 22,
-              }}>🏕️</div>
+              }}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 22l4-8 5 3 5-3 4 8"/><path d="M12 2L2 14h20L12 2z"/></svg></div>
               <h3 style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(20px, 2vw, 26px)',
@@ -619,7 +619,7 @@ export default function Home() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 marginBottom: 28,
                 fontSize: 22,
-              }}>🤝</div>
+              }}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 11h1a3 3 0 0 1 0 6h-1"/><path d="M9 12H6a3 3 0 0 0 0 6h1"/><path d="M12 17v-6"/><path d="M9 8h.01"/><path d="M15 8h.01"/><path d="M12 2a7 7 0 0 1 7 7v1H5V9a7 7 0 0 1 7-7z"/></svg></div>
               <h3 style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(20px, 2vw, 26px)',
