@@ -81,7 +81,7 @@ export default function HeroSection() {
       <div className="hero-fire-glow" />
 
       {/* ── Hero Content ─────────────────────────────────────── */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', textAlign: 'center', paddingBottom: 'clamp(52px, 7vh, 80px)', paddingLeft: '20px', paddingRight: '20px' }}>
+      <div className="hero-content-wrapper" style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', textAlign: 'center', paddingBottom: 'clamp(52px, 7vh, 80px)', paddingLeft: '20px', paddingRight: '20px' }}>
 
         {/* Eyebrow */}
         <motion.div
@@ -104,13 +104,13 @@ export default function HeroSection() {
           transition={{ duration: 0.85, delay: 0.55, ease: 'easeOut' }}
           style={{ margin: 0, textAlign: 'center' }}
         >
-          <span style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
+          <span className="hero-h1-line" style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
             Your Group Shows Up.
           </span>
-          <span style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
+          <span className="hero-h1-line" style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
             Everything&apos;s Already
           </span>
-          <span style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(44px, 6.4vw, 80px)', fontWeight: 400, color: '#C9A84C', lineHeight: 1.02, letterSpacing: '-0.022em', marginTop: '6px', textShadow: '0 2px 30px rgba(0,0,0,0.95), 0 0 60px rgba(201,168,76,0.15)' }}>
+          <span className="hero-h1-line hero-h1-accent" style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(44px, 6.4vw, 80px)', fontWeight: 400, color: '#C9A84C', lineHeight: 1.02, letterSpacing: '-0.022em', marginTop: '6px', textShadow: '0 2px 30px rgba(0,0,0,0.95), 0 0 60px rgba(201,168,76,0.15)' }}>
             Taken Care Of.
           </span>
         </motion.h1>
@@ -119,6 +119,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.55, delay: 0.9, ease: 'easeOut' }}
+          className="hero-gold-divider"
           style={{ width: '52px', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.80), transparent)', margin: '28px auto', transformOrigin: 'center' }}
         />
 
@@ -145,6 +146,7 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.0, ease: 'easeOut' }}
+          className="hero-subhead-text"
           style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, fontSize: 'clamp(15px, 1.6vw, 18px)', color: 'rgba(242,234,216,0.88)', lineHeight: 1.72, maxWidth: '420px', marginBottom: '28px', textShadow: '0 1px 20px rgba(0,0,0,0.95)' }}
         >
           You show up. The fire&apos;s already going.<br />
@@ -155,6 +157,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 1.1, ease: 'easeOut' }}
+          className="hero-pills-wrapper"
           style={{ display: 'flex', gap: '8px', marginBottom: '32px', flexWrap: 'wrap', justifyContent: 'center' }}
         >
           {pills.map(label => (

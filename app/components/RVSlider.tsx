@@ -802,6 +802,17 @@ export default function RVSlider() {
               </div>
             </div>
 
+            <div className="flt-dots">
+              {rv.images.map((_, i) => (
+                <button
+                  key={i}
+                  className={`flt-dot${i === activeImage ? ' flt-dot-active' : ''}`}
+                  onClick={() => changeImage(i)}
+                  aria-label={`Photo ${i + 1}`}
+                />
+              ))}
+            </div>
+
             <div className="flt-strip-wrap">
               <div className="flt-strip" ref={stripRef}>
                 {rv.images.map((im, i) => (
@@ -1068,8 +1079,10 @@ export default function RVSlider() {
             padding: 0;
           }
           .flt-display {
-            width: 100%;
-            flex: unset;
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: 1 1 100% !important;
+            min-width: 0 !important;
           }
           .flt-nav {
             flex-direction: row;
@@ -1111,15 +1124,27 @@ export default function RVSlider() {
             display: none;
           }
           .flt-hero {
-            height: 56vw;
-            min-height: 280px;
-            max-height: 360px;
-            width: 100%;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 62vw !important;
+            min-height: 260px !important;
+            max-height: 380px !important;
+            overflow: hidden !important;
           }
           .flt-hero-img {
-            object-fit: cover;
-            object-position: center center;
-            width: 100%;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center center !important;
+          }
+          .flt-badges {
+            display: none !important;
+          }
+          .flt-thumb-hover {
+            display: none !important;
+          }
+          .flt-thumb-label {
+            display: none !important;
           }
           .flt-img-desc {
             display: none;
@@ -1146,10 +1171,41 @@ export default function RVSlider() {
           }
           .flt-section {
             padding-top: 4rem;
-            padding-bottom: 3rem;
+            padding-bottom: 2rem !important;
           }
           .flt-header {
             padding-bottom: 2rem;
+          }
+          .flt-cta-bar {
+            padding: 24px 20px !important;
+          }
+        }
+        .flt-dots {
+          display: none;
+        }
+        @media (max-width: 767px) {
+          .flt-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 0 6px;
+            width: 100%;
+          }
+          .flt-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(201,168,76,0.25);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            flex-shrink: 0;
+          }
+          .flt-dot-active {
+            background: #C9A84C !important;
+            transform: scale(1.3);
           }
         }
       `}</style>
