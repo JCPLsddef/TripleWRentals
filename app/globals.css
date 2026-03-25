@@ -633,15 +633,11 @@ button { font-family: inherit; }
 /* ── Hero Responsive ── */
 @media (max-width: 640px) {
   .hero-ctas {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
     padding: 0 24px;
-  }
-  .hero-cta-primary,
-  .hero-cta-secondary {
-    width: 100%;
-    text-align: center;
-    display: block;
   }
   .hero-trust {
     gap: 12px;
@@ -814,16 +810,26 @@ select:focus {
     ) !important;
   }
   .hero-cta-primary {
-    padding: 16px 28px !important;
-    font-size: 12px !important;
+    display: inline-flex !important;
     width: auto !important;
-    min-width: 180px !important;
-  }
-  .hero-cta-secondary {
+    min-width: 155px !important;
+    max-width: 210px !important;
     padding: 15px 24px !important;
     font-size: 12px !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-cta-secondary {
+    display: inline-flex !important;
     width: auto !important;
-    min-width: 160px !important;
+    min-width: 155px !important;
+    max-width: 210px !important;
+    padding: 14px 20px !important;
+    font-size: 12px !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   .why-card-grid-v2 {
     grid-template-columns: 1fr !important;

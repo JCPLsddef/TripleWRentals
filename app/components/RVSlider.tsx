@@ -1063,41 +1063,93 @@ export default function RVSlider() {
           .flt-cta-bar { flex-direction: column; gap: 1.1rem; text-align: center; padding: 2.5rem 1.5rem 0; }
         }
         @media (max-width: 767px) {
-          .flt-hero {
-            height: 52vw;
-            min-height: 260px;
-            max-height: 340px;
+          .flt-interface {
+            grid-template-columns: 1fr;
+            padding: 0;
           }
-          .flt-hero-img {
-            object-position: center center;
-            object-fit: contain;
-            background-color: #0D0B09;
+          .flt-display {
+            width: 100%;
+            flex: unset;
           }
           .flt-nav {
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: visible;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            min-height: unset;
+            max-height: none;
             padding: 0 16px;
+            border-right: none;
+            border-bottom: 1px solid rgba(201,168,76,0.10);
+            scrollbar-width: none;
             gap: 4px;
+            flex-shrink: 0;
+            display: flex;
+          }
+          .flt-nav::-webkit-scrollbar {
+            display: none;
           }
           .flt-nav-item {
-            padding: 10px 14px;
-            min-width: 140px;
+            flex-shrink: 0;
+            min-width: 150px;
+            width: 150px;
+            padding: 12px 14px;
+            border-left: none;
+            border-bottom: 2px solid transparent;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
           }
-          .flt-nav-num {
-            font-size: 0.58rem;
+          .flt-nav-active {
+            border-bottom-color: #C9A84C !important;
+            border-left-color: transparent !important;
           }
-          .flt-nav-name {
-            font-size: 0.8rem;
+          .flt-nav-arrow {
+            display: none;
           }
-          .flt-nav-cat {
-            font-size: 0.68rem;
+          .flt-hero {
+            height: 56vw;
+            min-height: 280px;
+            max-height: 360px;
+            width: 100%;
+          }
+          .flt-hero-img {
+            object-fit: cover;
+            object-position: center center;
+            width: 100%;
+          }
+          .flt-img-desc {
+            display: none;
+          }
+          .flt-info {
+            padding: 0 16px 16px;
+          }
+          .flt-counter {
+            top: 12px;
+            right: 12px;
+          }
+          .flt-strip-wrap {
+            width: 100%;
           }
           .flt-strip {
             gap: 8px;
             padding: 12px 16px;
+            justify-content: flex-start;
           }
           .flt-thumb {
-            width: 72px;
-            height: 52px;
+            width: 68px;
+            height: 50px;
             flex-shrink: 0;
+          }
+          .flt-section {
+            padding-top: 4rem;
+            padding-bottom: 3rem;
+          }
+          .flt-header {
+            padding-bottom: 2rem;
           }
         }
       `}</style>
