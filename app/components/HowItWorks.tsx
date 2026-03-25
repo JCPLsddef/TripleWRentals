@@ -158,32 +158,6 @@ export default function HowItWorks() {
         <div className="text-center mb-10 md:mb-12 lg:mb-14">
 
           {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              marginBottom: '24px',
-            }}
-          >
-            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-            <span style={{
-              fontSize: '11px',
-              fontWeight: 500,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: '#C9A84C',
-              fontFamily: "'Outfit', sans-serif",
-            }}>
-              The Process
-            </span>
-            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-          </motion.div>
-
           {/* Headline */}
           <motion.h2
             initial={{ opacity: 0, y: 24 }}

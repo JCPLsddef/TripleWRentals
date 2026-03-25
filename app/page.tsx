@@ -456,11 +456,17 @@ export default function Home() {
 
       {/* ── SECTION 3: Stats Bar ─────────────────────────────── */}
       <section ref={statsRef} style={{
-        background: '#060402',
+        background: '#0E0B07',
         borderTop: '1px solid rgba(201,168,76,0.10)',
         borderBottom: '1px solid rgba(201,168,76,0.10)',
-        padding: '44px 24px',
+        padding: '52px 24px',
+        position: 'relative',
       }}>
+        {/* Radial gold glow */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%)',
+        }} />
         <div className="stats-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
@@ -520,24 +526,17 @@ export default function Home() {
         {/* Ambient glow */}
         <div aria-hidden="true" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 65%)',
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 65%)',
           filter: 'blur(40px)',
         }} />
 
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
-          {/* Section label */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 20 }}>
-            <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
-            <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>WHO THIS IS FOR</span>
-            <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
-          </div>
-
           <h2 style={{
             fontFamily: "'Playfair Display', serif",
             fontSize: 'clamp(28px, 4vw, 52px)',
             fontWeight: 400,
-            color: '#F0E8D8',
+            color: '#1C1510',
             textAlign: 'center',
             letterSpacing: '-0.02em',
             lineHeight: 1.1,
@@ -576,14 +575,14 @@ export default function Home() {
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(20px, 2vw, 26px)',
                 fontWeight: 400,
-                color: '#F0E8D8',
+                color: '#1C1510',
                 marginBottom: 16,
                 lineHeight: 1.2,
               }}>Families & Reunions</h3>
               <p style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 15,
-                color: '#A89880',
+                color: '#4A3A28',
                 fontWeight: 300,
                 lineHeight: 1.8,
                 marginBottom: 28,
@@ -596,7 +595,7 @@ export default function Home() {
                 {['Sleeps up to 14 guests', 'Delivered to any Texas location', 'Full kitchen, beds, bathrooms ready'].map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(168,152,128,0.85)', fontWeight: 300 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#4A3A28', fontWeight: 300 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -624,14 +623,14 @@ export default function Home() {
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(20px, 2vw, 26px)',
                 fontWeight: 400,
-                color: '#F0E8D8',
+                color: '#1C1510',
                 marginBottom: 16,
                 lineHeight: 1.2,
               }}>Corporate & Events</h3>
               <p style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 15,
-                color: '#A89880',
+                color: '#4A3A28',
                 fontWeight: 300,
                 lineHeight: 1.8,
                 marginBottom: 28,
@@ -644,7 +643,7 @@ export default function Home() {
                 {['Horse shows & equestrian events', 'Corporate retreats & team trips', 'Weekend events, same-day confirmed'].map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(168,152,128,0.85)', fontWeight: 300 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#4A3A28', fontWeight: 300 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -658,7 +657,7 @@ export default function Home() {
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic',
               fontSize: 'clamp(16px, 1.6vw, 20px)',
-              color: 'rgba(240,232,216,0.60)',
+              color: 'rgba(28,21,16,0.50)',
               marginBottom: 28,
             }}>
               Not sure which RV fits your group? We&apos;ll match you in minutes.
@@ -775,17 +774,6 @@ export default function Home() {
 
           {/* Header — centered */}
           <div style={{ textAlign: 'center', marginBottom: 52 }}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 20 }}
-            >
-              <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
-              <span style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>WHY TRIPLE W</span>
-              <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
-            </motion.div>
-
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -955,28 +943,20 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 8: FAQ ───────────────────────────────────── */}
-      <section id="faq" style={{ background: '#0D0B09', padding: '88px 0', position: 'relative', overflow: 'hidden' }}>
-
-        {/* Noise texture */}
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n4'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n4)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
+      <section id="faq" style={{ background: '#F4EDE3', padding: '88px 0', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(201,168,76,0.20)' }}>
 
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
           <div style={{ marginBottom: 48, textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Outfit', sans-serif" }}>Common Questions</span>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
-            </div>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '520px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#2A1F14', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '520px', margin: '0 auto' }}>
               Everything You Need<br />to Know.
             </h2>
           </div>
 
           <div>
             {faqs.map((faq, i) => (
-              <div key={i} className="faq-item" style={{ borderBottom: '1px solid rgba(201,168,76,0.10)', padding: '20px 0' }}>
+              <div key={i} className="faq-item" style={{ borderBottom: '1px solid rgba(42,31,20,0.12)', padding: '20px 0' }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{
@@ -990,7 +970,7 @@ export default function Home() {
                 >
                   <span style={{
                     fontFamily: "'Outfit', sans-serif",
-                    fontSize: 14, fontWeight: 500, color: '#F0E8D8',
+                    fontSize: 14, fontWeight: 500, color: '#2A1F14',
                     lineHeight: 1.5, textAlign: 'left',
                     letterSpacing: '0.01em',
                   }}>{faq.q}</span>
@@ -1013,7 +993,7 @@ export default function Home() {
                   transition: 'max-height 0.3s ease',
                 }}>
                   <p style={{
-                    fontSize: 13, color: '#A89880',
+                    fontSize: 13, color: '#5A4030',
                     lineHeight: 1.8, paddingTop: '10px', paddingBottom: '12px',
                     fontFamily: "'Outfit', sans-serif",
                     fontWeight: 300,
@@ -1027,8 +1007,8 @@ export default function Home() {
           <div style={{
             marginTop: '36px',
             padding: '24px 28px',
-            background: 'rgba(201,168,76,0.04)',
-            border: '1px solid rgba(201,168,76,0.14)',
+            background: 'rgba(201,168,76,0.06)',
+            border: '1px solid rgba(201,168,76,0.25)',
             borderRadius: '8px',
             display: 'flex',
             alignItems: 'center',
@@ -1036,7 +1016,7 @@ export default function Home() {
             flexWrap: 'wrap',
             gap: '12px',
           }}>
-            <span style={{ fontSize: '14px', color: '#E0D6C6', fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>
+            <span style={{ fontSize: '14px', color: '#2A1F14', fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>
               Still have questions?
             </span>
             <a
@@ -1059,6 +1039,64 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Tension Strip ────────────────────────────────────── */}
+      <section style={{
+        background: '#0A0806',
+        padding: '64px 24px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(201,168,76,0.12)',
+      }}>
+        {/* Subtle vignette */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.03) 0%, transparent 60%)',
+        }} />
+
+        <div style={{
+          maxWidth: 560,
+          margin: '0 auto',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 1,
+        }}>
+          {/* Gold rule */}
+          <div style={{
+            width: 40,
+            height: 1,
+            background: 'rgba(201,168,76,0.50)',
+            margin: '0 auto 28px',
+          }} />
+
+          {/* Line 1 */}
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic',
+            fontWeight: 300,
+            fontSize: 'clamp(16px, 1.8vw, 20px)',
+            color: 'rgba(240,232,216,0.60)',
+            letterSpacing: '0.01em',
+            lineHeight: 1.5,
+            margin: '0 0 14px',
+          }}>
+            Weekend dates fill fast.
+          </p>
+
+          {/* Line 2 */}
+          <p style={{
+            fontFamily: "'Playfair Display', serif",
+            fontWeight: 400,
+            fontSize: 'clamp(18px, 2.2vw, 26px)',
+            color: '#C9A84C',
+            letterSpacing: '-0.01em',
+            lineHeight: 1.3,
+            margin: 0,
+          }}>
+            The RV you want may not be available next week.
+          </p>
+        </div>
+      </section>
+
       {/* ── SECTION 9: Closing CTA ───────────────────────────── */}
       <section id="quote" style={{ background: '#0A0806', padding: '88px 0', position: 'relative', overflow: 'hidden' }}>
 
@@ -1069,11 +1107,6 @@ export default function Home() {
 
           {/* Section heading */}
           <div style={{ marginBottom: 32, textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>BOOK YOUR RENTAL</span>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
-            </div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, marginBottom: 14 }}>
               Reserve Your Dates.<br />
               <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>We Handle the Rest.</em>
@@ -1277,11 +1310,6 @@ export default function Home() {
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n6'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n6)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '16px' }}>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-              <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>FIND US</span>
-              <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-            </div>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(28px, 3.5vw, 44px)',

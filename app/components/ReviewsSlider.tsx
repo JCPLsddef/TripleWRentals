@@ -108,29 +108,15 @@ export default function ReviewsSlider() {
   };
 
   return (
-    <section id="reviews" className="bg-[#0F0D0B] py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section id="reviews" className="py-24 px-6 md:px-12 lg:px-20 overflow-hidden" style={{ background: '#F7F4F0', borderTop: '1px solid rgba(201,168,76,0.25)' }}>
       <div className="max-w-7xl mx-auto">
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center justify-center gap-2.5 mb-5"
-        >
-          <span className="inline-block w-7 h-px bg-[#C9A84C]/60 flex-shrink-0" />
-          <span className="text-[#C9A84C] text-[11px] tracking-[0.15em] uppercase" style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 500 }}>Guest Reviews</span>
-          <span className="inline-block w-7 h-px bg-[#C9A84C]/60 flex-shrink-0" />
-        </motion.div>
-
         {/* Headline */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-[#F3EDE3] text-3xl md:text-4xl lg:text-5xl mb-6 text-center"
-          style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}
+          className="text-3xl md:text-4xl lg:text-5xl mb-6 text-center" style={{ color: '#1A1A18', fontFamily: 'Cormorant Garamond, serif', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}
         >
           Real Trips. Real People. Real Reviews.
         </motion.h2>
@@ -141,8 +127,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#A89880] mb-10 flex items-center justify-center gap-2.5 flex-wrap"
-          style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: 300 }}
+          className="mb-10 flex items-center justify-center gap-2.5 flex-wrap" style={{ color: '#4A4A42', fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: 300 }}
         >
           <span className="text-[#C9A84C]" style={{ fontWeight: 500 }}>4.7 stars</span>
           <span>on Google</span>
@@ -198,7 +183,7 @@ export default function ReviewsSlider() {
         >
           <button
             onClick={prevSlide}
-            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] hover:border-[#C9A84C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(201,168,76,0.15)]"
+            className="w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300" style={{ background: '#FFFFFF', borderColor: '#E0D8CC', color: '#C9A84C' }}
             aria-label="Previous reviews"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -212,7 +197,7 @@ export default function ReviewsSlider() {
                 className={`h-1.5 rounded-full transition-all duration-400 ${
                   index === currentSlide
                     ? 'bg-[#C9A84C] w-10 shadow-[0_0_8px_rgba(201,168,76,0.4)]'
-                    : 'bg-[#2A2520] w-1.5 hover:bg-[#3A3530]'
+                    : 'bg-[#D4C8B8] w-1.5 hover:bg-[#C0B4A4]'
                 }`}
                 aria-label={`Go to page ${index + 1}`}
               />
@@ -221,7 +206,7 @@ export default function ReviewsSlider() {
 
           <button
             onClick={nextSlide}
-            className="w-11 h-11 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] hover:border-[#C9A84C]/40 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(201,168,76,0.15)]"
+            className="w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300" style={{ background: '#FFFFFF', borderColor: '#E0D8CC', color: '#C9A84C' }}
             aria-label="Next reviews"
           >
             <ChevronRight className="w-5 h-5" />
@@ -232,7 +217,7 @@ export default function ReviewsSlider() {
         <div className="md:hidden flex items-center justify-center gap-4 mb-12">
           <button
             onClick={prevSlide}
-            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] transition-colors"
+            className="w-10 h-10 rounded-full border flex items-center justify-center transition-colors" style={{ background: '#FFFFFF', borderColor: '#E0D8CC', color: '#C9A84C' }}
             aria-label="Previous review"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -243,7 +228,7 @@ export default function ReviewsSlider() {
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? 'bg-[#C9A84C] w-8' : 'bg-[#2A2520] w-1.5'
+                  index === currentSlide ? 'bg-[#C9A84C] w-8' : 'bg-[#D4C8B8] w-1.5'
                 }`}
                 aria-label={`Go to review ${index + 1}`}
               />
@@ -251,7 +236,7 @@ export default function ReviewsSlider() {
           </div>
           <button
             onClick={nextSlide}
-            className="w-10 h-10 rounded-full border border-[#2A2520]/60 bg-[#15120F] flex items-center justify-center text-[#C9A84C] hover:bg-[#1A1410] transition-colors"
+            className="w-10 h-10 rounded-full border flex items-center justify-center transition-colors" style={{ background: '#FFFFFF', borderColor: '#E0D8CC', color: '#C9A84C' }}
             aria-label="Next review"
           >
             <ChevronRight className="w-5 h-5" />
@@ -273,7 +258,7 @@ export default function ReviewsSlider() {
           >
             Start Your Booking
           </a>
-          <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', color: '#6B5F52', marginTop: '16px', letterSpacing: '0.03em', fontWeight: 300 }}>
+          <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', color: '#8A7868', marginTop: '16px', letterSpacing: '0.03em', fontWeight: 300 }}>
             Most bookings confirmed within the hour &nbsp;·&nbsp; White-glove service from first call to last night
           </p>
         </motion.div>
