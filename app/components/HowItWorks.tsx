@@ -1,20 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Phone, Calendar, Key } from 'lucide-react';
 
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isDesktop, setIsDesktop] = useState<boolean>(false);
-
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start 0.6", "end 0.3"]
@@ -145,7 +136,7 @@ export default function HowItWorks() {
         <div style={{ position: 'relative' }}>
 
           {/* Desktop horizontal connector line — hidden below md via CSS */}
-          <div style={{ position: 'absolute', top: 'calc(16px + 72px)', left: 0, right: 0, height: '2px', pointerEvents: 'none', display: isDesktop ? 'block' : 'none' }}>
+          <div className="hw-line-desktop" style={{ position: 'absolute', top: 'calc(16px + 72px)', left: 0, right: 0, height: '2px', pointerEvents: 'none', display: 'none' }}>
             <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none">
               <line
                 x1="16.7%"
@@ -194,7 +185,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Mobile vertical connector line — hidden at md+ via CSS */}
-          <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '2px', height: '100%', pointerEvents: 'none', display: isDesktop ? 'none' : 'block' }}>
+          <div className="hw-line-mobile" style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '2px', height: '100%', pointerEvents: 'none', display: 'block' }}>
             <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none">
               <line
                 x1="1"
@@ -243,9 +234,9 @@ export default function HowItWorks() {
           </div>
 
           {/* Steps grid */}
-          <div style={{
+          <div className="hw-steps-grid" style={{
             display: 'grid',
-            gridTemplateColumns: isDesktop ? 'repeat(3, 1fr)' : '1fr',
+            gridTemplateColumns: '1fr',
             gap: 0,
             textAlign: 'center',
             alignItems: 'start',
@@ -255,13 +246,14 @@ export default function HowItWorks() {
               return (
                 <div
                   key={index}
+                  className="hw-step"
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     textAlign: 'center',
                     padding: '0 24px',
-                    marginBottom: isDesktop ? 0 : '48px',
+                    marginBottom: '48px',
                   }}
                 >
                   {/* Step number */}
@@ -425,6 +417,23 @@ export default function HowItWorks() {
         </motion.div>
 
       </div>
+
+      <style>{`
+        @media (min-width: 768px) {
+          .hw-steps-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+          .hw-step {
+            margin-bottom: 0 !important;
+          }
+          .hw-line-desktop {
+            display: block !important;
+          }
+          .hw-line-mobile {
+            display: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

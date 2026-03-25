@@ -745,7 +745,6 @@ export default function RVSlider() {
     <>
       <section className="flt-section" id="fleet">
         <div className="flt-header">
-          <p className="flt-eyebrow">The Fleet</p>
           <h2 className="flt-title">Every Journey<br />Starts Here.</h2>
           <p className="flt-subtitle">
             14 premium RVs. Every one maintained to perfection.<br />
@@ -827,7 +826,7 @@ export default function RVSlider() {
 
         <div className="flt-cta-bar">
           <p className="flt-cta-text">Ready to hit the road?</p>
-          <a href="#booking" className="flt-cta-btn">
+          <a href="#quote" className="flt-cta-btn">
             Check Availability
             <svg viewBox="0 0 20 20" fill="none" className="flt-cta-icon" aria-hidden>
               <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -850,15 +849,6 @@ export default function RVSlider() {
           padding: 0 2rem 4.5rem;
           max-width: 680px;
           margin: 0 auto;
-        }
-        .flt-eyebrow {
-          font-family: 'Outfit', sans-serif;
-          font-size: 0.68rem;
-          font-weight: 500;
-          letter-spacing: 0.28em;
-          text-transform: uppercase;
-          color: #D4A853;
-          margin: 0 0 1.25rem;
         }
         .flt-title {
           font-family: 'Cormorant Garamond', Georgia, serif;
