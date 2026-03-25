@@ -1,10 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 
 interface RVImage {
   id: number;
@@ -703,236 +699,380 @@ const rvModels: RVModel[] = [
   },
 ];
 
-interface ArrowProps {
-  onClick?: () => void;
-}
+export default function RVSlider() {
+  const [activeModel, setActiveModel] = useState(0);
+  const [activeImage, setActiveImage] = useState(0);
+  const [prevSrc, setPrevSrc] = useState<string | null>(null);
+  const [fading, setFading] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
 
-const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full p-3 transition-all duration-300 group border border-white/20"
-    aria-label="Previous slide"
-  >
-    <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-  </button>
-);
+  const rv = rvModels[activeModel];
+  const img = rv.images[activeImage];
 
-const NextArrow: React.FC<ArrowProps> = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full p-3 transition-all duration-300 group border border-white/20"
-    aria-label="Next slide"
-  >
-    <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
-  </button>
-);
+  const changeModel = (idx: number) => {
+    if (idx === activeModel) return;
+    setPrevSrc(rv.images[activeImage].image);
+    setFading(true);
+    setTimeout(() => {
+      setActiveModel(idx);
+      setActiveImage(0);
+      setFading(false);
+      setPrevSrc(null);
+    }, 380);
+  };
 
-function RVModelSlider({ rv, rvIndex, currentRVIndex }: { rv: RVModel; rvIndex: number; currentRVIndex: number }) {
-  const sliderRef = useRef<Slider>(null);
+  const changeImage = (idx: number) => {
+    if (idx === activeImage) return;
+    setActiveImage(idx);
+  };
 
   useEffect(() => {
-    if (rvIndex === currentRVIndex) {
-      sliderRef.current?.slickGoTo(0);
+    if (navRef.current) {
+      const el = navRef.current.querySelector<HTMLElement>('.flt-nav-active');
+      el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-  }, [currentRVIndex, rvIndex]);
+  }, [activeModel]);
 
-  const imageSliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    pauseOnHover: true,
-    fade: true,
-    cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)',
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
-    dotsClass: 'slick-dots image-dots',
-  };
+  useEffect(() => {
+    if (stripRef.current) {
+      const el = stripRef.current.querySelector<HTMLElement>('.flt-thumb-active');
+      el?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, [activeImage, activeModel]);
 
   return (
-    <div className="h-full relative">
-      <style>{`
-        .rv-image-slider .slick-slider,
-        .rv-image-slider .slick-list,
-        .rv-image-slider .slick-track,
-        .rv-image-slider .slick-slide > div {
-          height: 100%;
-        }
+    <>
+      <section className="flt-section" id="fleet">
+        <div className="flt-header">
+          <p className="flt-eyebrow">The Fleet</p>
+          <h2 className="flt-title">Every Journey<br />Starts Here.</h2>
+          <p className="flt-subtitle">
+            14 premium RVs. Every one maintained to perfection.<br />
+            Built to carry you somewhere you&apos;ll never forget.
+          </p>
+        </div>
 
-        .rv-image-slider .image-dots {
-          bottom: 30px;
-          display: flex !important;
-          justify-content: center;
-          align-items: center;
-          gap: 10px;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          z-index: 10;
-        }
+        <div className="flt-interface">
+          <nav className="flt-nav" ref={navRef} aria-label="RV Fleet">
+            {rvModels.map((m, i) => (
+              <button
+                key={i}
+                className={`flt-nav-item${i === activeModel ? ' flt-nav-active' : ''}`}
+                onClick={() => changeModel(i)}
+                aria-label={`View ${m.modelName}`}
+              >
+                <span className="flt-nav-num">{String(i + 1).padStart(2, '0')}</span>
+                <div className="flt-nav-text">
+                  <span className="flt-nav-name">{m.modelName}</span>
+                  <span className="flt-nav-cat">{m.category}</span>
+                </div>
+                <svg className="flt-nav-arrow" viewBox="0 0 16 16" fill="none" aria-hidden>
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            ))}
+          </nav>
 
-        .rv-image-slider .image-dots li {
-          margin: 0;
-          width: 10px;
-          height: 10px;
-        }
-
-        .rv-image-slider .image-dots li button {
-          width: 10px;
-          height: 10px;
-          padding: 0;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.4);
-          border: 2px solid rgba(255, 255, 255, 0.6);
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .rv-image-slider .image-dots li button:hover {
-          background: rgba(255, 255, 255, 0.6);
-          transform: scale(1.15);
-        }
-
-        .rv-image-slider .image-dots li.slick-active button {
-          background: white;
-          width: 28px;
-          border-radius: 5px;
-        }
-
-        .rv-image-slider .image-dots li button:before {
-          display: none;
-        }
-
-        .rv-slide-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-          .rv-slide-img {
-            object-fit: contain;
-          }
-          .rv-slide-wrapper {
-            background: #0D0B09;
-          }
-        }
-      `}</style>
-
-      <div className="rv-image-slider h-full">
-        <Slider {...imageSliderSettings} ref={sliderRef}>
-          {rv.images.map((image) => (
-            <div key={image.id} className="relative h-full">
-              <div className="absolute inset-0 rv-slide-wrapper">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={image.image}
-                  alt={image.title}
-                  className="rv-slide-img"
-                />
+          <div className="flt-display">
+            <div className="flt-hero">
+              {prevSrc && (
+                <img src={prevSrc} alt="" className="flt-hero-img flt-img-prev" aria-hidden />
+              )}
+              <img
+                key={`${activeModel}-${activeImage}`}
+                src={img.image}
+                alt={img.title}
+                className={`flt-hero-img flt-img-curr ${fading ? 'flt-fade-out' : 'flt-fade-in'}`}
+              />
+              <div className="flt-grad-bottom" aria-hidden />
+              <div className="flt-grad-left" aria-hidden />
+              <div className="flt-info">
+                <div className="flt-badges">
+                  <span className="flt-badge flt-badge-cat">{rv.category}</span>
+                  <span className="flt-badge flt-badge-sleeps">{rv.sleeps}</span>
+                </div>
+                <h3 className="flt-model-name">{rv.modelName}</h3>
+                <p className="flt-img-label">{img.title}</p>
+                <p className="flt-img-desc">{img.description}</p>
+              </div>
+              <div className="flt-counter" aria-hidden>
+                <span className="flt-cnt-curr">{String(activeModel + 1).padStart(2, '0')}</span>
+                <span className="flt-cnt-sep">/</span>
+                <span className="flt-cnt-total">{String(rvModels.length).padStart(2, '0')}</span>
               </div>
             </div>
-          ))}
-        </Slider>
-      </div>
-    </div>
-  );
-}
 
-export function RVSlider() {
-  const mainSliderRef = useRef<Slider>(null);
-  const [currentRVIndex, setCurrentRVIndex] = useState(0);
-
-  const mainSliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-    arrows: false,
-    beforeChange: (_current: number, next: number) => {
-      setCurrentRVIndex(next);
-    },
-  };
-
-  const goToPrevRV = () => {
-    mainSliderRef.current?.slickPrev();
-  };
-
-  const goToNextRV = () => {
-    mainSliderRef.current?.slickNext();
-  };
-
-  const currentRV = rvModels[currentRVIndex];
-
-  return (
-    <div className="rv-slider-container">
-      <style>{`
-        .rv-slider-container {
-          width: 100%;
-          height: 65vh;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .rv-slider-container .slick-slider,
-        .rv-slider-container .slick-list,
-        .rv-slider-container .slick-track,
-        .rv-slider-container .slick-slide > div {
-          height: 100%;
-        }
-
-        @media (max-width: 768px) {
-          .rv-slider-container {
-            height: min(65vw, 380px);
-          }
-        }
-      `}</style>
-
-      {/* RV Model Navigation — top center */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-4">
-        <button
-          onClick={goToPrevRV}
-          className="bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full p-2.5 transition-all duration-300 border border-white/20 hover:scale-110"
-          aria-label="Previous RV model"
-        >
-          <ChevronLeft className="w-5 h-5 text-white" />
-        </button>
-
-        <div className="bg-white/8 backdrop-blur-xl rounded-2xl border border-white/15 px-8 py-3.5 shadow-2xl min-w-[280px]">
-          <div className="text-center">
-            <div className="text-white/60 text-xs tracking-widest uppercase mb-0.5" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400 }}>
-              {currentRV.category}
-            </div>
-            <div className="text-white text-xl md:text-2xl lg:text-3xl tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-              {currentRV.modelName}
-            </div>
-            <div className="text-white/50 text-xs mt-0.5" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: '0.05em' }}>
-              {currentRVIndex + 1} / {rvModels.length}
+            <div className="flt-strip-wrap">
+              <div className="flt-strip" ref={stripRef}>
+                {rv.images.map((im, i) => (
+                  <button
+                    key={im.id}
+                    className={`flt-thumb${i === activeImage ? ' flt-thumb-active' : ''}`}
+                    onClick={() => changeImage(i)}
+                    aria-label={im.title}
+                    aria-pressed={i === activeImage}
+                  >
+                    <img src={im.image} alt={im.title} className="flt-thumb-img" />
+                    <div className="flt-thumb-hover">
+                      <span className="flt-thumb-label">{im.title}</span>
+                    </div>
+                    {i === activeImage && <span className="flt-thumb-bar" aria-hidden />}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        <button
-          onClick={goToNextRV}
-          className="bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full p-2.5 transition-all duration-300 border border-white/20 hover:scale-110"
-          aria-label="Next RV model"
-        >
-          <ChevronRight className="w-5 h-5 text-white" />
-        </button>
-      </div>
+        <div className="flt-cta-bar">
+          <p className="flt-cta-text">Ready to hit the road?</p>
+          <a href="#booking" className="flt-cta-btn">
+            Check Availability
+            <svg viewBox="0 0 20 20" fill="none" className="flt-cta-icon" aria-hidden>
+              <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </section>
 
-      <Slider {...mainSliderSettings} ref={mainSliderRef}>
-        {rvModels.map((rv, index) => (
-          <div key={index} className="h-full">
-            <RVModelSlider rv={rv} rvIndex={index} currentRVIndex={currentRVIndex} />
-          </div>
-        ))}
-      </Slider>
-    </div>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Outfit:wght@300;400;500;600&display=swap');
+
+        .flt-section {
+          position: relative;
+          background: #0D0B09;
+          padding: 7rem 0 5rem;
+          overflow: hidden;
+        }
+        .flt-header {
+          text-align: center;
+          padding: 0 2rem 4.5rem;
+          max-width: 680px;
+          margin: 0 auto;
+        }
+        .flt-eyebrow {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.68rem;
+          font-weight: 500;
+          letter-spacing: 0.28em;
+          text-transform: uppercase;
+          color: #D4A853;
+          margin: 0 0 1.25rem;
+        }
+        .flt-title {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(2.75rem, 5.5vw, 4.75rem);
+          font-weight: 300;
+          line-height: 1.06;
+          color: #F5F0E8;
+          margin: 0 0 1.4rem;
+        }
+        .flt-subtitle {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.975rem;
+          font-weight: 300;
+          line-height: 1.75;
+          color: #7A6B55;
+          margin: 0;
+        }
+        .flt-interface {
+          display: grid;
+          grid-template-columns: 268px 1fr;
+          max-width: 1380px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+        .flt-nav {
+          border-right: 1px solid rgba(212,168,83,0.1);
+          overflow-y: auto;
+          max-height: 616px;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(212,168,83,0.18) transparent;
+        }
+        .flt-nav::-webkit-scrollbar { width: 2px; }
+        .flt-nav::-webkit-scrollbar-thumb { background: rgba(212,168,83,0.22); border-radius: 2px; }
+        .flt-nav-item {
+          display: flex;
+          align-items: center;
+          gap: 0.9rem;
+          width: 100%;
+          padding: 0.95rem 1.4rem;
+          background: none;
+          border: none;
+          border-left: 2px solid transparent;
+          cursor: pointer;
+          text-align: left;
+          transition: background 0.22s ease, border-color 0.22s ease;
+        }
+        .flt-nav-item:hover { background: rgba(212,168,83,0.04); border-left-color: rgba(212,168,83,0.28); }
+        .flt-nav-active { background: rgba(212,168,83,0.055) !important; border-left-color: #D4A853 !important; }
+        .flt-nav-active .flt-nav-name { color: #F5F0E8 !important; }
+        .flt-nav-active .flt-nav-num { color: #D4A853 !important; }
+        .flt-nav-active .flt-nav-arrow { opacity: 1 !important; color: #D4A853 !important; transform: translateX(0) !important; }
+        .flt-nav-num {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.62rem;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          color: #3A3028;
+          min-width: 20px;
+          transition: color 0.22s ease;
+        }
+        .flt-nav-text { flex: 1; display: flex; flex-direction: column; gap: 0.18rem; overflow: hidden; }
+        .flt-nav-name {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.84rem;
+          font-weight: 400;
+          color: #8A7A62;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: color 0.22s ease;
+        }
+        .flt-nav-item:hover .flt-nav-name { color: #C4B09A; }
+        .flt-nav-cat {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.62rem;
+          font-weight: 300;
+          letter-spacing: 0.04em;
+          color: #4A3F30;
+        }
+        .flt-nav-arrow {
+          width: 15px; height: 15px;
+          color: #3A3028;
+          opacity: 0;
+          transform: translateX(-5px);
+          transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
+          flex-shrink: 0;
+        }
+        .flt-nav-item:hover .flt-nav-arrow { opacity: 0.45; transform: translateX(0); }
+        .flt-display { display: flex; flex-direction: column; }
+        .flt-hero { position: relative; height: 516px; overflow: hidden; background: #0C0A08; }
+        .flt-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .flt-img-curr { z-index: 2; }
+        .flt-img-prev { z-index: 1; }
+        @keyframes fltFadeIn { from { opacity: 0; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fltFadeOut { from { opacity: 1; } to { opacity: 0; } }
+        .flt-fade-in { animation: fltFadeIn 0.48s ease forwards; }
+        .flt-fade-out { animation: fltFadeOut 0.32s ease forwards; }
+        .flt-grad-bottom {
+          position: absolute; bottom: 0; left: 0; right: 0; height: 68%;
+          background: linear-gradient(to top, rgba(13,11,9,0.94) 0%, rgba(13,11,9,0.45) 45%, transparent 100%);
+          z-index: 3; pointer-events: none;
+        }
+        .flt-grad-left {
+          position: absolute; top: 0; left: 0; bottom: 0; width: 28%;
+          background: linear-gradient(to right, rgba(13,11,9,0.42) 0%, transparent 100%);
+          z-index: 3; pointer-events: none;
+        }
+        .flt-info { position: absolute; bottom: 2.25rem; left: 2.25rem; z-index: 4; max-width: 460px; }
+        .flt-badges { display: flex; gap: 0.55rem; margin-bottom: 0.8rem; }
+        .flt-badge {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.62rem; font-weight: 500;
+          letter-spacing: 0.13em; text-transform: uppercase;
+          padding: 0.28rem 0.7rem; border-radius: 2px;
+        }
+        .flt-badge-cat { background: rgba(212,168,83,0.14); color: #D4A853; border: 1px solid rgba(212,168,83,0.28); }
+        .flt-badge-sleeps { background: rgba(245,240,232,0.06); color: #8A7A62; border: 1px solid rgba(245,240,232,0.09); }
+        .flt-model-name {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(1.9rem, 3.5vw, 3.1rem);
+          font-weight: 300; line-height: 1.1;
+          color: #F5F0E8; margin: 0 0 0.55rem;
+        }
+        .flt-img-label {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.65rem; font-weight: 500;
+          letter-spacing: 0.16em; text-transform: uppercase;
+          color: #D4A853; margin: 0 0 0.35rem;
+        }
+        .flt-img-desc {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.845rem; font-weight: 300;
+          line-height: 1.62; color: #7A6B55; margin: 0;
+        }
+        .flt-counter {
+          position: absolute; top: 1.5rem; right: 1.75rem; z-index: 4;
+          display: flex; align-items: baseline; gap: 0.28rem;
+          font-family: 'Outfit', sans-serif;
+        }
+        .flt-cnt-curr { font-size: 1.65rem; font-weight: 300; color: #F5F0E8; line-height: 1; }
+        .flt-cnt-sep { font-size: 0.8rem; color: #3A3028; font-weight: 300; }
+        .flt-cnt-total { font-size: 0.8rem; color: #4A3F30; font-weight: 300; }
+        .flt-strip-wrap { background: #0E0C0A; border-top: 1px solid rgba(212,168,83,0.07); padding: 1.1rem 1.5rem; }
+        .flt-strip { display: flex; gap: 0.7rem; overflow-x: auto; scrollbar-width: none; }
+        .flt-strip::-webkit-scrollbar { display: none; }
+        .flt-thumb {
+          flex-shrink: 0; position: relative;
+          width: 108px; height: 70px;
+          border: 1.5px solid transparent; border-radius: 3px;
+          overflow: hidden; cursor: pointer; background: #1A1510;
+          transition: transform 0.2s ease, border-color 0.22s ease;
+          padding: 0;
+        }
+        .flt-thumb:hover { transform: translateY(-2px); border-color: rgba(212,168,83,0.3); }
+        .flt-thumb-active { border-color: #D4A853 !important; }
+        .flt-thumb-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: opacity 0.22s ease; display: block; }
+        .flt-thumb:hover .flt-thumb-img { opacity: 0.72; }
+        .flt-thumb-active .flt-thumb-img { opacity: 1; }
+        .flt-thumb-hover {
+          position: absolute; inset: 0;
+          background: linear-gradient(to top, rgba(13,11,9,0.75) 0%, transparent 55%);
+          display: flex; align-items: flex-end;
+          padding: 0.3rem 0.38rem; opacity: 0; transition: opacity 0.2s ease;
+        }
+        .flt-thumb:hover .flt-thumb-hover { opacity: 1; }
+        .flt-thumb-label {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.58rem; font-weight: 400; color: #F5F0E8; line-height: 1.25;
+          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .flt-thumb-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: #D4A853; display: block; }
+        .flt-cta-bar {
+          display: flex; align-items: center; justify-content: center;
+          gap: 2.5rem; padding: 3.5rem 2rem 0;
+          max-width: 1380px; margin: 0 auto;
+        }
+        .flt-cta-text {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: 1.45rem; font-weight: 300; font-style: italic;
+          color: #6A5A45; margin: 0;
+        }
+        .flt-cta-btn {
+          display: inline-flex; align-items: center; gap: 0.6rem;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.76rem; font-weight: 600;
+          letter-spacing: 0.13em; text-transform: uppercase;
+          color: #0D0B09; background: #D4A853;
+          padding: 0.88rem 2rem; border-radius: 2px;
+          text-decoration: none;
+          transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+        }
+        .flt-cta-btn:hover { background: #E0B96A; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,168,83,0.22); }
+        .flt-cta-icon { width: 17px; height: 17px; transition: transform 0.22s ease; }
+        .flt-cta-btn:hover .flt-cta-icon { transform: translateX(4px); }
+
+        @media (max-width: 960px) {
+          .flt-interface { grid-template-columns: 1fr; padding: 0; }
+          .flt-nav { border-right: none; border-bottom: 1px solid rgba(212,168,83,0.08); max-height: none; display: flex; overflow-x: auto; scrollbar-width: none; padding: 0.4rem 1rem; gap: 0.15rem; }
+          .flt-nav::-webkit-scrollbar { display: none; }
+          .flt-nav-item { flex-direction: column; align-items: flex-start; gap: 0.15rem; padding: 0.7rem 1rem; min-width: 130px; border-left: none; border-bottom: 2px solid transparent; }
+          .flt-nav-item:hover { border-left-color: transparent; border-bottom-color: rgba(212,168,83,0.3); }
+          .flt-nav-active { border-left-color: transparent !important; border-bottom-color: #D4A853 !important; }
+          .flt-nav-arrow { display: none; }
+          .flt-hero { height: 400px; }
+        }
+        @media (max-width: 640px) {
+          .flt-section { padding: 4.5rem 0 4rem; }
+          .flt-hero { height: 300px; }
+          .flt-info { left: 1.25rem; bottom: 1.25rem; max-width: calc(100% - 2.5rem); }
+          .flt-model-name { font-size: 1.7rem; }
+          .flt-thumb { width: 84px; height: 56px; }
+          .flt-cta-bar { flex-direction: column; gap: 1.1rem; text-align: center; padding: 2.5rem 1.5rem 0; }
+        }
+      `}</style>
+    </>
   );
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Truck, Star, Clock, Phone } from 'lucide-react';
-import { RVSlider } from './components/RVSlider';
+import RVSlider from './components/RVSlider';
 import ReviewsSlider from './components/ReviewsSlider';
 import HeroSection from './components/HeroSection';
 import HowItWorks from './components/HowItWorks';
