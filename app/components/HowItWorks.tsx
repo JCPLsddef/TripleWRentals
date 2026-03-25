@@ -6,10 +6,9 @@ import { Phone, Calendar, Key } from 'lucide-react';
 
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.12 });
   const [isDesktop, setIsDesktop] = useState<boolean>(false);
   const stepsRef = useRef<HTMLDivElement>(null);
-  const stepsInView = useInView(stepsRef, { once: true, amount: 0.2 });
+  const stepsInView = useInView(stepsRef, { once: true, amount: 0.15 });
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
@@ -24,6 +23,14 @@ export default function HowItWorks() {
   });
 
   const lineProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  // Hoisted useTransform calls — must always be called (rules of hooks)
+  const desktopLineOffset = useTransform(lineProgress, [0, 1], [1600, 0]);
+  const desktopBeadCx = useTransform(lineProgress, [0, 0.33, 0.66, 1], ['16.7%', '50%', '83.3%', '83.3%']);
+  const beadOpacity = useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]);
+  const mobileLineOffset = useTransform(lineProgress, [0, 1], [2000, 0]);
+  const mobileBeadCy = useTransform(lineProgress, [0, 0.33, 0.66, 1], ['8%', '50%', '92%', '92%']);
+  const mobileBeadOpacity = useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]);
 
   const steps = [
     {
@@ -98,7 +105,7 @@ export default function HowItWorks() {
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={stepsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           style={{ textAlign: 'center', marginBottom: '56px' }}
         >
@@ -138,107 +145,103 @@ export default function HowItWorks() {
         {/* Steps container */}
         <div ref={stepsRef} style={{ position: 'relative' }}>
 
-          {/* Desktop horizontal connector line (md+) */}
-          {isDesktop && (
-            <div style={{ position: 'absolute', top: 'calc(16px + 72px)', left: 0, right: 0, height: '2px', pointerEvents: 'none' }}>
-              <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none">
-                <line
-                  x1="16.7%"
-                  y1="1"
-                  x2="83.3%"
-                  y2="1"
-                  stroke="#C9A84C"
-                  strokeWidth="1"
-                  strokeDasharray="3 8"
-                  opacity="0.15"
-                />
-                <motion.line
-                  x1="16.7%"
-                  y1="1"
-                  x2="83.3%"
-                  y2="1"
-                  stroke="url(#lineGrad)"
-                  strokeWidth="1.5"
-                  strokeDasharray="1600"
-                  strokeDashoffset={useTransform(lineProgress, [0, 1], [1600, 0])}
-                  style={{ filter: 'drop-shadow(0 0 4px rgba(180,140,40,0.5))' }}
-                />
-                <motion.circle
-                  cx={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['16.7%', '50%', '83.3%', '83.3%'])}
-                  cy="1"
-                  r="3"
-                  fill="url(#beadGrad)"
-                  style={{
-                    filter: 'drop-shadow(0 0 6px rgba(180,140,40,0.8))',
-                    opacity: useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
-                  }}
-                />
-                <defs>
-                  <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#B8922A" />
-                    <stop offset="50%" stopColor="#C9A84C" />
-                    <stop offset="100%" stopColor="#B8922A" />
-                  </linearGradient>
-                  <radialGradient id="beadGrad">
-                    <stop offset="0%" stopColor="#0D0B09" />
-                    <stop offset="45%" stopColor="#E8C97A" />
-                    <stop offset="100%" stopColor="#B8922A" />
-                  </radialGradient>
-                </defs>
-              </svg>
-            </div>
-          )}
+          {/* Desktop horizontal connector line — hidden below md via CSS */}
+          <div style={{ position: 'absolute', top: 'calc(16px + 72px)', left: 0, right: 0, height: '2px', pointerEvents: 'none', display: isDesktop ? 'block' : 'none' }}>
+            <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none">
+              <line
+                x1="16.7%"
+                y1="1"
+                x2="83.3%"
+                y2="1"
+                stroke="#C9A84C"
+                strokeWidth="1"
+                strokeDasharray="3 8"
+                opacity="0.15"
+              />
+              <motion.line
+                x1="16.7%"
+                y1="1"
+                x2="83.3%"
+                y2="1"
+                stroke="url(#lineGrad)"
+                strokeWidth="1.5"
+                strokeDasharray="1600"
+                strokeDashoffset={desktopLineOffset}
+                style={{ filter: 'drop-shadow(0 0 4px rgba(180,140,40,0.5))' }}
+              />
+              <motion.circle
+                cx={desktopBeadCx}
+                cy="1"
+                r="3"
+                fill="url(#beadGrad)"
+                style={{
+                  filter: 'drop-shadow(0 0 6px rgba(180,140,40,0.8))',
+                  opacity: beadOpacity
+                }}
+              />
+              <defs>
+                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#B8922A" />
+                  <stop offset="50%" stopColor="#C9A84C" />
+                  <stop offset="100%" stopColor="#B8922A" />
+                </linearGradient>
+                <radialGradient id="beadGrad">
+                  <stop offset="0%" stopColor="#0D0B09" />
+                  <stop offset="45%" stopColor="#E8C97A" />
+                  <stop offset="100%" stopColor="#B8922A" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
 
-          {/* Mobile vertical connector line */}
-          {!isDesktop && (
-            <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '2px', height: '100%', pointerEvents: 'none' }}>
-              <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none">
-                <line
-                  x1="1"
-                  y1="8%"
-                  x2="1"
-                  y2="92%"
-                  stroke="#C9A84C"
-                  strokeWidth="1"
-                  strokeDasharray="3 8"
-                  opacity="0.15"
-                />
-                <motion.line
-                  x1="1"
-                  y1="8%"
-                  x2="1"
-                  y2="92%"
-                  stroke="url(#lineGradV)"
-                  strokeWidth="1.5"
-                  strokeDasharray="2000"
-                  strokeDashoffset={useTransform(lineProgress, [0, 1], [2000, 0])}
-                  style={{ filter: 'drop-shadow(0 0 4px rgba(180,140,40,0.4))' }}
-                />
-                <motion.circle
-                  cx="1"
-                  cy={useTransform(lineProgress, [0, 0.33, 0.66, 1], ['8%', '50%', '92%', '92%'])}
-                  r="3"
-                  fill="url(#beadGradV)"
-                  style={{
-                    filter: 'drop-shadow(0 0 6px rgba(180,140,40,0.8))',
-                    opacity: useTransform(lineProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
-                  }}
-                />
-                <defs>
-                  <linearGradient id="lineGradV" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#B8922A" />
-                    <stop offset="50%" stopColor="#C9A84C" />
-                    <stop offset="100%" stopColor="#B8922A" />
-                  </linearGradient>
-                  <radialGradient id="beadGradV">
-                    <stop offset="0%" stopColor="#0D0B09" />
-                    <stop offset="45%" stopColor="#E8C97A" />
-                    <stop offset="100%" stopColor="#B8922A" />
-                  </radialGradient>
-                </defs>
-              </svg>
-            </div>
-          )}
+          {/* Mobile vertical connector line — hidden at md+ via CSS */}
+          <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '2px', height: '100%', pointerEvents: 'none', display: isDesktop ? 'none' : 'block' }}>
+            <svg style={{ width: '100%', height: '100%' }} preserveAspectRatio="none">
+              <line
+                x1="1"
+                y1="8%"
+                x2="1"
+                y2="92%"
+                stroke="#C9A84C"
+                strokeWidth="1"
+                strokeDasharray="3 8"
+                opacity="0.15"
+              />
+              <motion.line
+                x1="1"
+                y1="8%"
+                x2="1"
+                y2="92%"
+                stroke="url(#lineGradV)"
+                strokeWidth="1.5"
+                strokeDasharray="2000"
+                strokeDashoffset={mobileLineOffset}
+                style={{ filter: 'drop-shadow(0 0 4px rgba(180,140,40,0.4))' }}
+              />
+              <motion.circle
+                cx="1"
+                cy={mobileBeadCy}
+                r="3"
+                fill="url(#beadGradV)"
+                style={{
+                  filter: 'drop-shadow(0 0 6px rgba(180,140,40,0.8))',
+                  opacity: mobileBeadOpacity
+                }}
+              />
+              <defs>
+                <linearGradient id="lineGradV" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#B8922A" />
+                  <stop offset="50%" stopColor="#C9A84C" />
+                  <stop offset="100%" stopColor="#B8922A" />
+                </linearGradient>
+                <radialGradient id="beadGradV">
+                  <stop offset="0%" stopColor="#0D0B09" />
+                  <stop offset="45%" stopColor="#E8C97A" />
+                  <stop offset="100%" stopColor="#B8922A" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
 
           {/* Steps grid */}
           <div style={{
@@ -265,7 +268,7 @@ export default function HowItWorks() {
                   {/* Step number */}
                   <motion.span
                     initial={{ opacity: 0 }}
-                    animate={stepsInView ? { opacity: 1 } : {}}
+                    animate={stepsInView ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ delay: circleDelays[index], duration: 0.5 }}
                     style={{
                       fontFamily: "'Outfit', sans-serif",
@@ -282,9 +285,9 @@ export default function HowItWorks() {
 
                   {/* Circle with icon */}
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={stepsInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: circleDelays[index], duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    animate={stepsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: circleDelays[index] }}
                     style={{
                       position: 'relative',
                       width: '144px',
@@ -330,9 +333,9 @@ export default function HowItWorks() {
 
                   {/* Text block */}
                   <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={stepsInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: textDelays[index], duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={stepsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                    transition={{ duration: 0.5, ease: 'easeOut', delay: textDelays[index] }}
                   >
                     <h3 style={{
                       fontFamily: "'Cormorant Garamond', serif",
