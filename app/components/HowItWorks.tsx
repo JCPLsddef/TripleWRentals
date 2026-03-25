@@ -10,6 +10,8 @@ export default function HowItWorks() {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   const [isDesktop, setIsDesktop] = useState<boolean>(false);
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const stepsInView = useInView(stepsRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 1024);
@@ -363,7 +365,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Steps Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-0">
+          <div ref={stepsRef} className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-0">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const stepState = getStepState(index);
@@ -400,8 +402,21 @@ export default function HowItWorks() {
                 <motion.div
                   key={index}
                   initial="hidden"
-                  animate={shouldShow ? "visible" : "hidden"}
-                  variants={stompAnimation}
+                  animate={stepsInView ? "visible" : "hidden"}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.75, y: 18 },
+                    visible: {
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.65,
+                        delay: [0.1, 0.35, 0.6][index],
+                        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+                        scale: { type: "spring", damping: 22, stiffness: 320, restDelta: 0.001 }
+                      }
+                    }
+                  }}
                   whileHover={stepState !== 'inactive' ? { scale: 1.015 } : undefined}
                   transition={{ scale: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
                   onMouseEnter={() => setHoveredStep(index)}

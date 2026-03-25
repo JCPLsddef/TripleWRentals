@@ -71,25 +71,25 @@ const whyFeatures = [
     icon: Truck,
     title: 'White-Glove Delivery',
     description: 'We bring the RV to you—fully set up, perfectly cleaned, and ready to enjoy. No hassle, no trips, just premium service.',
-    image: 'https://images.unsplash.com/photo-1677129666186-d29eba893fe3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jaWVyZ2UlMjBzZXJ2aWNlJTIwbHV4dXJ5fGVufDF8fHx8MTc3NDIxNDc3M3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'https://static.wixstatic.com/media/62f926_b687d2cf0d374773b965a26a2da00832~mv2.webp',
   },
   {
     icon: Star,
     title: 'The Finest Fleet in East Texas',
     description: 'Meticulously maintained, modern RVs from top brands. Each one handpicked for comfort, reliability, and premium amenities.',
-    image: 'https://images.unsplash.com/photo-1625093887818-b89d990121a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwUlYlMjBmbGVldHxlbnwxfHx8fDE3NzQyMTQ3NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'https://static.wixstatic.com/media/62f926_e82ba4137dbb44ecb018eda98ab166b9~mv2.webp',
   },
   {
     icon: Clock,
     title: 'Reserved Within the Hour',
     description: 'Fast, simple booking with instant confirmations. No waiting, no uncertainty—just quick, professional service.',
-    image: 'https://images.unsplash.com/photo-1667574307418-8a44b96d96be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBSViUyMG1vdG9yaG9tZSUyMHByZW1pdW18ZW58MXx8fHwxNzc0MjE0NzcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'https://static.wixstatic.com/media/62f926_a4d11de4461f4bdd954c4a308e09f35b~mv2.webp',
   },
   {
     icon: Phone,
     title: 'Always Reachable',
     description: "Real people, real support. Call, text, or message anytime during your trip. We're here to make sure everything goes perfectly.",
-    image: 'https://images.unsplash.com/photo-1768678218064-72683d81bf2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdXN0b21lciUyMHNlcnZpY2UlMjBwaG9uZSUyMHN1cHBvcnR8ZW58MXx8fHwxNzc0MTI0NjY5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'https://static.wixstatic.com/media/62f926_c393c781146e46d6938c11efb3f377d6~mv2.webp',
   },
 ] as const;
 
