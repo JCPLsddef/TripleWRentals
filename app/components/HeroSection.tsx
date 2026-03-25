@@ -92,7 +92,7 @@ export default function HeroSection() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.45)', borderRadius: '999px', padding: '7px 20px', fontFamily: "'Cormorant Garamond', serif", fontSize: '11px', letterSpacing: '0.16em', color: '#C9A84C', textTransform: 'uppercase', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
             <span style={{ fontSize: '10px', letterSpacing: '3px' }}>★★★★★</span>
             <span style={{ color: 'rgba(201,168,76,0.30)' }}>|</span>
-            <span>Tyler, Texas</span>
+            <span>Tyler, Texas · From $200/night</span>
             <span style={{ color: 'rgba(201,168,76,0.30)' }}>|</span>
             <span>Open 24 / 7</span>
           </div>
@@ -105,13 +105,13 @@ export default function HeroSection() {
           style={{ margin: 0, textAlign: 'center' }}
         >
           <span style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
-            Texas&apos;s Finest
+            Your Group Shows Up.
           </span>
           <span style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
-            RV Experience.
+            Everything&apos;s Already
           </span>
           <span style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(44px, 6.4vw, 80px)', fontWeight: 400, color: '#C9A84C', lineHeight: 1.02, letterSpacing: '-0.022em', marginTop: '6px', textShadow: '0 2px 30px rgba(0,0,0,0.95), 0 0 60px rgba(201,168,76,0.15)' }}>
-            Delivered to You.
+            Taken Care Of.
           </span>
         </motion.h1>
 
@@ -121,6 +121,25 @@ export default function HeroSection() {
           transition={{ duration: 0.55, delay: 0.9, ease: 'easeOut' }}
           style={{ width: '52px', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.80), transparent)', margin: '28px auto', transformOrigin: 'center' }}
         />
+
+        {/* Price anchor */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.92, ease: 'easeOut' }}
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 400,
+            fontSize: 'clamp(11px, 1.1vw, 13px)',
+            color: 'rgba(201,168,76,0.85)',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase' as const,
+            marginBottom: '0px',
+            marginTop: '0px',
+            textShadow: '0 1px 20px rgba(0,0,0,0.95)',
+          }}
+        >
+          From $200/night · Delivered &amp; Set Up Anywhere in Texas
+        </motion.p>
 
         {/* Subhead */}
         <motion.p
@@ -152,18 +171,18 @@ export default function HeroSection() {
           style={{ display: 'flex', gap: '14px', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', justifyContent: 'center' }}
         >
           <a
-            href="tel:9729656901"
+            href="#gallery"
             className="hero-cta-primary"
             onMouseEnter={e => { e.currentTarget.style.background = '#E2C06A'; e.currentTarget.style.boxShadow = '0 6px 40px rgba(201,168,76,0.50), 0 2px 8px rgba(0,0,0,0.4)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
             onMouseLeave={e => { e.currentTarget.style.background = '#C9A84C'; e.currentTarget.style.boxShadow = '0 4px 28px rgba(201,168,76,0.35), 0 2px 8px rgba(0,0,0,0.4)'; e.currentTarget.style.transform = 'translateY(0)' }}
           >
-            Call (972) 965-6901
+            See the Fleet ↓
           </a>
-          <a href="#gallery" className="hero-cta-secondary"
+          <a href="tel:9729656901" className="hero-cta-secondary"
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.65)'; e.currentTarget.style.color = '#FFFFFF' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.30)'; e.currentTarget.style.color = 'rgba(242,234,216,0.80)' }}
           >
-            See the Fleet ↓
+            Call (972) 965-6901
           </a>
         </motion.div>
 
