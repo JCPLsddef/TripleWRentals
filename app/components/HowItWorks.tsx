@@ -1,14 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Phone, Calendar, Key } from 'lucide-react';
 
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isDesktop, setIsDesktop] = useState<boolean>(false);
-  const stepsRef = useRef<HTMLDivElement>(null);
-  const stepsInView = useInView(stepsRef, { once: true, amount: 0.15 });
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
@@ -53,8 +51,8 @@ export default function HowItWorks() {
     }
   ];
 
-  const circleDelays = [0.1, 0.3, 0.5];
-  const textDelays = [0.2, 0.4, 0.6];
+  const circleDelays = [0.05, 0.20, 0.35];
+  const textDelays = [0.15, 0.30, 0.45];
 
   return (
     <section
@@ -105,7 +103,8 @@ export default function HowItWorks() {
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={stepsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           style={{ textAlign: 'center', marginBottom: '56px' }}
         >
@@ -143,7 +142,7 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* Steps container */}
-        <div ref={stepsRef} style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           {/* Desktop horizontal connector line — hidden below md via CSS */}
           <div style={{ position: 'absolute', top: 'calc(16px + 72px)', left: 0, right: 0, height: '2px', pointerEvents: 'none', display: isDesktop ? 'block' : 'none' }}>
@@ -268,7 +267,8 @@ export default function HowItWorks() {
                   {/* Step number */}
                   <motion.span
                     initial={{ opacity: 0 }}
-                    animate={stepsInView ? { opacity: 1 } : { opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ delay: circleDelays[index], duration: 0.5 }}
                     style={{
                       fontFamily: "'Outfit', sans-serif",
@@ -286,7 +286,8 @@ export default function HowItWorks() {
                   {/* Circle with icon */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.85 }}
-                    animate={stepsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: circleDelays[index] }}
                     style={{
                       position: 'relative',
@@ -334,7 +335,8 @@ export default function HowItWorks() {
                   {/* Text block */}
                   <motion.div
                     initial={{ opacity: 0, y: 16 }}
-                    animate={stepsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.5, ease: 'easeOut', delay: textDelays[index] }}
                   >
                     <h3 style={{
@@ -370,11 +372,9 @@ export default function HowItWorks() {
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={stepsInView ? {
-            opacity: 1,
-            y: 0,
-            transition: { delay: 0.8, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
-          } : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: 0.1, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           style={{ textAlign: 'center', marginTop: '64px' }}
         >
           {/* Gold divider */}
