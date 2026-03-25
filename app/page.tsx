@@ -501,40 +501,183 @@ export default function Home() {
       <section id="gallery" aria-label="RV Interior Showcase" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Noise texture */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n0)'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', opacity: 0.035, mixBlendMode: 'overlay', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{
-          background: '#0D0B09',
-          padding: '88px 40px 48px',
-          textAlign: 'center',
-          position: 'relative', zIndex: 1,
-        }}>
-          {/* Eyebrow */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
-            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-            <span style={{ fontSize: '11px', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>OUR FLEET</span>
-            <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)' }} />
-          </div>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(28px, 4vw, 48px)',
-            fontWeight: 400, color: '#F0E8D8',
-            marginBottom: 16,
-            letterSpacing: '-0.02em', lineHeight: 1.12,
-          }}>
-            Step Inside.<br />
-            <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>See Every Detail.</em>
-          </h2>
-          <p style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 14, lineHeight: 1.7,
-            color: '#A89880',
-            maxWidth: 480, margin: '0 auto',
-            fontWeight: 300,
-          }}>
-            Browse each RV model and explore every room. Use the arrows to switch units.
-          </p>
-        </div>
+
         <div style={{ background: '#0D0B09', position: 'relative', zIndex: 1 }}>
           <RVSlider />
+        </div>
+      </section>
+
+
+      {/* ── SECTION 4C: Who This Is For ──────────────────────── */}
+      <section style={{
+        background: '#0A0806',
+        padding: '88px 0',
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(201,168,76,0.10)',
+        borderBottom: '1px solid rgba(201,168,76,0.10)',
+      }}>
+        {/* Ambient glow */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 65%)',
+          filter: 'blur(40px)',
+        }} />
+
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+
+          {/* Section label */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 20 }}>
+            <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
+            <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontFamily: "'Inter', sans-serif" }}>WHO THIS IS FOR</span>
+            <span style={{ display: 'inline-block', width: 28, height: 1, background: 'rgba(201,168,76,0.6)' }} />
+          </div>
+
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(28px, 4vw, 52px)',
+            fontWeight: 400,
+            color: '#F0E8D8',
+            textAlign: 'center',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.1,
+            marginBottom: 64,
+          }}>
+            Built for the Moments<br/>
+            <em style={{ color: '#C9A84C', fontStyle: 'italic' }}>That Actually Matter.</em>
+          </h2>
+
+          {/* Two columns */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: 24,
+          }}>
+
+            {/* Card 1 — Families */}
+            <div style={{
+              background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
+              border: '1px solid rgba(201,168,76,0.14)',
+              borderRadius: 12,
+              padding: '44px 40px',
+              position: 'relative',
+              overflow: 'hidden',
+            }}>
+              <div style={{
+                width: 48, height: 48,
+                borderRadius: 10,
+                background: 'rgba(201,168,76,0.08)',
+                border: '1px solid rgba(201,168,76,0.20)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 28,
+                fontSize: 22,
+              }}>🏕️</div>
+              <h3 style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(20px, 2vw, 26px)',
+                fontWeight: 400,
+                color: '#F0E8D8',
+                marginBottom: 16,
+                lineHeight: 1.2,
+              }}>Families & Reunions</h3>
+              <p style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 15,
+                color: '#A89880',
+                fontWeight: 300,
+                lineHeight: 1.8,
+                marginBottom: 28,
+              }}>
+                Hosting a reunion, birthday, or family getaway? We deliver to your campsite, park, or private land. Your family walks into a fully stocked, climate-controlled home base — no setup, no stress, just time together.
+              </p>
+              <div style={{
+                display: 'flex', flexDirection: 'column' as const, gap: 10,
+              }}>
+                {['Sleeps up to 14 guests', 'Delivered to any Texas location', 'Full kitchen, beds, bathrooms ready'].map((item) => (
+                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(168,152,128,0.85)', fontWeight: 300 }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Card 2 — Corporate */}
+            <div style={{
+              background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
+              border: '1px solid rgba(201,168,76,0.14)',
+              borderRadius: 12,
+              padding: '44px 40px',
+              position: 'relative',
+              overflow: 'hidden',
+            }}>
+              <div style={{
+                width: 48, height: 48,
+                borderRadius: 10,
+                background: 'rgba(201,168,76,0.08)',
+                border: '1px solid rgba(201,168,76,0.20)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 28,
+                fontSize: 22,
+              }}>🤝</div>
+              <h3 style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(20px, 2vw, 26px)',
+                fontWeight: 400,
+                color: '#F0E8D8',
+                marginBottom: 16,
+                lineHeight: 1.2,
+              }}>Corporate & Events</h3>
+              <p style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 15,
+                color: '#A89880',
+                fontWeight: 300,
+                lineHeight: 1.8,
+                marginBottom: 28,
+              }}>
+                Planning a team retreat, corporate event, or horse show weekend? Your crew deserves better than a hotel block. We deliver premium accommodations on-site — so your team stays comfortable, focused, and impressed.
+              </p>
+              <div style={{
+                display: 'flex', flexDirection: 'column' as const, gap: 10,
+              }}>
+                {['Horse shows & equestrian events', 'Corporate retreats & team trips', 'Weekend events, same-day confirmed'].map((item) => (
+                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: 'rgba(168,152,128,0.85)', fontWeight: 300 }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom CTA */}
+          <div style={{ textAlign: 'center', marginTop: 52 }}>
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: 'italic',
+              fontSize: 'clamp(16px, 1.6vw, 20px)',
+              color: 'rgba(240,232,216,0.60)',
+              marginBottom: 28,
+            }}>
+              Not sure which RV fits your group? We&apos;ll match you in minutes.
+            </p>
+            <a href="tel:9729656901" style={{
+              display: 'inline-block',
+              background: '#C9A84C',
+              color: '#0D0B09',
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 500,
+              fontSize: 12,
+              letterSpacing: '0.10em',
+              textTransform: 'uppercase' as const,
+              padding: '16px 48px',
+              borderRadius: 4,
+              textDecoration: 'none',
+            }}>Call (972) 965-6901</a>
+          </div>
+
         </div>
       </section>
 
@@ -543,6 +686,75 @@ export default function Home() {
 
       {/* ── SECTION 5.5: Unicorn Banner ──────────────────────── */}
       <UnicornBanner />
+
+      {/* ── Cinematic Social Proof Quote ─────────────────────── */}
+      <section style={{
+        background: '#060402',
+        padding: '100px 24px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(201,168,76,0.08)',
+      }}>
+        {/* Background texture */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{
+          maxWidth: 780,
+          margin: '0 auto',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 1,
+        }}>
+
+          {/* Opening quote mark */}
+          <div style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(60px, 8vw, 96px)',
+            color: 'rgba(201,168,76,0.15)',
+            lineHeight: 0.8,
+            marginBottom: 32,
+            fontWeight: 400,
+          }}>&ldquo;</div>
+
+          {/* The quote */}
+          <blockquote style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic',
+            fontWeight: 300,
+            fontSize: 'clamp(22px, 3.2vw, 38px)',
+            color: '#F0E8D8',
+            lineHeight: 1.55,
+            letterSpacing: '-0.01em',
+            margin: '0 0 40px',
+          }}>
+            He goes beyond Ritz Carlton standards. Our new first choice when coming to Texas Rose Horse Park.
+          </blockquote>
+
+          {/* Attribution line */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 16,
+          }}>
+            <div style={{ width: 40, height: 1, background: 'rgba(201,168,76,0.4)' }} />
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 12,
+              fontWeight: 400,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase' as const,
+              color: '#C9A84C',
+            }}>Tim S. &middot; Verified Google Review</span>
+            <div style={{ width: 40, height: 1, background: 'rgba(201,168,76,0.4)' }} />
+          </div>
+
+        </div>
+      </section>
 
       {/* ── SECTION 6: Reviews ───────────────────────────────── */}
       <ReviewsSlider />
