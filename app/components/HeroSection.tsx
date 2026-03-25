@@ -45,7 +45,7 @@ export default function HeroSection() {
       <motion.div style={{ y: rvY, position: 'absolute', top: '-10%', left: 0, right: 0, bottom: 0, width: '100%', height: '130%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', paddingRight: '7%', paddingBottom: '7%' }}>
         <img
           src={ASSETS.rv} alt="Grand Design Reflection luxury fifth wheel RV" loading="eager" decoding="async"
-          style={{ height: '62%', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(0,0,0,0.55))' }}
+          style={{ height: '72%', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(0,0,0,0.55))' }}
         />
       </motion.div>
 
@@ -69,7 +69,7 @@ export default function HeroSection() {
       </motion.div>
 
       {/* ── Overlay 1: Left — text zone ───────────────────────── */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(112deg, rgba(6,4,2,0.95) 0%, rgba(6,4,2,0.82) 22%, rgba(6,4,2,0.52) 42%, rgba(6,4,2,0.18) 60%, transparent 75%)' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(112deg, rgba(6,4,2,0.88) 0%, rgba(6,4,2,0.72) 22%, rgba(6,4,2,0.40) 42%, rgba(6,4,2,0.18) 60%, transparent 75%)' }} />
 
       {/* ── Overlay 2: Bottom ─────────────────────────────────── */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(to top, rgba(6,4,2,0.98) 0%, rgba(6,4,2,0.85) 12%, rgba(6,4,2,0.45) 26%, rgba(6,4,2,0.12) 40%, transparent 55%)' }} />
@@ -129,8 +129,8 @@ export default function HeroSection() {
           style={{
             fontFamily: "'Inter', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(11px, 1.1vw, 13px)',
-            color: 'rgba(201,168,76,0.85)',
+            fontSize: 'clamp(12px, 1.2vw, 14px)',
+            color: 'rgba(201,168,76,1)',
             letterSpacing: '0.12em',
             textTransform: 'uppercase' as const,
             marginBottom: '0px',

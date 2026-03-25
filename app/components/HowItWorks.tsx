@@ -150,9 +150,9 @@ export default function HowItWorks() {
         mx-auto centres against the TRUE viewport width (no section padding offset).
       */}
       <div className="relative w-full
-                      max-w-5xl xl:max-w-6xl 2xl:max-w-7xl
+                      max-w-[900px]
                       mx-auto
-                      px-6 xl:px-10 2xl:px-14">
+                      px-6">
 
         {/* ── Title ─────────────────────────────────────────────── */}
         <div className="text-center mb-10 md:mb-12 lg:mb-14">

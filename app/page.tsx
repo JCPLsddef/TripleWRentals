@@ -516,19 +516,13 @@ export default function Home() {
 
       {/* ── SECTION 4C: Who This Is For ──────────────────────── */}
       <section style={{
-        background: '#0A0806',
+        background: '#F5F0E8',
         padding: '88px 0',
         position: 'relative',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(201,168,76,0.10)',
-        borderBottom: '1px solid rgba(201,168,76,0.10)',
+        borderTop: '1px solid rgba(201,168,76,0.20)',
+        borderBottom: '1px solid rgba(201,168,76,0.20)',
       }}>
-        {/* Ambient glow */}
-        <div aria-hidden="true" style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 65%)',
-          filter: 'blur(40px)',
-        }} />
 
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
@@ -659,7 +653,7 @@ export default function Home() {
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic',
               fontSize: 'clamp(16px, 1.6vw, 20px)',
-              color: 'rgba(28,21,16,0.50)',
+              color: 'rgba(28,21,16,0.55)',
               marginBottom: 28,
             }}>
               Not sure which RV fits your group? We&apos;ll match you in minutes.

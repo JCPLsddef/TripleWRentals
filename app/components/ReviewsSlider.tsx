@@ -108,15 +108,15 @@ export default function ReviewsSlider() {
   };
 
   return (
-    <section id="reviews" className="py-24 px-6 md:px-12 lg:px-20 overflow-hidden" style={{ background: '#F7F4F0', borderTop: '1px solid rgba(201,168,76,0.25)' }}>
-      <div className="max-w-7xl mx-auto">
+    <section id="reviews" style={{ background: '#F7F4F0', padding: '80px 0', overflow: 'hidden', borderTop: '1px solid rgba(201,168,76,0.25)' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px' }}>
         {/* Headline */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl md:text-4xl lg:text-5xl mb-6 text-center" style={{ color: '#1A1A18', fontFamily: 'Cormorant Garamond, serif', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}
+          style={{ fontSize: 'clamp(28px, 4vw, 52px)', textAlign: 'center', marginBottom: '12px', color: '#1A1A18', fontFamily: 'Cormorant Garamond, serif', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}
         >
           Real Trips. Real People. Real Reviews.
         </motion.h2>
@@ -138,7 +138,7 @@ export default function ReviewsSlider() {
         </motion.div>
 
         {/* Desktop: 3 Cards */}
-        <div className="hidden md:grid md:grid-cols-3 gap-5 mb-8">
+        <div className="hidden md:grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '40px' }}>
           {getCurrentReviews().map((review, index) => (
             <ReviewCard
               key={`${review.name}-${currentSlide}`}
@@ -179,7 +179,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="hidden md:flex justify-center items-center gap-5 mb-10"
+          className="hidden md:flex" style={{ justifyContent: 'center', alignItems: 'center', gap: '20px', marginBottom: '32px' }}
         >
           <button
             onClick={prevSlide}
