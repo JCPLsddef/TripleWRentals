@@ -28,7 +28,7 @@ export function ReviewCard({ name, image, excerpt, stars, delay = 0 }: ReviewCar
       </div>
 
       {/* Excerpt */}
-      <p className="text-[#E0D6C6] leading-[1.75] mb-auto" style={{ fontFamily: 'Inter, sans-serif', fontSize: '14.5px', lineHeight: '1.75', fontWeight: 300 }}>
+      <p className="text-[#E0D6C6] leading-[1.75] mb-auto" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14.5px', lineHeight: '1.75', fontWeight: 300 }}>
         &ldquo;{excerpt}&rdquo;
       </p>
 
@@ -40,10 +40,10 @@ export function ReviewCard({ name, image, excerpt, stars, delay = 0 }: ReviewCar
           className="w-12 h-12 rounded-full object-cover border-2 border-[#2A2520]/60 ring-1 ring-[#B68B3C]/10"
         />
         <div className="flex flex-col gap-0.5">
-          <div className="text-[#F3EDE3]" style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', fontWeight: 500 }}>
+          <div className="text-[#F3EDE3]" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '14px', fontWeight: 500 }}>
             {name}
           </div>
-          <div className="text-[#7A6E60]" style={{ fontFamily: 'Inter, sans-serif', fontSize: '12px' }}>
+          <div className="text-[#7A6E60]" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '12px' }}>
             Verified Google Review
           </div>
         </div>
