@@ -785,3 +785,64 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.22);
   outline: none;
 }
+
+/* ─── Mobile Optimization Pass ─────────────────────────────── */
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px 0;
+    row-gap: 36px;
+  }
+  .stats-grid > div {
+    border-right: none !important;
+    padding: 0 16px !important;
+  }
+  .stats-grid > div:nth-child(1),
+  .stats-grid > div:nth-child(3) {
+    border-right: 1px solid rgba(201,168,76,0.10) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-overlay-left {
+    background: linear-gradient(
+      180deg,
+      rgba(6,4,2,0.82) 0%,
+      rgba(6,4,2,0.65) 30%,
+      rgba(6,4,2,0.35) 55%,
+      transparent 75%
+    ) !important;
+  }
+  .hero-cta-primary {
+    padding: 16px 28px !important;
+    font-size: 12px !important;
+    width: auto !important;
+    min-width: 180px !important;
+  }
+  .hero-cta-secondary {
+    padding: 15px 24px !important;
+    font-size: 12px !important;
+    width: auto !important;
+    min-width: 160px !important;
+  }
+  .why-card-grid-v2 {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .why-card-v2 {
+    border-radius: 12px !important;
+  }
+  .why-card-v2-img {
+    height: 180px !important;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

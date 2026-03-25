@@ -1062,6 +1062,44 @@ export default function RVSlider() {
           .flt-thumb { width: 84px; height: 56px; }
           .flt-cta-bar { flex-direction: column; gap: 1.1rem; text-align: center; padding: 2.5rem 1.5rem 0; }
         }
+        @media (max-width: 767px) {
+          .flt-hero {
+            height: 52vw;
+            min-height: 260px;
+            max-height: 340px;
+          }
+          .flt-hero-img {
+            object-position: center center;
+            object-fit: contain;
+            background-color: #0D0B09;
+          }
+          .flt-nav {
+            padding: 0 16px;
+            gap: 4px;
+          }
+          .flt-nav-item {
+            padding: 10px 14px;
+            min-width: 140px;
+          }
+          .flt-nav-num {
+            font-size: 0.58rem;
+          }
+          .flt-nav-name {
+            font-size: 0.8rem;
+          }
+          .flt-nav-cat {
+            font-size: 0.68rem;
+          }
+          .flt-strip {
+            gap: 8px;
+            padding: 12px 16px;
+          }
+          .flt-thumb {
+            width: 72px;
+            height: 52px;
+            flex-shrink: 0;
+          }
+        }
       `}</style>
     </>
   );

@@ -69,7 +69,7 @@ export default function HeroSection() {
       </motion.div>
 
       {/* ── Overlay 1: Left — text zone ───────────────────────── */}
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(112deg, rgba(6,4,2,0.88) 0%, rgba(6,4,2,0.72) 22%, rgba(6,4,2,0.40) 42%, rgba(6,4,2,0.18) 60%, transparent 75%)' }} />
+      <div className="hero-overlay-left" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(112deg, rgba(6,4,2,0.88) 0%, rgba(6,4,2,0.72) 22%, rgba(6,4,2,0.40) 42%, rgba(6,4,2,0.18) 60%, transparent 75%)' }} />
 
       {/* ── Overlay 2: Bottom ─────────────────────────────────── */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 6, pointerEvents: 'none', background: 'linear-gradient(to top, rgba(6,4,2,0.98) 0%, rgba(6,4,2,0.85) 12%, rgba(6,4,2,0.45) 26%, rgba(6,4,2,0.12) 40%, transparent 55%)' }} />
