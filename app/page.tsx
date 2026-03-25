@@ -555,12 +555,13 @@ export default function Home() {
 
             {/* Card 1 — Families */}
             <div style={{
-              background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
-              border: '1px solid rgba(201,168,76,0.14)',
+              background: '#FFFFFF',
+              border: '1px solid rgba(201,168,76,0.25)',
               borderRadius: 12,
               padding: '44px 40px',
               position: 'relative',
               overflow: 'hidden',
+              boxShadow: '0 2px 16px rgba(28,21,16,0.08)',
             }}>
               <div style={{
                 width: 48, height: 48,
@@ -595,7 +596,7 @@ export default function Home() {
                 {['Sleeps up to 14 guests', 'Delivered to any Texas location', 'Full kitchen, beds, bathrooms ready'].map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#4A3A28', fontWeight: 300 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#5A4030', fontWeight: 300 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -603,12 +604,13 @@ export default function Home() {
 
             {/* Card 2 — Corporate */}
             <div style={{
-              background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
-              border: '1px solid rgba(201,168,76,0.14)',
+              background: '#FFFFFF',
+              border: '1px solid rgba(201,168,76,0.25)',
               borderRadius: 12,
               padding: '44px 40px',
               position: 'relative',
               overflow: 'hidden',
+              boxShadow: '0 2px 16px rgba(28,21,16,0.08)',
             }}>
               <div style={{
                 width: 48, height: 48,
@@ -643,7 +645,7 @@ export default function Home() {
                 {['Horse shows & equestrian events', 'Corporate retreats & team trips', 'Weekend events, same-day confirmed'].map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#4A3A28', fontWeight: 300 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#5A4030', fontWeight: 300 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -1122,7 +1124,7 @@ export default function Home() {
             border: '1px solid rgba(201,168,76,0.15)',
             borderRadius: '10px',
             padding: '36px 36px',
-            boxShadow: '0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(201,168,76,0.04)',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(201,168,76,0.04), inset 0 0 60px rgba(201,168,76,0.02)',
           }}>
             <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
               {[
@@ -1133,7 +1135,7 @@ export default function Home() {
                   <label style={{
                     fontSize: '10px', fontWeight: 500,
                     letterSpacing: '0.10em', textTransform: 'uppercase',
-                    color: '#6B5F52', fontFamily: "'Inter', sans-serif",
+                    color: '#A89880', fontFamily: "'Inter', sans-serif",
                   }}>{label}</label>
                   <input
                     type={type}
@@ -1162,7 +1164,7 @@ export default function Home() {
               <label style={{
                 fontSize: '10px', fontWeight: 500,
                 letterSpacing: '0.10em', textTransform: 'uppercase',
-                color: '#6B5F52', fontFamily: "'Inter', sans-serif",
+                color: '#A89880', fontFamily: "'Inter', sans-serif",
               }}>Rental Dates</label>
               <input
                 type="text"
@@ -1189,7 +1191,7 @@ export default function Home() {
               <label style={{
                 fontSize: '10px', fontWeight: 500,
                 letterSpacing: '0.10em', textTransform: 'uppercase',
-                color: '#6B5F52', fontFamily: "'Inter', sans-serif",
+                color: '#A89880', fontFamily: "'Inter', sans-serif",
               }}>Message</label>
               <textarea
                 rows={4}
@@ -1249,9 +1251,9 @@ export default function Home() {
                 color: '#0D0B09',
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '12px', fontWeight: 500,
-                letterSpacing: '0.08em',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                padding: '16px',
+                padding: '18px',
                 borderRadius: '4px',
                 border: 'none', cursor: formStatus === 'sending' ? 'default' : 'pointer',
                 transition: 'all 0.2s',
@@ -1295,7 +1297,7 @@ export default function Home() {
               fontFamily: "'Inter', sans-serif",
             }}>
               Prefer to call?{' '}
-              <a href="tel:9729656901" style={{ color: '#A89880', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.3)' }}>
+              <a href="tel:9729656901" style={{ color: '#C9A84C', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.4)' }}>
                 (972) 965-6901
               </a>
             </p>

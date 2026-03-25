@@ -8,6 +8,7 @@ export default function UnicornBanner() {
       width: '100%',
       display: 'block',
       lineHeight: 0,
+      overflow: 'hidden',
       borderTop: '1px solid rgba(201,168,76,0.08)',
       borderBottom: '1px solid rgba(201,168,76,0.08)',
       background: '#0D0B09',
