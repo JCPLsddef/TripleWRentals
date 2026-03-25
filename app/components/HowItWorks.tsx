@@ -28,18 +28,18 @@ export default function HowItWorks() {
   const steps = [
     {
       icon: Phone,
-      title: 'Call or Text Us',
-      description: "Tell us your dates, occasion, and group size. We'll find the right RV and confirm availability — most bookings sorted within the hour."
+      title: "Tell Us Your Trip",
+      description: "Share your dates, destination, and group size. We'll match you to the right RV and confirm availability — usually within the hour.",
     },
     {
       icon: Calendar,
-      title: 'We Handle Everything',
-      description: 'Delivery, setup, walkthrough, and insurance arranged for you. Every detail taken care of before you arrive.'
+      title: "We Handle Everything",
+      description: "Delivery, setup, walkthrough, and insurance — all arranged for you. You focus on the anticipation. We handle the rest.",
     },
     {
       icon: Key,
-      title: 'Arrive & Enjoy',
-      description: 'Your RV is on-site, fully prepped, and ready. Step inside, make yourself at home, and let the experience begin.'
+      title: "Arrive & Live It",
+      description: "Your RV is on-site, fully prepped, and ready to go. Step inside. The trip you've been looking forward to starts now.",
     }
   ];
 
@@ -175,7 +175,7 @@ export default function HowItWorks() {
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
               color: '#C9A84C',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Outfit', sans-serif",
             }}>
               The Process
             </span>
@@ -199,12 +199,12 @@ export default function HowItWorks() {
               padding: '0 16px',
             }}
           >
-            From First Call<br />
+            Simple Process.<br />
             <em style={{
               fontStyle: 'italic',
               color: '#C9A84C',
               textShadow: '0 0 40px rgba(201,168,76,0.25)',
-            }}>to Check-In.</em>
+            }}>Unforgettable Trip.</em>
           </motion.h2>
 
           {/* Sub-line */}
@@ -213,7 +213,7 @@ export default function HowItWorks() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Outfit', sans-serif",
               fontWeight: 300,
               fontSize: '14px',
               letterSpacing: '0.03em',
@@ -225,7 +225,7 @@ export default function HowItWorks() {
               marginRight: 'auto',
             }}
           >
-            Three steps. Every detail handled for you.
+            Three steps. Every detail handled. Nothing left to chance.
           </motion.p>
         </div>
 
@@ -356,7 +356,7 @@ export default function HowItWorks() {
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
                   color: 'rgba(201,168,76,0.10)',
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: "'Outfit', sans-serif",
                 }}>0{i + 1}</div>
               </div>
             ))}
@@ -468,7 +468,7 @@ export default function HowItWorks() {
                   >
                     <span style={{
                       display: 'block',
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: "'Outfit', sans-serif",
                       fontWeight: 400,
                       fontSize: '10px',
                       letterSpacing: '0.18em',
@@ -501,7 +501,7 @@ export default function HowItWorks() {
                     <p
                       className="transition-all duration-500"
                       style={{
-                        fontFamily: "'Inter', sans-serif",
+                        fontFamily: "'Outfit', sans-serif",
                         fontWeight: 300,
                         fontSize: 'clamp(12px, 1vw, 14px)',
                         lineHeight: 1.75,
@@ -549,7 +549,7 @@ export default function HowItWorks() {
               overflow: 'hidden',
               background: 'linear-gradient(105deg, #A87820 0%, #C9A84C 28%, #E8C86A 52%, #C9A84C 72%, #A87820 100%)',
               color: '#0D0B09',
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Outfit', sans-serif",
               fontWeight: 500,
               fontSize: '11.5px',
               letterSpacing: '0.18em',
@@ -568,7 +568,7 @@ export default function HowItWorks() {
 
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: "'Outfit', sans-serif",
               fontWeight: 300,
               fontSize: '11px',
               letterSpacing: '0.05em',
@@ -576,7 +576,7 @@ export default function HowItWorks() {
               marginTop: '22px',
             }}
           >
-            Confirmed within the hour &nbsp;·&nbsp; White-glove service throughout
+            Most bookings confirmed within the hour &nbsp;·&nbsp; White-glove service from first call to last night
           </p>
         </motion.div>
 
