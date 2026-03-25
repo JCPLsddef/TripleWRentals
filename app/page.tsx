@@ -14,32 +14,32 @@ import './globals.css';
 
 const faqs = [
   {
-    q: 'How far do you deliver?',
-    a: 'We deliver across Texas: Tyler, Dallas/Fort Worth, Houston, Austin, San Antonio, and surrounding areas. Call us to confirm your specific location and get a delivery quote.',
+    q: "How far do you deliver?",
+    a: "We deliver across Texas — Tyler, Dallas/Fort Worth, Houston, Austin, San Antonio, and surrounding areas. Call us to confirm your location and get a delivery quote.",
   },
   {
     q: "What's included in the rental?",
-    a: "Every rental includes full delivery, setup, fresh linens, cookware, and a complete walkthrough. You get 24/7 support for your entire stay. Optional outdoor package (grill, chairs, lawn setup) available for just $75. Ask us when you call!",
+    a: "Full delivery, setup, fresh linens, cookware, and a complete walkthrough. Plus 24/7 support for your entire stay. Optional outdoor package — grill, chairs, full lawn setup — available for $75. Just ask when you call.",
   },
   {
-    q: 'Do I need a truck or special license?',
-    a: "No. We deliver and set up the RV at your location. You don't need a truck, a hitch, or any experience. We handle all the logistics. You just walk in.",
+    q: "Do I need a truck or special license?",
+    a: "No. We deliver and set up everything at your location. No truck, no hitch, no experience needed. You walk in and it's ready.",
   },
   {
-    q: "What if something breaks or doesn't work during my stay?",
-    a: "Call or text us immediately. We're available 24/7 and will either walk you through it over the phone or come out to fix it in person. In the rare event something can't be resolved, we'll make it right. Your experience is our reputation.",
+    q: "What if something breaks during my stay?",
+    a: "Call or text us immediately. We're available 24/7 and will walk you through it or come out in person. In the rare event something can't be resolved, we'll make it right. Your experience is our reputation.",
   },
   {
-    q: 'How does booking work?',
-    a: 'Simple: call or text us at (972) 965-6901. Tell us your dates and location. Most bookings are confirmed within the hour.',
+    q: "How does booking work?",
+    a: "Call or text us at (972) 965-6901. Tell us your dates and location. Most bookings are confirmed within the hour.",
   },
   {
     q: "What's your cancellation policy?",
-    a: "Full refund for cancellations 30+ days out. 50% refund for 8–30 days. No refund within 7 days. Something came up? Just call us. We'll always try to work with you.",
+    a: "Full refund for cancellations 30+ days out. 50% refund for 8–30 days. No refund within 7 days. Something came up? Just call us — we'll always try to work with you.",
   },
   {
-    q: 'Can I rent for just one night?',
-    a: "Yes. We offer daily, weekly, and monthly rentals. Weekend single-night slots go fast, especially in spring and fall. Call early to lock in your dates.",
+    q: "Can I rent for just one night?",
+    a: "Yes. We offer daily, weekly, and monthly rentals. Weekend slots go fast, especially spring and fall. Call early to lock in your dates.",
   },
 ];
 
@@ -754,11 +754,11 @@ export default function Home() {
           <div style={{ marginBottom: 48, textAlign: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '18px' }}>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
-              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>COMMON QUESTIONS</span>
+              <span style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#C9A84C', fontWeight: 500, fontFamily: "'Outfit', sans-serif" }}>Common Questions</span>
               <span style={{ display: 'inline-block', width: '28px', height: '1px', background: 'rgba(201,168,76,0.6)', flexShrink: 0 }} />
             </div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '520px', margin: '0 auto' }}>
-              Everything You Need<br />to Know
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#F0E8D8', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '520px', margin: '0 auto' }}>
+              Everything You Need<br />to Know.
             </h2>
           </div>
 
@@ -777,7 +777,7 @@ export default function Home() {
                   aria-expanded={openFaq === i}
                 >
                   <span style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Outfit', sans-serif",
                     fontSize: 14, fontWeight: 500, color: '#F0E8D8',
                     lineHeight: 1.5, textAlign: 'left',
                     letterSpacing: '0.01em',
@@ -803,7 +803,7 @@ export default function Home() {
                   <p style={{
                     fontSize: 13, color: '#A89880',
                     lineHeight: 1.8, paddingTop: '10px', paddingBottom: '12px',
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: "'Outfit', sans-serif",
                     fontWeight: 300,
                   }}>{faq.a}</p>
                 </div>
@@ -824,7 +824,7 @@ export default function Home() {
             flexWrap: 'wrap',
             gap: '12px',
           }}>
-            <span style={{ fontSize: '14px', color: '#E0D6C6', fontFamily: "'Playfair Display', serif", fontWeight: 400 }}>
+            <span style={{ fontSize: '14px', color: '#E0D6C6', fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>
               Still have questions?
             </span>
             <a
@@ -836,7 +836,7 @@ export default function Home() {
                 textDecoration: 'none',
                 borderBottom: '1px solid rgba(201,168,76,0.35)',
                 paddingBottom: '2px',
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'Outfit', sans-serif",
                 letterSpacing: '0.02em',
               }}
             >
