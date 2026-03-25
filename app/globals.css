@@ -203,11 +203,12 @@ button { font-family: inherit; }
 .why-card-v2-img {
   position: absolute;
   inset: 0;
-  opacity: 0.07;
-  transition: opacity 0.7s ease;
+  opacity: 0.18;
+  filter: brightness(1.1) saturate(0.8);
+  transition: opacity 0.7s ease, filter 0.7s ease;
   pointer-events: none;
 }
-.why-card-v2:hover .why-card-v2-img { opacity: 0.13; }
+.why-card-v2:hover .why-card-v2-img { opacity: 0.25; }
 
 /* Icon badge */
 .why-card-v2-icon-badge {

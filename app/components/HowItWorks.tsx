@@ -475,10 +475,10 @@ export default function HowItWorks() {
                   <motion.div
                     className="mt-8 px-3 lg:px-4 xl:px-6"
                     initial={{ opacity: 0, y: 12 }}
-                    animate={shouldShow ? {
+                    animate={stepsInView ? {
                       opacity: 1,
                       y: 0,
-                      transition: { delay: 0.32, duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+                      transition: { delay: [0.2, 0.45, 0.7][index], duration: 0.55, ease: [0.22, 1, 0.36, 1] }
                     } : { opacity: 0, y: 12 }}
                   >
                     <span style={{
