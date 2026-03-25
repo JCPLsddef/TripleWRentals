@@ -347,11 +347,11 @@ export default function HowItWorks() {
 
               const nodeStyles = {
                 inactive: {
-                  borderColor: 'rgba(201,168,76,0.20)',
-                  glowOpacity: 0,
-                  iconColor: 'rgba(201,168,76,0.28)',
-                  iconFilter: 'none',
-                  boxShadow: '0 0 0 1px rgba(201,168,76,0.06), 0 4px 28px rgba(0,0,0,0.5)',
+                  borderColor: '#C9A84C',
+                  glowOpacity: 0.35,
+                  iconColor: '#C9A84C',
+                  iconFilter: 'drop-shadow(0 0 8px rgba(198,156,82,0.55))',
+                  boxShadow: '0 0 52px rgba(198,156,82,0.22), 0 12px 40px rgba(0,0,0,0.55), inset 0 0 32px rgba(198,156,82,0.08)',
                 },
                 active: {
                   borderColor: '#C9A84C',
@@ -361,11 +361,11 @@ export default function HowItWorks() {
                   boxShadow: '0 0 52px rgba(198,156,82,0.22), 0 12px 40px rgba(0,0,0,0.55), inset 0 0 32px rgba(198,156,82,0.08)',
                 },
                 completed: {
-                  borderColor: '#B8922A',
-                  glowOpacity: 0.15,
-                  iconColor: '#B8922A',
-                  iconFilter: 'drop-shadow(0 0 4px rgba(180,140,40,0.32))',
-                  boxShadow: '0 0 28px rgba(180,140,40,0.16), 0 6px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(180,140,40,0.06)',
+                  borderColor: '#C9A84C',
+                  glowOpacity: 0.35,
+                  iconColor: '#C9A84C',
+                  iconFilter: 'drop-shadow(0 0 8px rgba(198,156,82,0.55))',
+                  boxShadow: '0 0 52px rgba(198,156,82,0.22), 0 12px 40px rgba(0,0,0,0.55), inset 0 0 32px rgba(198,156,82,0.08)',
                 }
               };
 
@@ -391,7 +391,7 @@ export default function HowItWorks() {
                       }
                     }
                   }}
-                  whileHover={stepState !== 'inactive' ? { scale: 1.015 } : undefined}
+                  whileHover={{ scale: 1.015 }}
                   transition={{ scale: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
                   onMouseEnter={() => setHoveredStep(index)}
                   onMouseLeave={() => setHoveredStep(null)}
@@ -462,9 +462,7 @@ export default function HowItWorks() {
                       fontSize: '10px',
                       letterSpacing: '0.18em',
                       textTransform: 'uppercase',
-                      color: stepState === 'active' ? 'rgba(201,168,76,0.7)' :
-                             stepState === 'completed' ? 'rgba(201,168,76,0.35)' :
-                                                         'rgba(201,168,76,0.12)',
+                      color: 'rgba(201,168,76,0.65)',
                       marginBottom: '10px',
                       transition: 'color 0.5s ease',
                     }}>
@@ -480,9 +478,7 @@ export default function HowItWorks() {
                         letterSpacing: '-0.01em',
                         lineHeight: 1.2,
                         marginBottom: '10px',
-                        color: stepState === 'active'    ? '#F0E8D8' :
-                               stepState === 'completed' ? '#D4C8B4' :
-                                                           'rgba(240,232,216,0.18)',
+                        color: '#F0E8D8',
                       }}
                     >
                       {step.title}
@@ -496,9 +492,7 @@ export default function HowItWorks() {
                         lineHeight: 1.75,
                         maxWidth: '260px',
                         margin: '0 auto',
-                        color: stepState === 'active'    ? '#A89880' :
-                               stepState === 'completed' ? '#7A6E60' :
-                                                           'rgba(168,152,128,0.25)',
+                        color: '#A89880',
                       }}
                     >
                       {step.description}
@@ -513,10 +507,10 @@ export default function HowItWorks() {
         {/* ── CTA ─────────────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={currentStep >= 2 ? {
+          animate={stepsInView ? {
             opacity: 1,
             y: 0,
-            transition: { delay: 0.55, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
+            transition: { delay: 0.85, duration: 0.75, ease: [0.22, 1, 0.36, 1] }
           } : { opacity: 0, y: 24 }}
           className="text-center mt-10 md:mt-12 lg:mt-14"
         >

@@ -771,16 +771,16 @@ button { font-family: inherit; }
 /* ─── Form Polish ────────────────────────────────────────────── */
 input::placeholder,
 textarea::placeholder {
-  color: rgba(122, 110, 96, 0.55);
+  color: rgba(201, 168, 76, 0.40);
   font-family: 'Inter', sans-serif;
 }
 
 input:focus,
 textarea:focus {
-  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.07);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.22);
 }
 
 select:focus {
-  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.07);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.22);
   outline: none;
 }
