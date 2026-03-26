@@ -71,25 +71,25 @@ const whyFeatures = [
     icon: Truck,
     title: 'White-Glove Delivery',
     description: 'We bring the RV to you—fully set up, perfectly cleaned, and ready to enjoy. No hassle, no trips, just premium service.',
-    image: 'https://static.wixstatic.com/media/62f926_b687d2cf0d374773b965a26a2da00832~mv2.webp',
+    image: 'https://static.wixstatic.com/media/62f926_a497e83d30a946aeab85a380919167c9~mv2.webp',
   },
   {
     icon: Star,
     title: 'The Finest Fleet in East Texas',
     description: 'Meticulously maintained, modern RVs from top brands. Each one handpicked for comfort, reliability, and premium amenities.',
-    image: 'https://static.wixstatic.com/media/62f926_e82ba4137dbb44ecb018eda98ab166b9~mv2.webp',
+    image: 'https://static.wixstatic.com/media/62f926_b86114a3592b498d8035eea569758bc6~mv2.png',
   },
   {
     icon: Clock,
     title: 'Reserved Within the Hour',
     description: 'Fast, simple booking with instant confirmations. No waiting, no uncertainty—just quick, professional service.',
-    image: 'https://static.wixstatic.com/media/62f926_a4d11de4461f4bdd954c4a308e09f35b~mv2.webp',
+    image: 'https://static.wixstatic.com/media/62f926_c87969a6134e4536a1a5d61010d02c4a~mv2.png',
   },
   {
     icon: Phone,
     title: 'Always Reachable',
     description: "Real people, real support. Call, text, or message anytime during your trip. We're here to make sure everything goes perfectly.",
-    image: 'https://static.wixstatic.com/media/62f926_c393c781146e46d6938c11efb3f377d6~mv2.webp',
+    image: 'https://static.wixstatic.com/media/62f926_a940034c8aee471c977633f272c30af9~mv2.png',
   },
 ] as const;
 
@@ -819,40 +819,48 @@ export default function Home() {
                   animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                   transition={{ duration: 0.9, delay: delays[index], ease: [0.16, 1, 0.3, 1] }}
                   style={{
-                    background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
-                    border: '1px solid rgba(201,168,76,0.12)',
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.3), 0 0 1px rgba(201,168,76,0.1)',
+                    background: '#0D0B09',
+                    border: '1px solid rgba(201,168,76,0.14)',
+                    boxShadow: '0 4px 32px rgba(0,0,0,0.45)',
                   }}
                 >
                   {/* Inner glow on hover */}
                   <div className="why-card-v2-inner-glow" />
-                  {/* Top gradient tint on hover */}
-                  <div className="why-card-v2-top-glow" />
-                  {/* Photo background */}
-                  <div className="why-card-v2-img">
-                    <img src={feature.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+
+                  {/* Full-bleed photo + gradient overlay */}
+                  <div style={{ position: 'absolute', inset: 0, borderRadius: 14, overflow: 'hidden', zIndex: 0 }}>
+                    <img
+                      src={feature.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="why-card-v2-photo"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.75) saturate(0.85) contrast(1.08)', transition: 'filter 0.7s ease' }}
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0.10) 100%)', borderRadius: 14, zIndex: 1 }} />
                   </div>
 
-                  <div style={{ position: 'relative', padding: '40px 44px' }}>
+                  {/* Content pinned to bottom */}
+                  <div style={{ position: 'relative', zIndex: 2, padding: '40px 40px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', minHeight: 320 }}>
                     {/* Icon badge */}
                     <div
                       className="why-card-v2-icon-badge"
                       style={{
-                        width: 56,
-                        height: 56,
+                        width: 48,
+                        height: 48,
                         borderRadius: 10,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginBottom: 28,
-                        background: 'linear-gradient(135deg, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.04) 100%)',
-                        border: '1px solid rgba(201,168,76,0.22)',
-                        boxShadow: '0 4px 16px rgba(201,168,76,0.06)',
+                        marginBottom: 20,
+                        background: 'rgba(13,11,9,0.55)',
+                        border: '1px solid rgba(201,168,76,0.30)',
+                        backdropFilter: 'blur(8px)',
+                        WebkitBackdropFilter: 'blur(8px)',
                       }}
                     >
                       <Icon
                         className="why-card-v2-icon"
-                        size={24}
+                        size={22}
                         style={{ color: '#C9A84C' }}
                         strokeWidth={1.5}
                       />
@@ -860,23 +868,24 @@ export default function Home() {
 
                     <h3 style={{
                       fontFamily: "'Playfair Display', serif",
-                      fontSize: 'clamp(18px, 2vw, 24px)',
+                      fontSize: 'clamp(18px, 2vw, 22px)',
                       fontWeight: 400,
                       color: '#F0E8D8',
                       lineHeight: 1.25,
                       letterSpacing: '-0.01em',
-                      marginBottom: 14,
+                      marginBottom: 10,
                     }}>
                       {feature.title}
                     </h3>
 
                     <p style={{
                       fontFamily: "'Inter', sans-serif",
-                      fontSize: '15px',
-                      color: '#A89880',
+                      fontSize: '14px',
+                      color: 'rgba(240,232,216,0.78)',
                       fontWeight: 300,
-                      lineHeight: 1.75,
+                      lineHeight: 1.70,
                       maxWidth: 440,
+                      margin: 0,
                     }}>
                       {feature.description}
                     </p>

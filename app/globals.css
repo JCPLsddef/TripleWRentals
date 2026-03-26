@@ -1,5 +1,5 @@
 /* ─── Google Fonts ─────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Holtwood+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Holtwood+One+SC&display=swap');
 
 /* ─── Design Tokens ─────────────────────────────────────────── */
 :root {
@@ -173,7 +173,7 @@ button { font-family: inherit; }
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
 }
-.why-card-v2:hover { transform: translateY(-4px); }
+.why-card-v2:hover { transform: scale(1.012); }
 
 /* Inner border glow */
 .why-card-v2-inner-glow {
@@ -201,16 +201,8 @@ button { font-family: inherit; }
 }
 .why-card-v2:hover .why-card-v2-top-glow { opacity: 1; }
 
-/* Photo background */
-.why-card-v2-img {
-  position: absolute;
-  inset: 0;
-  opacity: 0.18;
-  filter: brightness(1.1) saturate(0.8);
-  transition: opacity 0.7s ease, filter 0.7s ease;
-  pointer-events: none;
-}
-.why-card-v2:hover .why-card-v2-img { opacity: 0.25; }
+/* Photo hover brightness */
+.why-card-v2:hover .why-card-v2-photo { filter: brightness(0.85) saturate(0.90) contrast(1.08) !important; }
 
 /* Icon badge */
 .why-card-v2-icon-badge {
@@ -633,15 +625,11 @@ button { font-family: inherit; }
 /* ── Hero Responsive ── */
 @media (max-width: 640px) {
   .hero-ctas {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
     padding: 0 24px;
-  }
-  .hero-cta-primary,
-  .hero-cta-secondary {
-    width: 100%;
-    text-align: center;
-    display: block;
   }
   .hero-trust {
     gap: 12px;
@@ -784,4 +772,98 @@ textarea:focus {
 select:focus {
   box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.22);
   outline: none;
+}
+
+/* ─── Mobile Optimization Pass ─────────────────────────────── */
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px 0;
+    row-gap: 36px;
+  }
+  .stats-grid > div {
+    border-right: none !important;
+    padding: 0 16px !important;
+  }
+  .stats-grid > div:nth-child(1),
+  .stats-grid > div:nth-child(3) {
+    border-right: 1px solid rgba(201,168,76,0.10) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-overlay-left {
+    background: linear-gradient(
+      180deg,
+      rgba(6,4,2,0.82) 0%,
+      rgba(6,4,2,0.65) 30%,
+      rgba(6,4,2,0.35) 55%,
+      transparent 75%
+    ) !important;
+  }
+  .hero-cta-primary {
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 155px !important;
+    max-width: 210px !important;
+    padding: 15px 24px !important;
+    font-size: 12px !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-cta-secondary {
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 155px !important;
+    max-width: 210px !important;
+    padding: 14px 20px !important;
+    font-size: 12px !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .why-card-grid-v2 {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .why-card-v2 {
+    border-radius: 12px !important;
+    min-height: 280px !important;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Mobile UX Pass #3 — Hero Spacing ─────────────────────── */
+@media (max-width: 767px) {
+  .hero-h1-line {
+    font-size: clamp(32px, 8.5vw, 42px) !important;
+    line-height: 1.06 !important;
+  }
+  .hero-h1-accent {
+    font-size: clamp(34px, 9vw, 46px) !important;
+  }
+  .hero-content-wrapper {
+    padding-bottom: 28px !important;
+    justify-content: flex-end !important;
+  }
+  .hero-gold-divider {
+    margin: 16px auto !important;
+  }
+  .hero-pills-wrapper {
+    margin-bottom: 20px !important;
+  }
+  .hero-subhead-text {
+    margin-bottom: 18px !important;
+    font-size: 14px !important;
+  }
 }
