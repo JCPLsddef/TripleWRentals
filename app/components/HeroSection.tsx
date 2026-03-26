@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
+import BlurText from './BlurText'
 
 const ASSETS = {
   background: 'https://static.wixstatic.com/media/62f926_e0e04aa080b0429ea3f63cc0335a383b~mv2.png',
@@ -98,35 +99,31 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.55, ease: 'easeOut' }}
-          style={{ margin: 0, textAlign: 'center' }}
-        >
+        {/* Headline — per-word blur reveal */}
+        <h1 style={{ margin: 0, textAlign: 'center' }}>
           <span className="hero-h1-line" style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
-            Your Group Shows Up.
+            <BlurText text="Your Group Shows Up." delay={0.5} />
           </span>
           <span className="hero-h1-line" style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 5.8vw, 72px)', fontWeight: 400, color: '#FFFFFF', lineHeight: 1.02, letterSpacing: '-0.028em', textShadow: '0 2px 40px rgba(0,0,0,0.98), 0 8px 80px rgba(0,0,0,0.90)' }}>
-            Everything&apos;s Already
+            <BlurText text="Everything's Already" delay={0.82} />
           </span>
           <span className="hero-h1-line hero-h1-accent" style={{ display: 'block', fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: 'clamp(44px, 6.4vw, 80px)', fontWeight: 400, color: '#C9A84C', lineHeight: 1.02, letterSpacing: '-0.022em', marginTop: '6px', textShadow: '0 2px 30px rgba(0,0,0,0.95), 0 0 60px rgba(201,168,76,0.15)' }}>
-            Taken Care Of.
+            <BlurText text="Taken Care Of." delay={1.1} />
           </span>
-        </motion.h1>
+        </h1>
 
         {/* Gold divider */}
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.55, delay: 0.9, ease: 'easeOut' }}
+          transition={{ duration: 0.7, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
           className="hero-gold-divider"
-          style={{ width: '52px', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.80), transparent)', margin: '28px auto', transformOrigin: 'center' }}
+          style={{ width: '52px', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.80), transparent)', margin: '28px auto', transformOrigin: 'center', willChange: 'transform, opacity' }}
         />
 
         {/* Price anchor */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.92, ease: 'easeOut' }}
+          initial={{ opacity: 0, filter: 'blur(8px)' }} animate={{ opacity: 1, filter: 'blur(0px)' }}
+          transition={{ duration: 0.7, delay: 1.55, ease: [0.16, 1, 0.3, 1] }}
           style={{
             fontFamily: "'Inter', sans-serif",
             fontWeight: 400,
@@ -137,6 +134,7 @@ export default function HeroSection() {
             marginBottom: '0px',
             marginTop: '0px',
             textShadow: '0 1px 20px rgba(0,0,0,0.95)',
+            willChange: 'filter, opacity',
           }}
         >
           From $200/night · Delivered &amp; Set Up Anywhere in Texas
@@ -144,10 +142,10 @@ export default function HeroSection() {
 
         {/* Subhead */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.0, ease: 'easeOut' }}
+          initial={{ opacity: 0, filter: 'blur(8px)' }} animate={{ opacity: 1, filter: 'blur(0px)' }}
+          transition={{ duration: 0.7, delay: 1.65, ease: [0.16, 1, 0.3, 1] }}
           className="hero-subhead-text"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, fontSize: 'clamp(15px, 1.6vw, 18px)', color: 'rgba(242,234,216,0.88)', lineHeight: 1.72, maxWidth: '420px', marginBottom: '28px', textShadow: '0 1px 20px rgba(0,0,0,0.95)' }}
+          style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, fontSize: 'clamp(15px, 1.6vw, 18px)', color: 'rgba(242,234,216,0.88)', lineHeight: 1.72, maxWidth: '420px', marginBottom: '28px', textShadow: '0 1px 20px rgba(0,0,0,0.95)', willChange: 'filter, opacity' }}
         >
           You show up. The fire&apos;s already going.<br />
           We handled everything else.
@@ -155,10 +153,10 @@ export default function HeroSection() {
 
         {/* Pills */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 1.1, ease: 'easeOut' }}
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
           className="hero-pills-wrapper"
-          style={{ display: 'flex', gap: '8px', marginBottom: '32px', flexWrap: 'wrap', justifyContent: 'center' }}
+          style={{ display: 'flex', gap: '8px', marginBottom: '32px', flexWrap: 'wrap', justifyContent: 'center', willChange: 'transform, opacity' }}
         >
           {pills.map(label => (
             <span key={label} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(200,182,148,0.80)', border: '1px solid rgba(201,168,76,0.22)', borderRadius: '999px', padding: '5px 16px', background: 'rgba(201,168,76,0.04)' }}>
@@ -169,9 +167,9 @@ export default function HeroSection() {
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 1.2, ease: 'easeOut' }}
-          style={{ display: 'flex', gap: '14px', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', justifyContent: 'center' }}
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.95, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: 'flex', gap: '14px', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', justifyContent: 'center', willChange: 'transform, opacity' }}
         >
           <a
             href="#gallery"
@@ -191,9 +189,9 @@ export default function HeroSection() {
 
         {/* Trust badges */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 1.3, ease: 'easeOut' }}
-          style={{ display: 'flex', gap: '22px', flexWrap: 'wrap', justifyContent: 'center' }}
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: 'flex', gap: '22px', flexWrap: 'wrap', justifyContent: 'center', willChange: 'transform, opacity' }}
         >
           {badges.map(label => (
             <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '7px', fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(168,148,118,0.78)' }}>

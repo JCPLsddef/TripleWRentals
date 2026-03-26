@@ -81,7 +81,7 @@ const whyFeatures = [
   },
   {
     icon: Clock,
-    title: 'Reserved Within the Hour',
+    title: 'Reserved Within the Day',
     description: 'Fast, simple booking with instant confirmations. No waiting, no uncertainty—just quick, professional service.',
     image: 'https://static.wixstatic.com/media/62f926_c87969a6134e4536a1a5d61010d02c4a~mv2.png',
   },
