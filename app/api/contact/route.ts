@@ -60,21 +60,20 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    const recipients = [
-      'triplewrentals@gmail.com',
-      'jcpl-07@hotmail.com',
-    ];
-
-    const results = await Promise.allSettled(
-      recipients.map((to) =>
-        resend.emails.send({
-          from: 'Triple W Rentals <onboarding@resend.dev>',
-          to: [to],
-          subject: `New Rental Request — ${name}`,
-          html: htmlBody,
-        })
-      )
-    );
+    const results = await Promise.allSettled([
+      resend.emails.send({
+        from: 'Triple W Rentals <onboarding@resend.dev>',
+        to: ['jcpl-07@hotmail.com'],
+        subject: `New Rental Request — ${name}`,
+        html: htmlBody,
+      }),
+      resend.emails.send({
+        from: 'Triple W Rentals <onboarding@resend.dev>',
+        to: ['Triplewrentals@gmail.com'],
+        subject: `New Rental Request — ${name}`,
+        html: htmlBody,
+      }),
+    ]);
 
     const allFailed = results.every((r) => r.status === 'rejected');
     if (allFailed) {

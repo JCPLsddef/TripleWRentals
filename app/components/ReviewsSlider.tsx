@@ -259,7 +259,7 @@ export default function ReviewsSlider() {
             Start Your Booking
           </a>
           <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', color: '#8A7868', marginTop: '16px', letterSpacing: '0.03em', fontWeight: 300 }}>
-            Most bookings confirmed within the hour &nbsp;·&nbsp; White-glove service from first call to last night
+            Most bookings confirmed within the day &nbsp;·&nbsp; White-glove service from first call to last night
           </p>
         </motion.div>
       </div>

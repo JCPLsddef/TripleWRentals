@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "How does booking work?",
-    a: "Call or text us at (972) 965-6901. Tell us your dates and location. Most bookings are confirmed within the hour.",
+    a: "Call or text us at (972) 965-6901. Tell us your dates and location. Most bookings are confirmed within the day.",
   },
   {
     q: "What's your cancellation policy?",
@@ -1506,7 +1506,7 @@ export default function Home() {
               onMouseEnter={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#E8C97A'; }}
               onMouseLeave={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#C9A84C'; }}
             >
-              {formStatus === 'sending' ? 'Sending...' : 'Send Request · We\u2019ll Call Within the Hour'}
+              {formStatus === 'sending' ? 'Sending...' : 'Send Request · We\u2019ll Call Within the Day'}
             </button>
 
             {formStatus === 'success' && (
@@ -1523,7 +1523,7 @@ export default function Home() {
                   Request received.
                 </p>
                 <p style={{ color: '#A89880', fontSize: '13px', fontFamily: "'Inter', sans-serif" }}>
-                  We&rsquo;ll call you back within the hour.
+                  We&rsquo;ll call you back within the day.
                 </p>
               </div>
             )}

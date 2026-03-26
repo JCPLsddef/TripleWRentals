@@ -26,7 +26,7 @@ export default function HowItWorks() {
       icon: Phone,
       number: '01',
       title: "Tell Us Your Trip",
-      description: "Share your dates, destination, and group size. We\u2019ll match you to the right RV and confirm availability \u2014 usually within the hour.",
+      description: "Share your dates, destination, and group size. We\u2019ll match you to the right RV and confirm availability \u2014 usually within the day.",
     },
     {
       icon: Calendar,
@@ -412,7 +412,7 @@ export default function HowItWorks() {
             color: '#6B5F52',
             marginTop: '22px',
           }}>
-            Most bookings confirmed within the hour &nbsp;&middot;&nbsp; White-glove service from first call to last night
+            Most bookings confirmed within the day &nbsp;&middot;&nbsp; White-glove service from first call to last night
           </p>
         </motion.div>
 
