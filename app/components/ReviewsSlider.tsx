@@ -88,7 +88,7 @@ const reviews: Review[] = [
 
 export default function ReviewsSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalPages = Math.ceil(reviews.length / 3);
+  const totalPages = Math.floor(reviews.length / 3);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalPages);

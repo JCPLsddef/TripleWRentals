@@ -300,8 +300,10 @@ export default function Home() {
 
         {/* Desktop Links */}
         <div className="desktop-nav-items" style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-          {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
-            <a key={label} href={href} style={{
+          {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Golf Carts', 'https://triple-w-golf-carts.vercel.app']].map(([label, href]) => (
+            <a key={label} href={href}
+              {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              style={{
               color: 'rgba(240,232,216,0.60)',
               fontSize: 11, fontWeight: 400,
               fontFamily: "'Inter', sans-serif",
@@ -393,7 +395,7 @@ export default function Home() {
             ))}
             {[
               ['Automatic Support', 'https://triplewrentals.com/automatic-support'],
-              ['Golf Cart Rentals', 'https://triplewrentals.com/golf-cart-rentals'],
+              ['Golf Cart Rentals', 'https://triple-w-golf-carts.vercel.app'],
             ].map(([label, href]) => (
               <a key={label} href={href}
                 target="_blank" rel="noopener noreferrer"
@@ -785,7 +787,7 @@ export default function Home() {
                 margin: '0 auto 18px',
               }}
             >
-              The Standard Other RV<br />Companies Can&apos;t Match
+              The Standard No Other RV<br />Company Can Match
             </motion.h2>
 
             <motion.p
@@ -1390,8 +1392,10 @@ export default function Home() {
               marginBottom: 14,
             }}>QUICK LINKS</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Book Now', '#quote']].map(([label, href]) => (
-                <a key={label} href={href} style={{
+              {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Golf Carts', 'https://triple-w-golf-carts.vercel.app'], ['Book Now', '#quote']].map(([label, href]) => (
+                <a key={label} href={href}
+                  {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  style={{
                   fontSize: 12, color: '#7A6E60',
                   fontFamily: "'Inter', sans-serif",
                   fontWeight: 300,

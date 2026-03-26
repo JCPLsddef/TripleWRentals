@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     url: "https://triplewrentals.com",
     siteName: "Triple W Rentals",
     type: "website",
+    images: [
+      {
+        url: "https://static.wixstatic.com/media/62f926_632193a9c73745de87c9985e7ba52616~mv2.png",
+        width: 1200,
+        height: 630,
+        alt: "Triple W Rentals — Luxury RV Rentals in Texas",
+      },
+    ],
   },
 };
 
