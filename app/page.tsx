@@ -111,7 +111,86 @@ export default function Home() {
   const statsRef = useRef(null);
   const statsRan = useRef(false);
   const whyRef = useRef<HTMLElement>(null);
+
+  // Calendar picker state
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [calendarMonth, setCalendarMonth] = useState(() => {
+    const d = new Date();
+    return { year: d.getFullYear(), month: d.getMonth() };
+  });
+  const [hoverDate, setHoverDate] = useState<Date | null>(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
   const whyInView = useInView(whyRef, { once: true, amount: 0.2 });
+
+  // Calendar click-outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+        setCalendarOpen(false);
+      }
+    };
+    if (calendarOpen) document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [calendarOpen]);
+
+  // Calendar helpers
+  const formatDateRange = (start: Date | null, end: Date | null): string => {
+    if (!start) return '';
+    const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
+    if (!end) return start.toLocaleDateString('en-US', opts);
+    return `${start.toLocaleDateString('en-US', opts)} – ${end.toLocaleDateString('en-US', { ...opts, year: 'numeric' })}`;
+  };
+  const isSameDay = (a: Date, b: Date) =>
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate();
+  const isInRange = (day: Date) => {
+    if (!startDate) return false;
+    const check = endDate || hoverDate;
+    if (!check) return false;
+    const [lo, hi] = startDate <= check ? [startDate, check] : [check, startDate];
+    return day > lo && day < hi;
+  };
+  const handleDayClick = (day: Date) => {
+    if (!startDate || (startDate && endDate)) {
+      setStartDate(day);
+      setEndDate(null);
+    } else {
+      if (day < startDate) {
+        setEndDate(startDate);
+        setStartDate(day);
+      } else if (isSameDay(day, startDate)) {
+        setStartDate(null);
+      } else {
+        setEndDate(day);
+        setCalendarOpen(false);
+      }
+      const rangeStr = formatDateRange(
+        day < startDate ? day : startDate,
+        day < startDate ? startDate : day
+      );
+      setForm(prev => ({ ...prev, dates: rangeStr }));
+    }
+  };
+  const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+  const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
+  const prevMonth = () => {
+    setCalendarMonth(prev => {
+      if (prev.month === 0) return { year: prev.year - 1, month: 11 };
+      return { year: prev.year, month: prev.month - 1 };
+    });
+  };
+  const nextMonth = () => {
+    setCalendarMonth(prev => {
+      if (prev.month === 11) return { year: prev.year + 1, month: 0 };
+      return { year: prev.year, month: prev.month + 1 };
+    });
+  };
+  const MONTH_NAMES = ['January','February','March','April','May','June',
+    'July','August','September','October','November','December'];
+  const DAY_NAMES = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 
   /* Scroll reveal */
   useEffect(() => {
@@ -1156,31 +1235,191 @@ export default function Home() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 16 }}>
+            <div
+              ref={calendarRef}
+              style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 16, position: 'relative' }}
+            >
               <label style={{
                 fontSize: '10px', fontWeight: 500,
                 letterSpacing: '0.10em', textTransform: 'uppercase',
                 color: '#A89880', fontFamily: "'Inter', sans-serif",
               }}>Rental Dates</label>
-              <input
-                type="text"
-                placeholder="e.g. May 16 – 19, 2025"
-                value={form.dates}
-                onChange={e => setForm({ ...form, dates: e.target.value })}
+              {/* Trigger button */}
+              <button
+                type="button"
+                onClick={() => setCalendarOpen(o => !o)}
                 style={{
                   background: '#161209',
-                  border: '1px solid rgba(201,168,76,0.2)',
+                  border: `1px solid ${calendarOpen ? 'rgba(201,168,76,0.55)' : 'rgba(201,168,76,0.2)'}`,
                   borderRadius: '4px',
                   padding: '12px 14px',
                   fontSize: '14px',
-                  color: '#F0E8D8',
-                  outline: 'none',
-                  transition: 'border-color 0.15s',
+                  color: form.dates ? '#F0E8D8' : 'rgba(201,168,76,0.40)',
                   fontFamily: "'Inter', sans-serif",
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  transition: 'border-color 0.15s',
+                  width: '100%',
                 }}
-                onFocus={e => e.target.style.borderColor = 'rgba(201,168,76,0.55)'}
-                onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.2)'}
-              />
+              >
+                <span>{form.dates || 'Select your dates'}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="rgba(201,168,76,0.6)" strokeWidth="1.5" strokeLinecap="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </button>
+              {/* Calendar dropdown */}
+              {calendarOpen && (
+                <div style={{
+                  position: 'absolute',
+                  top: 'calc(100% + 8px)',
+                  left: 0,
+                  right: 0,
+                  zIndex: 50,
+                  background: 'linear-gradient(145deg, #161209 0%, #100E0B 100%)',
+                  border: '1px solid rgba(201,168,76,0.18)',
+                  borderRadius: '8px',
+                  padding: '20px',
+                  boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
+                }}>
+                  {/* Month nav */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                    <button type="button" onClick={prevMonth} style={{
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      color: '#A89880', padding: '4px 8px', fontSize: '16px',
+                      transition: 'color 0.15s',
+                    }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#A89880')}
+                    >&#8249;</button>
+                    <span style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: '15px', fontWeight: 400, letterSpacing: '0.06em',
+                      color: '#F0E8D8',
+                    }}>
+                      {MONTH_NAMES[calendarMonth.month]} {calendarMonth.year}
+                    </span>
+                    <button type="button" onClick={nextMonth} style={{
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      color: '#A89880', padding: '4px 8px', fontSize: '16px',
+                      transition: 'color 0.15s',
+                    }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#A89880')}
+                    >&#8250;</button>
+                  </div>
+                  {/* Day headers */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '2px', marginBottom: '8px' }}>
+                    {DAY_NAMES.map(d => (
+                      <div key={d} style={{
+                        textAlign: 'center',
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: '10px', fontWeight: 500,
+                        letterSpacing: '0.08em', textTransform: 'uppercase',
+                        color: 'rgba(168,152,128,0.5)', padding: '4px 0',
+                      }}>{d}</div>
+                    ))}
+                  </div>
+                  {/* Day grid */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '2px' }}>
+                    {Array.from({ length: getFirstDayOfMonth(calendarMonth.year, calendarMonth.month) }).map((_, i) => (
+                      <div key={`empty-${i}`} />
+                    ))}
+                    {Array.from({ length: getDaysInMonth(calendarMonth.year, calendarMonth.month) }).map((_, i) => {
+                      const day = new Date(calendarMonth.year, calendarMonth.month, i + 1);
+                      const today = new Date();
+                      today.setHours(0, 0, 0, 0);
+                      const isPast = day < today;
+                      const isStart = startDate && isSameDay(day, startDate);
+                      const isEnd = endDate && isSameDay(day, endDate);
+                      const inRange = isInRange(day);
+                      const isSelected = isStart || isEnd;
+                      return (
+                        <button
+                          key={i}
+                          type="button"
+                          disabled={isPast}
+                          onClick={() => !isPast && handleDayClick(day)}
+                          onMouseEnter={() => !isPast && startDate && !endDate && setHoverDate(day)}
+                          onMouseLeave={() => setHoverDate(null)}
+                          style={{
+                            padding: '8px 0',
+                            textAlign: 'center',
+                            fontFamily: "'Inter', sans-serif",
+                            fontSize: '13px',
+                            fontWeight: isSelected ? 500 : 300,
+                            border: 'none',
+                            borderRadius: isStart ? '4px 0 0 4px' : isEnd ? '0 4px 4px 0' : '0',
+                            cursor: isPast ? 'default' : 'pointer',
+                            transition: 'all 0.1s ease',
+                            color: isPast
+                              ? 'rgba(168,152,128,0.18)'
+                              : isSelected
+                              ? '#0D0B09'
+                              : inRange
+                              ? '#F0E8D8'
+                              : '#A89880',
+                            background: isSelected
+                              ? '#C9A84C'
+                              : inRange
+                              ? 'rgba(201,168,76,0.15)'
+                              : 'transparent',
+                          }}
+                          onMouseOver={e => {
+                            if (!isPast && !isSelected) {
+                              e.currentTarget.style.color = '#F0E8D8';
+                              e.currentTarget.style.background = 'rgba(201,168,76,0.10)';
+                            }
+                          }}
+                          onMouseOut={e => {
+                            if (!isPast && !isSelected) {
+                              e.currentTarget.style.color = inRange ? '#F0E8D8' : '#A89880';
+                              e.currentTarget.style.background = inRange ? 'rgba(201,168,76,0.15)' : 'transparent';
+                            }
+                          }}
+                        >
+                          {i + 1}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {/* Clear / confirm row */}
+                  {(startDate || endDate) && (
+                    <div style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      marginTop: '16px', paddingTop: '14px',
+                      borderTop: '1px solid rgba(201,168,76,0.10)',
+                    }}>
+                      <button type="button" onClick={() => {
+                        setStartDate(null);
+                        setEndDate(null);
+                        setForm(prev => ({ ...prev, dates: '' }));
+                      }} style={{
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        fontFamily: "'Inter', sans-serif", fontSize: '11px',
+                        color: '#6B5F52', letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                      }}>Clear</button>
+                      <span style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: '13px', color: '#C9A84C', fontStyle: 'italic',
+                      }}>
+                        {!startDate
+                          ? 'Select check-in'
+                          : !endDate
+                          ? 'Select check-out'
+                          : formatDateRange(startDate, endDate)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 24 }}>

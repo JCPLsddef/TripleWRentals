@@ -787,13 +787,7 @@ export default function RVSlider() {
               <div className="flt-grad-bottom" aria-hidden />
               <div className="flt-grad-left" aria-hidden />
               <div className="flt-info">
-                <div className="flt-badges">
-                  <span className="flt-badge flt-badge-cat">{rv.category}</span>
-                  <span className="flt-badge flt-badge-sleeps">{rv.sleeps}</span>
-                </div>
                 <h3 className="flt-model-name">{rv.modelName}</h3>
-                <p className="flt-img-label">{img.title}</p>
-                <p className="flt-img-desc">{img.description}</p>
               </div>
               <div className="flt-counter" aria-hidden>
                 <span className="flt-cnt-curr">{String(activeModel + 1).padStart(2, '0')}</span>
@@ -824,9 +818,7 @@ export default function RVSlider() {
                     aria-pressed={i === activeImage}
                   >
                     <img src={im.image} alt={im.title} className="flt-thumb-img" />
-                    <div className="flt-thumb-hover">
-                      <span className="flt-thumb-label">{im.title}</span>
-                    </div>
+                    <div className="flt-thumb-hover" />
                     {i === activeImage && <span className="flt-thumb-bar" aria-hidden />}
                   </button>
                 ))}
@@ -958,8 +950,8 @@ export default function RVSlider() {
         .flt-fade-in { animation: fltFadeIn 0.48s ease forwards; }
         .flt-fade-out { animation: fltFadeOut 0.32s ease forwards; }
         .flt-grad-bottom {
-          position: absolute; bottom: 0; left: 0; right: 0; height: 68%;
-          background: linear-gradient(to top, rgba(13,11,9,0.94) 0%, rgba(13,11,9,0.45) 45%, transparent 100%);
+          position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+          background: linear-gradient(to top, rgba(13,11,9,0.82) 0%, rgba(13,11,9,0.25) 55%, transparent 100%);
           z-index: 3; pointer-events: none;
         }
         .flt-grad-left {
@@ -968,31 +960,11 @@ export default function RVSlider() {
           z-index: 3; pointer-events: none;
         }
         .flt-info { position: absolute; bottom: 2.25rem; left: 2.25rem; z-index: 4; max-width: 460px; }
-        .flt-badges { display: flex; gap: 0.55rem; margin-bottom: 0.8rem; }
-        .flt-badge {
-          font-family: 'Outfit', sans-serif;
-          font-size: 0.62rem; font-weight: 500;
-          letter-spacing: 0.13em; text-transform: uppercase;
-          padding: 0.28rem 0.7rem; border-radius: 2px;
-        }
-        .flt-badge-cat { background: rgba(212,168,83,0.14); color: #D4A853; border: 1px solid rgba(212,168,83,0.28); }
-        .flt-badge-sleeps { background: rgba(245,240,232,0.06); color: #8A7A62; border: 1px solid rgba(245,240,232,0.09); }
         .flt-model-name {
           font-family: 'Cormorant Garamond', Georgia, serif;
           font-size: clamp(1.9rem, 3.5vw, 3.1rem);
           font-weight: 300; line-height: 1.1;
           color: #F5F0E8; margin: 0 0 0.55rem;
-        }
-        .flt-img-label {
-          font-family: 'Outfit', sans-serif;
-          font-size: 0.65rem; font-weight: 500;
-          letter-spacing: 0.16em; text-transform: uppercase;
-          color: #D4A853; margin: 0 0 0.35rem;
-        }
-        .flt-img-desc {
-          font-family: 'Outfit', sans-serif;
-          font-size: 0.845rem; font-weight: 300;
-          line-height: 1.62; color: #7A6B55; margin: 0;
         }
         .flt-counter {
           position: absolute; top: 1.5rem; right: 1.75rem; z-index: 4;
@@ -1018,18 +990,6 @@ export default function RVSlider() {
         .flt-thumb-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: opacity 0.22s ease; display: block; }
         .flt-thumb:hover .flt-thumb-img { opacity: 0.72; }
         .flt-thumb-active .flt-thumb-img { opacity: 1; }
-        .flt-thumb-hover {
-          position: absolute; inset: 0;
-          background: linear-gradient(to top, rgba(13,11,9,0.75) 0%, transparent 55%);
-          display: flex; align-items: flex-end;
-          padding: 0.3rem 0.38rem; opacity: 0; transition: opacity 0.2s ease;
-        }
-        .flt-thumb:hover .flt-thumb-hover { opacity: 1; }
-        .flt-thumb-label {
-          font-family: 'Outfit', sans-serif;
-          font-size: 0.58rem; font-weight: 400; color: #F5F0E8; line-height: 1.25;
-          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-        }
         .flt-thumb-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: #D4A853; display: block; }
         .flt-cta-bar {
           display: flex; align-items: center; justify-content: center;
