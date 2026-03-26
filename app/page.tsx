@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "How does booking work?",
-    a: "Call or text us at (972) 965-6901. Tell us your dates and location. Most bookings are confirmed within the day.",
+    a: "Call or text us at (972) 965-6901. Tell us your dates and location. Most bookings are confirmed within a day.",
   },
   {
     q: "What's your cancellation policy?",
@@ -71,25 +71,25 @@ const whyFeatures = [
     icon: Truck,
     title: 'White-Glove Delivery',
     description: 'We bring the RV to you—fully set up, perfectly cleaned, and ready to enjoy. No hassle, no trips, just premium service.',
-    image: 'https://static.wixstatic.com/media/62f926_a497e83d30a946aeab85a380919167c9~mv2.webp',
+    image: 'https://static.wixstatic.com/media/62f926_b687d2cf0d374773b965a26a2da00832~mv2.webp',
   },
   {
     icon: Star,
     title: 'The Finest Fleet in East Texas',
     description: 'Meticulously maintained, modern RVs from top brands. Each one handpicked for comfort, reliability, and premium amenities.',
-    image: 'https://static.wixstatic.com/media/62f926_b86114a3592b498d8035eea569758bc6~mv2.png',
+    image: 'https://static.wixstatic.com/media/62f926_e82ba4137dbb44ecb018eda98ab166b9~mv2.webp',
   },
   {
     icon: Clock,
-    title: 'Reserved Within the Hour',
+    title: 'Reserved Within a Day',
     description: 'Fast, simple booking with instant confirmations. No waiting, no uncertainty—just quick, professional service.',
-    image: 'https://static.wixstatic.com/media/62f926_c87969a6134e4536a1a5d61010d02c4a~mv2.png',
+    image: 'https://static.wixstatic.com/media/62f926_a4d11de4461f4bdd954c4a308e09f35b~mv2.webp',
   },
   {
     icon: Phone,
     title: 'Always Reachable',
     description: "Real people, real support. Call, text, or message anytime during your trip. We're here to make sure everything goes perfectly.",
-    image: 'https://static.wixstatic.com/media/62f926_a940034c8aee471c977633f272c30af9~mv2.png',
+    image: 'https://static.wixstatic.com/media/62f926_c393c781146e46d6938c11efb3f377d6~mv2.webp',
   },
 ] as const;
 
@@ -111,86 +111,7 @@ export default function Home() {
   const statsRef = useRef(null);
   const statsRan = useRef(false);
   const whyRef = useRef<HTMLElement>(null);
-
-  // Calendar picker state
-  const [calendarOpen, setCalendarOpen] = useState(false);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [calendarMonth, setCalendarMonth] = useState(() => {
-    const d = new Date();
-    return { year: d.getFullYear(), month: d.getMonth() };
-  });
-  const [hoverDate, setHoverDate] = useState<Date | null>(null);
-  const calendarRef = useRef<HTMLDivElement>(null);
   const whyInView = useInView(whyRef, { once: true, amount: 0.2 });
-
-  // Calendar click-outside
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
-        setCalendarOpen(false);
-      }
-    };
-    if (calendarOpen) document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [calendarOpen]);
-
-  // Calendar helpers
-  const formatDateRange = (start: Date | null, end: Date | null): string => {
-    if (!start) return '';
-    const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
-    if (!end) return start.toLocaleDateString('en-US', opts);
-    return `${start.toLocaleDateString('en-US', opts)} – ${end.toLocaleDateString('en-US', { ...opts, year: 'numeric' })}`;
-  };
-  const isSameDay = (a: Date, b: Date) =>
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate();
-  const isInRange = (day: Date) => {
-    if (!startDate) return false;
-    const check = endDate || hoverDate;
-    if (!check) return false;
-    const [lo, hi] = startDate <= check ? [startDate, check] : [check, startDate];
-    return day > lo && day < hi;
-  };
-  const handleDayClick = (day: Date) => {
-    if (!startDate || (startDate && endDate)) {
-      setStartDate(day);
-      setEndDate(null);
-    } else {
-      if (day < startDate) {
-        setEndDate(startDate);
-        setStartDate(day);
-      } else if (isSameDay(day, startDate)) {
-        setStartDate(null);
-      } else {
-        setEndDate(day);
-        setCalendarOpen(false);
-      }
-      const rangeStr = formatDateRange(
-        day < startDate ? day : startDate,
-        day < startDate ? startDate : day
-      );
-      setForm(prev => ({ ...prev, dates: rangeStr }));
-    }
-  };
-  const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
-  const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
-  const prevMonth = () => {
-    setCalendarMonth(prev => {
-      if (prev.month === 0) return { year: prev.year - 1, month: 11 };
-      return { year: prev.year, month: prev.month - 1 };
-    });
-  };
-  const nextMonth = () => {
-    setCalendarMonth(prev => {
-      if (prev.month === 11) return { year: prev.year + 1, month: 0 };
-      return { year: prev.year, month: prev.month + 1 };
-    });
-  };
-  const MONTH_NAMES = ['January','February','March','April','May','June',
-    'July','August','September','October','November','December'];
-  const DAY_NAMES = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 
   /* Scroll reveal */
   useEffect(() => {
@@ -379,10 +300,8 @@ export default function Home() {
 
         {/* Desktop Links */}
         <div className="desktop-nav-items" style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-          {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Golf Carts', 'https://triple-w-golf-carts.vercel.app']].map(([label, href]) => (
-            <a key={label} href={href}
-              {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              style={{
+          {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq']].map(([label, href]) => (
+            <a key={label} href={href} style={{
               color: 'rgba(240,232,216,0.60)',
               fontSize: 11, fontWeight: 400,
               fontFamily: "'Inter', sans-serif",
@@ -474,7 +393,7 @@ export default function Home() {
             ))}
             {[
               ['Automatic Support', 'https://triplewrentals.com/automatic-support'],
-              ['Golf Cart Rentals', 'https://triple-w-golf-carts.vercel.app'],
+              ['Golf Cart Rentals', 'https://triplewrentals.com/golf-cart-rentals'],
             ].map(([label, href]) => (
               <a key={label} href={href}
                 target="_blank" rel="noopener noreferrer"
@@ -597,13 +516,19 @@ export default function Home() {
 
       {/* ── SECTION 4C: Who This Is For ──────────────────────── */}
       <section style={{
-        background: '#F5F0E8',
+        background: '#0A0806',
         padding: '88px 0',
         position: 'relative',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(201,168,76,0.20)',
-        borderBottom: '1px solid rgba(201,168,76,0.20)',
+        borderTop: '1px solid rgba(201,168,76,0.10)',
+        borderBottom: '1px solid rgba(201,168,76,0.10)',
       }}>
+        {/* Ambient glow */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 65%)',
+          filter: 'blur(40px)',
+        }} />
 
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
@@ -630,13 +555,12 @@ export default function Home() {
 
             {/* Card 1 — Families */}
             <div style={{
-              background: '#FFFFFF',
-              border: '1px solid rgba(201,168,76,0.25)',
+              background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
+              border: '1px solid rgba(201,168,76,0.14)',
               borderRadius: 12,
               padding: '44px 40px',
               position: 'relative',
               overflow: 'hidden',
-              boxShadow: '0 2px 16px rgba(28,21,16,0.08)',
             }}>
               <div style={{
                 width: 48, height: 48,
@@ -671,7 +595,7 @@ export default function Home() {
                 {['Sleeps up to 14 guests', 'Delivered to any Texas location', 'Full kitchen, beds, bathrooms ready'].map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#5A4030', fontWeight: 300 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#4A3A28', fontWeight: 300 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -679,13 +603,12 @@ export default function Home() {
 
             {/* Card 2 — Corporate */}
             <div style={{
-              background: '#FFFFFF',
-              border: '1px solid rgba(201,168,76,0.25)',
+              background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
+              border: '1px solid rgba(201,168,76,0.14)',
               borderRadius: 12,
               padding: '44px 40px',
               position: 'relative',
               overflow: 'hidden',
-              boxShadow: '0 2px 16px rgba(28,21,16,0.08)',
             }}>
               <div style={{
                 width: 48, height: 48,
@@ -720,7 +643,7 @@ export default function Home() {
                 {['Horse shows & equestrian events', 'Corporate retreats & team trips', 'Weekend events, same-day confirmed'].map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#C9A84C', flexShrink: 0 }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#5A4030', fontWeight: 300 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#4A3A28', fontWeight: 300 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -734,7 +657,7 @@ export default function Home() {
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic',
               fontSize: 'clamp(16px, 1.6vw, 20px)',
-              color: 'rgba(28,21,16,0.55)',
+              color: 'rgba(28,21,16,0.50)',
               marginBottom: 28,
             }}>
               Not sure which RV fits your group? We&apos;ll match you in minutes.
@@ -866,7 +789,7 @@ export default function Home() {
                 margin: '0 auto 18px',
               }}
             >
-              The Standard No Other RV<br />Company Can Match
+              The Standard Other RV<br />Companies Can&apos;t Match
             </motion.h2>
 
             <motion.p
@@ -900,48 +823,40 @@ export default function Home() {
                   animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                   transition={{ duration: 0.9, delay: delays[index], ease: [0.16, 1, 0.3, 1] }}
                   style={{
-                    background: '#0D0B09',
-                    border: '1px solid rgba(201,168,76,0.14)',
-                    boxShadow: '0 4px 32px rgba(0,0,0,0.45)',
+                    background: 'linear-gradient(145deg, #15120F 0%, #1A1410 100%)',
+                    border: '1px solid rgba(201,168,76,0.12)',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.3), 0 0 1px rgba(201,168,76,0.1)',
                   }}
                 >
                   {/* Inner glow on hover */}
                   <div className="why-card-v2-inner-glow" />
-
-                  {/* Full-bleed photo + gradient overlay */}
-                  <div style={{ position: 'absolute', inset: 0, borderRadius: 14, overflow: 'hidden', zIndex: 0 }}>
-                    <img
-                      src={feature.image}
-                      alt=""
-                      aria-hidden="true"
-                      className="why-card-v2-photo"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.75) saturate(0.85) contrast(1.08)', transition: 'filter 0.7s ease' }}
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0.10) 100%)', borderRadius: 14, zIndex: 1 }} />
+                  {/* Top gradient tint on hover */}
+                  <div className="why-card-v2-top-glow" />
+                  {/* Photo background */}
+                  <div className="why-card-v2-img">
+                    <img src={feature.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
 
-                  {/* Content pinned to bottom */}
-                  <div style={{ position: 'relative', zIndex: 2, padding: '40px 40px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', minHeight: 320 }}>
+                  <div style={{ position: 'relative', padding: '40px 44px' }}>
                     {/* Icon badge */}
                     <div
                       className="why-card-v2-icon-badge"
                       style={{
-                        width: 48,
-                        height: 48,
+                        width: 56,
+                        height: 56,
                         borderRadius: 10,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginBottom: 20,
-                        background: 'rgba(13,11,9,0.55)',
-                        border: '1px solid rgba(201,168,76,0.30)',
-                        backdropFilter: 'blur(8px)',
-                        WebkitBackdropFilter: 'blur(8px)',
+                        marginBottom: 28,
+                        background: 'linear-gradient(135deg, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.04) 100%)',
+                        border: '1px solid rgba(201,168,76,0.22)',
+                        boxShadow: '0 4px 16px rgba(201,168,76,0.06)',
                       }}
                     >
                       <Icon
                         className="why-card-v2-icon"
-                        size={22}
+                        size={24}
                         style={{ color: '#C9A84C' }}
                         strokeWidth={1.5}
                       />
@@ -949,24 +864,23 @@ export default function Home() {
 
                     <h3 style={{
                       fontFamily: "'Playfair Display', serif",
-                      fontSize: 'clamp(18px, 2vw, 22px)',
+                      fontSize: 'clamp(18px, 2vw, 24px)',
                       fontWeight: 400,
                       color: '#F0E8D8',
                       lineHeight: 1.25,
                       letterSpacing: '-0.01em',
-                      marginBottom: 10,
+                      marginBottom: 14,
                     }}>
                       {feature.title}
                     </h3>
 
                     <p style={{
                       fontFamily: "'Inter', sans-serif",
-                      fontSize: '14px',
-                      color: 'rgba(240,232,216,0.78)',
+                      fontSize: '15px',
+                      color: '#A89880',
                       fontWeight: 300,
-                      lineHeight: 1.70,
+                      lineHeight: 1.75,
                       maxWidth: 440,
-                      margin: 0,
                     }}>
                       {feature.description}
                     </p>
@@ -1208,7 +1122,7 @@ export default function Home() {
             border: '1px solid rgba(201,168,76,0.15)',
             borderRadius: '10px',
             padding: '36px 36px',
-            boxShadow: '0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(201,168,76,0.04), inset 0 0 60px rgba(201,168,76,0.02)',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(201,168,76,0.04)',
           }}>
             <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
               {[
@@ -1219,7 +1133,7 @@ export default function Home() {
                   <label style={{
                     fontSize: '10px', fontWeight: 500,
                     letterSpacing: '0.10em', textTransform: 'uppercase',
-                    color: '#A89880', fontFamily: "'Inter', sans-serif",
+                    color: '#6B5F52', fontFamily: "'Inter', sans-serif",
                   }}>{label}</label>
                   <input
                     type={type}
@@ -1244,198 +1158,38 @@ export default function Home() {
               ))}
             </div>
 
-            <div
-              ref={calendarRef}
-              style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 16, position: 'relative' }}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 16 }}>
               <label style={{
                 fontSize: '10px', fontWeight: 500,
                 letterSpacing: '0.10em', textTransform: 'uppercase',
-                color: '#A89880', fontFamily: "'Inter', sans-serif",
+                color: '#6B5F52', fontFamily: "'Inter', sans-serif",
               }}>Rental Dates</label>
-              {/* Trigger button */}
-              <button
-                type="button"
-                onClick={() => setCalendarOpen(o => !o)}
+              <input
+                type="text"
+                placeholder="e.g. May 16 – 19, 2025"
+                value={form.dates}
+                onChange={e => setForm({ ...form, dates: e.target.value })}
                 style={{
                   background: '#161209',
-                  border: `1px solid ${calendarOpen ? 'rgba(201,168,76,0.55)' : 'rgba(201,168,76,0.2)'}`,
+                  border: '1px solid rgba(201,168,76,0.2)',
                   borderRadius: '4px',
                   padding: '12px 14px',
                   fontSize: '14px',
-                  color: form.dates ? '#F0E8D8' : 'rgba(201,168,76,0.40)',
-                  fontFamily: "'Inter', sans-serif",
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  color: '#F0E8D8',
+                  outline: 'none',
                   transition: 'border-color 0.15s',
-                  width: '100%',
+                  fontFamily: "'Inter', sans-serif",
                 }}
-              >
-                <span>{form.dates || 'Select your dates'}</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                  stroke="rgba(201,168,76,0.6)" strokeWidth="1.5" strokeLinecap="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-              </button>
-              {/* Calendar dropdown */}
-              {calendarOpen && (
-                <div style={{
-                  position: 'absolute',
-                  top: 'calc(100% + 8px)',
-                  left: 0,
-                  right: 0,
-                  zIndex: 50,
-                  background: 'linear-gradient(145deg, #161209 0%, #100E0B 100%)',
-                  border: '1px solid rgba(201,168,76,0.18)',
-                  borderRadius: '8px',
-                  padding: '20px',
-                  boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
-                }}>
-                  {/* Month nav */}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                    <button type="button" onClick={prevMonth} style={{
-                      background: 'none', border: 'none', cursor: 'pointer',
-                      color: '#A89880', padding: '4px 8px', fontSize: '16px',
-                      transition: 'color 0.15s',
-                    }}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
-                      onMouseLeave={e => (e.currentTarget.style.color = '#A89880')}
-                    >&#8249;</button>
-                    <span style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: '15px', fontWeight: 400, letterSpacing: '0.06em',
-                      color: '#F0E8D8',
-                    }}>
-                      {MONTH_NAMES[calendarMonth.month]} {calendarMonth.year}
-                    </span>
-                    <button type="button" onClick={nextMonth} style={{
-                      background: 'none', border: 'none', cursor: 'pointer',
-                      color: '#A89880', padding: '4px 8px', fontSize: '16px',
-                      transition: 'color 0.15s',
-                    }}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
-                      onMouseLeave={e => (e.currentTarget.style.color = '#A89880')}
-                    >&#8250;</button>
-                  </div>
-                  {/* Day headers */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '2px', marginBottom: '8px' }}>
-                    {DAY_NAMES.map(d => (
-                      <div key={d} style={{
-                        textAlign: 'center',
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '10px', fontWeight: 500,
-                        letterSpacing: '0.08em', textTransform: 'uppercase',
-                        color: 'rgba(168,152,128,0.5)', padding: '4px 0',
-                      }}>{d}</div>
-                    ))}
-                  </div>
-                  {/* Day grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '2px' }}>
-                    {Array.from({ length: getFirstDayOfMonth(calendarMonth.year, calendarMonth.month) }).map((_, i) => (
-                      <div key={`empty-${i}`} />
-                    ))}
-                    {Array.from({ length: getDaysInMonth(calendarMonth.year, calendarMonth.month) }).map((_, i) => {
-                      const day = new Date(calendarMonth.year, calendarMonth.month, i + 1);
-                      const today = new Date();
-                      today.setHours(0, 0, 0, 0);
-                      const isPast = day < today;
-                      const isStart = startDate && isSameDay(day, startDate);
-                      const isEnd = endDate && isSameDay(day, endDate);
-                      const inRange = isInRange(day);
-                      const isSelected = isStart || isEnd;
-                      return (
-                        <button
-                          key={i}
-                          type="button"
-                          disabled={isPast}
-                          onClick={() => !isPast && handleDayClick(day)}
-                          onMouseEnter={() => !isPast && startDate && !endDate && setHoverDate(day)}
-                          onMouseLeave={() => setHoverDate(null)}
-                          style={{
-                            padding: '8px 0',
-                            textAlign: 'center',
-                            fontFamily: "'Inter', sans-serif",
-                            fontSize: '13px',
-                            fontWeight: isSelected ? 500 : 300,
-                            border: 'none',
-                            borderRadius: isStart ? '4px 0 0 4px' : isEnd ? '0 4px 4px 0' : '0',
-                            cursor: isPast ? 'default' : 'pointer',
-                            transition: 'all 0.1s ease',
-                            color: isPast
-                              ? 'rgba(168,152,128,0.18)'
-                              : isSelected
-                              ? '#0D0B09'
-                              : inRange
-                              ? '#F0E8D8'
-                              : '#A89880',
-                            background: isSelected
-                              ? '#C9A84C'
-                              : inRange
-                              ? 'rgba(201,168,76,0.15)'
-                              : 'transparent',
-                          }}
-                          onMouseOver={e => {
-                            if (!isPast && !isSelected) {
-                              e.currentTarget.style.color = '#F0E8D8';
-                              e.currentTarget.style.background = 'rgba(201,168,76,0.10)';
-                            }
-                          }}
-                          onMouseOut={e => {
-                            if (!isPast && !isSelected) {
-                              e.currentTarget.style.color = inRange ? '#F0E8D8' : '#A89880';
-                              e.currentTarget.style.background = inRange ? 'rgba(201,168,76,0.15)' : 'transparent';
-                            }
-                          }}
-                        >
-                          {i + 1}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {/* Clear / confirm row */}
-                  {(startDate || endDate) && (
-                    <div style={{
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                      marginTop: '16px', paddingTop: '14px',
-                      borderTop: '1px solid rgba(201,168,76,0.10)',
-                    }}>
-                      <button type="button" onClick={() => {
-                        setStartDate(null);
-                        setEndDate(null);
-                        setForm(prev => ({ ...prev, dates: '' }));
-                      }} style={{
-                        background: 'none', border: 'none', cursor: 'pointer',
-                        fontFamily: "'Inter', sans-serif", fontSize: '11px',
-                        color: '#6B5F52', letterSpacing: '0.06em',
-                        textTransform: 'uppercase',
-                      }}>Clear</button>
-                      <span style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: '13px', color: '#C9A84C', fontStyle: 'italic',
-                      }}>
-                        {!startDate
-                          ? 'Select check-in'
-                          : !endDate
-                          ? 'Select check-out'
-                          : formatDateRange(startDate, endDate)}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
+                onFocus={e => e.target.style.borderColor = 'rgba(201,168,76,0.55)'}
+                onBlur={e => e.target.style.borderColor = 'rgba(201,168,76,0.2)'}
+              />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: 24 }}>
               <label style={{
                 fontSize: '10px', fontWeight: 500,
                 letterSpacing: '0.10em', textTransform: 'uppercase',
-                color: '#A89880', fontFamily: "'Inter', sans-serif",
+                color: '#6B5F52', fontFamily: "'Inter', sans-serif",
               }}>Message</label>
               <textarea
                 rows={4}
@@ -1495,9 +1249,9 @@ export default function Home() {
                 color: '#0D0B09',
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '12px', fontWeight: 500,
-                letterSpacing: '0.12em',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                padding: '18px',
+                padding: '16px',
                 borderRadius: '4px',
                 border: 'none', cursor: formStatus === 'sending' ? 'default' : 'pointer',
                 transition: 'all 0.2s',
@@ -1506,7 +1260,7 @@ export default function Home() {
               onMouseEnter={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#E8C97A'; }}
               onMouseLeave={e => { if (formStatus !== 'sending') e.currentTarget.style.background = '#C9A84C'; }}
             >
-              {formStatus === 'sending' ? 'Sending...' : 'Send Request · We\u2019ll Call Within the Day'}
+              {formStatus === 'sending' ? 'Sending...' : 'Send Request · We\u2019ll Call Within a Day'}
             </button>
 
             {formStatus === 'success' && (
@@ -1523,7 +1277,7 @@ export default function Home() {
                   Request received.
                 </p>
                 <p style={{ color: '#A89880', fontSize: '13px', fontFamily: "'Inter', sans-serif" }}>
-                  We&rsquo;ll call you back within the day.
+                  We&rsquo;ll call you back within a day.
                 </p>
               </div>
             )}
@@ -1541,7 +1295,7 @@ export default function Home() {
               fontFamily: "'Inter', sans-serif",
             }}>
               Prefer to call?{' '}
-              <a href="tel:9729656901" style={{ color: '#C9A84C', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.4)' }}>
+              <a href="tel:9729656901" style={{ color: '#A89880', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.3)' }}>
                 (972) 965-6901
               </a>
             </p>
@@ -1640,10 +1394,8 @@ export default function Home() {
               marginBottom: 14,
             }}>QUICK LINKS</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Golf Carts', 'https://triple-w-golf-carts.vercel.app'], ['Book Now', '#quote']].map(([label, href]) => (
-                <a key={label} href={href}
-                  {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  style={{
+              {[['Fleet', '#gallery'], ['Process', '#how'], ['Reviews', '#reviews'], ['FAQ', '#faq'], ['Book Now', '#quote']].map(([label, href]) => (
+                <a key={label} href={href} style={{
                   fontSize: 12, color: '#7A6E60',
                   fontFamily: "'Inter', sans-serif",
                   fontWeight: 300,
