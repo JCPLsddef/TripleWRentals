@@ -135,6 +135,11 @@ export default function Home() {
     return () => document.removeEventListener('mousedown', handler);
   }, [calendarOpen]);
 
+  // Always start at top of page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Calendar helpers
   const formatDateRange = (start: Date | null, end: Date | null): string => {
     if (!start) return '';
