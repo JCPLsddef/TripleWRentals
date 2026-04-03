@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
 
     const { data, error } = await resend.emails.send({
       from: 'Triple W Rentals <onboarding@resend.dev>',
-      to: ['jcpl-07@hotmail.com', 'Triplewrentals@gmail.com'],
+      to: ['jcpl-07@hotmail.com'],
       subject: `New Rental Request — ${name}`,
       html: htmlBody,
     });
