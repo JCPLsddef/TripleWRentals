@@ -40,6 +40,8 @@ export default function HeroSection() {
         />
         {/* Top shadow — keeps sky readable */}
         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '30%', background: 'linear-gradient(to bottom, rgba(6,4,2,0.30), transparent)', pointerEvents: 'none' }} />
+        {/* Full dark overlay for text contrast */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(13,11,9,0.50)', pointerEvents: 'none' }} />
       </motion.div>
 
       {/* ── RV Layer ──────────────────────────────────────────── */}

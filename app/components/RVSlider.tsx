@@ -828,9 +828,12 @@ export default function RVSlider() {
         </div>
 
         <div className="flt-cta-bar">
-          <p className="flt-cta-text">Ready to hit the road?</p>
-          <a href="#quote" className="flt-cta-btn">
-            Check Availability
+          <p className="flt-cta-text">Weekend dates go fast.</p>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: 'rgba(240,232,216,0.55)', fontWeight: 300, lineHeight: 1.6, margin: '4px 0 16px', maxWidth: 440, textAlign: 'center' }}>
+            Spring and summer weekends book 2–3 weeks out. Lock in your dates before they&apos;re gone.
+          </p>
+          <a href="tel:9729656901" className="flt-cta-btn">
+            Call to Check Availability — (972) 965-6901
             <svg viewBox="0 0 20 20" fill="none" className="flt-cta-icon" aria-hidden>
               <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

@@ -15,13 +15,6 @@ interface Review {
 
 const reviews: Review[] = [
   {
-    name: 'Tim S.',
-    image: 'https://static.wixstatic.com/media/62f926_e823cada6ec745d5b64f7431a63badd5~mv2.png',
-    excerpt: 'What makes this beyond 5 stars is the incredible hospitality. He goes beyond Ritz Carlton standards. The wifi is fast and reliable. Our new first choice when coming to Texas Rose Horse Park.',
-    fullReview: 'The RVs are nice and convenient especially for horse shows. However what makes this beyond 5 stars is the incredible hospitality by the host. He goes beyond Ritz Carlton standards. The wifi is incredible and fast and reliable. This is our new first choice when coming to Texas Rose Horse Park.',
-    stars: 5
-  },
-  {
     name: 'Wyman Jones',
     image: 'https://static.wixstatic.com/media/62f926_db0f2145b9b54be6947b1cd42f12e361~mv2.png',
     excerpt: 'When my reservation with another company was canceled last minute, I called Triple W and they came through. Corbin went above and beyond. His attention to detail and professionalism were greatly appreciated.',
@@ -108,7 +101,7 @@ export default function ReviewsSlider() {
   };
 
   return (
-    <section id="reviews" style={{ background: '#F7F4F0', padding: '80px 0', overflow: 'hidden', borderTop: '1px solid rgba(201,168,76,0.25)' }}>
+    <section id="reviews" style={{ background: '#F7F4F0', padding: '96px 0', overflow: 'hidden', borderTop: '1px solid rgba(201,168,76,0.25)' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px' }}>
         {/* Headline */}
         <motion.h2
@@ -116,7 +109,7 @@ export default function ReviewsSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{ fontSize: 'clamp(28px, 4vw, 52px)', textAlign: 'center', marginBottom: '12px', color: '#1A1A18', fontFamily: 'Cormorant Garamond, serif', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em' }}
+          style={{ fontSize: 'clamp(34px, 5vw, 56px)', textAlign: 'center', marginBottom: '12px', color: '#1A1A18', fontFamily: 'Cormorant Garamond, serif', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.01em' }}
         >
           Real Trips. Real People. Real Reviews.
         </motion.h2>
@@ -252,11 +245,11 @@ export default function ReviewsSlider() {
           className="text-center"
         >
           <a
-            href="#quote"
+            href="tel:9729656901"
             className="inline-block bg-[#C9A84C] hover:bg-[#E8C97A] text-[#0F0D0B] px-10 py-3.5 rounded-sm transition-all duration-300 hover:shadow-[0_8px_30px_rgba(201,168,76,0.3)] hover:-translate-y-0.5"
             style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 500, fontSize: '13px', letterSpacing: '0.06em', textTransform: 'uppercase' }}
           >
-            Start Your Booking
+            Call to Book — (972) 965-6901
           </a>
           <p style={{ fontFamily: 'Outfit, sans-serif', fontSize: '11px', color: '#8A7868', marginTop: '16px', letterSpacing: '0.03em', fontWeight: 300 }}>
             Most bookings confirmed within the day &nbsp;·&nbsp; White-glove service from first call to last night

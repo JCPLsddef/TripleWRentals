@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'motion/react';
+import { motion } from 'motion/react';
 import { Truck, Star, Clock, Phone } from 'lucide-react';
 import RVSlider from './components/RVSlider';
 import ReviewsSlider from './components/ReviewsSlider';
@@ -69,26 +69,26 @@ const moreServices = [
 const whyFeatures = [
   {
     icon: Truck,
-    title: 'White-Glove Delivery',
-    description: 'We bring the RV to you—fully set up, perfectly cleaned, and ready to enjoy. No hassle, no trips, just premium service.',
+    title: 'We Show Up. Personally.',
+    description: "Westin doesn\u2019t dispatch a crew and disappear. He delivers, walks you through, and stays reachable by call or text for your entire stay. That\u2019s why clients come back \u2014 and why they compare us to the Ritz Carlton.",
     image: 'https://static.wixstatic.com/media/62f926_a497e83d30a946aeab85a380919167c9~mv2.webp',
   },
   {
     icon: Star,
-    title: 'The Finest Fleet in East Texas',
-    description: 'Meticulously maintained, modern RVs from top brands. Each one handpicked for comfort, reliability, and premium amenities.',
+    title: 'A Fleet Built for Comfort, Not Just Quantity',
+    description: "14 RVs, every one maintained to an exacting standard. No surprises when you open the door. Everything works, everything\u2019s clean, everything\u2019s ready.",
     image: 'https://static.wixstatic.com/media/62f926_b86114a3592b498d8035eea569758bc6~mv2.png',
   },
   {
     icon: Clock,
-    title: 'Reserved Within the Day',
-    description: 'Fast, simple booking with instant confirmations. No waiting, no uncertainty—just quick, professional service.',
+    title: 'From First Call to On-Site \u2014 Fast',
+    description: "Most bookings are confirmed the same day you call. We move fast because your event doesn\u2019t wait.",
     image: 'https://static.wixstatic.com/media/62f926_c87969a6134e4536a1a5d61010d02c4a~mv2.png',
   },
   {
     icon: Phone,
-    title: 'Always Reachable',
-    description: "Real people, real support. Call, text, or message anytime during your trip. We're here to make sure everything goes perfectly.",
+    title: '24/7 \u2014 And We Mean It',
+    description: "Text at midnight if something\u2019s off. Westin picks up. He solves it. Your trip doesn\u2019t get derailed because someone\u2019s unavailable.",
     image: 'https://static.wixstatic.com/media/62f926_a940034c8aee471c977633f272c30af9~mv2.png',
   },
 ] as const;
@@ -105,11 +105,9 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [counts, setCounts] = useState({ rentals: 50 });
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [form, setForm] = useState({ name: '', phone: '', dates: '', message: '' });
   const statsRef = useRef(null);
-  const statsRan = useRef(false);
   const whyRef = useRef<HTMLElement>(null);
 
   // Calendar picker state
@@ -122,7 +120,6 @@ export default function Home() {
   });
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
-  const whyInView = useInView(whyRef, { once: true, amount: 0.2 });
 
   // Calendar click-outside
   useEffect(() => {
@@ -211,31 +208,6 @@ export default function Home() {
     return () => obs.disconnect();
   }, []);
 
-  /* CountUp observer */
-  useEffect(() => {
-    if (!statsRef.current) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !statsRan.current) {
-          statsRan.current = true;
-          const dur = 1800;
-          const start = Date.now();
-          const tick = () => {
-            const p = Math.min((Date.now() - start) / dur, 1);
-            const e = 1 - Math.pow(1 - p, 3);
-            setCounts({
-              rentals: Math.round(e * 50),
-            });
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    obs.observe(statsRef.current);
-    return () => obs.disconnect();
-  }, []);
 
   /* Steps connector animation */
   useEffect(() => {
@@ -560,7 +532,7 @@ export default function Home() {
           textAlign: 'center',
         }}>
           {[
-            { val: `${counts.rentals}+`, label: 'Rentals Delivered' },
+            { val: '3+', label: 'Years Serving Texas' },
             { val: '4.7★', label: '193 Verified Reviews' },
             { val: '24/7', label: 'Support Available' },
             { val: 'TX', label: 'Statewide Delivery' },
@@ -603,7 +575,7 @@ export default function Home() {
       {/* ── SECTION 4C: Who This Is For ──────────────────────── */}
       <section style={{
         background: '#F5F0E8',
-        padding: '88px 0',
+        padding: '96px 0',
         position: 'relative',
         overflow: 'hidden',
         borderTop: '1px solid rgba(201,168,76,0.20)',
@@ -756,7 +728,7 @@ export default function Home() {
               padding: '16px 48px',
               borderRadius: 4,
               textDecoration: 'none',
-            }}>Call (972) 965-6901</a>
+            }}>Call to Book — (972) 965-6901</a>
           </div>
 
         </div>
@@ -765,80 +737,27 @@ export default function Home() {
       {/* ── SECTION 5: How It Works ──────────────────────────── */}
       <HowItWorks />
 
-      {/* ── SECTION 5.5: Unicorn Banner ──────────────────────── */}
-      <UnicornBanner />
-
-      {/* ── Cinematic Social Proof Quote ─────────────────────── */}
+      {/* ── Aspirational Paragraph ───────────────────────────── */}
       <section style={{
-        background: '#060402',
-        padding: '100px 24px',
-        position: 'relative',
-        overflow: 'hidden',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
+        background: '#F5F0E8',
+        padding: '80px 24px',
+        borderTop: '1px solid rgba(201,168,76,0.15)',
+        borderBottom: '1px solid rgba(201,168,76,0.15)',
       }}>
-        {/* Background texture */}
-        <div aria-hidden="true" style={{
-          position: 'absolute', inset: 0,
-          background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-
-        <div style={{
-          maxWidth: 780,
+        <p style={{
+          maxWidth: 680,
           margin: '0 auto',
           textAlign: 'center',
-          position: 'relative',
-          zIndex: 1,
+          fontFamily: "'Outfit', sans-serif",
+          fontSize: 'clamp(16px, 1.8vw, 19px)',
+          color: '#4A3A28',
+          fontWeight: 300,
+          lineHeight: 1.85,
+          letterSpacing: '0.005em',
         }}>
-
-          {/* Opening quote mark */}
-          <div style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(60px, 8vw, 96px)',
-            color: 'rgba(201,168,76,0.15)',
-            lineHeight: 0.8,
-            marginBottom: 32,
-            fontWeight: 400,
-          }}>&ldquo;</div>
-
-          {/* The quote */}
-          <blockquote style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: 'italic',
-            fontWeight: 300,
-            fontSize: 'clamp(22px, 3.2vw, 38px)',
-            color: '#F0E8D8',
-            lineHeight: 1.55,
-            letterSpacing: '-0.01em',
-            margin: '0 0 40px',
-          }}>
-            He goes beyond Ritz Carlton standards. Our new first choice when coming to Texas Rose Horse Park.
-          </blockquote>
-
-          {/* Attribution line */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 16,
-          }}>
-            <div style={{ width: 40, height: 1, background: 'rgba(201,168,76,0.4)' }} />
-            <span style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 12,
-              fontWeight: 400,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase' as const,
-              color: '#C9A84C',
-            }}>Tim S. &middot; Verified Google Review</span>
-            <div style={{ width: 40, height: 1, background: 'rgba(201,168,76,0.4)' }} />
-          </div>
-
-        </div>
+          The best trips aren&apos;t the ones where everything was perfect. They&apos;re the ones where you were completely present &mdash; no scrambling, no logistics, no wondering if you forgot something. We handle the rest so that when you get there, the only thing left to do is enjoy it.
+        </p>
       </section>
-
-      {/* ── SECTION 6: Reviews ───────────────────────────────── */}
-      <ReviewsSlider />
 
       {/* ── SECTION 7: Why Triple W ──────────────────────────── */}
       <section id="why" ref={whyRef} style={{ background: '#0F0D0B', padding: '88px 0', position: 'relative', overflow: 'hidden' }}>
@@ -858,8 +777,9 @@ export default function Home() {
           <div style={{ textAlign: 'center', marginBottom: 52 }}>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
-              animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(32px, 4.5vw, 56px)',
@@ -876,8 +796,9 @@ export default function Home() {
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
               style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 'clamp(15px, 1.5vw, 18px)',
@@ -896,14 +817,14 @@ export default function Home() {
           <div className="why-card-grid-v2">
             {whyFeatures.map((feature, index) => {
               const Icon = feature.icon;
-              const delays = [0.4, 0.5, 0.6, 0.7] as const;
               return (
                 <motion.div
                   key={index}
                   className="why-card-v2"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                  transition={{ duration: 0.9, delay: delays[index], ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
                   style={{
                     background: '#0D0B09',
                     border: '1px solid rgba(201,168,76,0.14)',
@@ -987,8 +908,9 @@ export default function Home() {
           {/* Trust Strip */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={whyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
             style={{
               borderRadius: 12,
               padding: '28px 36px',
@@ -1003,8 +925,9 @@ export default function Home() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0 }}
-                  animate={whyInView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ duration: 0.7, delay: 1.0 + index * 0.1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                   style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}
                 >
                   <div style={{
@@ -1033,14 +956,89 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── SECTION 5.5: Unicorn Banner ──────────────────────── */}
+      <UnicornBanner />
+
+      {/* ── Cinematic Social Proof Quote ─────────────────────── */}
+      <section style={{
+        background: '#060402',
+        padding: '100px 24px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(201,168,76,0.08)',
+      }}>
+        {/* Background texture */}
+        <div aria-hidden="true" style={{
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{
+          maxWidth: 780,
+          margin: '0 auto',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 1,
+        }}>
+
+          {/* Opening quote mark */}
+          <div style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(60px, 8vw, 96px)',
+            color: 'rgba(201,168,76,0.15)',
+            lineHeight: 0.8,
+            marginBottom: 32,
+            fontWeight: 400,
+          }}>&ldquo;</div>
+
+          {/* The quote */}
+          <blockquote style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic',
+            fontWeight: 300,
+            fontSize: 'clamp(22px, 3.2vw, 38px)',
+            color: '#F0E8D8',
+            lineHeight: 1.55,
+            letterSpacing: '-0.01em',
+            margin: '0 0 40px',
+          }}>
+            He goes beyond Ritz Carlton standards. Our new first choice when coming to Texas Rose Horse Park.
+          </blockquote>
+
+          {/* Attribution line */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 16,
+          }}>
+            <div style={{ width: 40, height: 1, background: 'rgba(201,168,76,0.4)' }} />
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 12,
+              fontWeight: 400,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase' as const,
+              color: '#C9A84C',
+            }}>Tim S. &middot; Verified Google Review</span>
+            <div style={{ width: 40, height: 1, background: 'rgba(201,168,76,0.4)' }} />
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── SECTION 6: Reviews ───────────────────────────────── */}
+      <ReviewsSlider />
+
       {/* ── SECTION 8: FAQ ───────────────────────────────────── */}
-      <section id="faq" style={{ background: '#F4EDE3', padding: '88px 0', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(201,168,76,0.20)' }}>
+      <section id="faq" style={{ background: '#F4EDE3', padding: '96px 0', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(201,168,76,0.20)' }}>
 
         <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
           <div style={{ marginBottom: 48, textAlign: 'center' }}>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(28px, 3.5vw, 46px)', fontWeight: 400, color: '#2A1F14', letterSpacing: '-0.02em', lineHeight: 1.12, maxWidth: '520px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(34px, 5vw, 56px)', fontWeight: 400, color: '#2A1F14', letterSpacing: '-0.01em', lineHeight: 1.1, maxWidth: '520px', margin: '0 auto' }}>
               Everything You Need<br />to Know.
             </h2>
           </div>
@@ -1207,6 +1205,51 @@ export default function Home() {
             </p>
           </div>
 
+          {/* Phone-first CTA */}
+          <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '10px',
+              fontWeight: 600,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase' as const,
+              color: '#6B5F52',
+              marginBottom: 14,
+            }}>FASTEST WAY TO BOOK</p>
+            <a
+              href="tel:9729656901"
+              style={{
+                display: 'inline-block',
+                background: '#C9A84C',
+                color: '#0D0B09',
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 500,
+                fontSize: '14px',
+                letterSpacing: '0.04em',
+                padding: '16px 40px',
+                borderRadius: 4,
+                textDecoration: 'none',
+                transition: 'all 0.2s',
+                boxShadow: '0 2px 16px rgba(201,168,76,0.25)',
+              }}
+            >Call (972) 965-6901</a>
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '12px',
+              color: '#A89880',
+              fontWeight: 300,
+              marginTop: 12,
+            }}>Most trips confirmed in under 10 minutes.</p>
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: 'italic',
+              fontSize: '14px',
+              color: 'rgba(240,232,216,0.30)',
+              marginTop: 20,
+              letterSpacing: '0.04em',
+            }}>&mdash; or send a request below &mdash;</p>
+          </div>
+
           {/* Quote Form card */}
           <div className="quote-card" style={{
             background: 'linear-gradient(145deg, #12100C 0%, #0F0D0A 100%)',
@@ -1215,6 +1258,19 @@ export default function Home() {
             padding: '36px 36px',
             boxShadow: '0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(201,168,76,0.04), inset 0 0 60px rgba(201,168,76,0.02)',
           }}>
+            {/* Guarantee statement */}
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '13px',
+              color: '#7A6E60',
+              fontWeight: 300,
+              lineHeight: 1.7,
+              textAlign: 'center',
+              maxWidth: 440,
+              margin: '0 auto 24px',
+            }}>
+              If something goes wrong during your stay, Westin comes to you &mdash; same day, no charge. Your event doesn&apos;t stop because something broke.
+            </p>
             <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
               {[
                 { label: 'Your Name', key: 'name', placeholder: 'John Smith', type: 'text' },
