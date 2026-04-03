@@ -60,30 +60,22 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    const results = await Promise.allSettled([
-      resend.emails.send({
-        from: 'Triple W Rentals <onboarding@resend.dev>',
-        to: ['jcpl-07@hotmail.com'],
-        subject: `New Rental Request — ${name}`,
-        html: htmlBody,
-      }),
-      resend.emails.send({
-        from: 'Triple W Rentals <onboarding@resend.dev>',
-        to: ['Triplewrentals@gmail.com'],
-        subject: `New Rental Request — ${name}`,
-        html: htmlBody,
-      }),
-    ]);
+    const { data, error } = await resend.emails.send({
+      from: 'Triple W Rentals <onboarding@resend.dev>',
+      to: ['jcpl-07@hotmail.com', 'Triplewrentals@gmail.com'],
+      subject: `New Rental Request — ${name}`,
+      html: htmlBody,
+    });
 
-    const allFailed = results.every((r) => r.status === 'rejected');
-    if (allFailed) {
-      console.error('All email sends failed:', results);
+    if (error) {
+      console.error('Resend error:', JSON.stringify(error));
       return NextResponse.json(
         { error: 'Failed to send email' },
         { status: 500 }
       );
     }
 
+    console.log('Email sent successfully, id:', data?.id);
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('API error:', err);
